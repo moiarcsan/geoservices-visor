@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+<tiles-definitions>
+  <definition extends="site.mainLayoutPlantilla" name="pages.start">
+    <put direct="true" name="title" value="Inici"/>
+    <put name="ariadna" value="/WEB-INF/jsp/includes/ariadna.jsp"/>
+    <put name="body" value="/WEB-INF/jsp/start.jsp"/>
+  </definition>
+  <definition extends="site.mainLayoutPlantilla" name="pages.xml">
+    <put direct="true" name="title" value="Start"/>
+    <put name="right" value="/WEB-INF/jsp/includes/right.jsp"/>
+    <put name="body" value="/WEB-INF/jsp/includes/blank.jsp"/>
+  </definition>
+  <definition extends="site.mainLayoutPlantilla" name="pages.serialization">
+    <put direct="true" name="title" value="Start"/>
+    <put name="right" value="/WEB-INF/jsp/includes/right.jsp"/>
+    <put name="body" value="/WEB-INF/jsp/serialization.jsp"/>
+  </definition>
+  <definition extends="site.mainLayoutPlantilla" name="pages.ole">
+    <put direct="true" name="title" value="Start"/>
+    <put name="right" value="/WEB-INF/jsp/includes/right.jsp"/>
+    <put name="body" value="/WEB-INF/jsp/ole.jsp"/>
+  </definition>
+  <!--=== Securities Pages Definition ===-->
+  <!--=== LOGIN Page ===-->
+  <definition name="pages.login" path="/WEB-INF/jsp/login.jsp">
+    <put name="footer" value="/WEB-INF/jsp/includes/footer.jsp"/>
+  </definition>
+  <definition extends="site.mainLayoutPlantilla" name="pages.logoff">
+    <put direct="true" name="title" value="Sortida"/>
+    <put name="body" value="/WEB-INF/jsp/logoff.jsp"/>
+  </definition>
+  <!--=== ERROR Page (HTTP 403) ===-->
+  <definition extends="site.mainLayoutPlantilla" name="pages.error">
+    <put direct="true" name="title" value="Inici"/>
+    <put name="body" value="/WEB-INF/jsp/error.jsp"/>
+  </definition>
+  <!--******************************************************************-->
+  <!--Paginas de Mantenimento de CATEGORIES-->
+  <!--******************************************************************-->
+  <definition extends="site.mainLayoutPlantilla" name="pages.categories">
+    <put direct="true" name="title" value="Categories"/>
+    <put name="ariadna" value="/WEB-INF/jsp/categories/categoryListMenu.jsp"/>
+    <put name="bodyHeader" value="/WEB-INF/jsp/categories/categoryHeader.jsp"/>
+    <put name="body" value="pages.categories.bodyLlista"/>
+  </definition>
+  <definition name="pages.categories.bodyLlista" path="/WEB-INF/jsp/layouts/form-llista.jsp">
+    <put name="form" value="/WEB-INF/jsp/categories/categoryListQuickSearch.jsp"/>
+    <put name="llista" value="/WEB-INF/jsp/categories/categoryList.jsp"/>
+  </definition>
+  <definition extends="site.mainLayoutPlantilla" name="pages.categoryEdit">
+    <put direct="true" name="title" value="Categories"/>
+    <put name="ariadna" value="/WEB-INF/jsp/categories/categoryMenu.jsp"/>
+    <put name="bodyHeader" value="/WEB-INF/jsp/categories/categoryEditHeader.jsp"/>
+    <put name="body" value="/WEB-INF/jsp/categories/categoryEdit.jsp"/>
+  </definition>
+  <definition extends="site.mainLayoutPlantilla" name="pages.tipusCarrecEdit">
+    <put direct="true" name="title" value="Categories"/>
+    <put direct="true" name="title" value="Categories"/>
+    <put name="ariadna" value="/WEB-INF/jsp/categories/categoryMenu.jsp"/>
+    <put name="bodyHeader" value="/WEB-INF/jsp/categories/categoryEditHeader.jsp"/>
+    <put name="body" value="/WEB-INF/jsp/Tipus_carrec/tipus_carrecCreate.jsp"/>
+  </definition>
+  <!--******************************************************************-->
+  <!--Llistes de traces-->
+  <!--******************************************************************-->
+  <definition extends="site.mainLayoutPlantilla" name="pages.admin.traces.choose">
+    <put direct="true" name="title" value="Monitorització de traces"/>
+    <put name="ariadna" value="/WEB-INF/jsp/traces/ariadnaTraces.jsp"/>
+    <put name="bodyHeader" value="/WEB-INF/jsp/traces/llistaHeader.jsp"/>
+    <put name="body" value="/WEB-INF/jsp/traces/quickSearch.jsp"/>
+  </definition>
+  <definition name="pages.traces.bodyLlista" path="/WEB-INF/jsp/layouts/form-llista.jsp">
+    <put name="form" value="/WEB-INF/jsp/traces/quickSearch.jsp"/>
+    <put name="llista" value="/WEB-INF/jsp/traces/llistaTraces.jsp"/>
+  </definition>
+  <definition extends="site.mainLayoutPlantilla" name="pages.admin.traces.list">
+    <put direct="true" name="title" value="Monitorització de traces"/>
+    <put name="ariadna" value="/WEB-INF/jsp/traces/ariadnaTraces.jsp"/>
+    <put name="bodyHeader" value="/WEB-INF/jsp/traces/llistaHeader.jsp"/>
+    <put name="body" value="pages.traces.bodyLlista"/>
+  </definition>
+</tiles-definitions>

@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>interior.cat.visor</groupId>
+	<artifactId>visor-sig-components</artifactId>
+	<packaging>jar</packaging>
+	<version>${project.parent.version}</version>
+
+	<parent>
+		<groupId>interior.cat.visor</groupId>
+	  	<artifactId>modulos-visor-sig</artifactId>
+  		<version>4.7</version>
+	</parent>
+
+	<!-- Project Information -->
+	<licenses>
+		<license>
+			<name>GPL 2.0</name>
+			<url>http://www.gnu.org/licenses/gpl-2.0.html</url>
+		</license>
+	</licenses>
+
+	<name>${artifactId}-${project.version}</name>
+	<url>http://emergya.es</url>
+
+	<organization>
+		<name>Emergya</name>
+		<url>http://www.emergya.es</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>adiaz</id>
+			<name>Alejandro Diaz Torres</name>
+			<email>adiaz@emergya.es</email>
+			<organization>Emergya Consultoria</organization>
+			<organizationUrl>http://www.emergya.es</organizationUrl>
+			<roles>
+				<role>Analista</role>
+			</roles>
+		</developer>
+	</developers>
+
+
+	<issueManagement>
+		<system>redmine</system>
+		<url>http://redmine.emergya.es/projects/sicecat/</url>
+	</issueManagement>
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://jenkins.emergya.es/jenkins/view/sicecat/job/visor-sig-sicecat/</url>
+	</ciManagement>
+	<inceptionYear>2011</inceptionYear>
+	<mailingLists>
+		<mailingList>
+			<name>sicecat-devel</name>
+			<subscribe>mailto:sicecat-devel@listas.emergya.info?subject=subscribe</subscribe>
+			<unsubscribe>mailto:sicecat-devel@listas.emergya.info?subject=unsubscribe</unsubscribe>
+			<post>sicecat-devel@listas.emergya.info</post>
+			<archive>http://listas.emergya.info/mailman/listinfo/sicecat-devel</archive>
+		</mailingList>
+	</mailingLists>
+	<!-- Project Information -->
+
+
+	<!-- Environment Information -->
+	<scm>
+		<connection>scm:svn:http://svn.emergya.es/svn/sicecat</connection>
+		<developerConnection>scm:svn:http://svn.emergya.es/svn/sicecat</developerConnection>
+		<url>http://svn.emergya.es/svn/sicecat</url>
+	</scm>
+
+
+	<distributionManagement>
+		<!-- use the following if you're not using a snapshot version. -->
+		<repository>
+			<id>nexus.releases</id>
+			<name>Nexus SiceCat Releases</name>
+			<url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo/</url>
+		</repository>
+		<!-- use the following if you ARE using a snapshot version. -->
+		<snapshotRepository>
+			<id>nexus.snapshots</id>
+			<name>Nexus SiceCat Snapshot</name>
+			<url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>nexus.emergya</id>
+			<name>Emergya</name>
+			<url>http://nexus.emergya.es/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+	        	</releases>
+	        <snapshots>
+		  		<enabled>false</enabled>
+	        </snapshots>
+		</repository>
+		<repository>
+			<id>nexus.emergya.snapshot</id>
+			<name>Nexus Public Snapshots</name>
+			<url>http://nexus.emergya.es/nexus/content/groups/public-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+	        	</releases>
+	        <snapshots>
+		  		<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+	        </snapshots>
+		</repository>
+		<repository>
+			<id>canigo.repo</id>
+			<name>Canigo Maven2 repo</name>
+			<url>http://canigo.ctti.gencat.net/repository/maven2/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+	        	</releases>
+	        <snapshots>
+		  		<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+	        </snapshots>
+		</repository>
+		<!-- use the following if you're not using a snapshot version. -->
+		<repository>
+			<id>nexus.releases</id>
+			<name>Nexus SiceCat Releases</name>
+			<url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo/</url>
+		</repository>
+		<!-- use the following if you ARE using a snapshot version. -->
+		<repository>
+			<id>nexus.snapshots</id>
+			<name>Nexus SiceCat Snapshot</name>
+			<url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+	        	</releases>
+	        <snapshots>
+		  		<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+	        </snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus.emergya</id>
+			<name>Nexus Repository</name>
+			<url>http://nexus.emergya.es/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+	        	</releases>
+	        <snapshots>
+		  		<enabled>false</enabled>
+	        </snapshots>
+		</pluginRepository>
+		<!-- Needed to get a valid alpha version of maven pluggin. -->
+		<pluginRepository>
+			<id>nexus.snapshot</id>
+			<name>Nexus Public Snapshots</name>
+			<url>http://nexus.emergya.es/nexus/content/groups/public-snapshots/</url>
+			<snapshots>
+	         	<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+	 	    </snapshots>
+	    	<releases>
+				<updatePolicy>always</updatePolicy>
+	         	<enabled>false</enabled>
+	       </releases>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<properties>
+		<skipTests>false</skipTests>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<org.richfaces.bom.version>4.0.0.Final</org.richfaces.bom.version>
+		<org.richfaces.version>3.3.3.Final</org.richfaces.version>
+		<junit.version>4.8.2</junit.version>
+		<canigo.persistence.jpa>1.0.0</canigo.persistence.jpa>
+		<canigo.support.ole.version>1.0.0</canigo.support.ole.version>
+		<canigo.support.ftp.version>1.0.0</canigo.support.ftp.version>
+		<canigo.support.sftp.version>1.0.0
+		</canigo.support.sftp.version>
+		<canigo.security.version>1.0.0</canigo.security.version>
+		<canigo.support.merging.version>1.0.0
+		</canigo.support.merging.version>
+		<canigo.integration.documentum.version>1.0.0
+		</canigo.integration.documentum.version>
+		<canigo.operation.instrumentation.version>1.0.0</canigo.operation.instrumentation.version>
+		<canigo.integration.notificacions.electroniques.version>1.0.0
+		</canigo.integration.notificacions.electroniques.version>
+		<canigo.integration.gecat.version>1.0.0
+		</canigo.integration.gecat.version>
+		<canigo.support.mailing.version>1.0.0
+		</canigo.support.mailing.version>
+		<canigo.integration.antivirus.version>1.0.0
+		</canigo.integration.antivirus.version>
+		<canigo.integration.sap.version>1.0.0
+		</canigo.integration.sap.version>
+		<canigo.integration.psis.version>1.0.0
+		</canigo.integration.psis.version>
+		<canigo.integration.sarcat.version>1.0.0
+		</canigo.integration.sarcat.version>
+		<canigo.persistence.jpa.version>1.0.0</canigo.persistence.jpa.version>
+		<canigo.security>1.0.0</canigo.security>
+		<servlet.api.version>2.5</servlet.api.version>
+		<canigo.web.jsf.version>1.0.0</canigo.web.jsf.version>
+		<!--canigo.core.version>[3.0.0,3.1.0)</canigo.core.version -->
+		<canigo.core.version>3.0.0</canigo.core.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+		<facelets-taglib>0.3_jsf-1.2-spring-3</facelets-taglib>
+		<richfaces.version>3.3.2.GA</richfaces.version>
+		<org.opensymphony.quartz.version>1.8.3
+		</org.opensymphony.quartz.version>
+		<commons.collections.version>3.2.1</commons.collections.version>
+		<resource.folder>${basedir}/src/main/resources</resource.folder>
+		<browserFileNames>firefox</browserFileNames>
+		
+		<!-- Visor direct config (web.xml) -->
+		<display.name>Visor SIG Sicecat</display.name>
+		<print.pdf.config.yaml>WEB-INF/config.yaml</print.pdf.config.yaml>
+		<print.png.config.yaml>WEB-INF/config.yaml</print.png.config.yaml>
+		<visor.config.dir>/tmp</visor.config.dir>
+		<welcomeFile>index.jsp</welcomeFile>
+		<index.mode>IS_DEVEL</index.mode>
+		<!-- log4j.properties -->
+		<log4j.rootCategory>INFO, CONSOLE, LOGFILE</log4j.rootCategory>
+		<log4j.appender.LOGFILE.File>/var/tmp/visor-sig-sicecat.log</log4j.appender.LOGFILE.File>
+		<!-- Proxy NTLM -->
+		<proxy.proxyOn>false</proxy.proxyOn>
+		<proxy.noProxied></proxy.noProxied>
+		<proxy.proxyUrl>10.136.194.225</proxy.proxyUrl>
+		<welcomeFile>index.jsp</welcomeFile>
+		<proxy.proxyPort>8080</proxy.proxyPort>
+		<proxy.proxyUser></proxy.proxyUser>
+		<proxy.proxyPassword></proxy.proxyPassword>
+		<!-- Print config (config.yaml) -->
+		<print.visor.url>http://localhost:8080/Visor/</print.visor.url>
+		<print.header.logo>${print.visor.url}images/pdf/logo.png</print.header.logo>
+		<print.footer.logo>${print.visor.url}images/pdf/departament_dinterior.gif</print.footer.logo>
+
+		<maven.build.timestamp.format>yyMMdd_HHmm</maven.build.timestamp.format>
+		<buildNumber>${maven.build.timestamp}</buildNumber>
+		
+	    <axiomReleaseVersion>1.2.10</axiomReleaseVersion>
+	    <axis2ReleaseVersion>1.5.4</axis2ReleaseVersion>
+	</properties>
+
+	<build>
+		<finalName>${artifactId}-${project.version}</finalName>
+		<outputDirectory>target/scripts</outputDirectory>
+		<testOutputDirectory>target/test-scripts</testOutputDirectory>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/webresources</directory>
+                <filtering>true</filtering>
+                <targetPath>../../src/main/webapp</targetPath>
+            </resource>
+        </resources>
+        <plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>pre</id>
+			<properties>
+				<!-- Proxies configuration -->
+  				<proxy.one>proxy?url=</proxy.one>
+  				<proxy.two></proxy.two>
+				<searcher>rest/</searcher>
+				<proxy.proxyOn>true</proxy.proxyOn>
+				<proxy.noProxied>http://sigescat-pre.pise.interior.intranet,http://localhost</proxy.noProxied>
+				<proxy.proxyUrl>10.136.194.225</proxy.proxyUrl>
+				<welcomeFile>index.jsp</welcomeFile>
+				<proxy.proxyPort>8080</proxy.proxyPort>
+				<proxy.proxyUser></proxy.proxyUser>
+				<proxy.proxyPassword></proxy.proxyPassword>
+			</properties>
+		</profile>
+		<profile>
+			<id>int</id>
+			<properties>
+				<!-- Visor direct config (web.xml) -->
+				<display.name>Visor SIG Sicecat</display.name>
+				<dos.puntos>:</dos.puntos>
+				<dir.win>/</dir.win>
+				<print.pdf.config.yaml>C${dos.puntos}${dir.win}docs${dir.win}gis${dir.win}config.yaml</print.pdf.config.yaml>
+				<print.png.config.yaml>C${dos.puntos}${dir.win}docs${dir.win}gis${dir.win}config.yaml</print.png.config.yaml>
+				<visor.config.dir>C${dos.puntos}${dir.win}docs${dir.win}gis</visor.config.dir>
+				<welcomeFile>index.jsp</welcomeFile>
+				<index.mode>IS_NOT_DISPLAY</index.mode>
+				<!-- log4j.properties -->
+				<log4j.rootCategory>INFO, CONSOLE, LOGFILE</log4j.rootCategory>
+				<log4j.appender.LOGFILE.File>C${dos.puntos}${dir.win}logs${dir.win}Visor.log</log4j.appender.LOGFILE.File>
+				<!-- Proxy NTLM -->
+				<proxy.proxyOn>true</proxy.proxyOn>
+				<proxy.noProxied>http://sigescat,http://localhost,https://sigescat,http://corp-re-dev-fe1.pise.dirip.intranet,https://localhost,sigescat,localhost,corp-re-dev-fe1.pise.dirip.intranet</proxy.noProxied>
+				<proxy.proxyUrl>10.136.194.225</proxy.proxyUrl>
+				<welcomeFile>index.jsp</welcomeFile>
+				<proxy.proxyPort>8080</proxy.proxyPort>
+				<proxy.proxyUser></proxy.proxyUser>
+				<proxy.proxyPassword></proxy.proxyPassword>
+				<!-- Print config (config.yaml) -->
+				<print.visor.url>http://localhost:91/Visor/</print.visor.url>
+				<print.header.logo>${print.visor.url}images/pdf/logo.png</print.header.logo>
+				<print.footer.logo>${print.visor.url}images/pdf/departament_dinterior.gif</print.footer.logo>
+			</properties>
+		</profile>
+	</profiles>
+
+	<dependencies>
+	
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>compile</scope>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>compile</scope>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>el-api</artifactId>
+			<scope>compile</scope>
+			<version>2.2</version>
+		</dependency>
+	    
+	    <!-- Internal Conectors -->
+	    <dependency>
+	       <groupId>interior.cat.visor</groupId>
+  		   <artifactId>sigescat-searcher-conector</artifactId>
+     	   <version>${parent.version}</version>
+	    </dependency>
+	    <dependency>
+	       <groupId>interior.cat.visor</groupId>
+  		   <artifactId>sigescat-openls-conector</artifactId>
+    	   <version>${parent.version}</version>
+	    </dependency>
+	    
+	    <!-- Parseo a JSON -->
+        <dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-mrbean</artifactId>
+		    <version>1.8.5</version>
+		</dependency>
+
+		<!-- PDF Writer (mapfish-modified) -->
+		<dependency>
+			<groupId>org.mapfish.print</groupId>
+			<artifactId>print-lib</artifactId>
+			<!-- JDK 1.5 -->
+			<version>1.2.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>xerces</groupId>
+					<artifactId>xercesImpl</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>javax.media</groupId>
+			<artifactId>jai_core</artifactId>
+			<version>1.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.media</groupId>
+			<artifactId>jai_codec</artifactId>
+			<version>1.1.2_01</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.media</groupId>
+			<artifactId>jai_imageio</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>1.6.0</version>
+		</dependency>
+
+		<!-- SPRING DEPENDENCIES -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-oxm</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+
+		<!-- Upload Files -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		
+		<!-- OLS schema 
+	    <dependency>
+	    	<groupId>org.jvnet.ogc</groupId>
+	    	<artifactId>ols-v_1_1_0-schema</artifactId>
+	    	<version>1.0.3</version>
+	    </dependency> -->
+
+	</dependencies>
+
+</project>

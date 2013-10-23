@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<display-name>${display.name}</display-name>
+
+	<!-- FileUpload Servlet and Mapping -->
+	<servlet>
+		<servlet-name>FileUploadServlet</servlet-name>
+		<servlet-class>interior.cat.visor.servlet.UploadFile</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FileUploadServlet</servlet-name>
+		<url-pattern>/uploadServlet.do</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- FileDownload Servlet and Mapping -->
+	<servlet>
+		<servlet-name>FileDownloadServlet</servlet-name>
+		<servlet-class>interior.cat.visor.servlet.Download</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FileDownloadServlet</servlet-name>
+		<url-pattern>/download.do/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- Proxy -->
+	<servlet>
+		<servlet-name>Proxy</servlet-name>
+		<servlet-class>interior.cat.visor.servlet.Proxy</servlet-class>
+		<init-param>
+			<param-name>proxyOn</param-name>
+			<param-value>${proxy.proxyOn}</param-value>
+		</init-param>
+		<init-param>
+			<param-name>noProxied</param-name>
+			<param-value>${proxy.noProxied}</param-value>
+		</init-param>
+		<init-param>
+			<param-name>proxyUrl</param-name>
+			<param-value>${proxy.proxyUrl}</param-value>
+		</init-param>
+		<init-param>
+			<param-name>proxyPort</param-name>
+			<param-value>${proxy.proxyPort}</param-value>
+		</init-param>
+		<init-param>
+			<param-name>proxyUser</param-name>
+			<param-value>${proxy.proxyUser}</param-value>
+		</init-param>
+		<init-param>
+			<param-name>proxyPassword</param-name>
+			<param-value>${proxy.proxyPassword}</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Proxy</servlet-name>
+		<url-pattern>/proxy.do/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- PDF Mapfish -->
+	<servlet>
+		<servlet-name>mapfish.print</servlet-name>
+		<servlet-class>interior.cat.visor.servlet.MapPrinterPDFServlet</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>${print.pdf.config.yaml}</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mapfish.print</servlet-name>
+		<url-pattern>/PDF.do/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- PNG Mapfish -->
+	<servlet>
+		<servlet-name>png.print</servlet-name>
+		<servlet-class>interior.cat.visor.servlet.MapPrinterImageServlet</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>${print.png.config.yaml}</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>png.print</servlet-name>
+		<url-pattern>/PNG.do/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- FileDownload Servlet and Mapping -->
+	<servlet>
+		<servlet-name>WMSDownloadServlet</servlet-name>
+		<servlet-class>interior.cat.visor.servlet.DownloadWMS</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WMSDownloadServlet</servlet-name>
+		<url-pattern>/downloadWMS.do/*</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Spring3-mvc servlet for REST responses -->
+	<servlet>
+		<servlet-name>rest</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+                classpath:spring/app-servlet.xml
+            </param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>rest</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- Servlet para el envío de ficheros locales de configuración al navegador 
+		(layers.json, styles.josn...) -->
+	<servlet>
+		<servlet-name>LocalFilesServlet</servlet-name>
+		<servlet-class>interior.cat.visor.servlet.LocalFilesServlet</servlet-class>
+		<init-param>
+			<description>
+  			Ruta al directorio externo al WAR en el que se encuentran los archivos
+  			layers.json, search_services.json, styles.json, comarca.json.
+  		</description>
+			<param-name>rutaDirectorioConfigVisor</param-name>
+			<param-value>${visor.config.dir}</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LocalFilesServlet</servlet-name>
+		<url-pattern>/files.do/*</url-pattern>
+		<!-- <url-pattern>/lib/SiceCAT/data/*</url-pattern> -->
+	</servlet-mapping>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<mime-mapping>
+		<extension>ecss</extension>
+		<mime-type>text/css</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>png</extension>
+		<mime-type>image/png</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>jpg</extension>
+		<mime-type>image/jpeg</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>gif</extension>
+		<mime-type>image/gif</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>msi</extension>
+		<mime-type>application/octet-stream</mime-type>
+	</mime-mapping>
+	<welcome-file-list>
+		<welcome-file>${welcomeFile}</welcome-file>
+	</welcome-file-list>
+
+	<login-config>
+		<auth-method>BASIC</auth-method>
+	</login-config>
+</web-app>

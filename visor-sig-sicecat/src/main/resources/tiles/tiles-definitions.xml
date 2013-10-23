@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+<tiles-definitions>
+  <definition name="site.mainLayoutPlantilla" path="/WEB-INF/jsp/layouts/mainLayout.jsp">
+    <put name="header" value="/WEB-INF/jsp/includes/header.jsp"/>
+    <put name="menu" value="/WEB-INF/jsp/includes/menu.jsp"/>
+    <put name="messages" value="/WEB-INF/jsp/includes/messages.jsp"/>
+    <put name="ariadna" value="/WEB-INF/jsp/includes/blank.jsp"/>
+    <put name="bodyHeader" value="/WEB-INF/jsp/includes/blank.jsp"/>
+    <put name="errors" value="/WEB-INF/jsp/includes/errors.jsp"/>
+    <put name="body" value="/WEB-INF/jsp/includes/blank.jsp"/>
+    <put name="footer" value="/WEB-INF/jsp/includes/footer.jsp"/>
+    <put name="success" value="/WEB-INF/jsp/includes/success.jsp"/>
+  </definition>
+</tiles-definitions>

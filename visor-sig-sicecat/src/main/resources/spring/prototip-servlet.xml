@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" id="urlMapping">
+    <property name="interceptors">
+      <list>
+        <ref bean="openSessionInViewInterceptor"/>
+        <ref bean="exportInterceptor"/>
+      </list>
+    </property>
+    <property name="mappings">
+      <props>
+        <prop key="/**/*.do">strutsWrappingController</prop>
+        <prop key="/**/pdfView.pdf">pdfController</prop>
+        <prop key="/**/excelView.xls">excelController</prop>
+      </props>
+    </property>
+  </bean>
+  <bean class="org.springframework.web.servlet.mvc.ServletWrappingController" id="strutsWrappingController">
+    <property name="servletClass">
+      <value>org.apache.struts.action.ActionServlet</value>
+    </property>
+    <property name="servletName">
+      <value>action</value>
+    </property>
+    <property name="initParameters">
+      <props>
+        <prop key="config">/WEB-INF/classes/struts/struts-config.xml</prop>
+      </props>
+    </property>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.spring.view.document.ValueListPdfController" id="pdfController"/>
+  <bean class="net.gencat.ctti.canigo.services.web.spring.view.document.ValueListExcelController" id="excelController"/>
+  <bean class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor" name="openSessionInViewInterceptor">
+    <property name="sessionFactory">
+      <ref bean="sessionFactory"/>
+    </property>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.spring.BufferedResponseSpringInterceptor" id="exportInterceptor">
+    <property name="redirections">
+      <map>
+        <entry key="/**/*searchExportPDF*" value="/pdfView.pdf"/>
+        <entry key="/**/*searchExportExcel*" value="/excelView.xls"/>
+      </map>
+    </property>
+  </bean>
+</beans>

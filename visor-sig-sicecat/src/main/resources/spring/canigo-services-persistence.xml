@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-autowire="no" default-dependency-check="none" default-destroy-method="" default-init-method="" default-lazy-init="false" default-merge="false" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!--Hibernate SessionFactory-->
+  <bean class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" id="sessionFactory">
+    <property name="configLocation" value="classpath:${sessionFactory.configLocation}"/>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.connection.datasource">${dataSource.jndiName}</prop>
+      </props>
+    </property>
+  </bean>
+  <!--Transaction manager for a single Hibernate SessionFactory-->
+  <bean class="org.springframework.orm.hibernate3.HibernateTransactionManager" id="transactionManager">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+  <!--Base DAO Proxy-->
+  <bean class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" id="baseDaoProxy">
+    <property name="transactionManager">
+      <ref local="transactionManager"/>
+    </property>
+    <property name="target">
+      <bean class="java.lang.Object"/>
+    </property>
+    <property name="transactionAttributes">
+      <props>
+        <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+        <prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+        <prop key="load*">PROPAGATION_REQUIRED,readOnly</prop>
+        <prop key="store*">PROPAGATION_REQUIRED</prop>
+        <prop key="save*">PROPAGATION_REQUIRED</prop>
+        <prop key="delete*">PROPAGATION_REQUIRED</prop>
+      </props>
+    </property>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.persistence.spring.dao.impl.UniversalDAOImpl" id="universalHibernateDAO">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+</beans>

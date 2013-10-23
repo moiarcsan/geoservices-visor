@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <bean class="java.util.Locale" id="defaultLocale">
+    <constructor-arg type="java.lang.String">
+      <value>es</value>
+    </constructor-arg>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.i18n.impl.SpringI18nServiceImpl" id="i18nService">
+    <property name="messageSource" ref="messageSource"/>
+    <property name="defaultLocale" ref="defaultLocale"/>
+  </bean>
+  <bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource">
+    <property name="basenames">
+      <list>
+        <value>i18n/applicationResources</value>
+      </list>
+    </property>
+  </bean>
+</beans>

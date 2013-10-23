@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bean:beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" xmlns:bean="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <bean:bean class="java.util.HashMap" id="customEditors">
+    <bean:constructor-arg>
+      <bean:map>
+        <bean:entry key="java.util.Date">
+          <bean:bean class="net.gencat.ctti.canigo.services.i18n.spring.beans.propertyeditors.CustomDateEditor">
+            <bean:property name="i18nService" ref="i18nService"/>
+            <bean:property name="localeDatePatternsMap">
+              <bean:map>
+                <bean:entry>
+                  <bean:key>
+                    <bean:value>es</bean:value>
+                  </bean:key>
+                  <bean:value>dd/MM/yyyy</bean:value>
+                </bean:entry>
+                <bean:entry>
+                  <bean:key>
+                    <bean:value>es_ES</bean:value>
+                  </bean:key>
+                  <bean:value>dd/MM/yyyy</bean:value>
+                </bean:entry>
+                <bean:entry>
+                  <bean:key>
+                    <bean:value>ca_ES</bean:value>
+                  </bean:key>
+                  <bean:value>dd/MM/yyyy</bean:value>
+                </bean:entry>
+                <bean:entry>
+                  <bean:key>
+                    <bean:value>ca</bean:value>
+                  </bean:key>
+                  <bean:value>dd/MM/yyyy</bean:value>
+                </bean:entry>
+                <bean:entry>
+                  <bean:key>
+                    <bean:value>en</bean:value>
+                  </bean:key>
+                  <bean:value>MM/dd/yyyy</bean:value>
+                </bean:entry>
+                <bean:entry>
+                  <bean:key>
+                    <bean:value>en_GB</bean:value>
+                  </bean:key>
+                  <bean:value>MM/dd/yyyy</bean:value>
+                </bean:entry>
+              </bean:map>
+            </bean:property>
+          </bean:bean>
+        </bean:entry>
+      </bean:map>
+    </bean:constructor-arg>
+  </bean:bean>
+  <bean:bean class="org.springframework.beans.factory.config.CustomEditorConfigurer" id="customEditorConfigurer">
+    <bean:property name="customEditors">
+      <bean:ref local="customEditors"/>
+    </bean:property>
+  </bean:bean>
+</bean:beans>

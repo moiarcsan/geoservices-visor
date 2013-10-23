@@ -1,0 +1,438 @@
+[
+   {
+      'name':'default',
+      'options': {
+            pointRadius : 15,
+            fillColor: '#FFA046',
+            strokeColor: '#666666',
+            graphicName: 'circle'
+            }
+   },
+   {
+      'name':'selected',
+      'options': {
+            pointRadius : 16,
+            fillColor: '#95BB60',
+            strokeColor: '#E6E8EA',
+            graphicName: 'circle'
+            }
+   },
+   {
+      'name':'emergency',
+      'options': {
+            graphicWidth: 20, 
+            graphicHeight: 34,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_incidente.png"
+            }
+   },
+   {
+      'name':'mitjatrobat',
+      'options': {
+            graphicWidth: 30, 
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/star_silver.png"
+            }
+   },
+   {
+      'name':'mitjamobilitzat',
+      'options': {
+            graphicWidth: 30, 
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/star.png"
+            }
+   },
+   {
+      'name':'anotacion',
+      'options': {
+            graphicWidth: 30, 
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/edit.png"
+            }
+   },
+   {
+      'name':'elemento',
+      'options': {
+            graphicWidth: 19, 
+            graphicHeight: 32,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_elem_vuln.png"
+            }
+   },
+   {
+      'name':'entitat',
+      'options': {
+            graphicWidth: 30,
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/entity.png"
+         }
+      },
+   {
+      'name':'sirena',
+      'options': {
+            graphicWidth: 30,
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/sirena.png"
+         }
+      },
+   {
+      'name':'sirenaNord',
+      'options': {
+            graphicWidth: 30,
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/sirena_nord.png"
+         }
+      },
+   {
+      'name':'sirenaSud',
+      'options': {
+            graphicWidth: 30,
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/sirena_sud.png"
+         }
+      },
+   {
+      'name':'sirenaOest',
+      'options': {
+            graphicWidth: 30,
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/sirena_oest.png"
+         }
+      },
+   {
+      'name':'sirenaEst',
+      'options': {
+            graphicWidth: 30,
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/sirena_est.png"
+         }
+      },
+   {
+      'name':'sirenaNordOest',
+      'options': {
+            graphicWidth: 30,
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/sirena_nord_oest.png"
+         }
+      },
+   {
+      'name':'sirenaNordEst',
+      'options': {
+            graphicWidth: 30,
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/sirena_nord_est.png"
+         }
+      },
+   {
+      'name':'sirenaSudOest',
+      'options': {
+            graphicWidth: 30,
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/sirena_sud_oest.png"
+      }
+      },
+   {
+      'name':'sirenaSudEst',
+      'options': {
+            graphicWidth: 30,
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/sirena_sud_est.png"
+      }
+   },
+   {
+      'name':'ema',
+      'options': {
+            graphicWidth: 30,
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/ema.png"
+      }
+   },
+   {
+      'name':'eleInci',
+      'options': {
+            graphicWidth: 20,
+            graphicHeight: 34,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_incidente.png"
+      }
+   },
+   {
+      'name':'eleInciMitja',
+      'options': {
+            graphicWidth: 19,
+            graphicHeight: 32,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_mmrr.png"
+      }
+   },
+   {
+      'name':'eleInciAnotacio',
+      'options': {
+            graphicWidth: 20,
+            graphicHeight: 34,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_observacion.png"
+      }
+   },
+   {
+      'name':'eleInciVulnerable',
+      'options': {
+            graphicWidth: 19,
+            graphicHeight: 32,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_elem_vuln.png"
+      }
+   },
+   {
+      'name':'equipActiv',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_activa.png"
+      }
+   },
+   {
+      'name':'equipInactiv',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_no_activa.png"
+      }
+   },
+   {
+      'name':'equipActivNord',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_activa_flecha_norte.png"
+         }
+      },
+   {
+      'name':'equipActivSud',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_activa_flecha_sur.png"
+         }
+      },
+   {
+      'name':'equipActivOest',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_activa_flecha_oeste.png"
+         }
+      },
+   {
+      'name':'equipActivEst',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_activa_flecha_este.png"
+         }
+      },
+   {
+      'name':'equipActivNordOest',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_activa_flecha_noroeste.png"
+         }
+      },
+   {
+      'name':'equipActivNordEst',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_activa_flecha_noreste.png"
+         }
+      },
+   {
+      'name':'equipActivSudOest',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_activa_flecha_suroeste.png"
+      }
+      },
+   {
+      'name':'equipActivSudEst',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_activa_flecha_sureste.png"
+      }
+   },
+   {
+      'name':'equipInactivNord',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_noactiva_flecha_norte.png"
+         }
+      },
+   {
+      'name':'equipInactivSud',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_noactiva_flecha_sur.png"
+         }
+      },
+   {
+      'name':'equipInactivOest',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_noactiva_flecha_oeste.png"
+         }
+      },
+   {
+      'name':'equipInactivEst',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_noactiva_flecha_este.png"
+         }
+      },
+   {
+      'name':'equipInactivNordOest',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_noactiva_flecha_noroeste.png"
+         }
+      },
+   {
+      'name':'equipInactivNordEst',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_noactiva_flecha_noreste.png"
+         }
+      },
+   {
+      'name':'equipInactivSudOest',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_noactiva_flecha_suroeste.png"
+      }
+      },
+   {
+      'name':'equipInactivSudEst',
+      'options': {
+            graphicWidth: 24,
+            graphicHeight: 24,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_noactiva_flecha_sureste.png"
+      }
+   }
+]

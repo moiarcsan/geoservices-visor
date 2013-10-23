@@ -1,0 +1,1506 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>visor-sig-sicecat</artifactId>
+	<packaging>war</packaging>
+	<version>${project.parent.version}</version>
+
+	<parent>
+		<groupId>interior.cat.visor</groupId>
+	  	<artifactId>modulos-visor-sig</artifactId>
+		<version>4.9</version>
+		<!-- <relativePath>../pomHUDSON.xml</relativePath> -->
+	</parent>
+
+	<!-- Project Information -->
+	<licenses>
+		<license>
+			<name>GPL 2.0</name>
+			<url>http://www.gnu.org/licenses/gpl-2.0.html</url>
+		</license>
+	</licenses>
+
+	<name>${project.artifactId}-${project.version}</name>
+	<url>http://emergya.es</url>
+
+	<organization>
+		<name>Emergya</name>
+		<url>http://www.emergya.es</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>adiaz</id>
+			<name>Alejandro Diaz Torres</name>
+			<email>adiaz@emergya.es</email>
+			<organization>Emergya Consultoria</organization>
+			<organizationUrl>http://www.emergya.es</organizationUrl>
+			<roles>
+				<role>Analista</role>
+			</roles>
+		</developer>
+	</developers>
+
+
+	<issueManagement>
+		<system>redmine</system>
+		<url>http://redmine.emergya.es/projects/sicecat/</url>
+	</issueManagement>
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://jenkins.emergya.es/jenkins/view/sicecat/job/visor-sig-sicecat/</url>
+	</ciManagement>
+	<inceptionYear>2011</inceptionYear>
+	<mailingLists>
+		<mailingList>
+			<name>sicecat-devel</name>
+			<subscribe>mailto:sicecat-devel@listas.emergya.info?subject=subscribe</subscribe>
+			<unsubscribe>mailto:sicecat-devel@listas.emergya.info?subject=unsubscribe</unsubscribe>
+			<post>sicecat-devel@listas.emergya.info</post>
+			<archive>http://listas.emergya.info/mailman/listinfo/sicecat-devel</archive>
+		</mailingList>
+	</mailingLists>
+	<!-- Project Information -->
+
+
+	<!-- Environment Information -->
+	<scm>
+		<connection>scm:svn:http://svn.emergya.es/svn/sicecat</connection>
+		<developerConnection>scm:svn:http://svn.emergya.es/svn/sicecat</developerConnection>
+		<url>http://svn.emergya.es/svn/sicecat</url>
+	</scm>
+
+
+	<distributionManagement>
+		<!-- use the following if you're not using a snapshot version. -->
+		<repository>
+			<id>nexus.releases</id>
+			<name>Nexus SiceCat Releases</name>
+			<url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo/</url>
+		</repository>
+		<!-- use the following if you ARE using a snapshot version. -->
+		<snapshotRepository>
+			<id>nexus.snapshots</id>
+			<name>Nexus SiceCat Snapshot</name>
+			<url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>nexus.emergya</id>
+			<name>Emergya</name>
+			<url>http://nexus.emergya.es/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+	        	</releases>
+	        <snapshots>
+		  		<enabled>false</enabled>
+	        </snapshots>
+		</repository>
+		<repository>
+			<id>nexus.emergya.snapshot</id>
+			<name>Nexus Public Snapshots</name>
+			<url>http://nexus.emergya.es/nexus/content/groups/public-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+	        	</releases>
+	        <snapshots>
+		  		<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+	        </snapshots>
+		</repository>
+		<!-- Only on releases version
+		<repository>
+			<id>canigo.repo</id>
+			<name>Canigo Maven2 repo</name>
+			<url>http://canigo.ctti.gencat.net/repository/maven2/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+	        	</releases>
+	        <snapshots>
+		  		<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+	        </snapshots>
+		</repository-->
+		<!-- use the following if you're not using a snapshot version. -->
+		<repository>
+			<id>nexus.releases</id>
+			<name>Nexus SiceCat Releases</name>
+			<url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+	        	</releases>
+			<snapshots>
+			  		<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<!-- use the following if you ARE using a snapshot version. -->
+		<repository>
+			<id>nexus.snapshots</id>
+			<name>Nexus SiceCat Snapshot</name>
+			<url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+	        	</releases>
+	        <snapshots>
+		  		<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+	        </snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus.emergya</id>
+			<name>Nexus Repository</name>
+			<url>http://nexus.emergya.es/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+	        	</releases>
+	        <snapshots>
+		  		<enabled>false</enabled>
+	        </snapshots>
+		</pluginRepository>
+		<!-- Needed to get a valid alpha version of maven pluggin. -->
+		<pluginRepository>
+			<id>nexus.snapshot</id>
+			<name>Nexus Public Snapshots</name>
+			<url>http://nexus.emergya.es/nexus/content/groups/public-snapshots/</url>
+			<snapshots>
+	         	<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+	 	    </snapshots>
+	    	<releases>
+				<updatePolicy>always</updatePolicy>
+	         	<enabled>false</enabled>
+	       </releases>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<properties>
+		<visor.version>4.9</visor.version>
+		<skipTests>false</skipTests>
+		<project.build.sourceEncoding>ISO-8859-15</project.build.sourceEncoding>
+		<org.richfaces.bom.version>4.0.0.Final</org.richfaces.bom.version>
+		<org.richfaces.version>3.3.3.Final</org.richfaces.version>
+		<junit.version>4.8.2</junit.version>
+		<canigo.persistence.jpa>1.0.0</canigo.persistence.jpa>
+		<canigo.support.ole.version>1.0.0</canigo.support.ole.version>
+		<canigo.support.ftp.version>1.0.0</canigo.support.ftp.version>
+		<canigo.support.sftp.version>1.0.0
+		</canigo.support.sftp.version>
+		<canigo.security.version>1.0.0</canigo.security.version>
+		<canigo.support.merging.version>1.0.0
+		</canigo.support.merging.version>
+		<canigo.integration.documentum.version>1.0.0
+		</canigo.integration.documentum.version>
+		<canigo.operation.instrumentation.version>1.0.0</canigo.operation.instrumentation.version>
+		<canigo.integration.notificacions.electroniques.version>1.0.0
+		</canigo.integration.notificacions.electroniques.version>
+		<canigo.integration.gecat.version>1.0.0
+		</canigo.integration.gecat.version>
+		<canigo.support.mailing.version>1.0.0
+		</canigo.support.mailing.version>
+		<canigo.integration.antivirus.version>1.0.0
+		</canigo.integration.antivirus.version>
+		<canigo.integration.sap.version>1.0.0
+		</canigo.integration.sap.version>
+		<canigo.integration.psis.version>1.0.0
+		</canigo.integration.psis.version>
+		<canigo.integration.sarcat.version>1.0.0
+		</canigo.integration.sarcat.version>
+		<canigo.persistence.jpa.version>1.0.0</canigo.persistence.jpa.version>
+		<canigo.security>1.0.0</canigo.security>
+		<servlet.api.version>2.5</servlet.api.version>
+		<canigo.web.jsf.version>1.0.0</canigo.web.jsf.version>
+		<!--canigo.core.version>[3.0.0,3.1.0)</canigo.core.version -->
+		<canigo.core.version>3.0.0</canigo.core.version>
+		<project.build.sourceEncoding>ISO-8859-15</project.build.sourceEncoding>
+		<org.springframework.version>3.1.2.RELEASE</org.springframework.version>
+		<facelets-taglib>0.3_jsf-1.2-spring-3</facelets-taglib>
+		<richfaces.version>3.3.2.GA</richfaces.version>
+		<org.opensymphony.quartz.version>1.8.3
+		</org.opensymphony.quartz.version>
+		<commons.collections.version>3.2.1</commons.collections.version>
+		<resource.folder>${basedir}/src/main/resources</resource.folder>
+		<browserFileNames>firefox</browserFileNames>
+		
+		<!-- Visor direct config (web.xml) -->
+		<display.name>Visor SIG Sicecat</display.name>
+		<print.pdf.config.yaml>WEB-INF/config.yaml</print.pdf.config.yaml>
+		<print.png.config.yaml>WEB-INF/config.yaml</print.png.config.yaml>
+		<visor.config.dir>/tmp</visor.config.dir>
+		<welcomeFile>index.jsp</welcomeFile>
+		<index.mode>IS_DEVEL</index.mode>
+		<!-- log4j.properties -->
+		<log4j.rootCategory>INFO, CONSOLE, LOGFILE</log4j.rootCategory>
+		<log4j.appender.LOGFILE.File>/tmp/visor-sig-sicecat.log</log4j.appender.LOGFILE.File>
+		<!-- Proxy NTLM -->
+		<proxy.proxyOn>false</proxy.proxyOn>
+		<proxy.noProxied />
+		<proxy.proxyUrl>10.136.194.225</proxy.proxyUrl>
+		<welcomeFile>index.jsp</welcomeFile>
+		<proxy.proxyPort>8080</proxy.proxyPort>
+		<proxy.proxyUser />
+		<proxy.proxyPassword />
+		<!-- Print config (config.yaml) -->
+		<print.visor.url>http://localhost:8080/Visor/</print.visor.url>
+		<print.header.logo>${print.visor.url}images/pdf/logo.png</print.header.logo>
+		<print.footer.logo>${print.visor.url}images/pdf/departament_dinterior.gif</print.footer.logo>
+		
+		<!-- JDBC -->
+		<database.jdbc.driverClass>org.postgresql.Driver</database.jdbc.driverClass>
+		<database.hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</database.hibernate.dialect>
+		<database.jdbc.user>persistence_geo</database.jdbc.user>
+		<database.jdbc.password>persistence_geo</database.jdbc.password>
+		<database.jdbc.url>jdbc:postgresql://localhost/persistence_geo_db</database.jdbc.url>
+		<database.hibernate.hbm2ddl.auto>validate</database.hibernate.hbm2ddl.auto>
+		<database.schema>persistence_geo</database.schema>
+		<database.catalog>persistence_geo</database.catalog>
+		<database.characterEncoding>ISO-8859-15</database.characterEncoding>
+		<database.showsql>true</database.showsql>
+		<miliSecondsWaitingOpenConnection>20000</miliSecondsWaitingOpenConnection>
+
+		<maven.build.timestamp.format>yyMMdd_HHmm</maven.build.timestamp.format>
+		<buildNumber>${maven.build.timestamp}</buildNumber>
+		
+	    <axiomReleaseVersion>1.2.10</axiomReleaseVersion>
+	    <axis2ReleaseVersion>1.5.4</axis2ReleaseVersion>
+	</properties>
+
+	<build>
+		<finalName>${project.artifactId}-${project.version}</finalName>
+		<outputDirectory>target/scripts</outputDirectory>
+		<testOutputDirectory>target/test-scripts</testOutputDirectory>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/webresources</directory>
+                <filtering>true</filtering>
+                <targetPath>../../src/main/webapp</targetPath>
+            </resource>
+        </resources>
+        
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<versionRange>[1.0.0,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<configuration>
+					<verbose>true</verbose>
+					<filesets>
+						<fileset>
+							<directory>src/main/webapp/WEB-INF/lib/</directory>
+							<followSymlinks>false</followSymlinks>
+							<includes>
+								<include>**</include>
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>
+								src/main/webapp/WEB-INF/lib
+							</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+							<excludeScope>provided</excludeScope>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>jee6</id>
+			<build>
+
+				<plugins>
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webappDirectory>${project.build.directory}/${project.build.finalName}-jee6
+							</webappDirectory>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+
+			<dependencies>
+				<dependency>
+					<groupId>com.sun.faces</groupId>
+					<artifactId>jsf-api</artifactId>
+					<scope>provided</scope>
+				</dependency>
+				<dependency>
+					<groupId>com.sun.faces</groupId>
+					<artifactId>jsf-impl</artifactId>
+					<scope>provided</scope>
+				</dependency>
+				<dependency>
+					<groupId>javax.transaction</groupId>
+					<artifactId>jta</artifactId>
+					<version>1.1</version>
+					<scope>provided</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>javascript</id>
+			<build>
+
+				<plugins>
+
+					<plugin>
+						<!-- Maven compiler plugin -->
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<source>1.6</source>
+							<target>1.6</target>
+							<optimize>true</optimize>
+						</configuration>
+					</plugin>
+
+					<plugin>
+						<groupId>org.codehaus.mojo.javascript</groupId>
+						<artifactId>javascript-maven-plugin</artifactId>
+						<extensions>true</extensions>
+						<executions>
+							<execution>
+								<goals>
+									<goal>war-package</goal>
+									<!--goal>prepare-tests</goal> <goal>jsunit</goal -->
+								</goals>
+							</execution>
+						</executions>
+				        <configuration>
+				        	<output>scripts</output>
+				        </configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webResources>
+								<!-- OpenLayers -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/proj4js</directory>
+									<targetPath>scripts/proj4js</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/OpenLayers/img/</directory>
+									<targetPath>images/OpenLayers/img</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/OpenLayers/theme/default/img/</directory>
+									<targetPath>images/OpenLayers/theme/img</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/OpenLayers</directory>
+									<targetPath>scripts/OpenLayers</targetPath>
+								</resource>
+								<!-- EXTJS -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/ext</directory>
+									<targetPath>scripts/ext</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/ext/resources/images</directory>
+									<targetPath>images/ext/resources/images</targetPath>
+								</resource>
+								<!-- proj4js -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/proj4js</directory>
+									<targetPath>scripts/proj4js</targetPath>
+								</resource>
+								<!-- GeoExt -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/GeoExt/lib/resources/images</directory>
+									<targetPath>images</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/GeoExt/lib/resources/css</directory>
+									<targetPath>css</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/GeoExt</directory>
+									<targetPath>scripts/GeoExt</targetPath>
+								</resource>
+								<!-- GXP -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/gxp/theme/img/</directory>
+									<targetPath>images/gxp/theme/img</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/gxp/theme/</directory>
+									<targetPath>css/gxp/theme</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/gxp</directory>
+									<targetPath>scripts/gxp</targetPath>
+								</resource>
+								<!-- sicecatext -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/scripts</directory>
+									<targetPath>scripts</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/css</directory>
+									<targetPath>css</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/images</directory>
+									<targetPath>images</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/SiceCAT/data</directory>
+									<targetPath>WEB-INF/classes/conf/local</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/SiceCAT/data</directory>
+									<targetPath>WEB-INF/classes/conf/pre</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/SiceCAT/data</directory>
+									<targetPath>WEB-INF/classes/conf/pro</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/SiceCAT/data</directory>
+									<targetPath>WEB-INF/classes/conf/int</targetPath>
+								</resource>
+							</webResources>
+							<webappDirectory>${project.build.directory}/${project.build.finalName}-jee6
+							</webappDirectory>
+		                    <dependentWarExcludes>
+			                    WEB-INF/lib/asm*,
+			                    WEB-INF/lib/spring*3.0.2.RELEASE.jar,
+			                    WEB-INF/lib/spring*3.0.7.RELEASE.jar,
+			                    WEB-INF/lib/spring*3.1.2.RELEASE.jar,
+			                    WEB-INF/lib/commons-collections*,
+			                    WEB-INF/lib/commons-dbcp*,
+			                    WEB-INF/lib/commons-io*,
+			                    WEB-INF/lib/commons-lang*,
+			                    WEB-INF/lib/ehcache*,
+			                    WEB-INF/lib/jai*,
+			                    WEB-INF/lib/jdom*,
+			                    WEB-INF/lib/junit*,
+			                    WEB-INF/lib/stax-api*,
+			                    WEB-INF/lib/xml-apis*,
+			                    WEB-INF/lib/slf4j*,
+			                    WEB-INF/lib/cglib-2.2.2.jar,
+			                    WEB-INF/lib/cglib-2.1_3.jar,
+			                    WEB-INF/lib/httpclient-4.1.1.jar,
+			                    WEB-INF/lib/httpcore-4.1.jar,
+			                    WEB-INF/lib/jackson-core-asl-1.8.5.jar,
+			                    WEB-INF/lib/jackson-mapper-asl-1.8.5.jar,
+			                    WEB-INF/lib/spring-aop-3.0.3.RELEASE.jar,
+			                    WEB-INF/lib/spring-jdbc-3.0.7.RELEASE.jar,
+			                    WEB-INF/lib/spring-security-acl-3.0.2.RELEASE.jar,
+			                    WEB-INF/lib/spring-security-config-3.0.2.RELEASE.jar,
+			                    WEB-INF/lib/spring-security-core-3.0.2.RELEASE.jar,
+			                    WEB-INF/lib/spring-security-taglibs-3.0.2.RELEASE.jar,
+			                    WEB-INF/lib/spring-security-web-3.0.2.RELEASE.jar,
+			                    WEB-INF/lib/stax-api-1.0.jar,
+			                    WEB-INF/lib/jcl-over-slf4j-*,
+			                    WEB-INF/lib/ejb3-persistence-1.0.1.GA.jar
+		                	</dependentWarExcludes>
+		                    <overlays>
+		                        <overlay>
+		                            <groupId>com.emergya</groupId>
+		                            <artifactId>persistence-geo-rest</artifactId>
+		                        </overlay>
+		                    </overlays>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+
+			<dependencies>
+				<dependency>
+					<groupId>com.sun.faces</groupId>
+					<artifactId>jsf-api</artifactId>
+					<scope>provided</scope>
+				</dependency>
+				<dependency>
+					<groupId>com.sun.faces</groupId>
+					<artifactId>jsf-impl</artifactId>
+					<scope>provided</scope>
+				</dependency>
+				<dependency>
+					<groupId>javax.transaction</groupId>
+					<artifactId>jta</artifactId>
+					<version>1.1</version>
+					<scope>provided</scope>
+				</dependency>
+
+				<!-- Js libraries -->
+				<dependency>
+					<groupId>interior.cat.visor</groupId>
+					<artifactId>sicecatext-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>interior.cat.visor.geoext</groupId>
+					<artifactId>geoext-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>interior.cat.visor.openlayers</groupId>
+					<artifactId>openlayers-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>interior.cat.visor.ext</groupId>
+					<artifactId>ext-js-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>interior.cat.visor.proj4js</groupId>
+					<artifactId>proj4js-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>opengeo</groupId>
+					<artifactId>gxp-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+			</dependencies>
+		</profile>
+
+
+
+		<profile>
+			<id>jenkins-ci</id>
+			<build>
+
+				<plugins>
+
+					<plugin>
+						<!-- Maven compiler plugin -->
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<source>1.6</source>
+							<target>1.6</target>
+							<optimize>true</optimize>
+						</configuration>
+					</plugin>
+
+					<plugin>
+						<groupId>org.codehaus.mojo.javascript</groupId>
+						<artifactId>javascript-maven-plugin</artifactId>
+						<extensions>true</extensions>
+						<executions>
+							<execution>
+								<goals>
+									<goal>war-package</goal>
+									<!--goal>prepare-tests</goal> <goal>jsunit</goal -->
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webResources>
+								<!-- OpenLayers -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/proj4js</directory>
+									<targetPath>scripts/proj4js</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/OpenLayers/img/</directory>
+									<targetPath>images/OpenLayers/img</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/OpenLayers/theme/default/img/</directory>
+									<targetPath>images/OpenLayers/theme/img</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/OpenLayers</directory>
+									<targetPath>scripts/OpenLayers</targetPath>
+								</resource>
+								<!-- EXTJS -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/ext</directory>
+									<targetPath>scripts/ext</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/ext/resources/images</directory>
+									<targetPath>images/ext/resources/images</targetPath>
+								</resource>
+								<!-- proj4js -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/proj4js</directory>
+									<targetPath>scripts/proj4js</targetPath>
+								</resource>
+								<!-- GeoExt -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/GeoExt/lib/resources/images</directory>
+									<targetPath>images</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/GeoExt/lib/resources/css</directory>
+									<targetPath>css</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/GeoExt</directory>
+									<targetPath>scripts/GeoExt</targetPath>
+								</resource>
+								<!-- GXP -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/gxp/theme/img/</directory>
+									<targetPath>images/gxp/theme/img</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/gxp/theme/</directory>
+									<targetPath>css/gxp/theme</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/gxp</directory>
+									<targetPath>scripts/gxp</targetPath>
+								</resource>
+								<!-- sicecatext -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/scripts</directory>
+									<targetPath>scripts</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/css</directory>
+									<targetPath>css</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/images</directory>
+									<targetPath>images</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/SiceCAT/data</directory>
+									<targetPath>WEB-INF/classes/conf/local</targetPath>
+								</resource>
+							</webResources>
+							<webappDirectory>${project.build.directory}/${project.build.finalName}-jee6
+							</webappDirectory>
+						</configuration>
+					</plugin>
+
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.1</version>
+						<executions>
+							<execution>
+								<phase>install</phase>
+								<configuration>
+									<tasks>
+										<exec dir="${basedir}" executable="${basedir}/src/main/ci/script-weblogicdeploy.sh">
+										</exec>
+									</tasks>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+
+			<dependencies>
+		        
+				<dependency>
+					<groupId>com.sun.faces</groupId>
+					<artifactId>jsf-api</artifactId>
+					<scope>provided</scope>
+				</dependency>
+				<dependency>
+					<groupId>com.sun.faces</groupId>
+					<artifactId>jsf-impl</artifactId>
+					<scope>provided</scope>
+				</dependency>
+				<dependency>
+					<groupId>javax.transaction</groupId>
+					<artifactId>jta</artifactId>
+					<version>1.1</version>
+					<scope>provided</scope>
+				</dependency>
+
+				<!-- Js libraries -->
+				<dependency>
+					<groupId>interior.cat.visor</groupId>
+					<artifactId>sicecatext-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>interior.cat.visor.geoext</groupId>
+					<artifactId>geoext-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>interior.cat.visor.openlayers</groupId>
+					<artifactId>openlayers-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>interior.cat.visor.ext</groupId>
+					<artifactId>ext-js-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>interior.cat.visor.proj4js</groupId>
+					<artifactId>proj4js-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>opengeo</groupId>
+					<artifactId>gxp-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<activation>
+      				<activeByDefault>true</activeByDefault>
+			</activation>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo.javascript</groupId>
+						<artifactId>javascript-maven-plugin</artifactId>
+						<extensions>true</extensions>
+						<executions>
+							<execution>
+								<goals>
+									<goal>war-package</goal>
+									<!--<goal>prepare-tests</goal> <goal>jsunit</goal> -->
+									<!--<goal>compress</goal>-->
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webResources>
+								<!-- OpenLayers -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/proj4js</directory>
+									<targetPath>scripts/proj4js</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/OpenLayers/img/</directory>
+									<targetPath>images/OpenLayers/img</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/OpenLayers/theme/default/img/</directory>
+									<targetPath>images/OpenLayers/theme/img</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/OpenLayers</directory>
+									<targetPath>scripts/OpenLayers</targetPath>
+								</resource>
+								<!-- EXTJS -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/ext</directory>
+									<targetPath>scripts/ext</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/ext/resources/images</directory>
+									<targetPath>images/ext/resources/images</targetPath>
+								</resource>
+								<!-- proj4js -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/proj4js</directory>
+									<targetPath>scripts/proj4js</targetPath>
+								</resource>
+								<!-- GeoExt -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/GeoExt/lib/resources/images</directory>
+									<targetPath>images</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/GeoExt/lib/resources/css</directory>
+									<targetPath>css</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/GeoExt</directory>
+									<targetPath>scripts/GeoExt</targetPath>
+								</resource>
+								<!-- GXP -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/gxp/theme/img/</directory>
+									<targetPath>images/gxp/theme/img</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/gxp/theme/</directory>
+									<targetPath>css/gxp/theme</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/gxp</directory>
+									<targetPath>scripts/gxp</targetPath>
+								</resource>
+								<!-- sicecatext -->
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/scripts</directory>
+									<targetPath>scripts</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/css</directory>
+									<targetPath>css</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/images</directory>
+									<targetPath>images</targetPath>
+								</resource>
+								<resource>
+									<directory>target/${project.artifactId}-${project.version}/scripts/lib/SiceCAT/data</directory>
+									<targetPath>WEB-INF/classes/conf/local</targetPath>
+								</resource>
+							</webResources>
+							<webappDirectory>${project.build.directory}/${project.build.finalName}-jee6
+							</webappDirectory>
+		                    <dependentWarExcludes>
+			                    WEB-INF/lib/asm*,
+			                    WEB-INF/lib/spring*3.0.2.RELEASE.jar,
+			                    WEB-INF/lib/spring*3.0.7.RELEASE.jar,
+			                    WEB-INF/lib/spring*3.1.2.RELEASE.jar,
+			                    WEB-INF/lib/commons-collections*,
+			                    WEB-INF/lib/commons-dbcp*,
+			                    WEB-INF/lib/commons-io*,
+			                    WEB-INF/lib/commons-lang*,
+			                    WEB-INF/lib/ehcache*,
+			                    WEB-INF/lib/jai*,
+			                    WEB-INF/lib/jdom*,
+			                    WEB-INF/lib/junit*,
+			                    WEB-INF/lib/stax-api*,
+			                    WEB-INF/lib/xml-apis*,
+			                    WEB-INF/lib/slf4j*,
+			                    WEB-INF/lib/cglib-2.2.2.jar,
+			                    WEB-INF/lib/cglib-2.1_3.jar,
+			                    WEB-INF/lib/httpclient-4.1.1.jar,
+			                    WEB-INF/lib/httpcore-4.1.jar,
+			                    WEB-INF/lib/jackson-core-asl-1.8.5.jar,
+			                    WEB-INF/lib/jackson-mapper-asl-1.8.5.jar,
+			                    WEB-INF/lib/spring-aop-3.0.3.RELEASE.jar,
+			                    WEB-INF/lib/spring-jdbc-3.0.7.RELEASE.jar,
+			                    WEB-INF/lib/spring-security-acl-3.0.2.RELEASE.jar,
+			                    WEB-INF/lib/spring-security-config-3.0.2.RELEASE.jar,
+			                    WEB-INF/lib/spring-security-core-3.0.2.RELEASE.jar,
+			                    WEB-INF/lib/spring-security-taglibs-3.0.2.RELEASE.jar,
+			                    WEB-INF/lib/spring-security-web-3.0.2.RELEASE.jar,
+			                    WEB-INF/lib/stax-api-1.0.jar,
+			                    WEB-INF/lib/jcl-over-slf4j-*,
+			                    WEB-INF/lib/ejb3-persistence-1.0.1.GA.jar
+		                	</dependentWarExcludes>
+		                    <overlays>
+		                        <overlay>
+		                            <groupId>com.emergya</groupId>
+		                            <artifactId>persistence-geo-rest</artifactId>
+		                        </overlay>
+		                    </overlays>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<configuration>
+							<finalName>visor-sig-sicecat-${visor.version}</finalName>
+							<descriptors>
+								<descriptor>assemble/dynamic.xml</descriptor>
+								<descriptor>assemble/static.xml</descriptor>
+							</descriptors>
+						</configuration>
+						<executions>
+							<execution>
+								<id>assembly-app</id>
+								<phase>package</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+
+			<dependencies>
+				<!-- Js libraries -->
+				<dependency>
+					<groupId>interior.cat.visor</groupId>
+					<artifactId>sicecatext-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>interior.cat.visor.geoext</groupId>
+					<artifactId>geoext-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>interior.cat.visor.openlayers</groupId>
+					<artifactId>openlayers-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>interior.cat.visor.ext</groupId>
+					<artifactId>ext-js-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>interior.cat.visor.proj4js</groupId>
+					<artifactId>proj4js-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>opengeo</groupId>
+					<artifactId>gxp-maven</artifactId>
+					<version>${project.parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+			</dependencies>
+
+			<properties>
+				<!-- Visor direct config (web.xml) 
+				default release conf -->
+				<display.name>Visor SIG Sicecat</display.name>
+				<dos.puntos>:</dos.puntos>
+				<dir.win>/</dir.win>
+				<print.pdf.config.yaml>/sicecat2_AppJava/visor-sig-sicecat-${project.version}-dynamic.war/WEB-INF/classes/conf/int/config.yaml</print.pdf.config.yaml>
+				<print.png.config.yaml>/sicecat2_AppJava/visor-sig-sicecat-${project.version}-dynamic.war/WEB-INF/classes/conf/int/config.yaml</print.png.config.yaml>
+				<visor.config.dir>/sicecat2_AppJava/visor-sig-sicecat-${project.version}-dynamic.war/WEB-INF/classes/conf/int</visor.config.dir>
+				<welcomeFile>index.html</welcomeFile>
+				<index.mode>IS_NOT_DISPLAY</index.mode>
+				<!-- log4j.properties -->
+				<log4j.rootCategory>INFO, CONSOLE, LOGFILE</log4j.rootCategory>
+				<log4j.appender.LOGFILE.File>/export/AppJavaDades/sicecat2/logs/visor.log</log4j.appender.LOGFILE.File>
+				<!-- Proxy NTLM -->
+				<proxy.proxyOn>false</proxy.proxyOn>
+				<proxy.noProxied>http://sigescat,http://localhost,https://sigescat,&gt;https://integracio.dinterior.gencat.intranet,https://localhost,sigescat,localhost,corp-re-dev-fe1.pise.dirip.intranet,http://10.136.202.76</proxy.noProxied>
+				<proxy.proxyUrl>10.136.194.225</proxy.proxyUrl>
+				<welcomeFile>index.html</welcomeFile>
+				<proxy.proxyPort>8080</proxy.proxyPort>
+				<proxy.proxyUser />
+				<proxy.proxyPassword />
+				<!-- Print config (config.yaml) -->
+				<print.visor.url>https://integracio.dinterior.gencat.intranet/sicecat2/Visor/</print.visor.url>
+				<print.header.logo>${print.visor.url}images/pdf/logo.png</print.header.logo>
+				<print.footer.logo>${print.visor.url}images/pdf/departament_dinterior.gif</print.footer.logo>
+				<!-- JDBC -->
+                <database.jdbc.driverClass>oracle.jdbc.driver.OracleDriver</database.jdbc.driverClass>
+                <database.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</database.hibernate.dialect>
+                <database.jdbc.user>pise3_adm</database.jdbc.user>
+                <database.jdbc.password>pise3_adm</database.jdbc.password>
+                <database.jdbc.url>jdbc:oracle:thin:@dgpcpre.pise.interior.intranet:1522:dgpcint</database.jdbc.url>
+                <database.hibernate.hbm2ddl.auto>validate</database.hibernate.hbm2ddl.auto>
+                <database.schema>dgpcint</database.schema>
+                <database.catalog>dgpcint</database.catalog>
+                <database.characterEncoding>ISO-8859-15</database.characterEncoding>
+                <database.showsql>false</database.showsql>
+                <miliSecondsWaitingOpenConnection>20000</miliSecondsWaitingOpenConnection>
+			</properties>
+		</profile>
+		<profile>
+			<id>pre</id>
+			<properties>
+				<!-- Proxies configuration -->
+  				<proxy.one>proxy?url=</proxy.one>
+  				<proxy.two />
+				<searcher>rest/</searcher>
+				<proxy.proxyOn>true</proxy.proxyOn>
+				<proxy.noProxied>http://sigescat-pre.pise.interior.intranet,http://localhost</proxy.noProxied>
+				<proxy.proxyUrl>10.136.194.225</proxy.proxyUrl>
+				<welcomeFile>index.html</welcomeFile>
+				<proxy.proxyPort>8080</proxy.proxyPort>
+				<proxy.proxyUser />
+				<proxy.proxyPassword />
+				<!-- JDBC -->
+                                <database.jdbc.driverClass>oracle.jdbc.driver.OracleDriver</database.jdbc.driverClass>
+                                <database.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</database.hibernate.dialect>
+                                <database.jdbc.user>pise3_adm</database.jdbc.user>
+                                <database.jdbc.password>pise3_adm</database.jdbc.password>
+                                <database.jdbc.url>jdbc:oracle:thin:@dgpcpre.pise.interior.intranet:1522:dgpcpre</database.jdbc.url>
+                                <database.hibernate.hbm2ddl.auto>validate</database.hibernate.hbm2ddl.auto>
+                                <database.schema>dgpcpre</database.schema>
+                                <database.catalog>dgpcpre</database.catalog>
+                                <database.characterEncoding>ISO-8859-15</database.characterEncoding>
+                                <database.showsql>false</database.showsql>
+                                <miliSecondsWaitingOpenConnection>20000</miliSecondsWaitingOpenConnection>
+
+			</properties>
+		</profile>
+		<profile>
+			<id>int</id>
+			<properties>
+				<!-- Visor direct config (web.xml) -->
+				<display.name>Visor SIG Sicecat</display.name>
+				<dos.puntos>:</dos.puntos>
+				<dir.win>/</dir.win>
+				<print.pdf.config.yaml>C${dos.puntos}${dir.win}docs${dir.win}gis${dir.win}config.yaml</print.pdf.config.yaml>
+				<print.png.config.yaml>C${dos.puntos}${dir.win}docs${dir.win}gis${dir.win}config.yaml</print.png.config.yaml>
+				<visor.config.dir>C${dos.puntos}${dir.win}docs${dir.win}gis</visor.config.dir>
+				<welcomeFile>index.html</welcomeFile>
+				<index.mode>IS_NOT_DISPLAY</index.mode>
+				<!-- log4j.properties -->
+				<log4j.rootCategory>INFO, CONSOLE, LOGFILE</log4j.rootCategory>
+				<log4j.appender.LOGFILE.File>C${dos.puntos}${dir.win}logs${dir.win}Visor.log</log4j.appender.LOGFILE.File>
+				<!-- Proxy NTLM -->
+				<proxy.proxyOn>true</proxy.proxyOn>
+				<proxy.noProxied>http://sigescat,http://localhost,https://sigescat,http://corp-re-dev-fe1.pise.dirip.intranet,https://localhost,sigescat,localhost,corp-re-dev-fe1.pise.dirip.intranet</proxy.noProxied>
+				<proxy.proxyUrl>10.136.194.225</proxy.proxyUrl>
+				<welcomeFile>index.html</welcomeFile>
+				<proxy.proxyPort>8080</proxy.proxyPort>
+				<proxy.proxyUser />
+				<proxy.proxyPassword />
+				<!-- Print config (config.yaml) -->
+				<print.visor.url>http://localhost:91/Visor/</print.visor.url>
+				<print.header.logo>${print.visor.url}images/pdf/logo.png</print.header.logo>
+				<print.footer.logo>${print.visor.url}images/pdf/departament_dinterior.gif</print.footer.logo>
+				<!-- JDBC -->
+                                <database.jdbc.driverClass>oracle.jdbc.driver.OracleDriver</database.jdbc.driverClass>
+                                <database.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</database.hibernate.dialect>
+                                <database.jdbc.user>pise3_adm</database.jdbc.user>
+                                <database.jdbc.password>pise3_adm</database.jdbc.password>
+                                <database.jdbc.url>jdbc:oracle:thin:@dgpcpre.pise.interior.intranet:1522:dgpcint</database.jdbc.url>
+                                <database.hibernate.hbm2ddl.auto>validate</database.hibernate.hbm2ddl.auto>
+                                <database.schema>dgpcint</database.schema>
+                                <database.catalog>dgpcint</database.catalog>
+                                <database.characterEncoding>ISO-8859-15</database.characterEncoding>
+                                <database.showsql>false</database.showsql>
+                                <miliSecondsWaitingOpenConnection>20000</miliSecondsWaitingOpenConnection>
+
+			</properties>
+		</profile>
+		<profile>
+			<id>oracle</id>
+			<properties>
+				<!-- JDBC -->
+				<database.jdbc.driverClass>oracle.jdbc.driver.OracleDriver</database.jdbc.driverClass>
+				<database.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</database.hibernate.dialect>
+				<database.jdbc.user>SICECAT2_ADM</database.jdbc.user>
+				<database.jdbc.password>SICECAT2_ADM</database.jdbc.password>
+				<database.jdbc.url>jdbc:oracle:thin:@oracle-apps:1521:gissicecat2</database.jdbc.url>
+				<database.hibernate.hbm2ddl.auto>validate</database.hibernate.hbm2ddl.auto>
+				<database.schema>gissicecatuser2</database.schema>
+				<database.catalog>gissicecatuser2</database.catalog>
+				<database.characterEncoding>ISO-8859-15</database.characterEncoding>
+				<database.showsql>true</database.showsql>
+				<miliSecondsWaitingOpenConnection>20000</miliSecondsWaitingOpenConnection>
+			</properties>
+		</profile>
+	</profiles>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.richfaces</groupId>
+				<artifactId>richfaces-bom</artifactId>
+				<version>${org.richfaces.bom.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+        <!-- Test dependencies-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework.version}</version>
+            <scope>test</scope>
+        </dependency>
+         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+		<dependency>
+			<groupId>com.emergya</groupId>
+			<artifactId>persistence-geo-rest</artifactId>
+			<version>2.1-jpa1.0</version>
+			<type>war</type>
+			<exclusions>
+				<exclusion>
+	    			<groupId>org.codehaus.jackson</groupId>
+	    			<artifactId>jackson-core-asl</artifactId>
+				</exclusion>
+				<exclusion>
+	    			<groupId>org.codehaus.jackson</groupId>
+	    			<artifactId>jackson-mapper-asl</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.richfaces.framework</groupId>
+			<artifactId>richfaces-api</artifactId>
+			<version>${org.richfaces.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.richfaces.ui</groupId>
+			<artifactId>richfaces-ui</artifactId>
+			<version>${org.richfaces.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.richfaces.framework</groupId>
+			<artifactId>richfaces-impl</artifactId>
+			<version>${org.richfaces.version}</version>
+		</dependency>
+		<!-- <dependency> <groupId>com.sun.faces</groupId> <artifactId>jsf-api</artifactId> 
+			</dependency> <dependency> <groupId>com.sun.faces</groupId> <artifactId>jsf-impl</artifactId> 
+			</dependency> -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>el-api</artifactId>
+			<!-- JEE 6 -->
+			<scope>provided</scope>
+			<!-- JEE 5 -->
+			<!--scope>provided</scope-->
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+		</dependency>
+		
+		
+        <!-- SPRING DEPENDENCIES -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-oxm</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+	    
+	    <!-- Internal Conectors -->
+	    <dependency>
+	       <groupId>interior.cat.visor</groupId>
+  		   <artifactId>sigescat-searcher-conector</artifactId>
+     	   <version>${project.parent.version}</version>
+			<exclusions>
+				<exclusion>
+	    			<groupId>asm</groupId>
+	    			<artifactId>asm</artifactId>
+				</exclusion>
+				<exclusion>
+	    			<groupId>cglib</groupId>
+	    			<artifactId>cglib</artifactId>
+				</exclusion>
+			</exclusions>
+	    </dependency>
+	    <dependency>
+	       <groupId>interior.cat.visor</groupId>
+  		   <artifactId>sigescat-openls-conector</artifactId>
+ 	   	   <version>${project.parent.version}</version>
+			<exclusions>
+				<exclusion>
+	    			<groupId>asm</groupId>
+	    			<artifactId>asm</artifactId>
+				</exclusion>
+				<exclusion>
+	    			<groupId>cglib</groupId>
+	    			<artifactId>cglib</artifactId>
+				</exclusion>
+			</exclusions>
+	    </dependency>
+	    
+	    <!-- Parseo a JSON -->
+        <dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-mrbean</artifactId>
+		    <version>1.9.9</version>
+		</dependency>
+
+		<!-- Tests -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>5.10</version>
+			<classifier>jdk15</classifier>
+			<scope>test</scope>
+		</dependency>
+		
+		
+		<!-- Log4js dependecies -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
+		<!-- PDF Writer (mapfish-modified) -->
+		<dependency>
+			<groupId>org.mapfish.print</groupId>
+			<artifactId>print-lib</artifactId>
+			<!-- JDK 1.5 -->
+			<version>1.2.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>xerces</groupId>
+					<artifactId>xercesImpl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.media</groupId>
+					<artifactId>jai_codec</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>javax.media</groupId>
+			<artifactId>jai_core</artifactId>
+			<version>1.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.media</groupId>
+			<artifactId>jai_codec</artifactId>
+			<version>1.1.2_01</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.media</groupId>
+			<artifactId>jai_imageio</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>1.6.0</version>
+		</dependency>
+
+		<!-- Upload Files -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		
+		<!-- OLS schema -->
+	    <!--<dependency>
+	    	<groupId>org.jvnet.ogc</groupId>
+	    	<artifactId>ols-v_1_1_0-schema</artifactId>
+	    	<version>1.0.3</version>
+	    </dependency> -->
+	    <dependency>
+	    	<groupId>org.jvnet.jaxb2_commons</groupId>
+	    	<artifactId>jaxb2-basics-runtime</artifactId>
+	    	<version>0.6.0</version>
+	    </dependency>
+	    <dependency>
+	    	<groupId>org.jvnet.ogc</groupId>
+	    	<artifactId>gml-v_3_1_1-schema</artifactId>
+	    	<version>1.0.3</version>
+	    </dependency>
+
+		<!-- Canigo -->
+		<!-- ====================================================== Core ====================================================== -->
+		<dependency>
+			<groupId>cat.gencat.ctti</groupId>
+			<artifactId>canigo.core</artifactId>
+			<version>${canigo.core.version}</version>
+			<exclusions>
+				<exclusion>
+	    			<groupId>asm</groupId>
+	    			<artifactId>asm</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- ====================================================== Suport ====================================================== -->
+		<dependency>
+			<groupId>cat.gencat.ctti</groupId>
+			<artifactId>canigo.support.mailing</artifactId>
+			<version>${canigo.support.mailing.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cat.gencat.ctti</groupId>
+			<artifactId>canigo.support.ole</artifactId>
+			<version>${canigo.support.ole.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cat.gencat.ctti</groupId>
+			<artifactId>canigo.support.sftp</artifactId>
+			<version>${canigo.support.sftp.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cat.gencat.ctti</groupId>
+			<artifactId>canigo.support.merging</artifactId>
+			<version>${canigo.support.merging.version}</version>
+		</dependency>
+
+		<!-- ====================================================== Integració 
+			====================================================== -->
+
+		<dependency>
+			<groupId>cat.gencat.ctti</groupId>
+			<artifactId>canigo.integration.documentum</artifactId>
+			<version>${canigo.integration.documentum.version}</version>
+		</dependency>
+		<!-- ====================================================== Instrumentació 
+			====================================================== -->
+
+		<dependency>
+			<groupId>cat.gencat.ctti</groupId>
+			<artifactId>canigo.operation.instrumentation</artifactId>
+			<version>${canigo.operation.instrumentation.version}</version>
+
+			<exclusions>
+				<exclusion>
+					<groupId>xerces</groupId>
+					<artifactId>xercesImpl</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- ====================================================== Persistència 
+			====================================================== -->
+
+		<dependency>
+			<groupId>cat.gencat.ctti</groupId>
+			<artifactId>canigo.persistence.jpa</artifactId>
+			<version>${canigo.persistence.jpa.version}</version>
+		</dependency>
+
+		<!-- ====================================================== Seguretat ====================================================== -->
+
+		<dependency>
+			<groupId>cat.gencat.ctti</groupId>
+			<artifactId>canigo.security</artifactId>
+			<version>${canigo.security.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-security-ldap</artifactId>
+					<groupId>org.springframework.security</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<!-- ====================================================== Capa WEB ====================================================== -->
+
+		<dependency>
+			<groupId>cat.gencat.ctti</groupId>
+			<artifactId>canigo.web.jsf</artifactId>
+			<version>${canigo.web.jsf.version}</version>
+		</dependency>
+
+		<!-- Js libraries TODO: Uncomment when eclipse plugin be compatible (view 
+			javascript profile) <dependency> <groupId>interior.cat.visor</groupId> <artifactId>sicecatext-maven</artifactId> 
+			<version>0.0.1</version> <type>javascript</type> </dependency> -->
+
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xerces</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.1.2</version>
+		</dependency>
+	</dependencies>
+
+</project>

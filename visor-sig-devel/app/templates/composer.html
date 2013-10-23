@@ -1,0 +1,86 @@
+    <!-- GeoExplorer resources -->
+    <link rel="stylesheet" type="text/css" href="../theme/app/geoexplorer.css" />
+    <!--[if IE]><link rel="stylesheet" type="text/css" href="../theme/app/ie.css"/><![endif]-->        
+    <link rel="stylesheet" type="text/css" href="../theme/ux/colorpicker/color-picker.ux.css" />
+    <link rel="stylesheet" type="text/css" href="../theme/ux/ohiggins.css" />
+    <script type="text/javascript" src="../script/GeoExplorer.js"></script>
+ 
+
+    <!-- PrintPreview resources -->
+    <link rel="stylesheet" type="text/css" href="../externals/PrintPreview/resources/css/printpreview.css">
+
+    <!-- Ux resources -->
+    <link rel="stylesheet" type="text/css" href="../theme/ux/colorpicker/color-picker.ux.css" />       
+    <link rel="stylesheet" type="text/css" href="../theme/ux/ext.ux/gridfilters/css/RangeMenu.css" />
+    <link rel="stylesheet" type="text/css" href="../theme/ux/ext.ux/gridfilters/css/GridFilters.css" />
+    <link rel="stylesheet" type="text/css" href="../theme/ux/PointInformation.css" />
+    <link rel="stylesheet" type="text/css" href="../theme/ux/ScaleSelector.css" />
+    <link rel="stylesheet" type="text/css" href="../theme/ux/wfswizard/css/WfsWizard.css" />
+    <link rel="stylesheet" type="text/css" href="../theme/ux/WMSGetFeatureInfo.css" />
+    <link rel="stylesheet" type="text/css" href="../theme/ux/fonts/fonts.css" />
+    
+    <script>
+        // optionally set locale based on query string parameter
+        if (GeoExt.Lang) {
+            GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
+        }
+        Ext.BLANK_IMAGE_URL = "../theme/app/img/blank.gif";
+        OpenLayers.ImgPath = "../theme/app/img/";
+        // optionally set locale based on query string parameter
+        if (GeoExt.Lang) {
+            GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
+        }
+        var app = new GeoExplorer.Composer({
+            authStatus: {{status}},
+            proxy: "../proxy/?url=",
+            printService: "http://sig.minenergia.cl/geoserver/pdf/",
+            about: {
+                title: "Ministerio de Energía - Módulo Cartográfico",
+                "abstract": "Ministerio de Energía - Módulo Cartográfico",
+                contact: ""
+            },
+            defaultSourceType: "gxp_wmscsource",
+            sources: {
+                local: {
+                    url: "http://sig.minenergia.cl/geoserver/ows",
+                    title: "GeoServer Local",
+                    ptype: "gxp_wmscsource"
+                },
+                osm: {
+                    ptype: "gxp_osmsource"
+                },
+                google: {
+                    ptype: "gxp_googlesource"
+                }
+            },
+            map: {
+                projection: "EPSG:900913",
+                layers: [{
+                    source: "google",
+                    title: "Google Terrain",
+                    name: "TERRAIN",
+                    group: "background"
+                },{
+                    source: "google",
+                    title: "Google Satellite",
+                    name: "SATELLITE",
+                    group: "background"
+                },{
+                    source: "local",
+                    title: "Comuna_2002",
+                    name: "gore:Comuna_2002",
+                    group: "default"
+                },{
+                    source: "osm",
+                    title: "OpenStreetMap",
+                    name: "mapnik",
+                    group: "background",
+                    args: {
+                        "baseLayer":true
+                    }
+                }],
+                center: [-7914828, -4087606],
+                zoom: 4
+            }
+        });
+    </script>

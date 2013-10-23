@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>	  
+	<parent>
+	  	<groupId>interior.cat.visor</groupId>
+	  	<artifactId>modulos-visor-sig</artifactId>
+		<version>4.7</version>
+		<relativePath>../pomHUDSON.xml</relativePath>
+	</parent>
+	<groupId>interior.cat.visor</groupId>
+	<artifactId>modulos-visor-sig-dint</artifactId>
+	<version>${project.parent.version}</version>
+	<!-- <version>4.7</version> -->
+	<packaging>pom</packaging>
+
+	<!-- Project Information -->
+	<licenses>
+		<license>
+			<name>Apache License V2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
+
+	<name>modulos-visor-sig</name>
+	<url>http://emergya.es</url>
+
+	<organization>
+		<name>Emergya</name>
+		<url>http://www.emergya.es</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>adiaz</id>
+			<name>Alejandro Diaz Torres</name>
+			<email>adiaz@emergya.es</email>
+			<organization>Emergya Consultoria</organization>
+			<organizationUrl>http://www.emergya.es</organizationUrl>
+			<roles>
+				<role>Analista</role>
+			</roles>
+		</developer>
+	</developers>
+
+
+	<issueManagement>
+		<system>redmine</system>
+		<url>http://redmine.emergya.es/projects/sicecat/</url>
+	</issueManagement>
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://jenkins.emergya.es/jenkins/view/sicecat/job/visor-sig-sicecat/</url>
+	</ciManagement>
+	<inceptionYear>2011</inceptionYear>
+	<mailingLists>
+		<mailingList>
+			<name>sicecat-devel</name>
+			<subscribe>mailto:sicecat-devel@listas.emergya.info?subject=subscribe</subscribe>
+			<unsubscribe>mailto:sicecat-devel@listas.emergya.info?subject=unsubscribe</unsubscribe>
+			<post>sicecat-devel@listas.emergya.info</post>
+			<archive>http://listas.emergya.info/mailman/listinfo/sicecat-devel</archive>
+		</mailingList>
+	</mailingLists>
+	<!-- Project Information -->
+
+
+	<!-- Environment Information -->
+	<scm>
+		<connection>scm:svn:http://svn.emergya.es/svn/sicecat</connection>
+		<developerConnection>scm:svn:http://svn.emergya.es/svn/sicecat</developerConnection>
+		<url>http://svn.emergya.es/svn/sicecat</url>
+	</scm>
+
+
+	<distributionManagement>
+		<!-- use the following if you're not using a snapshot version. -->
+		<repository>
+			<id>nexus.releases</id>
+			<name>Nexus SiceCat Releases</name>
+			<url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo/</url>
+		</repository>
+		<!-- use the following if you ARE using a snapshot version. -->
+		<snapshotRepository>
+			<id>nexus.snapshots</id>
+			<name>Nexus SiceCat Snapshot</name>
+			<url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>canigo.repo</id>
+			<name>Canigo Maven2 repo</name>
+			<url>http://canigo.ctti.gencat.net/repository/maven2/</url>
+		</repository>
+		<repository>
+			<id>repo1</id>
+			<name>Repo 1 Maven</name>
+			<url> http://repo1.maven.org/maven2</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<sourceDirectory>Source/main/java</sourceDirectory>
+		<testSourceDirectory>Source/test/java</testSourceDirectory>
+		<resources>
+			<resource>
+				<directory>Source/main/resources</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>Source/test/resources</directory>
+			</testResource>
+		</testResources>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.0-beta-3</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<format>{0,date,yyyyMMdd}</format>
+					<items>
+						<item>timestamp</item>
+					</items>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<target>1.5</target>
+					<source>1.5</source>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<finalName>visor-sig-sicecat-${visor.version}</finalName>
+					<descriptors>
+						<descriptor>./assemble/dynamic.xml</descriptor>
+						<descriptor>./assemble/static.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>assembly-app</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+		</dependency>
+	</dependencies>
+
+</project>

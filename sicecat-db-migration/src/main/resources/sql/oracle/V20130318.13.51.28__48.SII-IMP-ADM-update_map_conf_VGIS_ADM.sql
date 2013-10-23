@@ -1,0 +1,2 @@
+update GIS_MAP_CONF set PDFSERVER = '';
+update GIS_MAP_CONF set VERSION = '4.7-SNAPSHOT(r4125)';

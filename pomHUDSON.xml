@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>	  
+
+	<!--parent>
+		<artifactId>ModulsPROCIV</artifactId>
+		<groupId>cat.gencat.prociv</groupId>
+		<version>${sicecat.version}</version>
+		<relativePath>../pomHUDSON.xml</relativePath>
+	</parent-->
+
+	<groupId>interior.cat.visor</groupId>
+	<artifactId>modulos-visor-sig</artifactId>
+	<version>${visor.version}</version>
+	<packaging>pom</packaging>
+	
+	<name>Modulos Visor</name>
+
+
+  <modules>
+    <!--module>javascript-maven-tools/javascript-maven-plugin</module-->
+    <!-- Librerias externas adaptadas y empaquetadas (js) -->
+    <module>openlayers-maven/pomHUDSON.xml</module>
+    <module>ext-js-maven/pomHUDSON.xml</module>
+    <module>geoext-maven/pomHUDSON.xml</module>
+    <module>proj4js-maven/pomHUDSON.xml</module>
+    <module>gxp-maven/pomHUDSON.xml</module>
+    <!-- Librerias propias -->
+    <module>sicecatext-maven/pomHUDSON.xml</module>
+    <module>sigescat-searcher-ws/pomHUDSON.xml</module>
+    <module>sigescat-searcher-conector/pomHUDSON.xml</module>
+    <module>sigescat-openls-conector/pomHUDSON.xml</module>
+    <!-- Visor. -->
+    <!--<module>visor-sig-components/pomHUDSON.xml</module>-->
+    <module>visor-sig-sicecat/pomHUDSON.xml</module>
+  </modules>
+
+	<build>
+		<sourceDirectory>Source/main/java</sourceDirectory>
+		<testSourceDirectory>Source/test/java</testSourceDirectory>
+		<resources>
+			<resource>
+				<directory>Source/main/resources</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>Source/test/resources</directory>
+			</testResource>
+		</testResources>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.0-beta-3</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<format>{0,date,yyyyMMdd}</format>
+					<items>
+						<item>timestamp</item>
+					</items>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+  			<version>2.3.2</version>
+  			<configuration>
+  				<source>1.6</source>
+  				<target>1.6</target>
+  			</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<!--plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<finalName>visor-sig-sicecat-${visor.version}</finalName>
+					<descriptors>
+						<descriptor>assemble/dynamic.xml</descriptor>
+						<descriptor>assemble/static.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>assembly-app</id>
+						<phase>package</phase>
+						<goals>
+							<goal>assembly</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin-->
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+		</dependency>
+	</dependencies>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<name>Nexus Public Snapshots</name>
+			<url>https://dinterior.gencat.intranet/ic/artifactory/direp-snapshots-local</url>
+			<snapshots>
+	         		<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+	 	    	</snapshots>
+		    	<releases>
+				<updatePolicy>never</updatePolicy>
+	         		<enabled>false</enabled>
+		       </releases>
+		</pluginRepository>
+	</pluginRepositories>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <sicecat.version>0.04.003</sicecat.version>
+    <visor.version>4.9</visor.version>
+  </properties>
+	
+</project>

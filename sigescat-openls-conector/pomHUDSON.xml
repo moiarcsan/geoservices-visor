@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>interior.cat.visor</groupId>
+  <artifactId>sigescat-openls-conector</artifactId>
+  <packaging>jar</packaging>
+  <version>${parent.version}</version>
+
+  <parent>
+  <groupId>interior.cat.visor</groupId>
+    <artifactId>modulos-visor-sig</artifactId>
+    <version>4.9</version>
+    <!-- <relativePath>../pomHUDSON.xml</relativePath> -->
+  </parent>
+
+  <!-- Project Information -->
+  <licenses>
+    <license>
+      <name>GPL 2.0</name>
+      <url>http://www.gnu.org/licenses/gpl-2.0.html</url>
+    </license>
+  </licenses>
+
+  <name>Conector a openls searcher de SIGESCAT</name>
+  <url>http://www.emergya.es</url>
+
+  <organization>
+    <name>Emergya</name>
+    <url>http://www.emergya.es</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <id>adiaz</id>
+      <name>Alejandro Diaz Torres</name>
+      <email>adiaz@emergya.es</email>
+      <organization>Emergya Consultoria</organization>
+      <organizationUrl>http://www.emergya.es</organizationUrl>
+      <roles>
+        <role>Analista</role>
+      </roles>
+    </developer>
+  </developers>
+
+
+  <issueManagement>
+    <system>redmine</system>
+    <url>http://redmine.emergya.es/projects/sicecat/</url>
+  </issueManagement>
+  <ciManagement>
+    <system>jenkins</system>
+    <url>http://jenkins.emergya.es/jenkins/view/sicecat/</url>
+  </ciManagement>
+  <inceptionYear>2011</inceptionYear>
+  <mailingLists>
+    <mailingList>
+      <name>sicecat-devel</name>
+      <subscribe>mailto:sicecat-devel@listas.emergya.info?subject=subscribe</subscribe>
+      <unsubscribe>mailto:sicecat-devel@listas.emergya.info?subject=unsubscribe</unsubscribe>
+      <post>sicecat-devel@listas.emergya.info</post>
+      <archive>http://listas.emergya.info/mailman/listinfo/sicecat-devel</archive>
+    </mailingList>
+  </mailingLists>
+  <!-- Project Information -->
+
+
+  <!-- Environment Information -->
+  <scm>
+    <connection>scm:svn:http://svn.emergya.es/svn/sicecat</connection>
+    <developerConnection>scm:svn:http://svn.emergya.es/svn/sicecat</developerConnection>
+    <url>http://svn.emergya.es/svn/sicecat</url>
+  </scm>
+
+
+  <distributionManagement>
+  <!-- use the following if you're not using a snapshot version. -->
+  <repository>
+    <id>nexus.releases</id>
+    <name>Nexus SiceCat Releases</name>
+    <url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo/</url>
+  </repository>
+  <!-- use the following if you ARE using a snapshot version. -->
+  <snapshotRepository>
+    <id>nexus.snapshots</id>
+    <name>Nexus SiceCat Snapshot</name>
+    <url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo-snapshots/</url>
+  </snapshotRepository>
+  </distributionManagement>
+
+  <build>
+    <resources>
+      <resource>
+        <filtering>true</filtering>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+    <finalName>${project.groupId}</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+          <optimize>true</optimize>
+          <debug>true</debug>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <repositories>
+  <repository>
+    <id>nexus.emergya</id>
+    <name>Emergya</name>
+    <url>http://nexus.emergya.es/nexus/content/groups/public/</url>
+  </repository>
+  <repository>
+    <id>nexus.snapshot</id>
+    <name>Nexus Public Snapshots</name>
+    <url>http://nexus.emergya.es/nexus/content/groups/public-snapshots/</url>
+    <releases>
+      <enabled>false</enabled>
+    </releases>
+    <snapshots>
+        <enabled>true</enabled>
+    </snapshots>
+  </repository>
+  <repository>
+    <id>nexus.sicecat</id>
+    <name>Nexus Sicecat</name>
+    <url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo/</url>
+  </repository>
+  <repository>
+    <id>nexus.sicecat.snapshot</id>
+    <name>Nexus Sicecat Snapshots</name>
+    <url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo-snapshots/</url>
+    <releases>
+      <enabled>false</enabled>
+    </releases>
+    <snapshots>
+        <enabled>true</enabled>
+    </snapshots>
+  </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>maven2-repository.dev.java.net</id>
+      <url>http://download.java.net/maven/2/</url>
+    </pluginRepository>
+  </pluginRepositories>
+  <dependencies>
+  <!-- OLS schema -->
+    <dependency>
+      <groupId>org.jvnet.ogc</groupId>
+      <artifactId>ols-v_1_2_1-schema</artifactId>
+      <version>1.0.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-oxm</artifactId>
+        <version>${spring.version}</version>
+    </dependency>      
+    <dependency>
+      <groupId>org.springframework.ws</groupId>
+      <artifactId>spring-xml</artifactId>
+      <version>2.0.0-M1</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.14</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+  <!-- EHCACHE DEPENDENCIES -->
+  <dependency>
+      <groupId>net.sf.ehcache</groupId>
+      <artifactId>ehcache</artifactId>
+      <version>1.6.1</version>
+  </dependency>
+  <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib</artifactId>
+      <version>2.2.2</version>
+  </dependency>
+  <dependency>
+    <groupId>com.googlecode.ehcache-spring-annotations</groupId>
+    <artifactId>ehcache-spring-annotations</artifactId>
+    <version>1.2.0</version>
+  </dependency>
+  <dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>servlet-api</artifactId>
+    <version>2.5</version>
+    <type>jar</type>
+    <scope>provided</scope>
+  </dependency>
+  <dependency>
+    <groupId>commons-httpclient</groupId>
+    <artifactId>commons-httpclient</artifactId>
+    <version>3.1</version>
+    <scope>provided</scope>
+  </dependency>
+  </dependencies>
+  <properties>
+    <hibernate.version>3.5.1-Final</hibernate.version>
+    <spring.version>3.0.5.RELEASE</spring.version>
+    <jetty.version>6.1.4</jetty.version>
+    <maven-compiler-plugin.version>2.3.1</maven-compiler-plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <openls.endpoint>http://10.136.202.75/openls</openls.endpoint>
+  </properties>
+</project>

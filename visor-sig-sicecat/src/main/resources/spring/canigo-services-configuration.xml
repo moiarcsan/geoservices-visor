@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <bean class="net.gencat.ctti.canigo.services.configuration.springframework.beans.factory.config.HostPropertyPlaceholderConfigurer" id="configurationService">
+    <property name="basePropertyFiles">
+      <list>
+        <value>file/fileService.properties</value>
+        <value>jdbc/jdbc.properties</value>
+        <value>i18n/applicationResources.properties</value>
+        <value>./Struts-Layout.properties</value>
+        <value>https/https.properties</value>
+      </list>
+    </property>
+    <property name="logService" ref="loggingService"/>
+  </bean>
+</beans>

@@ -1,0 +1,28 @@
+<assembly>
+	<id>dynamic</id>
+	<formats>
+		<format>war</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>../visor-sig-sicecat/target/visor-sig-sicecat-${visor.version}</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>WEB-INF/**/*.*</include>
+				<include>target/WEB-INF/**/*.*</include>
+			</includes>
+			<excludes>
+				<exclude>**/*.html</exclude>
+				<exclude>**/*.htm</exclude>
+				<exclude>css/**/*</exclude>
+				<exclude>images/**/*</exclude>
+				<exclude>scripts/**/*</exclude>
+				<exclude>config/**/*</exclude>
+				<exclude>assemble/*.*</exclude>
+				<exclude>media/*.*</exclude>
+				<exclude>**/fact24*.xsd</exclude>
+			</excludes>
+		</fileSet>
+	</fileSets>
+</assembly>

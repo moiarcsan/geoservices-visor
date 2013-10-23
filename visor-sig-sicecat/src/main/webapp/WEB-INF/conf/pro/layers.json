@@ -1,0 +1,1534 @@
+/**
+Nombre: layers.json
+
+Este archivo contiene la lista de capas que se mostrarán en el árbol de capas
+del Visor de SICECAT II. El contenido es un objeto JSON y por tanto debe seguir
+las reglas de sintaxis descritas en http://www.json.org
+
+A continuaci\u00F3n se describen las propiedades de cada capa y los posibles valores 
+que puede tomar.
+  * id: Es un identificador \u00FAnico para la capa dentro del fichero layers.json. 
+        Debe ser un entero. Por ejemplo, "id":"123".
+  * name: Es el nombre de la capa. Aparece en el árbol de capas.
+  * type: El tipo de capa. Sus posibles valores son
+      * WMST para las capas base de SIGESCAT (orto, topo y dades)
+      * WMS para capas de tipo Web Map Service.
+  * testLayer: Indica que se pruebe la capa al añadirla. La comprobación consiste en un getCapabilities. Sólo válido para type = WMS o WMST 
+  * group"layers": Es el nombre de la carpeta de primer nivel en la que estará la capa
+  * subgroup"layers": Es el nombre de la capa de segundo nivel en la que estará la capa.
+       Esta carpeta de segundo nivel se creará dentro de la carpeta indicada por gropuLayers.
+  * url: direcci\u00F3n en la que se presta el servicio. Las capas WMS suelen terminar en el caracter "?"
+
+  * layerOp1: Primer grupo de opciones. Dentro de este grupo están las siguientes opciones:
+      * "layers": es una lista separada por comas de las capas que se desean solicitar en
+          la petici\u00F3n. Por ejemplo, "s:z,s:pn"
+      * "transparent": true o false. Indica si la zonas de la capa en las que no hay 
+          contenido serán transparentes u opacas.
+  * layerOp2: Segundo grupo de opciones. 
+      * "format": formato de las imagenes devueltas por el servicodr. Por ejemplo "image/png".
+      * "isBaseLayer": true o false. Una capa base aparece con un radio button en el 
+          árbol de capas. En un mapa se pueden añadir varias capas base, pero solo puede
+          visualizarse una simultáneamente. 
+      * "opacity": opacidad de la capa. Su valor está comprendido entre 0.0 (capa transparente)
+          y 1.0 (capa totalmente opaca).
+      * "buffer": entero. Indica el n\u00FAmero de filas y de columnas de teselas adicionales
+          a las m\u00EDminimas necesarias para cubrir la vista actual del mapa se van a solicitar.
+      * "resolutions": En caso de ser una capa de tipo WMST, es necesario indicar en esta 
+          propiedad un array con la lista de resoluciones del mapa servidas por el servidor.
+      * "maxExtent": Coordenadas de los l\u00EDmites de la capa, de la forma minx, miny, maxx, maxy.
+       
+*/
+
+[
+{
+    'id':'1',
+    'name': 'Topo',
+    'type': 'WMST',
+    'testLayer': 'true',
+    'groupLayers': 'overlays',
+    'url': 'http://10.136.202.75/wmst/topo',
+    'layerOp1' :{layers: 'bt_350',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+          isBaseLayer: true,
+          opacity: 1,
+          visibility: false,
+          resolutions:[50,0.16,350,100,0.5,25,5,200,2,1,10],
+          buffer: 0,
+                        maxExtent: new OpenLayers.Bounds(162100, 4407000, 546560, 4848000)
+          }
+  },
+{
+'id':'0',
+'name': 'PNOA',
+'type': 'WMS',
+'testLayer': 'true',
+'groupLayers': 'overlays',
+'url': 'http://www.idee.es/wms/PNOA/PNOA',
+'layerOp1' :{layers: 'pnoa',
+     visiblity: true, 
+     transparent: true
+    },
+'layerOp2' :{format: 'image/png',
+    isBaseLayer: true,
+    opacity: 1,
+    buffer : 0,
+                        maxExtent: new OpenLayers.Bounds(162100, 4407000, 546560, 4848000)
+    }
+},
+  {
+    'id':'11',
+    'name': 'Orto',
+    'type': 'WMST',
+    'testLayer': 'true',
+    'groupLayers': 'overlays',
+    'url': 'http://10.136.202.75/wmst/orto',
+    'layerOp1' :{layers: 'orto_350',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+          isBaseLayer: true,
+          visibility: false,
+          opacity: 1,
+          resolutions:[350,200,100,50,25,10,5,2,1,0.5,0.16],
+          buffer : 0,
+                        maxExtent: new OpenLayers.Bounds(162100, 4407000, 546560, 4848000)
+          }
+  },
+  {
+    'id':'12',
+    'name': 'Dades',
+    'type': 'WMST',
+    'testLayer': 'true',
+    'groupLayers': 'overlays',
+    'url': 'http://10.136.202.75/wmst/dades',
+    'layerOp1' :{layers: 'Limit_350',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+          isBaseLayer: true,
+          visibility: false,
+          opacity: 0.5,
+          resolutions:[50,0.16,350,100,0.5,25,5,200,2,1,10],
+          buffer : 0,
+      maxExtent: new OpenLayers.Bounds(258000, 4485000, 536000, 4752000)
+          }
+  },
+  { 
+    'id':'13',
+    'name': 'PAM Plaseqcat',
+    'type': 'WMS',
+    'groupLayers':'Planificaci\u00F3 Municipal',
+    'subgroupLayers' : 'Obligacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_plaseqcat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'14',
+    'name': 'PAM Transcat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers' : 'Obligacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_transcat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'15',
+    'name': 'PAM Sismicat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Obligacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_sismicat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'16',
+    'name': 'PAM Neucat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Obligacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_neucat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'17',
+    'name': 'PAM Inuncat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Obligacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_inuncat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'18',
+    'name': 'PAM Infocat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Obligacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_infocat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'19',
+    'name': 'PAM Camcat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Obligacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_camcat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'20',
+    'name': 'PAM Aerocat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Obligacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_aerocat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'21',
+    'name': 'PAM Penta',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Obligacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_penta',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'22',
+    'name': 'PAM Radcat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Obligacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_radcat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'23',
+    'name': 'PAM Allaucat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Obligacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_allaucat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'24',
+    'name': 'PBEM Aerocat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Obligacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pbem_aerocat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'25',
+    'name': 'PBEM Ferrocat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Obligacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pbem_ferrocat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'26',
+    'name': 'PBEM Procicat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Obligacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pbem_procicat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   
+   
+   { 
+    'id':'27',
+    'name': 'PAM Plaseqcat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Vig\u00E8ncia',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_plaseqcat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'28',
+    'name': 'PAM Transcat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Vig\u00E8ncia',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_transcat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'29',
+    'name': 'PAM Sismicat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Vig\u00E8ncia',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_sismicat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'30',
+    'name': 'PAM Neucat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Vig\u00E8ncia',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_neucat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'31',
+    'name': 'PAM Inuncat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Vig\u00E8ncia',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_inuncat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'32',
+    'name': 'PAM Infocat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Vig\u00E8ncia',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_infocat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'33',
+    'name': 'PAM Camcat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Vig\u00E8ncia',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_camcat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'34',
+    'name': 'PAM Aerocat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Vig\u00E8ncia',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_aerocat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'35',
+    'name': 'PAM Penta',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Vig\u00E8ncia',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_penta',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'36',
+    'name': 'PAM Radcat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Vig\u00E8ncia',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_radcat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'37',
+    'name': 'PAM Allaucat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Vig\u00E8ncia',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pam_allaucat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'38',
+    'name': 'PBEM Aerocat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Vig\u00E8ncia',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pbem_aerocat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'39',
+    'name': 'PBEM Ferrocat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Vig\u00E8ncia',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pbem_ferrocat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'40',
+    'name': 'PBEM Procicat',
+    'type': 'WMS',
+    'groupLayers' : 'Planificaci\u00F3 Municipal',
+    'subgroupLayers': 'Vig\u00E8ncia',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'pbem_procicat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   
+   
+   { 
+    'id':'41',
+    'name': 'Estacions ferrocarril',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos en el Transport',
+    'subgroupLayers': 'Risc Transport Ferrocarril',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:ef',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'42',
+    'name': 'T\u00FAnels ferrocarril',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos en el Transport',
+    'subgroupLayers': 'Risc Transport Ferrocarril',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:tf',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'43',
+    'name': 'L\u00EDnies ferrocarril',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos en el Transport',
+    'subgroupLayers': 'Risc Transport Ferrocarril',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:lf',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   
+   
+   { 
+    'id':'44',
+    'name': 'Instal·lacions aerona\u00FAtiques',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos en el Transport',
+    'subgroupLayers': 'Risc Aeron\u00E0utic',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'instalacions_aero',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'45',
+    'name': "Zones d'emerg\u00E8ncia aerona\u00FAtica",
+    'type': 'WMS',
+    'groupLayers' : 'Riscos en el Transport',
+    'subgroupLayers': 'Risc Aeron\u00E0utic',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'probablilitat_impacte',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   
+   
+   { 
+    'id':'46',
+    'name': 'Establiments Plaseqcat',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Qu\u00EDmic en Establiments Industrials',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:ei',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'47',
+    'name': 'Per\u00EDmetre de les instal·lacions',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Qu\u00EDmic en Establiments Industrials',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'per\u00EDmetre de les instal·lacions',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'48',
+    'name': 'Zona intervenci\u00F3 i alerta m\u00E0ximes',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Qu\u00EDmic en Establiments Industrials',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'zi_za_maximes',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'49',
+    'name': 'Sirenes',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Qu\u00EDmic en Establiments Industrials',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'sirenes',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'50',
+    'name': 'Sirenes: cobertura',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Qu\u00EDmic en Establiments Industrials',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'sirenes_cobertura',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'51',
+    'name': "Zones d'evacuaci\u00F3",
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Qu\u00EDmic en Establiments Industrials',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'zones evacuacio',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'52',
+    'name': 'Zones de confinament general',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Qu\u00EDmic en Establiments Industrials',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'zones confinamet general',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'53',
+    'name': "Zones d'indefensi\u00F3 en l'autoprotecci\u00F3",
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Qu\u00EDmic en Establiments Industrials',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'zones indefensi\u00F3 autoprotecci\u00F3',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'54',
+    'name': "Zones d'intensitat l\u00EDmit",
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Qu\u00EDmic en Establiments Industrials',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'zones intensitat l\u00EDmit',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   
+   
+   { 
+    'id':'55',
+    'name': 'Transcat viari',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Transport Mercaderies Perilloses',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'transcat_viari',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'56',
+    'name': 'Transcat ferrocarril',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Transport Mercaderies Perilloses',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'transcat_ferrocarril',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'57',
+    'name': 'ZIEA Transcat',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Transport Mercaderies Perilloses',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'ZIEA_transcat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   
+   
+   { 
+    'id':'58',
+    'name': 'Municipis amb oleoducte',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Conductes',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'munis_oleo',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'59',
+    'name': 'Municipis amb etilenoducte',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Conductes',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'munis_etileno',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'60',
+    'name': 'Municipis amb gasoducte operatiu',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Conductes',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'munis_gaso_operatiu',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'61',
+    'name': 'Etilenoducte',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Conductes',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'etilenoducte_vinilis',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'62',
+    'name': 'Oleoducte',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Conductes',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'oleoductes_CLH',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'63',
+    'name': 'Gasoducte',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Conductes',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'gasoductes_enagas',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   
+   
+   { 
+    'id':'64',
+    'name': 'Zones emerg\u00E8ncia nuclear',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Nuclear',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'zones_emergencia_nuclear',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   
+   { 
+    'id':'65',
+    'name': 'Municipis instal·lacions radioactives',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Radiol\u00F2gic',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'munis_inst_radioactives',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'66',
+    'name': 'Municipis instal·lacions vigil\u00E0ncia radioactiva',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Radiol\u00F2gic',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'munis_inst_vigilancia_radio',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'67',
+    'name': 'Municipis instal·lacions vigil\u00E0ncia radioactiva',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Radiol\u00F2gic',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'munis_inst_vigilancia_radio',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'68',
+    'name': 'Municipis en zona de perill radiol\u00F2gic',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Radiol\u00F2gic',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'munis_zones_1km2km',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'69',
+    'name': 'Municipis vigil\u00E0ncia ambiental',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Radiol\u00F2gic',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'munis_xvambiental',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'70',
+    'name': "Instal·lacions nuclears no generadores d'energia",
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Radiol\u00F2gic',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'cas_Vandellos_HospInf',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'71',
+    'name': 'Zones perill',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Radiol\u00F2gic',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'zones_1km2km',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'72',
+    'name': 'Instal·lacions de vigil\u00E0ncia radiol\u00F2gica',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Radiol\u00F2gic',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'inst_vigilancia_radio',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'73',
+    'name': 'Instal·lacions radioactives',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Radiol\u00F2gic',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'inst_radioactives',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   
+   { 
+    'id':'74',
+    'name': 'Vulnerabilitat',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Contaminaci\u00F3 Marina',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'camcat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'75',
+    'name': 'Perill',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Tecnol\u00F2gics',
+    'subgroupLayers': 'Risc Contaminaci\u00F3 Marina',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'camcat',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   
+   { 
+    'id':'76',
+    'name': 'Punts Actuaci\u00F3 Priorit\u00E0ria',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Inundacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:ap',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'77',
+    'name': 'Zones inundables T50',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Inundacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:z1',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'78',
+    'name': 'Zones inundables T100',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Inundacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:zt',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'79',
+    'name': 'Zones inundables T500',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Inundacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:z3',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'80',
+    'name': 'Cons de dejecci\u00F3',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Inundacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:cd',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'81',
+    'name': 'Zones potencialment inundables',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Inundacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:pi',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'82',
+    'name': 'Temps tr\u00E0nsit',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Inundacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:tt',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'83',
+    'name': 'Sirenes preses',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Inundacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:sp',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'84',
+    'name': 'Sirenes preses: cobertura',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Inundacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:sc',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'85',
+    'name': 'Zones inundables presa Rialb',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Inundacions',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:ir',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   
+   { 
+    'id':'86',
+    'name': 'Perill',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Incendis Forestals',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:pn',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'87',
+    'name': 'Vulnerabilitat',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Incendis Forestals',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 's:vu',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   
+   { 
+    'id':'88',
+    'name': 'Instal·lacions gas',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Nevades',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'installacions_gas',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'89',
+    'name': 'Subestacions el\u00E8ctriques',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Nevades',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'subestacions_electriques',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'90',
+    'name': 'Vies prioritzades',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Nevades',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'vies_prioritzades',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   
+   { 
+    'id':'91',
+    'name': 'Intensitat',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc S\u00EDsmic',
+    'url': 'http://10.136.202.75/ows/wms?',
+    'layerOp1' :{layers: 'risc_sismic',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   
+   { 
+    'id':'92',
+    'name': 'Zones allaus',
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Allaus',
+    'url': 'http://SIURANA.IGC.CAT/arcgis/services/allaus_zonesallaus/MapServer/WMSServer?',
+    'layerOp1' :{layers: '0',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'93',
+    'name': "Observacions d'allaus",
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Allaus',
+    'url': 'http://SIURANA.IGC.CAT/arcgis/services/allaus_observacions/MapServer/WMSServer?',
+    'layerOp1' :{layers: '0',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   },
+   { 
+    'id':'94',
+    'name': "Enquesta d'allaus",
+    'type': 'WMS',
+    'groupLayers' : 'Riscos Naturals',
+    'subgroupLayers': 'Risc Allaus',
+    'url': 'http://SIURANA.IGC.CAT/arcgis/services/allaus_enquesta/MapServer/WMSServer?',
+    'layerOp1' :{layers: '0',
+           transparent: true
+          },
+    'layerOp2' :{format: 'image/png',
+           isBaseLayer: false,
+           visibility: false,
+           opacity: 0.4,
+           buffer : 0
+          }
+   }
+
+]

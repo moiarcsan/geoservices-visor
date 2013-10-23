@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>interior.cat.visor.proj4js</groupId>
+  <artifactId>proj4js-maven</artifactId>
+  <version>${parent.version}</version>
+  <packaging>javascript</packaging>
+
+  <parent>
+	<groupId>interior.cat.visor</groupId>
+  	<artifactId>modulos-visor-sig</artifactId>
+	<version>4.9</version>
+  </parent>
+  
+  <!-- Project Information -->
+	<licenses>
+		<license>
+			<name>GPL 2.0</name>
+			<url>http://www.gnu.org/licenses/gpl-2.0.html</url>
+		</license>
+	</licenses>
+
+	<name>Proj4js package with javascript-maven-plugin</name>
+	<url>http://www.emergya.es</url>
+
+	<organization>
+		<name>Emergya</name>
+		<url>http://www.emergya.es</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>adiaz</id>
+			<name>Alejandro D&iacute;az Torres</name>
+			<email>adiaz@emergya.es</email>
+			<organization>Emergya Consultor&iacute;a</organization>
+			<organizationUrl>http://www.emergya.es</organizationUrl>
+			<roles>
+				<role>Analista</role>
+			</roles>
+		</developer>
+	</developers>
+
+
+	<issueManagement>
+		<system>redmine</system>
+		<url>http://redmine.emergya.es/projects/sicecat/</url>
+	</issueManagement>
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://jenkins.emergya.es/jenkins/view/sicecat/</url>
+	</ciManagement>
+	<inceptionYear>2011</inceptionYear>
+	<mailingLists>
+		<mailingList>
+			<name>sicecat-devel</name>
+			<subscribe>mailto:sicecat-devel@listas.emergya.info?subject=subscribe</subscribe>
+			<unsubscribe>mailto:sicecat-devel@listas.emergya.info?subject=unsubscribe</unsubscribe>
+			<post>sicecat-devel@listas.emergya.info</post>
+			<archive>http://listas.emergya.info/mailman/listinfo/sicecat-devel</archive>
+		</mailingList>
+	</mailingLists>
+	<!-- Project Information -->
+
+
+	<!-- Environment Information -->
+	<scm>
+		<connection>scm:svn:http://svn.emergya.es/svn/sicecat</connection>
+		<developerConnection>scm:svn:http://svn.emergya.es/svn/sicecat</developerConnection>
+		<url>http://svn.emergya.es/svn/sicecat</url>
+	</scm>
+
+
+  <distributionManagement>
+	<!-- use the following if you're not using a snapshot version. -->
+	<repository>
+		<id>nexus.releases</id>
+		<name>Nexus SiceCat Releases</name>
+		<url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo/</url>
+	</repository>
+	<!-- use the following if you ARE using a snapshot version. -->
+	<snapshotRepository>
+		<id>nexus.snapshots</id>
+		<name>Nexus SiceCat Snapshot</name>
+		<url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo-snapshots/</url>
+	</snapshotRepository>
+  </distributionManagement>
+
+  <build>
+    <outputDirectory>target/scripts</outputDirectory>
+    <testOutputDirectory>target/test-scripts</testOutputDirectory>
+    <pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo.javascript</groupId>
+										<artifactId>javascript-maven-plugin</artifactId>
+										<versionRange>[0.9.0,)</versionRange>
+										<goals>
+											<goal>war-package</goal>
+											<goal>prepare-tests</goal>
+											<goal>compile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+
+		</pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo.javascript</groupId>
+        <artifactId>javascript-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <executions>
+            <execution>
+                <goals>
+                    <goal>war-package</goal>
+                </goals>
+            </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  
+  <profiles>
+		<profile>
+			
+			<id>javascript</id>
+			<activation>
+      				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+				        <groupId>org.codehaus.mojo.javascript</groupId>
+				        <artifactId>javascript-maven-plugin</artifactId>
+				        <extensions>true</extensions>
+				        <executions>
+				            <execution>
+				                <goals>
+				                    <goal>war-package</goal>
+				                </goals>
+				            </execution>
+				        </executions>
+			      </plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+				        <groupId>org.codehaus.mojo.javascript</groupId>
+				        <artifactId>javascript-maven-plugin</artifactId>
+				        <extensions>true</extensions>
+				        <executions>
+				            <execution>
+				                <goals>
+				                    <goal>war-package</goal>
+				                    <goal>prepare-tests</goal>
+				                    <goal>jsunit</goal>
+				                    <!--<goal>compress</goal>-->
+				                </goals>
+				            </execution>
+				        </executions>
+			      </plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+  
+  <repositories>
+	<repository>
+		<id>nexus.releases</id>
+		<name>Nexus SiceCAT Releases</name>
+		<url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo/</url>
+    	</repository>
+	<!-- Needed to get a valid alpha version of maven pluggin. -->
+	<repository>
+	        <id>nexus.snapshots</id>
+      		<name>Nexus SiceCAT Snapshot</name>
+      		<url>http://nexus.emergya.es/nexus/content/groups/public-snapshots/</url>
+		<releases>
+			<enabled>false</enabled>
+	        </releases>
+	        <snapshots>
+		  	<enabled>true</enabled>
+	        </snapshots>
+	</repository>
+	<!-- Change when the plugin be released -->
+	<repository>
+		<id>codehaus.snapshot</id>
+		<name>Codehaus Snapshots</name>
+		<url>http://snapshots.repository.codehaus.org/</url>
+		<releases>
+			<enabled>false</enabled>
+	        </releases>
+	        <snapshots>
+		  	<enabled>true</enabled>
+	        </snapshots>
+	</repository> 
+  </repositories>
+
+  <pluginRepositories>
+	<!-- Needed to get a valid alpha version of maven pluggin. -->
+	<pluginRepository>
+		<id>nexus.snapshot</id>
+		<name>Nexus Public Snapshots</name>
+		<url>http://nexus.emergya.es/nexus/content/groups/public-snapshots/</url>
+		<snapshots>
+		         <enabled>true</enabled>
+   	        </snapshots>
+      		<releases>
+		         <enabled>false</enabled>
+	        </releases>
+	</pluginRepository>
+	<!-- Change when the plugin be released -->
+	<pluginRepository>
+		<id>codehaus.snapshot</id>
+		<name>Codehaus Snapshots</name>
+		<url>http://snapshots.repository.codehaus.org/</url>
+
+	      <snapshots>
+		<enabled>true</enabled>
+	      </snapshots>
+
+	      <releases>
+		<updatePolicy>never</updatePolicy>
+	      </releases>
+	</pluginRepository>
+  </pluginRepositories>
+	
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+</project>

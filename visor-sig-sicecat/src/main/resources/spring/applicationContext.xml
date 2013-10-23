@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util 
+       http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+    <context:property-placeholder
+        properties-ref="webProperties" />
+
+    <bean id="webProperties"
+        class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                  <value>classpath:application.properties</value>
+                  <value>classpath:conf/${platform:devel}/${entorn:local}/jndi.properties</value>
+                  <value>classpath:conf/${platform:devel}/${entorn:local}/log4j.properties</value>
+            </list>
+        </property>
+    </bean>
+	
+	<!--
+	<import resource="canigo-services.xml"/> -->
+	<import resource="classpath:/conectorSearcherContext.xml" />
+	<import resource="classpath:/conectorOpenlsContext.xml" />
+    <context:component-scan base-package="interior.cat"/>
+    
+    <!-- For persistence-geo -->
+    <bean class="java.lang.Boolean" id="secureRestRequest">
+    	<constructor-arg value="false" />
+    </bean>
+    <import resource="classpath:/spring/modelContext.xml" />
+	 
+    <context:annotation-config/>
+    
+    <context:property-placeholder location="classpath*:*.properties"/>
+
+    <bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:application.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:messages"/>
+        <property name="defaultEncoding" value="${project.build.sourceEncoding}"/>
+    </bean>
+    
+    <!-- Define the OXM marshaller which is used to convert the Objects <-> XML. 
+	<bean id="oxmMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller"/>
+	
+	<bean id="marshallingHttpMessageConverter"
+	      class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+	    <property name="marshaller" ref="oxmMarshaller"/>
+	    <property name="unmarshaller" ref="oxmMarshaller"/>
+	</bean>-->
+	
+	<!-- JSON Converter -->
+	<bean id="jacksonMessageConverter" 
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+
+	<!-- Required for REST services in order to bind the return value to the ResponseBody. -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	    <property name="messageConverters">
+	        <util:list id="beanList">
+	            <!-- <ref bean="marshallingHttpMessageConverter"/> -->
+	            <ref bean="jacksonMessageConverter"/>
+	        </util:list>
+	    </property>
+	</bean>
+
+</beans>

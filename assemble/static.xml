@@ -1,0 +1,24 @@
+<assembly>
+	<id>static</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>visor-sig-sicecat/target/visor-sig-sicecat-${visor.version}-jee6/</directory>
+			<!--outputDirectory>/Visor/</outputDirectory-->
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>**/*.html</include>
+				<include>**/*.htm</include>
+				<include>css/**/*</include>
+				<include>images/**/*</include>
+				<include>scripts/**/*</include>
+				<include>config/**/*</include>
+				<include>media/**/*</include>
+				<include>lib/SiceCAT/data/**</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</assembly>
