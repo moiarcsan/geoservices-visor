@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>interior.cat.visor</groupId>
+  <artifactId>sicecatext-maven</artifactId>
+  <version>${parent.version}</version>
+  <packaging>javascript</packaging>
+
+  <parent>
+	<groupId>interior.cat.visor</groupId>
+  	<artifactId>modulos-visor-sig</artifactId>
+	<version>4.9</version>
+  </parent>
+
+	<name>Geoext extension for Sicecat II map viewer</name>
+
+  <dependencies>
+	<dependency>
+		<groupId>interior.cat.visor.geoext</groupId>
+		<artifactId>geoext-maven</artifactId>
+		<version>${parent.version}</version>
+		<type>jar</type>
+	</dependency>
+	<dependency>
+		<groupId>interior.cat.visor.proj4js</groupId>
+	    <artifactId>proj4js-maven</artifactId>
+	    <version>${parent.version}</version>
+	    <type>jar</type>
+	</dependency>
+	<dependency>
+		<groupId>opengeo</groupId>
+	    <artifactId>gxp-maven</artifactId>
+	    <version>${parent.version}</version>
+	    <type>jar</type>
+	</dependency>
+  </dependencies>
+
+  <build>
+    <outputDirectory>target/scripts</outputDirectory>
+    <testOutputDirectory>target/test-scripts</testOutputDirectory>
+
+    <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+        </resource>
+    </resources>
+    
+    <pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo.javascript</groupId>
+										<artifactId>javascript-maven-plugin</artifactId>
+										<versionRange>[0.9.0,)</versionRange>
+										<goals>
+											<goal>war-package</goal>
+											<goal>prepare-tests</goal>
+											<goal>compile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+
+		</pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo.javascript</groupId>
+        <artifactId>javascript-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <executions>
+            <execution>
+                <goals>
+                    <goal>war-package</goal>
+                </goals>
+            </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  
+  <profiles>
+		<profile>
+			<id>javascript</id>
+			<build>
+				<plugins>
+					<plugin>
+				        <groupId>org.codehaus.mojo.javascript</groupId>
+				        <artifactId>javascript-maven-plugin</artifactId>
+				        <extensions>true</extensions>
+				        <executions>
+				            <execution>
+				                <goals>
+				                    <goal>war-package</goal>
+				                </goals>
+				            </execution>
+				        </executions>
+				        <configuration>
+				        	<output>scripts</output>
+				        </configuration>
+			      </plugin>
+				</plugins>
+			</build>
+
+			<dependencies>
+				<!-- Js libraries -->
+				<dependency>
+					<groupId>interior.cat.visor.geoext</groupId>
+					<artifactId>geoext-maven</artifactId>
+					<version>${parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>interior.cat.visor.proj4js</groupId>
+				    <artifactId>proj4js-maven</artifactId>
+				    <version>${parent.version}</version>
+				    <type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>opengeo</groupId>
+				    <artifactId>gxp-maven</artifactId>
+				    <version>${parent.version}</version>
+				    <type>javascript</type>
+				</dependency>
+			</dependencies>
+		</profile>
+		
+		<profile>
+			<activation>
+      				<activeByDefault>true</activeByDefault>
+			</activation>
+			<id>release</id>
+			<properties>
+				<!-- Services configuration (at local 'rest/' path) -->
+  				<target.rest.server>rest/</target.rest.server>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+				        <groupId>org.codehaus.mojo.javascript</groupId>
+				        <artifactId>javascript-maven-plugin</artifactId>
+				        <extensions>true</extensions>
+				        <executions>
+				            <execution>
+				                <goals>
+				                    <goal>war-package</goal>
+				                    <goal>prepare-tests</goal>
+				                    <goal>jsunit</goal>
+				                    <!--<goal>compress</goal>-->
+				                </goals>
+				            </execution>
+				        </executions>
+			      </plugin>
+				</plugins>
+			</build>
+
+			<dependencies>
+				<!-- Js libraries -->
+				<dependency>
+					<groupId>interior.cat.visor.geoext</groupId>
+					<artifactId>geoext-maven</artifactId>
+					<version>${parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>interior.cat.visor.proj4js</groupId>
+				    <artifactId>proj4js-maven</artifactId>
+				    <version>${parent.version}</version>
+				    <type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>opengeo</groupId>
+				    <artifactId>gxp-maven</artifactId>
+				    <version>${parent.version}</version>
+				    <type>javascript</type>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>jenkins-ci</id>
+			<build>
+			<plugins>
+				<plugin>
+				        <groupId>org.codehaus.mojo.javascript</groupId>
+				        <artifactId>javascript-maven-plugin</artifactId>
+				        <extensions>true</extensions>
+				        <executions>
+				            <execution>
+				                <goals>
+				                    <goal>war-package</goal>
+				                </goals>
+				            </execution>
+				        </executions>
+			      </plugin>	
+
+			      <plugin>
+			        <artifactId>maven-antrun-plugin</artifactId>
+			        <version>1.1</version>
+			        <executions>
+			          <execution>
+			            <phase>package</phase>
+			            <configuration>
+			              <tasks>
+			                <exec
+			                  dir="${basedir}"
+			                  executable="${basedir}/src/main/ci/script-naturaldocs.sh"
+			                  failonerror="false">
+			                </exec>
+			              </tasks>
+			            </configuration>
+			            <goals>
+			              <goal>run</goal>
+			            </goals>
+			          </execution>
+			        </executions>
+			      </plugin>
+			</plugins>
+			</build>
+			
+			<dependencies>
+				<!-- Js libraries -->
+				<dependency>
+					<groupId>interior.cat.visor.geoext</groupId>
+					<artifactId>geoext-maven</artifactId>
+					<version>${parent.version}</version>
+					<type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>interior.cat.visor.proj4js</groupId>
+				    <artifactId>proj4js-maven</artifactId>
+				    <version>${parent.version}</version>
+				    <type>javascript</type>
+				</dependency>
+				<dependency>
+					<groupId>opengeo</groupId>
+				    <artifactId>gxp-maven</artifactId>
+				    <version>${parent.version}</version>
+				    <type>javascript</type>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>develop</id>
+			<properties>
+				<!-- Proxies configuration -->
+  				<proxy.one>proxy?url2=</proxy.one>
+  				<proxy.two>http://sicecat-apps:8080/Visor/proxy&amp;url=</proxy.two>
+				<searcher>proxy?url=http://sicecat-apps:8080/Visor/rest/</searcher>
+			</properties>
+		</profile>
+		<profile>
+			<id>pre</id>
+			<properties>
+				<!-- Proxies configuration -->
+  				<proxy.one>proxy?url=</proxy.one>
+  				<proxy.two></proxy.two>
+				<searcher>rest/</searcher>
+			</properties>
+		</profile>
+	</profiles>
+	
+  <properties>
+  	<project.build.sourceEncoding>ISO-8859-15</project.build.sourceEncoding>
+	<!-- Proxies configuration -->
+  	<proxy.one>proxy?url2=</proxy.one>
+  	<proxy.two>http://win7-apps:8080/Visor/proxy&amp;url=</proxy.two>
+	<searcher>http://win7-apps-apps:8080/Visor/rest/</searcher>
+	<visor.version>4.0</visor.version>
+  </properties>
+</project>

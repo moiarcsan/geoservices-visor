@@ -1,0 +1,82 @@
+[
+	{
+		'type':'search_wfs',
+		'title':"Límits comarcals",
+		'name': "k",
+        'namespace': "s",
+		'url': "http://10.136.202.75/ows/wfs?",
+		'schema': "http://10.136.202.75/ows/wfs?version=1.1.0&request=DescribeFeatureType&typeName=s:k",
+		'mappedWith': "s:k",
+		'maxFeatures':200,
+		'srsName': "EPSG:23031"
+	},
+	{
+		'type':'search_wfs',
+		'title':"Límits municipals",
+		'name': "i",
+        'namespace': "s",
+		'url': "http://10.136.202.75/ows/wfs?",
+		'schema': "http://10.136.202.75/ows/wfs?version=1.1.0&request=DescribeFeatureType&typeName=s:i",
+		'mappedWith': "s:i",
+		'maxFeatures':200,
+		'srsName': "EPSG:23031"
+	},
+	{
+		'type':'search_wfs',
+		'title':"Punts quilometrics (DGC)",
+		'name': "y",
+        'namespace': "s",
+		'url': "http://10.136.202.75/ows/wfs?",
+		'schema': "http://10.136.202.75/ows/wfs?version=1.1.0&request=DescribeFeatureType&typeName=s:y",
+		'mappedWith': "s:y",
+		'maxFeatures':200,
+		'srsName': "EPSG:23031"
+	},
+	{
+		'type':'search_wfs_all',
+		'featureTypes':["s:a","s:ab","s:ae","s:ap","s:aps","s:b","s:c","s:c112","s:ca","s:cd","s:co",
+    	     "s:d","s:db","s:e","s:ef","s:ei","s:en","s:f","s:fo","s:g","s:h","s:i","s:ir",
+    	     "s:k","s:lf","s:np","s:nv","s:p","s:pi","s:plo","s:pn","s:po","s:rpo","s:s1",
+    	     "s:s5","s:sc","s:soc","s:sp","s:sv","s:svm","s:tf","s:tt","s:vu","s:x","s:y",
+    	     "s:z","s:z1","s:z3","s:zt"],
+        'namespace': "s",
+		'url': "http://10.136.202.75/ows/wfs?",
+		'schema_base': "http://10.136.202.75/ows/wfs?version=1.1.0&request=DescribeFeatureType&typeName=",
+		'maxFeatures':200,
+		'srsName': "EPSG:23031"
+	},
+	{
+		'type':'search_wfs_all',
+		'featureTypes':["r:ra","r:rp","r:rl"],
+        'namespace': "r",
+		'url': "http://10.136.202.75/ows/wfs?",
+		'schema_base': "http://10.136.202.75/ows/wfs?version=1.1.0&request=DescribeFeatureType&typeName=",
+		'maxFeatures':200,
+		'srsName': "EPSG:23031"
+	},
+	{
+		'type':'search_wfs_all',
+		'featureTypes':["p:pap","p:pas","p:pb","p:pe","p:pl","p:pm","p:psa","p:pse","p:t"],
+        'namespace': "p",
+		'url': "http://10.136.202.75/ows/wfs?",
+		'schema_base': "http://10.136.202.75/ows/wfs?version=1.1.0&request=DescribeFeatureType&typeName=",
+		'maxFeatures':200,
+		'srsName': "EPSG:23031"
+	},
+	{
+		'name':'default',
+		'type':'geocode',
+		'url':'http://ws.geonames.org/searchJSON?'
+	},
+	{
+		'name':'sigescat',
+		'type':'geocode',
+		'url':'http://10.136.202.75/openls'
+	},
+	{
+		'name':'restSearcher',
+		'type':'geocode',
+		'url':'rest/', 
+		'useProxy': 'false'
+	}
+]

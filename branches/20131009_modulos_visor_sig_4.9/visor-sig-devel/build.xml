@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="visor-sig-sicecat" default="dist" basedir=".">
+
+    <description>
+        Visor SIG SICECAT Build File
+    </description>
+
+    <property name="build" location="target/build"/>
+    <property name="ringo" location="externals/ringojs-fork"/>
+    <property name="app.port" value="9080"/>
+    <property name="cargo.host" value="localhost"/>
+    <property name="cargo.port" value="8080"/>
+    <property name="cargo.container" value="tomcat6x"/>
+    <property name="cargo.username" value="manager"/>
+    <property name="cargo.password" value=""/>
+    <property name="cargo.context" value="${ant.project.name}"/>
+    
+    <target name="buildjs">
+        <mkdir dir="${build}/${ant.project.name}/WEB-INF/app/static/scripts"/>
+        <java jar="${ringo}/run.jar" fork="true" failonerror="true">
+            <sysproperty key="ringo.home" path="${ringo}"/>
+            <arg path="externals/buildkit/lib/buildkit/build.js"/>
+            <arg line="-s -o ${build}/${ant.project.name}/WEB-INF/app/static/scripts buildjs.cfg"/>
+        </java>
+    </target>
+    
+    <target name="dist" depends="postcompile"/>
+    
+    <!-- this target is useful when init has already been run -->
+    <target name="postcompile" depends="test, buildjs, redist"/>
+    
+    <target name="redist">
+
+        <mkdir dir="${build}/${ant.project.name}"/>
+        
+        <copy todir="${build}/${ant.project.name}">
+            <fileset dir="src/main/webapp/">
+            </fileset>
+        </copy>
+        <copy todir="${build}/${ant.project.name}/WEB-INF/lib" flatten="true" includeEmptyDirs="false">
+            <fileset dir="${ringo}/lib"/>
+        </copy>
+        <copy todir="${build}/${ant.project.name}/scripts">
+            <fileset dir="${build}/${ant.project.name}/WEB-INF/app/static/scripts" />
+        </copy>
+        <!-- copy stick -->
+        <copy todir="${build}/${ant.project.name}/WEB-INF/app/stick">
+            <fileset dir="externals/stick">
+                <include name="**/lib/**"/>
+                <include name="package.json"/>
+            </fileset>
+        </copy>
+        
+    </target>
+
+    <target name="war" depends="dist">
+        <war destfile="${build}/${ant.project.name}.war">
+            <fileset dir="${build}/${ant.project.name}"/>
+        </war>
+    </target>
+
+    <target name="debug">
+        <java jar="${ringo}/run.jar" fork="true">
+            <sysproperty key="app.debug" value="1"/>
+            <sysproperty key="ringo.home" path="${ringo}"/>
+            <sysproperty key="ringo.modulepath" path="externals"/>
+            <arg path="app/main.js"/>
+            <arg line="-p ${app.port}"/>
+        </java>
+    </target>
+
+    <target name="debugall">
+        <java jar="${ringo}/run.jar" fork="true">
+            <sysproperty key="app.debug" value="1"/>
+            <sysproperty key="ringo.home" path="${ringo}"/>
+            <sysproperty key="ringo.modulepath" path="externals"/>
+            <arg value="-d"/>
+            <arg path="app/main.js"/>
+            <arg line="-p ${app.port}"/>
+        </java>
+    </target>
+
+    <target name="test" unless="skipTests">
+        <java jar="${ringo}/run.jar" fork="true" failonerror="yes">
+            <sysproperty key="ringo.home" path="${ringo}"/>
+            <sysproperty key="ringo.modulepath" path="externals"/>
+            <arg path="test/all.js"/>
+        </java>
+    </target>
+
+    <target name="clean" description="remove previous build">
+        <delete dir="${build}"/>
+        <ant dir="${ringo}" target="clean"/>
+    </target>
+
+</project>

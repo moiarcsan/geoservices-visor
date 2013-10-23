@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <bean class="org.springframework.jndi.JndiObjectFactoryBean" id="dataSource">
+    <property name="jndiName" value="${dataSource.jndiName}"/>
+  </bean>
+  <bean class="java.util.Locale" id="securityDefaultLocale">
+    <constructor-arg type="java.lang.String">
+      <value>es</value>
+    </constructor-arg>
+  </bean>
+  <bean class="org.springframework.context.support.ResourceBundleMessageSource" id="securityMessageSource">
+    <property name="basenames">
+      <list>
+        <value>i18n/saceErrorMessages</value>
+      </list>
+    </property>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.i18n.impl.SpringI18nServiceImpl" id="securityI18nService">
+    <property name="messageSource" ref="securityMessageSource"/>
+    <property name="defaultLocale" ref="securityDefaultLocale"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.security.LDAPAuthenticationConfiguration" id="ldapAuthenticationConfiguration2">
+    <property name="authoritiesbyUserNameQuery" value="SELECT username,authority FROM authorities WHERE username = ?"/>
+    <property name="ldapURL" value="ldap://localhost:389/dc=mycompany,dc=com"/>
+    <property name="usernameFormat" value="uid={0},ou=people,dc=mycompany,dc=com"/>
+    <property name="userLookupNameFormat" value="uid={0},ou=people"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.security.DatabaseAuthenticationConfiguration" id="databaseAuthenticationConfiguration3">
+    <property name="passwordEncoderClass" value="net.sf.acegisecurity.providers.encoding.PlaintextPasswordEncoder"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.security.GICARAuthenticationConfiguration" id="GICARAuthenticationConfiguration">
+    <property name="httpGicarHeaderUsernameKey" value="CODIINTERN"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.security.AuthenticationSecurityConfiguration" id="authenticationConfiguration">
+    <property name="filterProcessesUrl" value="/AppJava/j_acegi_security_check"/>
+    <property name="loginFormUrlValue" value="/AppJava/pagelogin.do"/>
+    <property name="authenticationFailureUrlValue" value="/AppJava/pagelogin.do"/>
+    <property name="authenticationProvidersConfigurationList">
+      <list>
+        <!--ref local="SACEAuthenticationConfiguration1" /-->
+        <!--<ref local="ldapAuthenticationConfiguration2" />-->
+        <!--<ref local="GICARAuthenticationConfiguration" />-->
+        <ref local="databaseAuthenticationConfiguration3"/>
+      </list>
+    </property>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.security.AuthorizationSecurityConfiguration" id="authorizationConfiguration">
+    <property name="rolesList">
+      <list>
+        <value>ROLE_ADMIN</value>
+        <value>ROLE_USER</value>
+      </list>
+    </property>
+    <property name="aclsClassesList">
+      <list/>
+    </property>
+    <!--<property name="aclsClassesList">-->
+    <!--<list>-->
+    <!--<value>net.gencat.ctti.canigo.samples.prototip.model.Account</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--<property name="secureBusinessObjects">-->
+    <!--<value>-->
+    <!--net.gencat.ctti.canigo.samples.prototip.struts.action.FileAction.upload = ROLE_ADMIN-->
+    <!--net.gencat.ctti.canigo.samples.prototip.model.bo.AccountBOImpl.saveOrUpdate = ROLE_ADMIN-->
+    <!--</value>-->
+    <!--</property>-->
+    <property name="secureUrls">
+      <value>/**/files.do = ROLE_ADMIN
+				/**/categories* = ROLE_ADMIN
+				/**/*.do* = ROLE_USER,ROLE_ADMIN</value>
+    </property>
+  </bean>
+  <import resource="classpath:/spring/acegi-beans.xml"/>
+</beans>

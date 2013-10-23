@@ -1,0 +1,15 @@
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
+	version="2.0">
+	<namespace>http://www.emergya.es/customtags</namespace>
+	<tag>
+		<tag-name>mapa</tag-name>
+		<component>
+			<component-type>es.emergya.JsfMapa</component-type>
+		</component>
+		<attribute>
+			<name>rendered</name>
+		</attribute>
+	</tag>
+</facelet-taglib>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>interior.cat.visor</groupId>
+	  	<artifactId>modulos-visor-sig</artifactId>
+		<version>4.8</version>
+	</parent>
+
+	<artifactId>sicecat-db-migration</artifactId>
+	<packaging>jar</packaging>
+
+    <!-- Project Information -->
+    <licenses>
+        <license>
+            <name>GPL 2.0</name>
+            <url>http://www.gnu.org/licenses/gpl-2.0.html</url>
+        </license>
+    </licenses>
+
+	<name>DB migration for sicecat</name>
+	<url>http://www.emergya.es</url>
+	<description>Database migration scripts for Flyway</description>
+
+	<organization>
+		<name>Emergya</name>
+		<url>http://www.emergya.es</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>adiaz</id>
+			<name>Alejandro Diaz Torres</name>
+			<email>adiaz@emergya.com</email>
+			<organization>Emergya Consultoria</organization>
+			<organizationUrl>http://www.emergya.es</organizationUrl>
+			<roles>
+				<role>Analista</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>jlrodriguez</id>
+			<name>Juan Luis Rodriguez Ponce</name>
+			<email>jlrodriguez@emergya.com</email>
+			<organization>Emergya Consultoria</organization>
+			<organizationUrl>http://www.emergya.es</organizationUrl>
+			<roles>
+				<role>Analista Funcional</role>
+			</roles>
+		</developer>
+	</developers>
+
+
+	<issueManagement>
+		<system>redmine</system>
+		<url>https://redmine.emergya.es/projects/sir-gore-chile</url>
+	</issueManagement>
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://jenkins.emergya.es/jenkins/view/persistence_geo/</url>
+	</ciManagement>
+	<inceptionYear>2012</inceptionYear>
+	<!-- Project Information -->
+
+
+	<!-- Environment Information -->
+	<scm>
+		<connection>scm:git:git@github.com:Emergya/sir-persistence_geo.git</connection>
+		<developerConnection>scm:git:git@github.com:Emergya/sir-persistence_geo.git</developerConnection>
+		<url>scm:git:git@github.com:Emergya/sir-persistence_geo.git</url>
+	</scm>
+
+
+	<distributionManagement>
+		<!-- use the following if you're not using a snapshot version. -->
+		<repository>
+			<id>nexus.releases</id>
+			<name>Nexus Releases</name>
+			<url>http://nexus.emergya.es/nexus/content/repositories/persistence_geo-repo/</url>
+		</repository>
+		<!-- use the following if you ARE using a snapshot version. -->
+		<snapshotRepository>
+			<id>nexus.snapshots</id>
+			<name>Nexus Snapshot</name>
+			<url>http://nexus.emergya.es/nexus/content/repositories/persistence_geo-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>thirdparty</id>
+			<url>http://nexus.emergya.es/nexus/content/repositories/thirdparty</url>
+		</repository>
+		<repository>
+			<id>jboss-repo</id>
+			<url>http://repository.jboss.org/maven2</url>
+		</repository>
+		<repository>
+			<id>spring-repo</id>
+			<url>http://maven.springframework.org</url>
+		</repository>
+
+		<!-- Hibernate Spatial -->
+		<repository>
+			<id>OSGEO GeoTools repo</id>
+			<url>http://download.osgeo.org/webdav/geotools</url>
+		</repository>
+		<repository>
+			<id>Hibernate Spatial repo</id>
+			<url>http://www.hibernatespatial.org/repository</url>
+		</repository>
+		<repository>
+			<id>JBOSS</id>
+			<url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+		</repository>
+		<repository>
+			<id>terracotta-releases</id>
+			<url>http://www.terracotta.org/download/reflector/releases</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+
+		<filters>
+			<filter>src/main/filters/${filter.profile}</filter>
+		</filters>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+				<targetPath>../test-classes</targetPath>
+			</testResource>
+		</testResources>
+		<plugins>
+			<plugin>
+				<groupId>com.googlecode.flyway</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>2.0.3</version>
+				<configuration>
+					<driver>${jdbc.driverClassName}</driver>
+					<url>${jdbc.url}</url>
+					<user>${jdbc.username}</user>
+					<password>${jdbc.password}</password>
+					<schemas>
+						<schema>${jdbc.schema}</schema>
+					</schemas>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<escapeString>\</escapeString>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+
+
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.emergya</groupId>
+			<artifactId>persistence-geo-core</artifactId>
+			<version>1.9-jpa1.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<!-- ================= Profiles to deploy ================= -->
+		<profile>
+			<id>local</id>
+			<activation>
+      				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<flyway.locations>sql/common,sql/postgresql</flyway.locations>
+				<database.hibernate.hbm2ddl.auto>validate</database.hibernate.hbm2ddl.auto>
+                <jdbc.driverClassName>org.postgresql.Driver</jdbc.driverClassName>
+                <jdbc.url>jdbc:postgresql://localhost:5432/persistence_geo_db</jdbc.url>
+                <jdbc.username>persistence_geo</jdbc.username>
+                <jdbc.password>persistence_geo</jdbc.password>
+                <jdbc.schema>persistence_geo</jdbc.schema>
+				<filter.profile>local.properties</filter.profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<jdbc.driverClassName>org.hsqldb.jdbcDriver</jdbc.driverClassName>
+				<jdbc.url>jdbc:hsqldb:mem:testDB</jdbc.url>
+				<jdbc.username>sa</jdbc.username>
+				<jdbc.password />
+				<hibernate.dialect>org.hibernate.dialect.HSQLDialect</hibernate.dialect>
+				<hibernate.hbm2ddl.auto>create</hibernate.hbm2ddl.auto>
+				<hibernate.show_sql>true</hibernate.show_sql>
+				<filter.profile>local.properties</filter.profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>devel</id>
+			<properties>
+				<flyway.locations>sql/common,sql/postgresql</flyway.locations>
+				<database.hibernate.hbm2ddl.auto>validate</database.hibernate.hbm2ddl.auto>
+				<jdbc.driverClassName>org.postgresql.Driver</jdbc.driverClassName>
+				<jdbc.url>jdbc:postgresql://postgresql-apps.emergya.es:5434/persistence_geo_db</jdbc.url>
+				<jdbc.username>persistence_geo</jdbc.username>
+				<jdbc.password>persistence_geo</jdbc.password>
+				<jdbc.schema>persistence_geo</jdbc.schema>
+				<filter.profile>devel.properties</filter.profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>oracle</id>
+			<properties>
+				<flyway.locations>sql/common,sql/oracle</flyway.locations>
+				<database.hibernate.hbm2ddl.auto>validate</database.hibernate.hbm2ddl.auto>
+				<jdbc.driverClassName>oracle.jdbc.driver.OracleDriver</jdbc.driverClassName>
+				<jdbc.url>jdbc:oracle:thin:@oracle-apps:1521:gissicecat2</jdbc.url>
+				<jdbc.username>SICECAT2_ADM</jdbc.username>
+				<jdbc.password>SICECAT2_ADM</jdbc.password>
+				<jdbc.schema>SICECAT2_ADM</jdbc.schema>
+				<filter.profile>oracle.properties</filter.profile>
+			</properties>
+		</profile>
+	</profiles>
+
+	<properties>
+		<flyway.locations>sql/common</flyway.locations>
+	</properties>
+
+</project>

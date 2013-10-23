@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <bean class="net.mlw.vlh.adapter.hibernate3.Hibernate30Adapter" name="baseHibernateAdapter">
+    <property name="sessionFactory" ref="sessionFactory"/>
+    <property name="defaultNumberPerPage" value="5"/>
+    <property name="defaultSortColumn" value="id"/>
+    <property name="defaultSortDirection" value="asc"/>
+    <property name="removeEmptyStrings" value="true"/>
+    <property name="focusOptimalization" value="false"/>
+  </bean>
+  <bean class="net.mlw.vlh.DefaultValueListHandlerImpl" name="valueListHandler">
+    <property name="config.adapters">
+      <map></map>
+    </property>
+  </bean>
+  <bean class="net.mlw.vlh.web.ValueListConfigBean" name="vlConfig" scope="singleton">
+    <property name="messageSource" ref="messageSource"/>
+    <property name="displayHelper">
+      <bean class="net.gencat.ctti.canigo.services.web.vlh.util.ContextPathImagesDisplayHelper"/>
+    </property>
+    <property name="displayProviders">
+      <map>
+        <entry key="html">
+          <bean class="net.mlw.vlh.web.tag.support.HtmlDisplayProvider" scope="singleton">
+            <property name="preAppendContextPath" value="true"/>
+          </bean>
+        </entry>
+        <entry key="ExportPDF">
+          <bean class="net.gencat.ctti.canigo.services.web.vlh.tag.support.PdfDisplayProvider" scope="singleton">
+            <property name="logService" ref="loggingService"/>
+            <property name="i18nService" ref="i18nService"/>
+            <property name="skipColumns">
+              <list></list>
+            </property>
+          </bean>
+        </entry>
+        <entry key="ExportExcel">
+          <bean class="net.gencat.ctti.canigo.services.web.vlh.tag.support.ExcelDisplayProvider" scope="singleton">
+            <property name="logService" ref="loggingService"/>
+            <property name="i18nService" ref="i18nService"/>
+            <property name="skipColumns">
+              <list></list>
+            </property>
+          </bean>
+        </entry>
+      </map>
+    </property>
+  </bean>
+  <bean class="net.mlw.vlh.web.mvc.ValueListHandlerHelper" id="valueListHelper">
+    <property name="valueListHandler">
+      <ref bean="valueListHandler"/>
+    </property>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.lists.impl.SimpleValueListActionHelper" name="valueListActionHelper">
+    <property name="valueListHelper">
+      <ref bean="valueListHelper"/>
+    </property>
+    <property name="maxExportRows" value="5"/>
+    <property name="logService" ref="loggingService"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.taglib.util.searchPanel.SearchPanelServiceBase" name="searchPanelService">
+    <property name="valueListHandlerHelper">
+      <ref bean="valueListHelper"/>
+    </property>
+    <property name="loggingService">
+      <ref bean="loggingService"/>
+    </property>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.lists.impl.ExtendedValueListActionHelper" name="extendedValueListActionHelper">
+    <property name="valueListHelper">
+      <ref bean="valueListHelper"/>
+    </property>
+    <property name="maxExportRows" value="10000"/>
+    <property name="logService" ref="loggingService"/>
+  </bean>
+</beans>

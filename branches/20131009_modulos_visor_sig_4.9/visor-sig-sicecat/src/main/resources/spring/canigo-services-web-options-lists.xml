@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <bean class="net.mlw.vlh.adapter.hibernate3.Hibernate30Adapter" name="defaultOptionBaseHibernateAdapter">
+    <property name="sessionFactory" ref="sessionFactory"/>
+    <property name="defaultNumberPerPage" value="5"/>
+    <property name="defaultSortColumn" value="id"/>
+    <property name="defaultSortDirection" value="asc"/>
+    <property name="removeEmptyStrings" value="true"/>
+  </bean>
+  <bean class="net.mlw.vlh.DefaultValueListHandlerImpl" name="defaultOptionValueListHandler">
+    <property name="config.adapters">
+      <map>
+        <entry key="groupsList">
+          <bean parent="defaultOptionBaseHibernateAdapter">
+            <property name="hql">
+              <value>FROM
+													net.gencat.ctti.canigo.services.security.model.PartyGroup
+													AS vo WHERE 1=1 
+													ORDER BY vo.name ASC</value>
+            </property>
+          </bean>
+        </entry>
+        <entry key="rolesList">
+          <bean parent="defaultOptionBaseHibernateAdapter">
+            <property name="hql">
+              <value>FROM
+													net.gencat.ctti.canigo.services.security.model.Role
+													AS vo WHERE 1=1 
+													ORDER	BY vo.name ASC</value>
+            </property>
+          </bean>
+        </entry>
+      </map>
+    </property>
+  </bean>
+  <bean class="net.mlw.vlh.web.mvc.ValueListHandlerHelper" id="defaultOptionValueListHandlerHelper">
+    <property name="valueListHandler">
+      <ref bean="defaultOptionValueListHandler"/>
+    </property>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.taglib.util.options.vlh.hibernate3.VlhOptionListSourceImpl" name="defaultOptionListSource">
+    <property name="valueListHandlerHelper">
+      <ref bean="defaultOptionValueListHandlerHelper"/>
+    </property>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.taglib.util.autocomplete.AutocompleteServiceBase" name="autocompleteService">
+    <property name="optionsService">
+      <ref bean="optionsListService"/>
+    </property>
+    <property name="loggingService">
+      <ref bean="loggingService"/>
+    </property>
+  </bean>
+  <bean id="groupsOptionListSource" parent="defaultOptionListSource">
+    <property name="optionListName" value="groupsList"/>
+    <property name="optionLabelName" value="name"/>
+    <property name="optionLabelProperty" value="id"/>
+  </bean>
+  <bean id="rolesOptionListSource" parent="defaultOptionListSource">
+    <property name="optionListName" value="rolesList"/>
+    <property name="optionLabelName" value="name"/>
+    <property name="optionLabelProperty" value="id"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.taglib.util.options.OptionsListServiceBase" id="optionsListService">
+    <property name="optionsListSources">
+      <map>
+        <entry key="groupsList">
+          <ref bean="groupsOptionListSource"/>
+        </entry>
+        <entry key="rolesList">
+          <ref bean="rolesOptionListSource"/>
+        </entry>
+      </map>
+    </property>
+  </bean>
+</beans>

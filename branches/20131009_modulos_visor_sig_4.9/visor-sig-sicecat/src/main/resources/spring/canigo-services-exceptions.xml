@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <bean class="net.gencat.ctti.canigo.services.exceptions.aop.aspectwerkz.ExceptionHandlerAspect" id="net.gencat.ctti.canigo.services.exceptions.aop.aspectwerkz.ExceptionHandlerAspect" scope="prototype">
+    <property name="exceptionHandlers">
+      <map/>
+    </property>
+  </bean>
+</beans>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <bean class="net.gencat.ctti.canigo.services.web.filter.HttpsConfigBean" id="httpsConfigBean">
+    <property name="httpsMode" value="${https.mode}"/>
+    <property name="httpPortIn" value="${https.httpPortIn}"/>
+    <property name="httpPortOut" value="${https.httpPortOut}"/>
+    <property name="httpsPortIn" value="${https.httpsPortIn}"/>
+    <property name="httpsPortOut" value="${https.httpsPortOut}"/>
+    <!--<property name="httpsURLs">
+											<list>
+												<value>/**/*</value>
+											</list>
+										</property>-->
+  </bean>
+</beans>

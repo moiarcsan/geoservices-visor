@@ -1,0 +1,23 @@
+<assembly>
+	<id>static</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>target/${artifactId}-${project.version}-jee6</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>**/*.html</include>
+				<include>**/*.htm</include>
+				<include>css/**/*</include>
+				<include>images/**/*</include>
+				<include>scripts/**/*</include>
+				<include>config/**/*</include>
+				<include>media/**/*</include>
+				<include>lib/SiceCAT/data/**</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</assembly>

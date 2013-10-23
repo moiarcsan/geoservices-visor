@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <import resource="canigo-services-i18n.xml"/>
+  <import resource="canigo-services-security.xml"/>
+  <import resource="canigo-services-persistence.xml"/>
+  <import resource="canigo-services-web.xml"/>
+  <import resource="canigo-services-exceptions.xml"/>
+  <import resource="canigo-services-file.xml"/>
+  <import resource="canigo-services-configuration.xml"/>
+</beans>

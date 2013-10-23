@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!--TAG's default configuration-->
+  <import resource="property-editors.xml"/>
+  <bean class="net.gencat.ctti.canigo.services.web.struts.taglib.configuration.ConfigurationTag" id="configurationTag">
+    <property name="styleId" value="defaultConfiguration"/>
+    <property name="i18nService" ref="i18nService"/>
+    <property name="appendContextPath" value="true"/>
+    <property name="contextSubpath" value="AppJava"/>
+    <property name="useUrlRewrite" value="true"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.struts.taglib.forms.FormTag" id="formTag">
+    <property name="logService" ref="loggingService"/>
+    <property name="i18nService" ref="i18nService"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.struts.taglib.forms.ActionImageTag" id="actionImageTag"/>
+  <bean class="net.gencat.ctti.canigo.services.web.struts.taglib.forms.SubmitTag" id="submitTag"/>
+  <bean class="net.gencat.ctti.canigo.services.web.struts.taglib.forms.fields.FileFieldTag" id="fileFieldTag">
+    <property name="layout" value="false"/>
+    <property name="i18nService" ref="i18nService"/>
+    <property name="validationService" ref="webValidationService"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.struts.taglib.forms.fields.TextFieldTag" id="textFieldTag">
+    <property name="layout" value="false"/>
+    <property name="i18nService" ref="i18nService"/>
+    <property name="validationService" ref="webValidationService"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.struts.taglib.forms.fields.PasswordFieldTag" id="passwordFieldTag">
+    <property name="i18nService" ref="i18nService"/>
+    <property name="validationService" ref="webValidationService"/>
+    <property name="layout" value="false"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.struts.taglib.forms.fields.TextAreaFieldTag" id="textAreaFieldTag">
+    <property name="i18nService" ref="i18nService"/>
+    <property name="validationService" ref="webValidationService"/>
+    <property name="layout" value="false"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.struts.taglib.forms.fields.SelectFieldTag" id="selectFieldTag">
+    <property name="i18nService" ref="i18nService"/>
+    <property name="validationService" ref="webValidationService"/>
+    <property name="optionsListService" ref="optionsListService"/>
+    <property name="layout" value="false"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.struts.taglib.forms.fields.PagedSelectFieldTag" id="pagedSelectFieldTag">
+    <property name="i18nService" ref="i18nService"/>
+    <property name="validationService" ref="webValidationService"/>
+    <property name="optionsListService" ref="optionsListService"/>
+    <property name="layout" value="false"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.struts.taglib.forms.fields.OptionsFieldTag" id="optionsFieldTag">
+    <property name="i18nService" ref="i18nService"/>
+    <property name="validationService" ref="webValidationService"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.struts.taglib.forms.fields.CheckboxFieldTag" id="checkboxFieldTag">
+    <property name="i18nService" ref="i18nService"/>
+    <property name="validationService" ref="webValidationService"/>
+    <property name="layout" value="false"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.struts.taglib.forms.fields.LabelTag" id="labelTag">
+    <property name="i18nService" ref="i18nService"/>
+    <property name="validationService" ref="webValidationService"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.taglib.ButtonTag" id="buttonTag">
+    <property name="i18nService" ref="i18nService"/>
+    <property name="logService" ref="loggingService"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.struts.taglib.forms.fields.RadioFieldTag" id="radioTag">
+    <property name="i18nService" ref="i18nService"/>
+    <property name="validationService" ref="validationService"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.taglib.DirtyFormWarningTag" id="dirtyFormWarningTag">
+    <property name="i18nService" ref="i18nService"/>
+    <property name="logService" ref="loggingService"/>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.struts.taglib.forms.fields.SearchPanelTag" id="searchPanelTag">
+    <property name="i18nService" ref="i18nService"/>
+    <property name="logService" ref="loggingService"/>
+  </bean>
+  <bean class="net.sf.navigator.menu.MenuLoader" id="menuLoader">
+    <property name="menuConfig">
+      <value>/WEB-INF/classes/struts/menu-config.xml</value>
+    </property>
+  </bean>
+  <!--Binder for requests-->
+  <bean class="net.gencat.ctti.canigo.services.web.spring.bind.ServletRequestDataBinderFactory" id="servletRequestDataBinderFactory">
+    <property name="customEditors">
+      <ref bean="customEditors"/>
+    </property>
+    <property name="bindProperties">
+      <map>
+        <entry key="allowNumberEditorEmptyStrings" value="true"/>
+      </map>
+    </property>
+  </bean>
+  <!--Binder for Collection requests-->
+  <bean class="net.gencat.ctti.canigo.services.web.spring.bind.ServletRequestDataCollectionBinderFactory" id="servletRequestDataCollectionBinderFactory" parent="servletRequestDataBinderFactory"/>
+  <!--Use init method to initialize in 'init-method'-->
+  <bean class="net.gencat.ctti.canigo.services.web.spring.bind.WebDataBinderFactory" id="webDataBinderFactory">
+    <property name="customEditors">
+      <ref bean="customEditors"/>
+    </property>
+    <property name="bindProperties">
+      <map>
+        <entry key="allowNumberEditorEmptyStrings" value="true"/>
+      </map>
+    </property>
+  </bean>
+  <bean class="net.gencat.ctti.canigo.services.web.validation.commons.CommonsWebValidationServiceImpl" id="webValidationService">
+    <property name="webDataBinderFactory">
+      <ref bean="webDataBinderFactory"/>
+    </property>
+    <property name="validatorFactory">
+      <ref bean="validatorFactory"/>
+    </property>
+    <property name="i18nService">
+      <ref bean="i18nService"/>
+    </property>
+    <property name="loggingService">
+      <ref bean="loggingService"/>
+    </property>
+  </bean>
+  <import resource="canigo-services-web-options-lists.xml"/>
+  <import resource="canigo-services-web-lists.xml"/>
+  <import resource="canigo-services-https.xml"/>
+</beans>

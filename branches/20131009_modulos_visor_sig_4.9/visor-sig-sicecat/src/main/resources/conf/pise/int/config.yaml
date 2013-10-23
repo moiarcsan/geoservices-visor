@@ -1,0 +1,118 @@
+#===========================================================================
+# allowed DPIs
+#===========================================================================
+dpis: [300]
+
+#===========================================================================
+# allowed Formats
+#===========================================================================
+formats: ['pdf', 'png']
+
+#===========================================================================
+# the allowed scales
+#===========================================================================
+scales:
+  - 25000
+  - 50000
+  - 100000
+  - 200000
+  - 500000
+  - 1000000
+  - 2000000
+  - 4000000
+
+#===========================================================================
+# the list of allowed hosts
+#===========================================================================
+hosts:
+  - !acceptAll
+    dummy: true
+
+#===========================================================================
+# Fonts for texts 
+#===========================================================================
+fonts:
+ - fonts
+
+
+layouts:
+  #===========================================================================
+  A4 portrait:
+  #===========================================================================
+    metaData:
+      title: '${title}'
+      author: 'Emergya Consultoría SCA'
+      subject: 'Simple layout'
+      keywords: 'map,print'
+      creator: 'MapFish'
+
+    #-------------------------------------------------------------------------
+    mainPage:
+      pageSize: A4
+      rotation: true
+      items:
+        - !columns
+         config:
+          cells:
+           - align: LEFT
+             vertAlign: BOTTOM
+         widths: [25,50,25]
+         backgroundColor:#FFAABB
+         items:
+          - !text
+             text: "CECAT "
+             font: "Lucida Sans"
+             fontColor:#f39400
+             fontSize: 32
+          - !text
+            text: "Centre de Coordinació Operativa de Catalunya "
+            font: "Lucida Sans"
+            fontColor:#f39400
+            fontSize: 12
+            vertAlign: bottom
+            spacingAfter: 5
+          - !image
+            maxHeight: 40
+            maxWidth: 40
+            align: right
+            url: http://localhost/Visor/images/pdf/logo.png
+
+        - !text
+          text: ''
+          spacingAfter: 50
+
+        - !text
+          font: Helvetica
+          fontSize: 30
+          align: center
+          spacingAfter: 20
+          fontEncoding: Cp1252
+          text: '${title}'
+        - !columns
+          config:
+             borderWidth: 1
+             cells:
+              - padding: 2   
+          spacingAfter: 20
+          items:
+            - !map
+              width: 500
+              height: 483
+        - !columns
+          items:
+            - !scalebar
+              type: bar
+              maxSize: 120
+              barBgColor: white
+              fontSize: 8
+              align: right
+
+      footer:
+        height: 40
+        items:
+          - !image
+            maxWidth: 150
+            maxHeight: 10
+            spacingAfter:20
+            url:http://localhost/Visor/images/pdf/departament_dinterior.gif
+	

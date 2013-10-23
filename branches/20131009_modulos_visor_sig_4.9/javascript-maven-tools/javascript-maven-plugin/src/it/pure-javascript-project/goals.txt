@@ -1,0 +1,1 @@
+clean install -Dmaven.repo.local=/export/AppJavaDades/ic/hudson/in/m2_repository_telefonica -s /serveis/apache/maven2.2/conf/settings_TELEFONICA.xml -Djavax.net.ssl.trustStore=/export/AppJavaDades/ic/hudson/in/keystore/keystore.pks -Djavax.net.ssl.trustStorePassword=changeit
