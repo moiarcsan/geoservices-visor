@@ -286,6 +286,10 @@ AuxiliaryLayer = {
 		data.sicecat_feature = new SiceCAT.Feature(feature2);
 		
 		AuxiliaryLayer.map.addLayer(vectorLayer);
+		// Deactivate the tooltip control to register all features
+		actions['tooltipcontrol'].control.deactivate();
+		// Activate the tooltip control to register all features
+		actions['tooltipcontrol'].control.activate();
 	},
 	/*
 	 * Function: addFeatureToLayerId

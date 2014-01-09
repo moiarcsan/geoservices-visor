@@ -88,10 +88,11 @@ SiceCAT.Control.GetFeatureInfo = OpenLayers
 						Ext.get(this.map.div).removeListener("click",
 								this_.clickEvent, this_);
 					},
-					clickEvent : function(evt, this_) {
+					clickEvent : function(evt) {
 						if(Ext.isGecko){
-							if(evt.browserEvent){
-								return this.selectClick(evt.browserEvent.layerX, evt.browserEvent.layerY, this);
+							var evento = ((window.event)?(event):(evt));
+							if(evento && evento.xy){
+								return this.selectClick(evento.xy.x, evento.xy.y, this);
 							}
 						}else{
 							if (event.xy) {
