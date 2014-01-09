@@ -1183,7 +1183,7 @@ SIGIntegrator = Ext
 									+ this.propertiesToLoad);
 						if (this.propertiesToLoad == 0) {
 							if (this.functionToCall == "msjAplListSelected") {
-								this.getSecondaryAPI().msjAplListSelected(
+								this.getSecondaryAPI().msAplListSelected(
 										this.list_);
 								this.functionToCall = null;
 							} else if (this.functionToCall == "msAplRectangleSelected") {

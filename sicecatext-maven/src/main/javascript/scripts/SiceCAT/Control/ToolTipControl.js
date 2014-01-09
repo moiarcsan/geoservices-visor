@@ -44,9 +44,9 @@
  * 
  * Author:
  * 
- *  María Arias de Reyna Domínguez(marias@emergya.com)
+ *  Marï¿½a Arias de Reyna Domï¿½nguez(marias@emergya.com)
  *  
- *  Edited by: Moisés Arcos Santiago <marcos@emergya.com>
+ *  Edited by: Moisï¿½s Arcos Santiago <marcos@emergya.com>
  */
 OpenLayers.Control.ToolTipControl = OpenLayers
 		.Class(
@@ -67,6 +67,7 @@ OpenLayers.Control.ToolTipControl = OpenLayers
 					featureTitleTextAPI: "{0} layer element: {1}",
 					titlePopup: "Informacion",
 					titleSeeMore: "Ver mas",
+					titleReverseGeocoding: "Reverse Geocoding",
 					nameProperty: "Property",
 					valueProperty: "Value",
 					
@@ -209,76 +210,12 @@ OpenLayers.Control.ToolTipControl = OpenLayers
 					 * <closePopUps>
 					 */
 					trigger : function(event) {
-						var items_acc = [];
-						var feature = null;
 						if(event.type == "featurehighlighted"){
-							this.closePopUps();
-							if(!event.feature)
-								return;
-							feature = event.feature;
-							// Tooltip info
-							var featureTitleDesc = this.obtainFeatureTitleDescription(feature);
-							var div_html = document.createElement("div");
-							div_html.className = "div_tooltip";
-							var div_content = document.createElement("div");
-							div_content.appendChild(div_html);
-							var html_content = "";
-							var infoTooltip = null;
-							if(!!feature.data && !!feature.data.sicecat_feature){
-								// API origin
-								if(Ext.isGecko){
-									// Firefox
-									div_html.textContent = featureTitleDesc.description;
-									html_content = div_content.textContent;
-								}else{
-									// Chrome / IE
-									div_html.innerHTML = featureTitleDesc.description;
-									html_content = div_content.innerHTML;
-								}
-								
-								infoTooltip = new Ext.Panel({
-					            	title: featureTitleDesc.title,
-					            	autoScroll: true,
-					            	html: html_content
-					            });
-							}else{
-								infoTooltip = new Ext.Panel({
-					            	title: featureTitleDesc.title,
-					            	autoScroll: true,
-					            	layout: 'fit',
-					            	items: [featureTitleDesc.description]
-					            });
-							}
-							
-							// GetFeatureInfo
-							var info_control = new SiceCAT.Control.GetFeatureInfo();
-							var grid = info_control.clickEvent(event.feature.parentEvent);
-							var moreInfo = new Ext.Panel({
-				            	title: this.titleSeeMore,
-				            	layout: 'fit',
-				            	autoScroll: true,
-				            	items: [grid]
-				            });
-							items_acc.push(infoTooltip);
-							items_acc.push(moreInfo);
-							this.selectFeatureEvent = true;
-							// Show the popup
-							this.showPopup(feature, items_acc);
+							// It's been clicked over a feature
+							this.clickOverFeatureHandler(event.feature);
 						}else if(event.type == "click" && !this.selectFeatureEvent){
-							this.closePopUps();
-							// GetFeatureInfo
-							var info_control = new SiceCAT.Control.GetFeatureInfo();
-							var grid = info_control.clickEvent(event);
-							var moreInfo = new Ext.Panel({
-				            	title: this.titleSeeMore,
-				            	autoScroll: true,
-				            	layout: 'fit',
-				            	items: [grid]
-				            });
-							feature = event.xy;
-							items_acc.push(moreInfo);
-							// Show the popup
-							this.showPopup(feature, items_acc);
+							// It's not been clicked over a feature
+							this.clickHandler(event);
 						}
 					},
 					
@@ -296,8 +233,8 @@ OpenLayers.Control.ToolTipControl = OpenLayers
 							title : this.titlePopup,
 							location : feature,
 							layout: 'fit',
-							width: 200,
-							height: 200,
+							width: 300,
+							height: 300,
 							minWidth: 100,
 							minHeight: 100,
 							map: this.map,
@@ -468,7 +405,11 @@ OpenLayers.Control.ToolTipControl = OpenLayers
 					getJsonFromFeature: function(feature){
 						var feature_data = [];
 						for(f in feature.data){
-							feature_data.push([f, feature.data[f]]);
+							if(!!feature.data[f].value){
+								feature_data.push([f, feature.data[f].value]);
+							}else{
+								feature_data.push([f, feature.data[f]]);
+							}
 						}
 						return feature_data;
 					},
@@ -502,44 +443,205 @@ OpenLayers.Control.ToolTipControl = OpenLayers
 							}
 							description = this.getDescription(feature);
 						}
-						/*if (!!feature.data && feature.data.pk_id != null) {
-
-							if (feature.data.name == null)
-								feature.data.name = "";
-
-							title = this.obtainFeatureTitleText(feature.data.name, feature.data.type, feature.data.pk_id);
-
-						}else if(!!feature.data){
-							title = this.obtainFeatureTitle(feature);
-							if(!!feature.data["TITOL"] 
-									&& !!feature.data["COMENTARI"]
-									&& !!feature.fid){
-								description = feature.data["COMENTARI"];
-							}else{
-								description += this.obtainPropertyRows(feature.data);
-							}
-							
-							if(description != "<table>"){
-								description += "</table>";
-							}
-							
-						}
-						
-						if(!!feature.attributes && description == "<table>"){
-							title = this.obtainFeatureTitle(feature);
-							if(!!feature.attributes["COMENTARI"]){
-								description = feature.attributes["COMENTARI"];
-							}else{
-								description += this.obtainPropertyRows(feature.attributes);
-							}
-							
-							if(description != "<table>"){
-								description += "</table>";
-							}
-						}*/
 						return {
 							description: description,
 							title: title
 						};
+					},
+					
+					/**
+					 * Method: clickOverFeatureHandler
+					 * 
+					 * Params: {<OpenLayers.Vector.Feature>} feature
+					 * 
+					 */
+					clickOverFeatureHandler: function(feature){
+						this.closePopUps();
+						var items_acc = [];
+						// Info about selected feature
+						var featureTitleDesc = this.obtainFeatureTitleDescription(feature);
+						var div_html = document.createElement("div");
+						div_html.className = "div_tooltip";
+						var div_content = document.createElement("div");
+						div_content.appendChild(div_html);
+						var html_content = "";
+						var infoTooltip = null;
+						if(!!feature.data && !!feature.data.sicecat_feature){
+							// API origin
+							if(Ext.isGecko){
+								// Firefox
+								div_html.textContent = featureTitleDesc.description;
+								html_content = div_content.textContent;
+							}else{
+								// Chrome / IE
+								div_html.innerHTML = featureTitleDesc.description;
+								html_content = div_content.innerHTML;
+							}
+							
+							infoTooltip = new Ext.Panel({
+				            	title: featureTitleDesc.title,
+				            	autoScroll: true,
+				            	html: html_content
+				            });
+						}else{
+							infoTooltip = new Ext.Panel({
+				            	title: featureTitleDesc.title,
+				            	autoScroll: true,
+				            	layout: 'fit',
+				            	items: [featureTitleDesc.description]
+				            });
+						}
+						
+						// GetFeatureInfo
+						var info_control = new SiceCAT.Control.GetFeatureInfo();
+						var evento = null;
+						if(!Ext.isGecko){
+							evento = feature.parentEvt;
+						}else{
+							evento = feature.parentEvent;
+						}
+						var grid = info_control.clickEvent(evento);
+						var moreInfo = new Ext.Panel({
+			            	title: this.titleSeeMore,
+			            	layout: 'fit',
+			            	autoScroll: true,
+			            	items: [grid]
+			            });
+						items_acc.push(infoTooltip);
+						items_acc.push(moreInfo);
+						this.selectFeatureEvent = true;
+						
+						// Reverse Geocoding
+						var point = map.getLonLatFromPixel(evento.xy);
+						var grid_rg = this.reverseGeocoding(point.lon, point.lat);
+						var reverseGeocoding = new Ext.Panel({
+			            	title: this.titleReverseGeocoding,
+			            	autoScroll: true,
+			            	layout: 'fit',
+			            	items: [grid_rg]
+			            });
+						items_acc.push(reverseGeocoding);
+						
+						// Show the popup
+						this.showPopup(feature, items_acc);
+					},
+					
+					/**
+					 * Method: clickHandler
+					 * 
+					 * Params: 
+					 * 
+					 * */
+					clickHandler: function(feature){
+						this.closePopUps();
+						var items_acc = [];
+						// GetFeatureInfo
+						var info_control = new SiceCAT.Control.GetFeatureInfo();
+						var grid = info_control.clickEvent(event);
+						var moreInfo = new Ext.Panel({
+			            	title: this.titleSeeMore,
+			            	autoScroll: true,
+			            	layout: 'fit',
+			            	items: [grid]
+			            });
+						feature = event.xy;
+						items_acc.push(moreInfo);
+						
+						// Reverse Geocoding
+						var point = map.getLonLatFromPixel(feature);
+						var grid_rg = this.reverseGeocoding(point.lon, point.lat);
+						var reverseGeocoding = new Ext.Panel({
+			            	title: this.titleReverseGeocoding,
+			            	autoScroll: true,
+			            	layout: 'fit',
+			            	items: [grid_rg]
+			            });
+						items_acc.push(reverseGeocoding);
+						
+						// Show the popup
+						this.showPopup(feature, items_acc);
+					},
+					
+					/**
+					 * Method: reverseGeocoding
+					 * 
+					 * Params: 
+					 * 
+					 **/
+					reverseGeocoding: function(posX, posY){
+						var colModel = new Ext.grid.ColumnModel([{
+							dataIndex : 'property',
+							header : this.nameProperty
+						}, {
+							dataIndex : 'value',
+							header : this.valueProperty
+						}]);
+						var data_store = new Ext.data.SimpleStore({
+					        fields: [{
+					        	name: 'property'
+					        },{
+					        	name: 'value'
+					        }]
+						});
+						var gridView = new Ext.grid.GridView({
+							forceFit : true
+						});
+						var grid = new Ext.grid.GridPanel({
+							autoHeight : true,
+							store : data_store,
+							colModel : colModel,
+							view : gridView
+						});
+						
+						var data = '<XLS xsi:schemaLocation="http://www.opengis.net/xls" version="1.2.0" xmlns="http://www.opengis.net/xls"'
+										+ ' xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
+										+ '<Request methodName="Geocode" requestID="123" '
+										+ 'version="1.2.0" maximumResponses="' + false + '">'
+										+ '<ReverseGeocodeRequest> <Position> <gml:Point srsName="EPSG:23031">' 
+										+ '<gml:pos>' + posX + ' ' + posY
+										+ '</gml:pos></gml:Point></Position></ReverseGeocodeRequest>'
+										+ '</Request></XLS>';
+						
+						var store_rg = new Ext.data.Store({
+							proxy : new Ext.data.HttpProxy({
+								url: 'proxy.do?url=http://sigescat.pise.interior.intranet/openls',
+								method: 'POST',
+								xmlData: data
+							}),
+							fields : [
+							   {name: "lon", type: "number"},
+							   {name: "lat", type: "number"},
+							   {name: "place", type: "text"},
+							   {name: "typePlace", type: "text"},
+							   "text"
+							],
+							listeners:{
+								load: function(store, records, options) {
+									var json = this.getJsonFromRecords(records);
+									data_store.loadData(json);
+								},
+								scope: this
+							},
+							reader: new SiceCAT.data.OpenLS_XLSReverseGeocodeReader()
+						});
+						store_rg.load();
+						
+						return grid;
+					},
+					
+					/**
+					 * Method: getJsonFromRecords
+					 * 
+					 * Params:
+					 **/
+					getJsonFromRecords: function(records){
+						var json = [];
+						for(r in records){
+							var data = records[r].data;
+							for(d in data){
+								json.push([d, data[d]]);
+							}
+						}
+						return json;
 					}
 				});
