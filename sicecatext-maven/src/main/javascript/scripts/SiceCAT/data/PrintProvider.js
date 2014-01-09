@@ -483,13 +483,32 @@ SiceCAT.data.PrintProvider = Ext.extend(Ext.util.Observable, {
             this.download(url);
         } else {
             Ext.Ajax.request({
-                url: this.capabilities.createURL + ".do",
+                url: this.capabilities.createURL,
                 timeout: this.timeout,
                 jsonData: jsonData,
                 headers: {"Content-Type": "application/json; charset=" + this.encoding},
                 success: function(response) {
                     var url = Ext.decode(response.responseText).getURL;
-                    this.download(url);
+                    var url_complete = "";
+                    if(url.indexOf("Visor/") != -1){
+                    	url_complete = this.getAbsoluteUrl(url.split("Visor/")[1]);
+                    }
+                    var indexDo = url_complete.indexOf(".do");
+                	var base_url = "";
+                	var idFile = "";
+                	var array_url = null;
+                	var url_req = "";
+                	if(indexDo != -1){
+                		// Get the url first part
+                		base_url = url_complete.substr(0, indexDo+3);
+                		array_url = url_complete.split("/");
+                		idFile = array_url[array_url.length-1];
+                		if(idFile.indexOf(".printout") != -1){
+                			idFile = idFile.replace(".printout", "");
+                		}
+                		url_req = base_url + "?id=" + idFile; 
+                	}
+                    this.downloadFile(url_req, {}, null);
                 },
                 failure: function(response) {
                     this.fireEvent("printexception", this, response);
@@ -499,12 +518,60 @@ SiceCAT.data.PrintProvider = Ext.extend(Ext.util.Observable, {
             });
         }
     },
+    downloadFile: function(url, params, sourceForm) {
+    	var body = Ext.getBody();
+    	body.createChild({
+    		tag: 'iframe',
+    		cls: 'x-hidden',
+    		id: 'app-upload-frame',
+    		name: 'uploadframe'
+    	});
+    	
+    	var downloadForm;
+    	if (typeof(sourceForm) == 'undefined' || sourceForm == null) {
+    		downloadForm = body.createChild({
+    			tag: 'form',
+    			cls: 'x-hidden',
+    			id: 'app-upload-form'
+    		});
+    	} else {
+    		downloadForm = sourceForm;
+    	}
+
+    	Ext.Ajax.request({
+    		url: url || '.',
+    		params: params || {},
+    		form: downloadForm,
+    		isUpload: true,
+    		scope: this
+    	});
+    },
     
     /** private: method[download]
      *  :param url: ``String``
      */
     download: function(url) {
-        if (this.fireEvent("beforedownload", this, url) !== false) {
+    	var indexDo = url.indexOf(".do");
+    	var base_url = "";
+    	var idFile = "";
+    	var array_url = null;
+    	if(indexDo != -1){
+    		// Get the url first part
+    		base_url = url.substr(0, indexDo+3);
+    		array_url = url.split("/");
+    		idFile = array_url[array_url.length-1];
+    		if(idFile.indexOf(".printout") != -1){
+    			idFile = idFile.replace(".printout", "");
+    		}
+    	}
+    	Ext.Ajax.request({
+    		url: base_url,
+    		isUpload: true,
+    		params: {
+    			id: idFile
+    		}
+    	});
+        /*if (this.fireEvent("beforedownload", this, url) !== false) {
             if (Ext.isOpera) {
                 // Make sure that Opera don't replace the content tab with
                 // the pdf
@@ -513,7 +580,7 @@ SiceCAT.data.PrintProvider = Ext.extend(Ext.util.Observable, {
                 // This avoids popup blockers for all other browsers
                 window.location.href = url;                        
             } 
-        }
+        }*/
         this.fireEvent("print", this, url);
     },
     
