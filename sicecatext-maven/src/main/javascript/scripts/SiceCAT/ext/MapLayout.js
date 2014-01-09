@@ -1470,6 +1470,15 @@ SiceCAT.MapLayout = Ext
 																} ]
 													});
 											error.show();
+										},
+										"loadcapabilities": function() {
+											if(type == "PDF"){
+												this.capabilities.printURL = this.getAbsoluteUrl("PDF.do/print.pdf.do");
+												this.capabilities.createURL = this.getAbsoluteUrl("PDF.do/create.json.do");
+											}else if(type == "PNG"){
+												this.capabilities.printURL = this.getAbsoluteUrl("PNG.do/print.pdf.do");
+												this.capabilities.createURL = this.getAbsoluteUrl("PNG.do/create.json.do");
+											}
 										}
 									}
 								});
