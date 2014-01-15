@@ -669,7 +669,15 @@ GeoExt.Lang
 						searcherTitleText : "Finder",
 						queryText : "Ask",
 						errorWFSText: "Error ocurred in WFS. <a href='#' id='error_msg_wfs_detail'>Technical information</a>",
-						errorWFSDetailsTitleText: "Details"
+						errorWFSDetailsTitleText: "Details",
+						titleAddressPanel: "Addresses - {0}",
+						titleWayPanel: "KP Ways - {0}",
+						titleGeneralPanel: "General - {0}",
+						titleWarningPanel: "Location error",
+						msgWarningPanel: "The location wasn't returned correctly by the server",
+						titleResultLayer: "Search results",
+						msgErrorServer: "Server error",
+						msgResults: "results"
 					},
 
 					"OpenLayers.Control.SeleccionPuntoRadio.prototype" : {

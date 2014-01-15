@@ -890,3 +890,26 @@ button.x-btn-text.CreateFolder, .CreateFolder{
 	background: url("../../../images/ext/resources/images/sicecat/tree/folder.gif") no-repeat;
 	min-width: 24px;
 }
+
+/* Paneles del buscador */
+#wayPanel .ext-el-mask {
+	background-color: #EEEEEE;
+	opacity: 0;
+}
+#wayPanel.x-masked .x-tool-toggle {
+	display: none;
+}
+#addressPanel .ext-el-mask {
+	background-color: #EEEEEE;
+	opacity: 0;
+}
+#addressPanel.x-masked .x-tool-toggle {
+	display: none;
+}
+#generalPanel .ext-el-mask {
+	background-color: #EEEEEE;
+	opacity: 0;
+}
+#generalPanel.x-masked .x-tool-toggle {
+display: none;
+}

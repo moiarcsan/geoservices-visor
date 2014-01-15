@@ -44,9 +44,9 @@
  * 
  * Author:
  * 
- *  Mar�a Arias de Reyna Dom�nguez(marias@emergya.com)
+ *  María Arias de Reyna Domínguez(marias@emergya.com)
  *  
- *  Edited by: Mois�s Arcos Santiago <marcos@emergya.com>
+ *  Edited by: Moisés Arcos Santiago <marcos@emergya.com>
  */
 OpenLayers.Control.ToolTipControl = OpenLayers
 		.Class(
@@ -405,7 +405,7 @@ OpenLayers.Control.ToolTipControl = OpenLayers
 					getJsonFromFeature: function(feature){
 						var feature_data = [];
 						for(f in feature.data){
-							if(!!feature.data[f].value){
+							if(feature.data[f] != null && !!feature.data[f].value){
 								feature_data.push([f, feature.data[f].value]);
 							}else{
 								feature_data.push([f, feature.data[f]]);

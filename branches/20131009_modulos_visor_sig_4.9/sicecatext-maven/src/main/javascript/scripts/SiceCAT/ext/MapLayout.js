@@ -265,6 +265,14 @@ SiceCAT.MapLayout = Ext
 					searcherTitleText : "Finder",
 					searchButtonWFSButtonText : "WFS",
 					searchButtonWFSButtonTooltipText : "Search WFS layers configured",
+					titleAddressPanel: "Address - {0}",
+					titleWayPanel: "Vía PK - {0}",
+					titleGeneralPanel: "General - {0}",
+					titleWarningPanel: "Error de localización",
+					msgWarningPanel: "La localización no se ha devuelto correctamente por el servidor",
+					titleResultLayer: "Resultados de la consulta",
+					msgErrorServer: "Error de servidor",
+					msgResults: "results",
 					
 					titlesForLayer : {
 						"p:pap" : "Centres de l'administraci\u00f3 p\u00fablica",
@@ -1007,7 +1015,7 @@ SiceCAT.MapLayout = Ext
 						var openlsUrl = OpenLayers.ProxyHost + Sicecat.defaultWMSServer.replace("ows/wms?", "openls");
 						
 						// Combobox buscador
-						this.toolbarNav.push(new SiceCAT.widgets.MultiSearchCombo({
+						/*this.toolbarNav.push(new SiceCAT.widgets.MultiSearchCombo({
 							map: this.map,
 							openlsUrl: openlsUrl,
 							enableKeyEvents: true,
@@ -1023,6 +1031,492 @@ SiceCAT.MapLayout = Ext
 						            }
 						        }
 							}
+						}));*/
+						
+						var finish_load = 0;
+						var id_field = null;
+						var context_this = this;
+						var num_results = [];
+						var searcher_mask = new Ext.LoadMask(Ext.getBody());
+						var data = "<XLS xsi:schemaLocation=\"http://www.opengis.net/xls ...\" " +
+						"version=\"1.2.0\" xmlns=\"http://www.opengis.net/xls\" " +
+						"xmlns:gml=\"http://www.opengis.net/gml\" " +
+						"xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"> " +
+						"<Request methodName=\"Geocode\" requestID=\"123\" version=\"1.2.0\" maximumResponses=\"10\"> " +
+						"<GeocodeRequest> " +
+						"<Address countryCode=\"ES\"> " +
+						"<FreeFormAddress>{0}</FreeFormAddress>" +
+						"</Address>" +
+						"</GeocodeRequest>" +
+						"</Request>" +
+						"</XLS>";
+						var titlesForLayer = {
+						    	"pap":"Centres de l'administració pública","pas":"Centres d'assistència social",
+						    	"pb":"Centres de negoci","pe":"Centres educatius","pl":"Centres de lleure",
+						    	"pm":"Centres de transport i mobilitat","psa":"Centres de salut",
+						    	"pse":"Centres de seguretat","t":"Toponímia (nomenclàtor)",
+						    	"ra":"Anotacions poligonals","rl":"Anotacions lineals","rp":"Anotacions puntuals",
+						    	"a":"AVAS (Base dels avions de vigilància i atac).","ab":"Àrees Bàsiques policials.",
+						    	"ae":"Activitats extractives.","ap":"Inuncat: Punts d'actuació prioritària.",
+						    	"aps":"Punts d'actuació prioritària","b":"Guaites.","c":"Heliports.",
+						    	"c112":"Centres del servei 112.","ca":"Xarxa de camins","cd":"Inuncat: Cons de dejecció",
+						    	"co":"Alçada edificis","d":"Hidrants","db":"Districtes de Barcelona.","e":"Punts d'aigua.",
+						    	"ef":"Estacions de ferrocarril.","ei":"Establiments industrials (SIPAE)",
+						    	"en":"Espais Naturals de Protecció Especial.","f":"Parcs de bombers",
+						    	"fo":"Àrees forestals públiques","g":"Xarxa RESCAT (Torres de comunicació)",
+						    	"h":"Capitals de municipi","i":"Límits municipals","ir":"Zones inundables presa Rialb",
+						    	"k":"Límits comarcals.","lf":"Línies de ferrocarril.","np":"Nuclis de població",
+						    	"nv":"Nodes del graf","p":"Límits provincials","pi":"Inuncat_Zones potencialment inundables.",
+						    	"plo":"Municipis amb Policia Local.","pn":"Risc incendi forestal. Perill.",
+						    	"po":"Última posició dels efectius RESCAT","rpo":"Mapa de les Regions Policials.",
+						    	"s1":"Malla SOC 1km","s5":"Malla SOC de 5 km","sc":"Inuncat: Sirenes preses cobertura.",
+						    	"soc":"Malla SOC 1 km","sp":"Situació de la sirena de les preses.","sv":"Segments del graf",
+						    	"svm":"Segments del graf","tf":"Túnels de ferrocarril","tt":"Inuncat: Temps de trànsit",
+						    	"vu":"Infocat: Mapa de vulnerabilitat d'incendis","x":"Eixos carretera (DGC)",
+						    	"y":"Punts quilomètrics (DGC)","z":"Tallafocs","z1":"Inuncat. Zones inundables T50",
+						    	"z3":"Zones inundables T500.","zt":"Inuncat: Zones inundables T100"
+						    };
+						var entitatsForNamespace = {
+					    	"s":["a","ab","ae","ap","aps","b","c","c112","ca","cd","co",
+					    	     "d","db","e","ef","ei","en","f","fo","g","h","i","ir",
+					    	     "k","lf","np","nv","p","pi","plo","pn","po","rpo","s1",
+					    	     "s5","sc","soc","sp","sv","svm","tf","tt","vu","x","y",
+					    	     "z","z1","z3","zt"],
+					    	"p":["pap","pas","pb","pe","pl","pm","psa","pse","t"],
+					    	"r":["ra","rl","rp"]
+					    };
+						
+						var getNamespace = function(entitat){
+					    	for(var index in entitatsForNamespace){
+					    		for(var i = 0; i <entitatsForNamespace[index].length; i++){
+					    			if(entitatsForNamespace[index][i] == entitat){
+					    				return index;
+					    			}
+					    		}
+					    	}
+					    };
+					    
+						var searcher_win_new = new Ext.Window({
+					        height: 180,
+					        width: 400,
+					        modal: false,
+					        plain: true,
+					        frame: false,
+					        shadow: false,
+					        border: false,
+					        layout: 'accordion',
+					        layoutConfig: {
+					            // layout-specific configs go here
+					            titleCollapse: true,
+					            animate: true,
+					            collapseFirst: true
+					        },
+					        resizable: false,
+					        draggable: false,
+					        closable: false,
+					        items: [{
+					        	id: 'addressPanel',
+					        	cls: 'addressPanelStyle',
+					        	title: this.titleAddressPanel,
+					        	autoScroll: true,
+					        	width: '100%'
+					        },{
+					        	id: 'wayPanel',
+					        	cls: 'wayPanelStyle',
+					        	title: this.titleWayPanel,
+					        	autoScroll: true,
+					        	width: '100%'
+					        },{
+					        	id: 'generalPanel',
+					        	cls: 'generalPanelStyle',
+					        	title: this.titleGeneralPanel,
+					        	autoScroll: true,
+					        	width: '100%'
+					        }]
+						});
+						
+						Ext.getBody().on('click', function(e, t){
+						    var el = searcher_win_new.getEl();
+						    if (!!el && !(el.dom === t || el.contains(t))) {
+						    	searcher_win_new.hide();
+						    }
+						});
+						
+						// Method to get the data formated
+						var getJsonFromFeature = function(feature, type){
+							var json = [];
+							var data = null;
+							var json_data = null;
+							var place = null;
+							var nom = null;
+							var municipi = null;
+							for(var i=0; i<feature.length; i++){
+								var arrayPlace = [];
+								data = feature[i].data;
+								json_data = feature[i].json;
+								// Diferenciamos entre los tipos de resultados
+								if(type == 0){
+									// Direcciones
+									place = data.place;
+									if(place != null && place.indexOf(",") != -1){
+										arrayPlace = place.split(",");
+										nom = arrayPlace[0];
+										municipi = arrayPlace[1];
+									}
+									if(nom == null && data.text != null){
+										nom = data.text;
+									}
+									if(nom == null && data.typePlace != null){
+										nom = data.typePlace;
+									}
+									var cadena = "";
+									if(nom != null){
+										cadena+=nom;
+									}
+									if(municipi != null && nom != null){
+										cadena+="<br/>" + municipi;
+									}else if(municipi != null && nom == null){
+										cadena+=municipi;
+									}
+									json.push([cadena, data.lon, data.lat, null, null, data]);
+								}else if(type == 1){
+									// Vía PK
+									nom = json_data.nom;
+									valor = json_data.valor;
+									entitat = json_data.entitat;
+									objectid = json_data.id;
+									var layer = titlesForLayer[entitat];
+									var cadena = "";
+									if(nom != null){
+										cadena+=nom;
+										if(valor != null){
+											cadena+=", km " + valor;
+										}
+									}
+									if(layer != null && (nom != null || valor != null)){
+										cadena+="<br/>" + layer;
+									}else{
+										cadena+=layer;
+									}
+									json.push([cadena, data.utmX, data.utmY, entitat, objectid, null]);
+								}else if(type == 2){
+									// General
+									nom = json_data.nom;
+									municipi = json_data.municipi;
+									entitat = json_data.entitat;
+									var layer = titlesForLayer[entitat];
+									var cadena = "";
+									if(nom != null){
+										cadena+=nom;
+									}
+									if(layer != null){
+										cadena+="<br/>" + layer;
+									}
+									if(municipi != null && layer != null){
+										cadena+=", " + municipi;
+									}else if(municipi != null && layer == null){
+										cadena +="<br/>" + municipi;
+									}
+									json.push([cadena, data.utmX, data.utmY, null, null, data]);
+								}
+							}
+							return json;
+						};
+						// Method to get the grid address panel
+						var getGridPanel = function(feature, type){
+							var colModel = new Ext.grid.ColumnModel([{
+								dataIndex : 'text',
+								width: 400
+							}]);
+							var data_store = new Ext.data.SimpleStore({
+						        fields: [{
+						        	name: 'text'
+						        },{
+						        	lon: 'text'
+						        },{
+						        	lat: 'text'
+						        },{
+						        	entitat: 'text'
+						        },{
+						        	objectid: 'text'
+						        }]
+							});
+							
+							var json = getJsonFromFeature(feature, type);
+							data_store.loadData(json);
+							
+							var gridView = new Ext.grid.GridView({
+								forceFit : true,
+							});
+							
+							var grid = new Ext.grid.GridPanel({
+								autoHeight : true,
+								hideHeaders: true,
+								border: false,
+								store : data_store,
+								colModel : colModel,
+								view : gridView,
+								listeners: {
+									'cellclick': function(grid, rowIndex, columnIndex, e){
+										var record = grid.getStore().getAt(rowIndex);
+										var text = record.json[0];
+										if(text.indexOf("<br/>") != -1){
+											text = text.replace("<br/>", ", ");
+										}
+										var lon = record.json[1];
+										var lat = record.json[2];
+										var entitat = record.json[3];
+										var objectid = record.json[4];
+										var data = record.json[5];
+										var searchbar = Ext.getCmp('searchbar');
+										searchbar.setValue(text);
+										// Create the result layer
+										var layer = new OpenLayers.Layer.Vector(text, {
+											strategies : [new OpenLayers.Strategy.Save()],
+											styleMap : Sicecat.createStyleMap()
+										});
+										// Add layer to map
+										map.addLayer(layer);
+										var position = new OpenLayers.LonLat(lon, lat);
+										if(lon != null && lat != null && lon != "" && lat != ""){
+											position.transform(
+													new OpenLayers.Projection("EPSG:23031"),
+													map.getProjectionObject()
+											);
+											var feature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(position.lon, position.lat));
+											if(data != null ){
+												feature.data = data;
+											}
+											layer.removeAllFeatures();
+											layer.addFeatures(feature);
+											// zoom in the location
+											map.setCenter(position, 8);
+										}else if(entitat != null){
+										    var panel = new SiceCAT.ZoomToResultPanel({
+										    	closest: false,
+										    	sicecatInstance: Sicecat,
+										    	map: Sicecat.map
+										    });
+										    panel.getZoomToResult(getNamespace(entitat) + ":" + entitat, "OBJECTID", objectid, text);
+										}else{
+											Ext.MessageBox.show({
+												title : context_this.titleWarningPanel,
+												msg : context_this.msgWarningPanel,
+												width : 300,
+												icon : Ext.Msg.INFO,
+												buttons : Ext.Msg.OK
+											});
+										}
+										// close the window
+										searcher_win_new.hide();
+									}
+								}
+							});
+							
+							return grid;
+						};
+						
+						var finishLoad = function(){
+							searcher_win_new.show();
+				            searcher_win_new.alignTo(id_field, "tl-bl");
+				            var layout = null;
+				            for(var i=0; i<num_results.length; i++){
+				            	if(num_results[i].records != 0){
+				            		layout = searcher_win_new.getLayout();
+				            		layout.setActiveItem(num_results[i].panel);
+				            		break;
+				            	}else{
+				            		if(!Ext.getCmp(num_results[i].panel).collapsed){
+				            			Ext.getCmp(num_results[i].panel).collapse();
+				            		}
+				            	}
+				            }
+				            num_results = [];
+				            searcher_mask.hide();
+						};
+						
+						var loadOpenLS = function(store, records, options){
+							// Set the title with the records size
+							var titletoset = "";
+							var exception = false;
+							if(options != null && options.type != null && options.type == "exception"){
+								exception = true;
+								titletoset = String.format(context_this.titleAddressPanel, context_this.msgErrorServer);
+							}else{
+								titletoset = String.format(context_this.titleAddressPanel, records.length + " " + context_this.msgResults);
+							}
+							var addressPanel = Ext.getCmp('addressPanel');
+							addressPanel.setTitle(titletoset);
+							if(records.length == 0 || exception){
+								addressPanel.setDisabled(true);
+								num_results[0] = {panel: 'addressPanel', records: 0};
+							}else{
+								addressPanel.setDisabled(false);
+								num_results[0] = {panel: 'addressPanel', records: records.length};
+							}
+							// Set the content panel with the grid result
+							var gridAddressPanel = getGridPanel(records, 0);
+							addressPanel.removeAll();
+							addressPanel.add(gridAddressPanel);
+							finish_load--;
+							if(finish_load == 0){
+								finishLoad();
+							}
+						};
+						
+						var submitOpenLS = function(query){
+							var openls_data = String.format(data, query);
+							var store_rg = new Ext.data.Store({
+								proxy : new Ext.data.HttpProxy({
+									url: 'proxy.do?url=http://sigescat.pise.interior.intranet/openls',
+									method: 'POST',
+									xmlData: openls_data
+								}),
+								fields : [
+								    {name: "lon", type: "number"},
+								    {name: "lat", type: "number"},
+								    "text"
+								],
+								listeners:{
+									load: loadOpenLS,
+									exception: function(e, records, options){
+										loadOpenLS(null, [], {type: 'exception'});
+									},
+									scope: this
+								},
+								reader: new SiceCAT.data.OpenLS_XLSReader()
+							});
+							store_rg.load();
+							searcher_mask.show();
+						};
+						
+						var roadResponseSize = null;
+						var solrResponseSize = null;
+						var loadCercaGeneral = function(store, records, options){
+							// Set the Via PK title panel
+							var titletosetway = "";
+							var exceptionWay = false;
+							if(options != null && options.type != null && options.type == "exception"){
+								exceptionWay = true;
+								titletosetway = String.format(context_this.titleWayPanel, context_this.msgErrorServer);
+							}else{
+								titletosetway = String.format(context_this.titleWayPanel, roadResponseSize + " " + context_this.msgResults);
+							}
+							var wayPanel = Ext.getCmp('wayPanel');
+							wayPanel.setTitle(titletosetway);
+							if(roadResponseSize == 0 || exceptionWay){
+								wayPanel.setDisabled(true);
+								num_results[1] = {panel: 'wayPanel', records: 0};
+							}else{
+								wayPanel.setDisabled(false);
+								num_results[1] = {panel: 'wayPanel', records: roadResponseSize};
+							}
+							// Set the content panel with the grid result
+							var featureWay = records.slice(0, roadResponseSize);
+							var gridWayPanel = getGridPanel(featureWay, 1);
+							wayPanel.removeAll();
+							wayPanel.add(gridWayPanel);
+							// Set the General title panel
+							var titletosetgeneral = "";
+							var exceptionGeneral = false;
+							if(options != null && options.type != null && options.type == "exception"){
+								exceptionGeneral = true;
+								titletosetgeneral = String.format(context_this.titleGeneralPanel, context_this.msgErrorServer);
+							}else{
+								titletosetgeneral = String.format(context_this.titleGeneralPanel, solrResponseSize + " " + context_this.msgResults);
+							}
+							var generalPanel = Ext.getCmp('generalPanel');
+							generalPanel.setTitle(titletosetgeneral);
+							if(solrResponseSize == 0 || exceptionGeneral){
+								generalPanel.setDisabled(true);
+								num_results[2] = {panel: 'generalPanel', records: 0};
+							}else{
+								generalPanel.setDisabled(false);
+								num_results[2] = {panel: 'generalPanel', records: solrResponseSize};
+							}
+							// Set the content panel with the grid result
+							var featureGeneral = records.slice(roadResponseSize, solrResponseSize);
+							var gridGeneralPanel = getGridPanel(featureGeneral, 2);
+							generalPanel.removeAll();
+							generalPanel.add(gridGeneralPanel);
+							finish_load--;
+							if(finish_load == 0){
+								finishLoad();
+							}
+						};
+						
+						var submitCercaGeneral = function(query){
+							var url_cerca = "rest/cercaGeneral/" + encodeURIComponent(query);
+							var store_cg = new Ext.data.Store({
+								proxy : new Ext.data.HttpProxy({
+									url: url_cerca,
+									method: 'POST'
+								}),
+								fields : [
+								    {name: "lon", type: "number"},
+								    {name: "lat", type: "number"},
+								    "text"
+								],
+								listeners:{
+									load: loadCercaGeneral,
+									exception: function(e, records, options){
+										loadCercaGeneral(null, [], {type: 'exception'});
+									},
+									scope: this
+								},
+								reader: new Ext.data.JsonReader({
+						            idProperty: 'id',
+						            root: function(o){
+						            	var out = [];
+						            	roadResponseSize = o.roadResponse.lst.length;
+						            	solrResponseSize = o.solrResponse.lst.length;
+						            	return out.concat(o.roadResponse.lst, o.solrResponse.lst);
+						            },
+						            totalProperty: "totalHits",
+						            fields: [
+						                {name: 'id', mapping: 'id'},
+						                {name: 'entitat', mapping: 'entitat'},
+						                {name: 'nom', mapping: 'nom'},
+						                {name: 'municipi', mapping: 'municipi', 
+						                	convert: function(v, record){
+						        		        if(record.municipi == null ){
+						        		        	return "";
+						        		        }
+						        		    }
+						                },
+						                {name: 'score', mapping: 'score',
+						                	convert: function(v, record){
+						        		        if(record.score == null ){
+						        		        	return "";
+						        		        }
+						        		    }
+						                },
+						                {name: 'utmX', mapping: 'utmX'},
+						                {name: 'utmY', mapping: 'utmY'}
+						            ]
+						        })
+							});
+							store_cg.load();
+						};
+						
+						var submitOnEnter = function (field, event) {
+					        if (event.getKey() == event.ENTER) {
+					            var value = field.getValue();
+					            submitOpenLS(value);
+					            finish_load++;
+					            submitCercaGeneral(value);
+					            finish_load++;
+					            id_field = field.getId();
+					        }
+					    };
+						
+						this.toolbarNav.push(new Ext.form.TextField({
+							id: 'searchbar',
+							emptyText: "Search...",
+							width: 240,
+							listeners: {
+				                specialkey: submitOnEnter
+				            }
 						}));
 						
 						// Search WFS Action
