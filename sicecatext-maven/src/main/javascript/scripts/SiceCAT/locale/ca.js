@@ -711,6 +711,14 @@ GeoExt.Lang
 						errorWFSText: "El servei WFS de SIGESCAT no est\u00E0 disponible. <a href='#' id='error_msg_wfs_detail'>Informaci\u00F3 t\u00e8cnica</a>",
 						errorWFSDetailsTitleText: "Detalls",
 						searcherTitleText : "Cercador",
+						titleAddressPanel: "Adreces - {0}",
+						titleWayPanel: "Via PK - {0}",
+						titleGeneralPanel: "General - {0}",
+						titleWarningPanel: "Error de localització",
+						msgWarningPanel: "La localització no s'ha tornat correctament pel servidor",
+						titleResultLayer: "Resultats de la consulta",
+						msgErrorServer: "Error de servidor",
+						msgResults: "resultats"
 					},
 
 					"OpenLayers.Control.SeleccionPuntoRadio.prototype" : {
