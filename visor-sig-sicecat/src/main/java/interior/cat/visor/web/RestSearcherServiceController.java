@@ -45,7 +45,7 @@ import com.sitep.sigem.server.services.Response;
 import com.sitep.sigem.server.services.RoadResponse;
 import com.sitep.sigem.server.services.SolrResponse;
 
-import interior.cat.visor.conectors.openls.service.OpenLSService;
+import interior.cat.visor.openls.service.OpenLSService;
 import interior.cat.visor.conectors.searcher.service.SearcherService;
 import interior.cat.visor.conectors.searcher.utils.ShowResponses;
 
@@ -240,6 +240,32 @@ public class RestSearcherServiceController {
 			LOG.error(e);
 		}
 
+		return response;
+	}
+	
+	/**
+	 * Rest query for cercaGeneral method
+	 * 
+	 * @param query
+	 * 
+	 * @return Response
+	 */
+	@RequestMapping(value = "/cercaGeneral/{query}")
+	public @ResponseBody
+	Response cercaGeneral(@PathVariable("query") String query) {
+		LOG.trace("Entro en cercaGeneral");
+		Response response = null;
+		try {
+			response = searcherService.cercaGeneral(query.equals(NULL_VALUE) ? "" : query, DEFAULT_START, DEFAULT_END);
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+
+		if (LOG.isTraceEnabled()) {
+			interior.cat.visor.conectors.searcher.utils.ShowResponses.muestraInfo(
+					response, true, "cercaGeneral", LOG);
+		}
+		
 		return response;
 	}
 	
