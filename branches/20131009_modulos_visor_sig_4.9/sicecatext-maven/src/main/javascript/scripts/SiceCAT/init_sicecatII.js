@@ -615,6 +615,18 @@ function init_header() {
 		html : html,
 		region : 'north'
 	};
+	
+	// Remove all temporal elements before close 
+	window.onbeforeunload = function(event){
+		// Enviamos una petición para eliminar los elementos temporales
+		Ext.Ajax.request({
+			url: 'rest/persistenceGeo/userContext/removeAll',
+			success: function(response){
+				// Cerramos la ventana
+				window.close();
+			}
+		});
+	};
 }
 
 function init_footer() {
