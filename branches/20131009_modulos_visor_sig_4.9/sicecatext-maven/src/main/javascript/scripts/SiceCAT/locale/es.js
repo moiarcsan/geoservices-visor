@@ -689,7 +689,7 @@ GeoExt.Lang
 						errorWFSDetailsTitleText: "Detalles",
 						searcherTitleText : "Buscador",
 						titleAddressPanel: "Direcciones - {0}",
-						titleWayPanel: "Vía PK - {0}",
+						titleWayPanel: "V\u00cda PK - {0}",
 						titleGeneralPanel: "General - {0}",
 						titleWarningPanel: "Error de localización",
 						msgWarningPanel: "La localización no se ha devuelto correctamente por el servidor",

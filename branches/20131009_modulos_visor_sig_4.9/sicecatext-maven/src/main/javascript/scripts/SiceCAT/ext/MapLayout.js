@@ -1287,11 +1287,13 @@ SiceCAT.MapLayout = Ext
 											if(data != null ){
 												feature.data = data;
 											}
+											feature.style = integrator.cloneObject(Sicecat.styles['resultatCerca']);
 											layer.removeAllFeatures();
 											layer.addFeatures(feature);
 											// zoom in the location
 											map.setCenter(position, 8);
 										}else if(entitat != null){
+											Sicecat.search_tool_origin = true;
 										    var panel = new SiceCAT.ZoomToResultPanel({
 										    	closest: false,
 										    	sicecatInstance: Sicecat,

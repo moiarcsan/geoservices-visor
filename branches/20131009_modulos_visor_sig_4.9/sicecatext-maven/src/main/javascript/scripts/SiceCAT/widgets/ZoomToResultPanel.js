@@ -361,7 +361,11 @@ SiceCAT.ZoomToResultPanel = Ext.extend(SiceCAT.QueryPanel, {
 		                var features = [];
 		                var founds = 0;
 		                store.each(function(record) {
-		                    features.push(record.get("feature"));
+		                	var feat = record.get("feature");
+		                	if(Sicecat.search_tool_origin){
+		                		feat.style = integrator.cloneObject(Sicecat.styles['resultatCerca']);
+		                	}
+		                    features.push(feat);
 		                    founds++;
 		                });
 		                
@@ -636,6 +640,12 @@ SiceCAT.ZoomToResultPanel = Ext.extend(SiceCAT.QueryPanel, {
             maxFeatures: this.maxFeatures,
             autoLoad: false,
             autoSave: false,
+            proxy:{
+                url: layer.get("url"),
+                protocol:{
+                    outputFormat: "GML2"
+                }
+            },
             listeners: {
                 load: function(store, records, options) {
                     this.fireEvent("storeload", this, store, records, options);
