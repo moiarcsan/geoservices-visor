@@ -256,7 +256,7 @@
             graphicOpacity:1,
             fillColor: '#27F543',
             strokeColor: '#27F543',
-            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_no_activa.png"
+            externalGraphic: "https://dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_sirena_noactiva.png"
       }
    },
    {

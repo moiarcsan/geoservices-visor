@@ -29,6 +29,28 @@
             }
    },
    {
+      'name':'emergency_d',
+      'options': {
+            graphicWidth: 20, 
+            graphicHeight: 34,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://integracio.dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_incidente_d.png"
+            }
+   },
+   {
+      'name':'resultatCerca',
+      'options': {
+            graphicWidth: 30,
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://integracio.dinterior.gencat.intranet/sicecat2/images/gisIcons/pin_red.png"
+            }
+   },
+   {
       'name':'mitjatrobat',
       'options': {
             graphicWidth: 30, 
