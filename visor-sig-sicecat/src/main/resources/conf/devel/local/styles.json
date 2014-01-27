@@ -25,8 +25,19 @@
             graphicOpacity:1,
             fillColor: '#27F543',
             strokeColor: '#27F543',
-            externalGraphic: "http://localhost:8080/Visor/images/gisIcons/icono_incidente.png"
+            externalGraphic: "http://localhost:8080/Visor/images/SiceCAT/icono_incidente.png"
             }
+   },
+   {
+   		'name':'emergency_d',
+        'options': {
+        	graphicWidth: 20,
+            graphicHeight: 34,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "http://localhost:8080/Visor/images/SiceCAT/star_silver.png"
+      	}
    },
    {
       'name':'mitjatrobat',
@@ -434,5 +445,16 @@
             strokeColor: '#27F543',
             externalGraphic: "http://localhost:8080/Visor/images/gisIcons/icono_sirena_noactiva_flecha_sureste.png"
       }
+   },
+   {
+      'name':'resultatCerca',
+      'options': {
+            graphicWidth: 30,
+            graphicHeight: 30,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "http://localhost:8080/Visor/images/gisIcons/pin_red.png"
+            }
    }
 ]
