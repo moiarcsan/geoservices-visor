@@ -345,7 +345,7 @@ SiceCAT = Ext
 												this_
 														.loadMapConfiguration(function() {
 															this_
-																	.overrideConfiguration(this_.jsonMapConfiguration["OpenLayers.ProxyHost"]);
+																	.overrideConfiguration(this_.jsonMapConfiguration["openLayersProxyHost"]);
 															this_.initGPCL();
 														});
 											});

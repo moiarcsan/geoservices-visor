@@ -1370,7 +1370,7 @@ SiceCAT.MapLayout = Ext
 							var openls_data = String.format(data, query);
 							var store_rg = new Ext.data.Store({
 								proxy : new Ext.data.HttpProxy({
-									url: 'proxy.do?url=http://sigescat.pise.interior.intranet/openls',
+									url: OpenLayers.ProxyHost + 'http://sigescat.pise.interior.intranet/openls',
 									method: 'POST',
 									xmlData: openls_data
 								}),

@@ -73,7 +73,7 @@ OpenLayers.Control.ZoomToMunicipioComarca = OpenLayers.Class(OpenLayers.Control,
     /** api: config[wfsUrl]
      *  ``String`` WFS service url.
      */
-    wfsUrl: 'proxy.do?url=http://sigescat.pise.interior.intranet/ows/wfs',
+    wfsUrl: 'http://sigescat.pise.interior.intranet/ows/wfs',
     
     /** api: config[queryUrlParameters]
      *  ``String`` Parameters to make a query.
@@ -277,7 +277,7 @@ OpenLayers.Control.ZoomToMunicipioComarca = OpenLayers.Class(OpenLayers.Control,
      * Obtain query url to make a query for a queryType
      */
     getQueryUrl: function(queryType){
-        return this.wfsUrl + '?' + String.format(this.queryUrlParameters, queryType);
+        return OpenLayers.ProxyHost + this.wfsUrl + '?' + String.format(this.queryUrlParameters, queryType);
     },
     
     /**
