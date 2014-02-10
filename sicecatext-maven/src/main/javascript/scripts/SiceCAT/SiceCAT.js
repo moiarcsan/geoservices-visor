@@ -366,11 +366,16 @@ SiceCAT = Ext
 					 * Does override configuration of other libraries:
 					 */
 					overrideConfiguration : function(proxy) {
-						if (!!proxy) {
+						if(!proxy){
+							OpenLayers.ProxyHost = "";
+						}else{
+							OpenLayers.ProxyHost = proxy;
+						}
+						/*if (!!proxy) {
 							OpenLayers.ProxyHost = proxy;
 						} else {
 							OpenLayers.ProxyHost = "proxy.do?url=";
-						}
+						}*/
 					},
 
 					initGPCL : function() {
@@ -627,19 +632,26 @@ SiceCAT = Ext
 					/*
 					 *  private: testLayerGetCapabilities
 					 */
-					testLayerGetMap: function (url, map, layerToLoad, continueLoading){
+testLayerGetMap: function (url, map, layerToLoad, continueLoading){
 						
 						var this_instance = this;
 						
-						var urlMap = url + "&LAYERS=" 
-									+ layerToLoad.properties.layers 
-										+ "&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&FORMAT=image%2Fpng&SRS=EPSG%3A23031&BBOX=302100,4547000,442100,4687000&WIDTH=400&HEIGHT=400"; 
-						
-						if(urlMap != null){
 							this.waiting++;
 				            Ext.Ajax.request({
-				                url:  OpenLayers.ProxyHost + urlMap,
+				                url:  OpenLayers.ProxyHost + url,
 								method: 'GET',
+								params: {
+									'LAYERS': layerToLoad.properties.layers,
+									'TRANSPARENT': 'true',
+									'SERVICE': 'WMS',
+									'VERSION' : '1.1.1',
+									'REQUEST': 'GetMap',
+									'FORMAT': 'image/png',
+									'SRS': 'EPSG:23031',
+									'BBOX': '302100,4547000,442100,4687000',
+									'WIDTH': '400',
+									'HEIGHT': '400'
+								},
 								success: function ( response ) { 
 									this_instance.waiting--;
 									if(response.responseText.indexOf("error") != -1){
@@ -656,20 +668,22 @@ SiceCAT = Ext
 									}
 								},
 								failure: function ( result, request) {
-									this_instance.waiting--;
-									this_instance.layerError(url, layerToLoad, map);
-									if(this_instance.waiting == 0){
-										if(this_instance.errors_text != ""){
-											this_instance.showErrorWindow(String.format(this_instance.errorLayersTitleText, this_instance.errors.length), 
-													this_instance.errorLayersBodyInfoText, this_instance.errors_text);
-										} 
-										if(!!continueLoading){
-											continueLoading();
+									//if(result.status != 0){
+										this_instance.waiting--;
+										this_instance.layerError(url, layerToLoad, map);
+										if(this_instance.waiting == 0){
+											if(this_instance.errors_text != ""){
+												this_instance.showErrorWindow(String.format(this_instance.errorLayersTitleText, this_instance.errors.length), 
+														this_instance.errorLayersBodyInfoText, this_instance.errors_text);
+											} 
+											if(!!continueLoading){
+												continueLoading();
+											}
 										}
-									}
+									//}
 								} 
 							});
-						}
+						
 					},
 					
 					/**
