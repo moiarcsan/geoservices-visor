@@ -219,16 +219,15 @@ SiceCAT.ZoomToResultPanel = Ext.extend(SiceCAT.QueryPanel, {
 	    	                title: this.sicecatInstance.jsonSearchServices[i]["title"],
 	    	                name: this.sicecatInstance.jsonSearchServices[i]["name"],
 	    	                namespace: this.sicecatInstance.jsonSearchServices[i]["namespace"],
-	    	                url: OpenLayers.ProxyHost + this.sicecatInstance.jsonSearchServices[i]["url"],
-	    	                schema: OpenLayers.ProxyHost + this.sicecatInstance.jsonSearchServices[i]["schema"],
+	    	                url: Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.sicecatInstance.jsonSearchServices[i]["url"]),
+	    	                schema: Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.sicecatInstance.jsonSearchServices[i]["schema"]),
 	    	                maxFeatures:this.sicecatInstance.jsonSearchServices[i]["maxFeatures"]
 	    	            };
 	    		}else if (this.sicecatInstance.jsonSearchServices[i]['type'] == "search_wfs_all"
 						&& !!this.sicecatInstance.jsonSearchServices[i]["featureTypes"]
 						&& !!this.sicecatInstance.jsonSearchServices[i]["featureTypes"].length
 						&& this.sicecatInstance.jsonSearchServices[i]["featureTypes"].length > 0) {
-					var url = OpenLayers.ProxyHost
-						+ this.sicecatInstance.jsonSearchServices[i]["url"];
+					var url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.sicecatInstance.jsonSearchServices[i]["url"]);
 					for(var k = 0; k < this.sicecatInstance.jsonSearchServices[i]["featureTypes"].length; k++){
 						//if(Sicecat.isLogEnable) console.log("Registrando "+ this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k] + " en el indice "+j);
 	    				indexes[this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k]] = j;
@@ -237,9 +236,8 @@ SiceCAT.ZoomToResultPanel = Ext.extend(SiceCAT.QueryPanel, {
 								name : this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k].split(":")[1],
 								namespace : this.sicecatInstance.jsonSearchServices[i]["namespace"],
 								url : url,
-								schema : OpenLayers.ProxyHost
-										+ this.sicecatInstance.jsonSearchServices[i]["schema_base"]
-										+ this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k],
+								schema : Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.sicecatInstance.jsonSearchServices[i]["schema_base"]
+										+ this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k]),
 								maxFeatures : this.sicecatInstance.jsonSearchServices[i]["maxFeatures"],
 								styleMap : Sicecat.createStyleMap()
 							
@@ -267,10 +265,8 @@ SiceCAT.ZoomToResultPanel = Ext.extend(SiceCAT.QueryPanel, {
 				title : featureType,
 				namespace : featureType.split(":")[0],
 				name : featureType.split(":")[1],
-				url : OpenLayers.ProxyHost + this.defaultUrl,
-				schema : OpenLayers.ProxyHost
-						+ this.defaultSchemabase
-						+ featureType,
+				url : Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.defaultUrl),
+				schema : Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.defaultSchemabase + featureType),
 				maxFeatures : this.defaultMaxFeatures
 			};
 
@@ -550,7 +546,7 @@ SiceCAT.ZoomToResultPanel = Ext.extend(SiceCAT.QueryPanel, {
      * Gets capabilites url
      */
     getCapabilitiesUrl: function(url){
-    	var capabilitiesUrl = OpenLayers.ProxyHost + url;
+    	var capabilitiesUrl = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, url);
     	var index = capabilitiesUrl.indexOf("request=getCapabilities")
     	var index2 = capabilitiesUrl.indexOf("?");
 	    var index3 = capabilitiesUrl.indexOf("&");

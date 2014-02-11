@@ -147,11 +147,12 @@ OpenLayers.Control.LayerInformation = OpenLayers
 						}
 						if(urlSinProxy != null){
 							if(urlSinProxy.indexOf("?")!=-1){
-								ret = OpenLayers.ProxyHost + urlSinProxy.replace("?", "&");
+								ret = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, urlSinProxy.replace("?", "&"));
 							}else{
-								ret = OpenLayers.ProxyHost + urlSinProxy + "&";
+								ret = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, urlSinProxy + "&");
 							}
 						}
+						/* GetURLProxy */
 						return ret;
 					},
 					

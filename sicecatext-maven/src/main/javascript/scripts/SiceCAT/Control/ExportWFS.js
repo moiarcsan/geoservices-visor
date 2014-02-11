@@ -378,9 +378,11 @@ OpenLayers.Control.ExportWFS = OpenLayers
 								+ layer.protocol.featurePrefix + ":"
 								+ layer.protocol.featureType;
 						
-						if(urlVectorWFS.indexOf(OpenLayers.ProxyHost) != 0){
-							urlVectorWFS = OpenLayers.ProxyHost + urlVectorWFS;
-						}
+						/* GetURLProxy */
+						urlVectorWFS = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, urlVectorWFS);
+//						if(urlVectorWFS.indexOf(OpenLayers.ProxyHost) != 0){
+//							urlVectorWFS = OpenLayers.ProxyHost + urlVectorWFS;
+//						}
 						
 						var requestSuccess = function(response){
 							var format = new OpenLayers.Format.WFSDescribeFeatureType();

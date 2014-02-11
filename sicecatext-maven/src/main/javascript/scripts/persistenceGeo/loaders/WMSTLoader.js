@@ -69,10 +69,7 @@ PersistenceGeo.loaders.WMSTLoader
 					layerOptions.layerOp1,
 					layerOptions.layerOp2, layerOptions);
 			
-			this.testLayer((OpenLayers.ProxyHost
-							.indexOf("url2") != -1 ? OpenLayers.ProxyHost
-							: "")
-							+ layerData.server_resource, map, layerData, null);
+			this.testLayer((layer_url, map, layerData, null);
 			
 			//TODO: Wrap 
 			PersistenceGeoParser.AbstractLoader.postFunctionsWrapper(layerData, layer, layerTree);

@@ -197,8 +197,10 @@ Ext.namespace("Viewer.view.dialog");
     	   this.progressBar = this.items.get('step-2').getComponent('progressBar');
             this.layout.setActiveItem('step-2');
             this.progressBar.wait();
+            /* GetURLProxy */
+    		var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, url.getValue());
             OpenLayers.Request.GET({
-                url: OpenLayers.ProxyHost + url.getValue(),
+                url: layer_url,
                 callback: this.remoteCapabilitiesLoaded,
                 scope: this
             });
@@ -306,8 +308,10 @@ Ext.namespace("Viewer.view.dialog");
         		featureTypeName = this.SIGESCAT_NS_MAP[record.data.layer.protocol.featureNS] 
         							+ featureTypeName;
         	}
+        	/* GetURLProxy */
+    		var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, record.data.layer.protocol.url);
             OpenLayers.Request.GET({
-                url: OpenLayers.ProxyHost + record.data.layer.protocol.url,
+                url: layer_url,
                 params: {
                     "SERVICE": "WFS",
                     "REQUEST": "DescribeFeatureType",

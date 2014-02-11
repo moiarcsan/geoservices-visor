@@ -604,7 +604,7 @@ OpenLayers.Control.ToolTipControl = OpenLayers
 						
 						var store_rg = new Ext.data.Store({
 							proxy : new Ext.data.HttpProxy({
-								url: OpenLayers.ProxyHost + 'http://sigescat.pise.interior.intranet/openls',
+								url: Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, 'http://sigescat.pise.interior.intranet/openls'),
 								method: 'POST',
 								xmlData: data
 							}),

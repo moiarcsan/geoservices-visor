@@ -99,8 +99,10 @@ Ext.extend(GeoExt.data.WFSCapabilitiesReader, Ext.data.DataReader, {
     							+ featureTypeName;
     	}
         
+    	/* GetURLProxy */
+		var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, record.data.layer.protocol.url);
         OpenLayers.Request.GET({
-            url: OpenLayers.ProxyHost + record.data.layer.protocol.url,
+            url: layer_url,
             params: {
                 "SERVICE": "WFS",
                 "REQUEST": "DescribeFeatureType",

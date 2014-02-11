@@ -109,8 +109,9 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
          * of layers in different SRS.
          */
         if (layer instanceof OpenLayers.Layer.WMS) {
+        	var url_layer = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, layer.url);
             layer = new OpenLayers.Layer.WMS(
-                layer.name, OpenLayers.ProxyHost + layer.url,
+                layer.name, url_layer,
                 {layers: layer.params["LAYERS"]},
                 {
                     attribution: layer.attribution,
@@ -180,7 +181,8 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
      * Gets capabilites url
      */
     getCapabilitiesUrl: function(url){
-    	var capabilitiesUrl = OpenLayers.ProxyHost + url;
+    	/* GetURLProxy */
+		var capabilitiesUrl = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, url);
     	var index = capabilitiesUrl.indexOf("request=getCapabilities")
     	var index2 = capabilitiesUrl.indexOf("?");
 	    var index3 = capabilitiesUrl.indexOf("&");
@@ -239,7 +241,9 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
                 if (layer instanceof OpenLayers.Layer.WMS) {
                 	// NEW WIN: Nombre de la capa
                 	layer.name = nameLayer
-                    layer = new OpenLayers.Layer.WMS(layer.name, OpenLayers.ProxyHost + layer.url,
+                	/* GetURLProxy */
+            		var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, layer.url);
+                    layer = new OpenLayers.Layer.WMS(layer.name, layer_url,
                         {layers: layer.params["LAYERS"]},
                         {
                             attribution: layer.attribution,
