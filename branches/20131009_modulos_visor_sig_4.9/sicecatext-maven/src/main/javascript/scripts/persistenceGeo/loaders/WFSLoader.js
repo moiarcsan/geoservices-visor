@@ -48,12 +48,7 @@ PersistenceGeo.loaders.WFSLoader
 					new OpenLayers.Strategy.BBOX(),
 					new OpenLayers.Strategy.Refresh({
 						interval : 5000
-					})];
-
-			if(!!layerData['properties']['editable']
-					&& this.toBoolean(layerData['properties']['editable'])){
-				_strategies.push(new OpenLayers.Strategy.Save({auto: true}));
-			}
+					}) ];
 
 			var maxFeatures = this.toNumber(layerData['properties']['maxFeatures']);
 			var visibility = this.toBoolean(layerData['visibility']);
@@ -61,9 +56,10 @@ PersistenceGeo.loaders.WFSLoader
 			var renderer = OpenLayers.Util
 				.getParameters(window.location.href).renderer;
 
+			/* GetURLProxy */
+			var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, layerData['properties']['url'] ? layerData['properties']['url'] : layerData.server_resource);
 			var options = {
-				url : OpenLayers.ProxyHost + (layerData['properties']['url'] ? 
-						layerData['properties']['url'] : layerData.server_resource), 
+				url : layer_url, 
 	            maxFeatures: maxFeatures,
 	            featureType: layerData['properties']['featureType'],
 	            featureNS: layerData['properties']['featureNS'],
@@ -73,10 +69,6 @@ PersistenceGeo.loaders.WFSLoader
 			};
 
 			this.copyAllPosibleProperties(layerData['properties'], options);
-
-			options['version'] = '1.0.0';
-
-
 			var layer = new OpenLayers.Layer.Vector(
 					layerData['name'],
 					{
@@ -90,54 +82,11 @@ PersistenceGeo.loaders.WFSLoader
 			
 			this.postFunctionsWrapper(layerData, layer, layerTree);
 			
-			//Editable(in use)/Ocuppied/availabled
-			if(layerData['properties']['editable']){
-				if(layerData['properties']['available']
-					&& this.toBoolean(layerData['properties']['available'])){
-					layer.groupLayers = "available";
-					layer.subgroupLayers = "available";
-					layer.visibility = false;
-					if(!(Global_TMP.permisos.contains('admin'))){
-						layer.groupLayers = 'false';
-						layer.subgroupLayers = 'false';
-						layer.displayInLayerSwitcher = false;
-					}
-					if(!!layerData['properties']['geometry'] 
-						&& !!Sicecat
-						&& !!Sicecat.poolWFSAvalaibles
-						&& !!Sicecat.poolWFSAvalaibles[layerData['properties']['geometry']])
-						Sicecat.poolWFSAvalaibles[layerData['properties']['geometry']].push(layer);
-				}else if(!!layerData['properties']['inUse']
-					&& this.toBoolean(layerData['properties']['inUse'])){
-					layer.groupLayers = "editables";
-					layer.subgroupLayers = "editables";
-				}else{
-					layer.visibility = false;
-					if(!(Global_TMP.permisos.contains('admin'))){
-						layer.groupLayers = 'false';
-						layer.subgroupLayers = 'false';
-						layer.displayInLayerSwitcher = false;
-					}else{
-						layer.groupLayers = "occupied";
-						layer.subgroupLayers = "occupied";
-					}
-				}
+			if(true){ //TODO from group
+				layer.groupLayers = "editables";
+				layer.subgroupLayers = "editables";
 			}
 			
 			return layer;
-		},
-
-		//overwrite
-	    copyAllPosibleProperties: function (fromMap, toMap){
-	        for(var key in fromMap){
-	            if (!!fromMap[key]
-	                && ((typeof fromMap[key] == "string")
-	                    || (typeof fromMap[key] == "number")
-	                    || (typeof fromMap[key] == "boolean"))
-	                && fromMap[key] != "[object Object]"
-	                && key != "visibility") {
-            		toMap[key] = fromMap[key];
-	            }
-	        }
-	    }
+		}
 });

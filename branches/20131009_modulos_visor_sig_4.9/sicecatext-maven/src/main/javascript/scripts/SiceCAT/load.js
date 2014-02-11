@@ -92,6 +92,7 @@ jsfiles.push("SiceCAT/widgets/ZoomToResultPanel.js");
 jsfiles.push("SiceCAT/widgets/GeoSearch.js");
 jsfiles.push("SiceCAT/widgets/PKSearchPanel.js");
 jsfiles.push("SiceCAT/widgets/SigescatCercaSolrGeneralSearcherCombo.js");
+jsfiles.push("SiceCAT/widgets/SigescatCercaGeneralSearcherCombo.js");
 jsfiles.push("SiceCAT/widgets/OpenlsSigescatSearchCombo.js");
 jsfiles.push("SiceCAT/widgets/OpenlsSigescatReverseGeocodePanel.js");
 jsfiles.push("SiceCAT/widgets/CopyFeaturesPanel.js");
@@ -157,6 +158,7 @@ jsfiles.push("downloadify/js/downloadify.min.js");
 jsfiles.push("downloadify/js/swfobject.js");
 //PersistenceGeo
 jsfiles.push("persistenceGeo/loaders/WFSLoader.js");
+jsfiles.push("persistenceGeo/loaders/WMSLoader.js");
 jsfiles.push("persistenceGeo/loaders/WMSTLoader.js");
 jsfiles.push("persistenceGeo/loaders/TEXTLoader.js");
 jsfiles.push("persistenceGeo/SiceCATGeoParser.js");
