@@ -533,7 +533,7 @@ SiceCAT.West = Ext
 														// servicio
 														OpenLayers.Request
 																.POST({
-																	url : url,
+																	url : Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, url),
 																	scope : this,
 																	headers : {
 																		"Content-Type" : "text/xml;charset=UTF-8",

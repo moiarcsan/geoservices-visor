@@ -501,12 +501,13 @@ SiceCAT.MapLayout = Ext
 						actions["zoomToLayer"] = action;
 
 						// TODO: #48206
+						var zoom_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, Sicecat.defaultWMSServer.replace("ows/wms?", "ows/wfs"));
 						action = new GeoExt.Action(
 								{
 									control : new OpenLayers.Control.ZoomToMunicipioComarca(),
 									iconCls : "ZoomToMunicipio",
 									map : this.map,
-									url: OpenLayers.ProxyHost + Sicecat.defaultWMSServer.replace("ows/wms?", "ows/wfs"),
+									url: zoom_url,
 									sicecatInstance : Sicecat,
 									tooltip : this.zoomToMunicipioTooltipText
 								});
@@ -1012,7 +1013,9 @@ SiceCAT.MapLayout = Ext
 						// http://sigescat.pise.interior.intranet/ows/wms? --> 
 						// http://sigescat.pise.interior.intranet/openls
 						// e incluye el proxy
-						var openlsUrl = OpenLayers.ProxyHost + Sicecat.defaultWMSServer.replace("ows/wms?", "openls");
+						/* GetURLProxy */
+						var openlsUrl = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, Sicecat.defaultWMSServer.replace("ows/wms?", "openls"));
+						
 						
 						// Combobox buscador
 						/*this.toolbarNav.push(new SiceCAT.widgets.MultiSearchCombo({
@@ -1528,23 +1531,21 @@ SiceCAT.MapLayout = Ext
 							var j = 0;
 							for ( var i = 0; i < this.sicecatInstance.jsonSearchServices.length; i++) {
 								if (this.sicecatInstance.jsonSearchServices[i]['type'] == "search_wfs") {
-									var url = OpenLayers.ProxyHost
-											+ this.sicecatInstance.jsonSearchServices[i]["url"];
+									var url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.sicecatInstance.jsonSearchServices[i]["url"]);
+									var url_schema = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.sicecatInstance.jsonSearchServices[i]["schema"]);
 									layers[j++] = {
 										title : this.sicecatInstance.jsonSearchServices[i]["title"],
 										name : this.sicecatInstance.jsonSearchServices[i]["name"],
 										namespace : this.sicecatInstance.jsonSearchServices[i]["namespace"],
 										url : url,
-										schema : OpenLayers.ProxyHost
-												+ this.sicecatInstance.jsonSearchServices[i]["schema"],
+										schema : url_schema,
 										maxFeatures : this.sicecatInstance.jsonSearchServices[i]["maxFeatures"]
 									};
 								} else if (this.sicecatInstance.jsonSearchServices[i]['type'] == "search_wfs_all"
 										&& !!this.sicecatInstance.jsonSearchServices[i]["featureTypes"]
 										&& !!this.sicecatInstance.jsonSearchServices[i]["featureTypes"].length
 										&& this.sicecatInstance.jsonSearchServices[i]["featureTypes"].length > 0) {
-									var url = OpenLayers.ProxyHost
-											+ this.sicecatInstance.jsonSearchServices[i]["url"];
+									var url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.sicecatInstance.jsonSearchServices[i]["url"]);
 									for ( var k = 0; k < this.sicecatInstance.jsonSearchServices[i]["featureTypes"].length; k++) {
 										var title;
 										if (!!this.titlesForLayer[this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k]]) {
@@ -1552,27 +1553,20 @@ SiceCAT.MapLayout = Ext
 										} else {
 											title = this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k];
 										}
+										var url_schema = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, 
+												this.sicecatInstance.jsonSearchServices[i]["schema_base"] + this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k]);
 										layers[j++] = {
 											title : title,
 											name : this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k]
 													.split(":")[1],
 											namespace : this.sicecatInstance.jsonSearchServices[i]["namespace"],
 											url : url,
-											schema : OpenLayers.ProxyHost
-													+ this.sicecatInstance.jsonSearchServices[i]["schema_base"]
-													+ this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k],
+											schema : url_schema,
 											maxFeatures : this.sicecatInstance.jsonSearchServices[i]["maxFeatures"]
 										};
 									}
 								} else if (this.sicecatInstance.jsonSearchServices[i]['type'] == "geocode") {
-									var url;
-									if (this.sicecatInstance.jsonSearchServices[i]["useProxy"]
-											&& this.sicecatInstance.jsonSearchServices[i]["useProxy"] == "false") {
-										url = this.sicecatInstance.jsonSearchServices[i]["url"];
-									} else {
-										url = OpenLayers.ProxyHost
-												+ this.sicecatInstance.jsonSearchServices[i]["url"];
-									}
+									var url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.sicecatInstance.jsonSearchServices[i]["url"]);
 									var name = this.sicecatInstance.jsonSearchServices[i]["name"];
 									if (Sicecat.isLogEnable)
 										console.log("Registred + " + url + " as direct geocode service in '" + name + "'");
@@ -1589,8 +1583,9 @@ SiceCAT.MapLayout = Ext
 						if(urlWFS.indexOf("?") != -1){
 							urlWFS = urlWFS.replace("?", "");
 						}
+						var url_layer = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, urlWFS);
 						Ext.Ajax.request({
-							url: OpenLayers.ProxyHost + urlWFS,
+							url: url_layer,
 							method: 'GET',
 						    params: {
 						    	SERVICE: 'WFS',

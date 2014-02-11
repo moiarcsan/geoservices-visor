@@ -563,9 +563,8 @@ SiceCAT = Ext
 					 */
 					testLayerInformation: function (url, map, layerToLoad, continueLoading){
 						var this_instance = this;
-						var postUrl = OpenLayers.ProxyHost + url.replace('proxy.do?url=', '');
 			            Ext.Ajax.request({
-			                url:  postUrl + "&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+			                url:  url,
 							params : { SERVICE : 'WMS' , REQUEST : 'GetCapabilities', VERSION: '1.1.1'},
 							method: 'GET',
 							success: function ( result, request ) { 
