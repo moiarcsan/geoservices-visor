@@ -62,6 +62,16 @@ SiceCAT = Ext
 						LINE:[],
 						POLYGON:[]
 					},
+					
+					/**
+					 * Property: nombreCapaAuxiliarText
+					 * 
+					 * {String} Default text to be show
+					 */
+					typeCall: {
+						ALFANUMERICA: "alfanumérica",
+						CARTOGRAFIA: "cartografía"
+					},
 
 					/**
 					 * Property: nombreCapaAuxiliarText
@@ -336,6 +346,8 @@ SiceCAT = Ext
 						this.layout.idioma = "cat";
 
 						OpenLayers.ProxyHost = 'proxy.do?url=';
+						
+						this.confType = null;
 
 						var this_ = this;
 						this
@@ -369,10 +381,21 @@ SiceCAT = Ext
 						if(!proxy){
 							OpenLayers.ProxyHost = "";
 						}else{
-							OpenLayers.ProxyHost = proxy;
+							var confType = null;
+							var proxyUrl = null;
+							if(proxy.indexOf("@@") != -1){
+								var arrayProxy = proxy.split("@@");
+								if(arrayProxy.length > 0){
+									this.confType = arrayProxy[0];
+									OpenLayers.ProxyHost = arrayProxy[1];
+								}
+							}else{
+								OpenLayers.ProxyHost = proxy;
+							}
 						}
+						
 						/*if (!!proxy) {
-							OpenLayers.ProxyHost = proxy;
+							OpenLayers.ProxyHost = "";
 						} else {
 							OpenLayers.ProxyHost = "proxy.do?url=";
 						}*/
@@ -632,7 +655,7 @@ SiceCAT = Ext
 					/*
 					 *  private: testLayerGetCapabilities
 					 */
-testLayerGetMap: function (url, map, layerToLoad, continueLoading){
+					testLayerGetMap: function (url, map, layerToLoad, continueLoading){
 						
 						var this_instance = this;
 						
@@ -776,12 +799,10 @@ testLayerGetMap: function (url, map, layerToLoad, continueLoading){
 					loadCorrectLayer: function (map, layerToLoad){
 						//console.log(layerToLoad);
 						if (layerToLoad['type'] == 'WMS') {
+							var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, layerToLoad['url']);
 							var wms = new OpenLayers.Layer.WMS(
 									layerToLoad['name'],
-									(OpenLayers.ProxyHost
-											.indexOf("url2") != -1 ? OpenLayers.ProxyHost
-											: "")
-											+ layerToLoad['url'],
+									layer_url,
 									layerToLoad['layerOp1'],
 									layerToLoad['layerOp2']);
 							var group = layerToLoad['groupLayers'];
@@ -800,12 +821,10 @@ testLayerGetMap: function (url, map, layerToLoad, continueLoading){
 							map.addLayer(wms);
 							(new SiceCATGeoParser()).generateLayerFromJson(layerToLoad, group, subgroup);
 						} else if (layerToLoad['type'] == 'WMST') {
+							var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, layerToLoad['url']);
 							var wms = new SiceCAT.Layer.WMS_SIGESCAT(
 									layerToLoad['name'],
-									(OpenLayers.ProxyHost
-											.indexOf("url2") != -1 ? OpenLayers.ProxyHost
-											: "")
-											+ layerToLoad['url'],
+									layer_url,
 									layerToLoad['layerOp1'],
 									layerToLoad['layerOp2'],
 									layerToLoad);
@@ -1911,6 +1930,36 @@ testLayerGetMap: function (url, map, layerToLoad, continueLoading){
 							|| (!layer.groupID 
 									//&& layer.userID == Sicecat.user.login
 									);
+					},
+					
+					/**
+					 * Method: getURLProxy
+					 * 
+					 * Devuelve la url formateada con la inclusión del proxy si es necesario
+					 * 
+					 * @param configType
+					 * @param typeCall
+					 * @param url
+					 * 
+					 * @returns {String}
+					 */
+					getURLProxy: function (configType, typeCall, url){
+						var url_req = "";
+						if(configType == 0){
+							// No se usará ningún proxy para ninguna llamada a SIGESCAT
+							url_req = url;
+						}else if(configType == 1){
+							// Se usará el “proxy.do” sólo en las llamadas alfanuméricas, las llamadas de cartografía van directas a SIGESCAT [DINT]
+							if(typeCall == "alfanumerica"){
+								url_req = OpenLayers.ProxyHost + url;
+							}else{
+								url_req = url;
+							}
+						}else if(configType == 2){
+							// Se usará el “proxy.do” en todas las llamadas tanto alfanuméricas como de cartografía [PISE]
+							url_req = OpenLayers.ProxyHost + url;
+						}
+						return url_req;
 					},
 
 					CLASS_NAME : "SiceCAT"

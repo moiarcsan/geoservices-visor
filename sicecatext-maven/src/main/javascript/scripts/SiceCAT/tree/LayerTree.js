@@ -24,7 +24,7 @@
  * This exception does not however invalidate any other reasons why the
  * executable file might be covered by the GNU General Public License.
  * 
- * Authors:: Alejandro DÃ­az Torres (mailto:adiaz@emergya.com)
+ * Authors:: Alejandro Díaz Torres (mailto:adiaz@emergya.com)
  * 
  */
 
@@ -547,7 +547,7 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 				PersistenceGeoParser.saveLayerProperties(node.attributes.layer.layerID,{
 					visibility: checked
 				});
-			} // TODO: else Â¿save layer visibility by user?
+			} // TODO: else ¿save layer visibility by user?
 		}
 	},
 	
@@ -715,6 +715,10 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 	getAddLayersPanel : function() {
 		// var map = this.map;
 		Ext.QuickTips.init();
+		/* GetURLProxy */
+		var wms_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.sicecatInstance.defaultWMSServer);
+		var taure_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, "http://taure.icc.cat/cgi-bin/mapserv?");
+		var galileo_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, "http://galileo.icc.cat/arcgis/services/icc_limadmin_v_r/MapServer/WMSServer");
 		var panel = new SiceCAT.widgets.AddLayers(
 				{
 					width : 365,
@@ -724,14 +728,12 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 					mapPanel : mapPanel,
 					sources : {
 						"sigescat" : {
-							url : OpenLayers.ProxyHost
-									+ this.sicecatInstance.defaultWMSServer,
+							url : wms_url,
 							version : "1.1.1",
 							ptype : "gxp_wmssource"
 						},
 						"taure.icc.cat" : {
-							url : OpenLayers.ProxyHost
-									+ "http://taure.icc.cat/cgi-bin/mapserv?",
+							url : taure_url,
 							baseParams : {
 								map : "/opt/idec/dades/pcivil/risc_municipal.map",
 								LAYERS : "PAM_CAMCAT_obl",
@@ -746,8 +748,7 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 							ptype : "gxp_wmssource"
 						},
 						"galileo.icc.cat" : {
-							url : OpenLayers.ProxyHost
-									+ "http://galileo.icc.cat/arcgis/services/icc_limadmin_v_r/MapServer/WMSServer",
+							url : galileo_url,
 							version : "1.1.1",
 							ptype : "gxp_wmssource"
 						}
