@@ -290,7 +290,7 @@ SiceCAT.QueryPanel = Ext.extend(gxp.QueryPanel, {
         var intersectFilter = null;
         var filters_intersect = [];
         // Filtro por cruce con geometrias
-        if(Sicecat.featuresSelected.length > 1){
+        if(Sicecat.featuresSelected && Sicecat.featuresSelected.length > 1){
         	// Hay m�s de una feature seleccionada
         	var filter_intersect = null;
         	for(var i = 0; i<Sicecat.featuresSelected.length; i++){
@@ -305,7 +305,7 @@ SiceCAT.QueryPanel = Ext.extend(gxp.QueryPanel, {
                 type: OpenLayers.Filter.Logical.OR,
                 filters: filters_intersect
             });
-        }else if(Sicecat.featuresSelected.length == 1){
+        }else if(Sicecat.featuresSelected && Sicecat.featuresSelected.length == 1){
         	// Hay s�lo una feature seleccionada
         	var geom = Sicecat.featuresSelected[0].geometry;
         	intersectFilter = this.intersectQuery && new OpenLayers.Filter.Spatial({
@@ -362,6 +362,12 @@ SiceCAT.QueryPanel = Ext.extend(gxp.QueryPanel, {
             maxFeatures: this.maxFeatures || this.maxFeaturesAutorized,
             autoLoad: false,
             autoSave: false,
+            proxy:{
+                url: layer.get("url"),
+                protocol:{
+                    outputFormat: "GML2"
+                }
+            },
             listeners: {
                 load: function(store, records, options) {
                     this.fireEvent("storeload", this, store, records, options);
