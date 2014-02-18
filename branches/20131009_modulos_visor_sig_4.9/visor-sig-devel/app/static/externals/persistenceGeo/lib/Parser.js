@@ -206,12 +206,12 @@ PersistenceGeo.Parser = Ext.extend(Ext.Component,{
 		return this.LOADED_FOLDERS_NAMES[idFolder];
 	},
 	
-	initFoldersByUser: function(user){
-		this.initFolders(user, this.LOAD_FOLDERS_BASE_URL() + user);
+	initFoldersByUser: function(user, callback){
+		this.initFolders(user, this.LOAD_FOLDERS_BASE_URL() + user, callback);
 	},
 	
-	initFoldersByGroup: function(idGroup){
-		this.initFolders(idGroup, this.LOAD_FOLDERS_GROUP_BASE_URL() + idGroup);
+	initFoldersByGroup: function(idGroup, callback){
+		this.initFolders(idGroup, this.LOAD_FOLDERS_GROUP_BASE_URL() + idGroup, callback);
 	},
 	
 	saveLayerName: function (layerId, name, onsuccess, onfailure){
@@ -394,7 +394,7 @@ PersistenceGeo.Parser = Ext.extend(Ext.Component,{
 	 * Loads OpenLayers layers and call to onload callback function (layers). 
 	 * Used to load all user layers. 
 	 */
-	initFolders: function(userOrGroup, url){
+	initFolders: function(userOrGroup, url, callback){
 		this.LOADED_FOLDERS = {};
 		this.LOADED_FOLDERS_NAMES = {};
 		this.ROOT_FOLDER = null;
@@ -414,19 +414,16 @@ PersistenceGeo.Parser = Ext.extend(Ext.Component,{
 						var lastParent = null;
 						var parents = {};
 	                	while (i<records.length){
-	                		if(!!records[i].data.id 
-	                				&& !!records[i].data.name){
+	                		if(!!records[i].data.id && !!records[i].data.name){
 	                			var folderName = records[i].data.name;
 	                			this_.LOADED_FOLDERS_OBJECTS[records[i].data.id] = records[i].data;
 	                			this_.LOADED_FOLDERS[folderName] = records[i].data.id;
 	                			this_.LOADED_FOLDERS_NAMES[records[i].data.id] = folderName;
 	                			// Root folder haven't '-'
-	                			if(!this_.ROOT_FOLDER 
-	                					&& folderName.indexOf("-") < 0){
+	                			if(!this_.ROOT_FOLDER && folderName.indexOf("-") < 0){
 	                				this_.ROOT_FOLDER = folderName;
 	                			}
-	                			if(!!records[i].data.idParent
-	                					&& !!parents[records[i].data.idParent]){
+	                			if(!!records[i].data.idParent && !!parents[records[i].data.idParent]){
 	                				//Add child
 	                				lastParent = parents[records[i].data.idParent];
                 					lastParent.element.add(records[i].data.id, new Ext.util.MixedCollection());
@@ -444,6 +441,9 @@ PersistenceGeo.Parser = Ext.extend(Ext.Component,{
 	                			}
 	                		}
 	                		i++;
+	                	}
+	                	if(callback){
+	                		callback();
 	                	}
                  }
              }
@@ -479,8 +479,10 @@ PersistenceGeo.Parser = Ext.extend(Ext.Component,{
 	 * Used to load all user layers. Call to onloadcallback with an array of ``OpenLayers.Layer`` result.
 	 */
 	loadLayersByUser: function(user, onload){
-		this.initFoldersByUser(user); //Caution!! you haven't getFolderName function available before storeload
-		this.loadLayers(user, onload, this.LOAD_LAYERS_BY_USER_BASE_URL() + user);
+		var this_ = this;
+		this.initFoldersByUser(user, function(){
+			this_.loadLayers(user, onload, this_.LOAD_LAYERS_BY_USER_BASE_URL() + user);
+		}); //Caution!! you haven't getFolderName function available before storeload
 	},
 	
 	/**
@@ -490,8 +492,10 @@ PersistenceGeo.Parser = Ext.extend(Ext.Component,{
 	 * Used to load all user layers. Call to onloadcallback with an array of ``OpenLayers.Layer`` result.
 	 */
 	loadLayersByGroup: function(group, onload){
-		this.initFoldersByGroup(group);
-		this.loadLayers(group, onload, this.LOAD_LAYERS_BY_GROUP_BASE_URL() + group);
+		var this_ = this;
+		this.initFoldersByGroup(group, function(){
+			this_.loadLayers(group, onload, this_.LOAD_LAYERS_BY_GROUP_BASE_URL() + group);
+		});
 	},
 	
 	/**
