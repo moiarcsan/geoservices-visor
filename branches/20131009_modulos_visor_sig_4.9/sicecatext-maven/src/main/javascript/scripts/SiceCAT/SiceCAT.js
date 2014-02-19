@@ -1950,12 +1950,22 @@ SiceCAT = Ext
 						}else if(configType == 1){
 							// Se usará el “proxy.do” sólo en las llamadas alfanuméricas, las llamadas de cartografía van directas a SIGESCAT [DINT]
 							if(typeCall == "alfanumerica"){
+								var index = url.indexOf("?");
+								while(index > 0){
+									url = url.replace("?", "&");
+									index = url.indexOf("?");
+								}
 								url_req = OpenLayers.ProxyHost + url;
 							}else{
 								url_req = url;
 							}
 						}else if(configType == 2){
 							// Se usará el “proxy.do” en todas las llamadas tanto alfanuméricas como de cartografía [PISE]
+							var index = url.indexOf("?");
+							while(index > 0){
+								url = url.replace("?", "&");
+								index = url.indexOf("?");
+							}
 							url_req = OpenLayers.ProxyHost + url;
 						}
 						return url_req;

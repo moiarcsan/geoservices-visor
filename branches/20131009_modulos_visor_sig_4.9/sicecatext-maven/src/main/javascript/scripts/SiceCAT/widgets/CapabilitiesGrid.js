@@ -183,7 +183,8 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
     getCapabilitiesUrl: function(url){
     	/* GetURLProxy */
 		var capabilitiesUrl = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, url);
-    	var index = capabilitiesUrl.indexOf("request=getCapabilities")
+    	var index = capabilitiesUrl.indexOf("request=getCapabilities");
+    	var indexService = capabilitiesUrl.indexOf("service=wms");
     	var index2 = capabilitiesUrl.indexOf("?");
 	    var index3 = capabilitiesUrl.indexOf("&");
     	if(index < 0){
@@ -197,6 +198,11 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
 	        	capabilitiesUrl += "?";
 	        }
 	        capabilitiesUrl += "request=getCapabilities";
+	        if(indexService < 0){
+	        	capabilitiesUrl += "&service=wms";
+	        }
+    	}else if(indexService < 0){
+    		capabilitiesUrl += "&service=wms";
     	}
         return capabilitiesUrl;
     },
