@@ -660,7 +660,7 @@ SiceCAT = Ext
 						
 							this.waiting++;
 				            Ext.Ajax.request({
-				                url:  OpenLayers.ProxyHost + url,
+				                url:  url,
 								method: 'GET',
 								params: {
 									'LAYERS': layerToLoad.properties.layers,
