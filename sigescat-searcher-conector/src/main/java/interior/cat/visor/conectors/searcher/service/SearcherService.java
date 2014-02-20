@@ -101,4 +101,20 @@ public interface SearcherService {
 			Integer filaInicial, Integer filaFinal) throws WSException,
 			IncorrectWSParametersException;
 
+	/**
+	 * Implementacion del metodo <code>cercaGeneral</code> del ws
+	 * 
+	 * @param query
+	 * @param filaInicial
+	 * @param filaFinal
+	 * 
+	 * @return response
+	 * 
+	 * @throws WSException
+	 * @throws IncorrectWSParametersException
+	 */
+	public Response cercaGeneral(String query, Integer filaInicial,
+			Integer filaFinal) throws WSException,
+			IncorrectWSParametersException;
+
 }

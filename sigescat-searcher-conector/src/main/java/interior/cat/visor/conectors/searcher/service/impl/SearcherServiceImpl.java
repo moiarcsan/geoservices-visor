@@ -126,4 +126,24 @@ public class SearcherServiceImpl implements SearcherService {
 				query, entitats, filaInicial, filaFinal);
 	}
 
+	/**
+	 * Implementacion del metodo <code>cercaGeneral</code> del ws
+	 * 
+	 * @param query
+	 * @param filaInicial
+	 * @param filaFinal
+	 * 
+	 * @return response
+	 * 
+	 * @throws WSException
+	 * @throws IncorrectWSParametersException
+	 */
+	@Cacheable("cercaGeneral")
+	public Response cercaGeneral(String query, Integer filaInicial,
+			Integer filaFinal) throws WSException,
+			IncorrectWSParametersException {
+		return searchWS.getSearchServiceImplPort().cercaGeneral(query,
+				filaInicial, filaFinal);
+	}
+
 }
