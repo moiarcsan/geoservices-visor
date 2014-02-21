@@ -10,7 +10,7 @@
 
 	<parent>
 		<groupId>interior.cat.visor</groupId>
-	  	<artifactId>modulos-visor-sig</artifactId>
+		<artifactId>modulos-visor-sig</artifactId>
 		<version>4.9</version>
 	</parent>
 
@@ -96,10 +96,10 @@
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>never</updatePolicy>
-	        	</releases>
-	        <snapshots>
-		  		<enabled>false</enabled>
-	        </snapshots>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 		<repository>
 			<id>nexus.emergya.snapshot</id>
@@ -107,26 +107,17 @@
 			<url>http://nexus.emergya.es/nexus/content/groups/public-snapshots/</url>
 			<releases>
 				<enabled>false</enabled>
-	        	</releases>
-	        <snapshots>
-		  		<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-	        </snapshots>
-		</repository>
-		<!-- Only on releases version
-		<repository>
-			<id>canigo.repo</id>
-			<name>Canigo Maven2 repo</name>
-			<url>http://canigo.ctti.gencat.net/repository/maven2/</url>
-			<releases>
+			</releases>
+			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>never</updatePolicy>
-	        	</releases>
-	        <snapshots>
-		  		<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-	        </snapshots>
-		</repository-->
+			</snapshots>
+		</repository>
+		<!-- Only on releases version <repository> <id>canigo.repo</id> <name>Canigo 
+			Maven2 repo</name> <url>http://canigo.ctti.gencat.net/repository/maven2/</url> 
+			<releases> <enabled>true</enabled> <updatePolicy>never</updatePolicy> </releases> 
+			<snapshots> <enabled>true</enabled> <updatePolicy>never</updatePolicy> </snapshots> 
+			</repository -->
 		<!-- use the following if you're not using a snapshot version. -->
 		<repository>
 			<id>nexus.releases</id>
@@ -135,9 +126,9 @@
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>never</updatePolicy>
-	        	</releases>
+			</releases>
 			<snapshots>
-			  		<enabled>false</enabled>
+				<enabled>false</enabled>
 			</snapshots>
 		</repository>
 		<!-- use the following if you ARE using a snapshot version. -->
@@ -147,11 +138,11 @@
 			<url>http://nexus.emergya.es/nexus/content/repositories/sicecat-repo-snapshots/</url>
 			<releases>
 				<enabled>false</enabled>
-	        	</releases>
-	        <snapshots>
-		  		<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
 				<updatePolicy>never</updatePolicy>
-	        </snapshots>
+			</snapshots>
 		</repository>
 	</repositories>
 
@@ -163,10 +154,10 @@
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>never</updatePolicy>
-	        	</releases>
-	        <snapshots>
-		  		<enabled>false</enabled>
-	        </snapshots>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</pluginRepository>
 		<!-- Needed to get a valid alpha version of maven pluggin. -->
 		<pluginRepository>
@@ -174,13 +165,13 @@
 			<name>Nexus Public Snapshots</name>
 			<url>http://nexus.emergya.es/nexus/content/groups/public-snapshots/</url>
 			<snapshots>
-	         	<enabled>true</enabled>
+				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
-	 	    </snapshots>
-	    	<releases>
+			</snapshots>
+			<releases>
 				<updatePolicy>always</updatePolicy>
-	         	<enabled>false</enabled>
-	       </releases>
+				<enabled>false</enabled>
+			</releases>
 		</pluginRepository>
 	</pluginRepositories>
 
@@ -230,7 +221,7 @@
 		<commons.collections.version>3.2.1</commons.collections.version>
 		<resource.folder>${basedir}/src/main/resources</resource.folder>
 		<browserFileNames>firefox</browserFileNames>
-		
+
 		<!-- Visor direct config (web.xml) -->
 		<display.name>Visor SIG Sicecat</display.name>
 		<print.pdf.config.yaml>WEB-INF/config.yaml</print.pdf.config.yaml>
@@ -253,14 +244,14 @@
 		<print.visor.url>http://localhost:8080/Visor/</print.visor.url>
 		<print.header.logo>${print.visor.url}images/pdf/logo.png</print.header.logo>
 		<print.footer.logo>${print.visor.url}images/pdf/departament_dinterior.gif</print.footer.logo>
-		
+
 		<!-- JDBC -->
 		<database.jdbc.driverClass>org.postgresql.Driver</database.jdbc.driverClass>
 		<database.hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</database.hibernate.dialect>
 		<database.jdbc.user>persistence_geo</database.jdbc.user>
 		<database.jdbc.password>persistence_geo</database.jdbc.password>
 		<database.jdbc.url>jdbc:postgresql://localhost/persistence_geo_db</database.jdbc.url>
-		<database.hibernate.hbm2ddl.auto>validate</database.hibernate.hbm2ddl.auto>
+		<database.hibernate.hbm2ddl.auto>none</database.hibernate.hbm2ddl.auto>
 		<database.schema>persistence_geo</database.schema>
 		<database.catalog>persistence_geo</database.catalog>
 		<database.characterEncoding>UTF-8</database.characterEncoding>
@@ -269,9 +260,9 @@
 
 		<maven.build.timestamp.format>yyMMdd_HHmm</maven.build.timestamp.format>
 		<buildNumber>${maven.build.timestamp}</buildNumber>
-		
-	    <axiomReleaseVersion>1.2.10</axiomReleaseVersion>
-	    <axis2ReleaseVersion>1.5.4</axis2ReleaseVersion>
+
+		<axiomReleaseVersion>1.2.10</axiomReleaseVersion>
+		<axis2ReleaseVersion>1.5.4</axis2ReleaseVersion>
 	</properties>
 
 	<build>
@@ -279,18 +270,18 @@
 		<outputDirectory>target/scripts</outputDirectory>
 		<testOutputDirectory>target/test-scripts</testOutputDirectory>
 
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/webresources</directory>
-                <filtering>true</filtering>
-                <targetPath>../../src/main/webapp</targetPath>
-            </resource>
-        </resources>
-        
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/webresources</directory>
+				<filtering>true</filtering>
+				<targetPath>../../src/main/webapp</targetPath>
+			</resource>
+		</resources>
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -435,9 +426,9 @@
 								</goals>
 							</execution>
 						</executions>
-				        <configuration>
-				        	<output>scripts</output>
-				        </configuration>
+						<configuration>
+							<output>scripts</output>
+						</configuration>
 					</plugin>
 					<plugin>
 						<artifactId>maven-war-plugin</artifactId>
@@ -532,45 +523,48 @@
 							</webResources>
 							<webappDirectory>${project.build.directory}/${project.build.finalName}
 							</webappDirectory>
-		                    <dependentWarExcludes>
-			                    WEB-INF/lib/asm*,
-			                    WEB-INF/lib/spring*3.0.2.RELEASE.jar,
-			                    WEB-INF/lib/spring*3.0.7.RELEASE.jar,
-			                    WEB-INF/lib/spring*3.1.2.RELEASE.jar,
-			                    WEB-INF/lib/commons-collections*,
-			                    WEB-INF/lib/commons-dbcp*,
-			                    WEB-INF/lib/commons-io*,
-			                    WEB-INF/lib/commons-lang*,
-			                    WEB-INF/lib/ehcache*,
-			                    WEB-INF/lib/jai*,
-			                    WEB-INF/lib/jdom*,
-			                    WEB-INF/lib/junit*,
-			                    WEB-INF/lib/stax-api*,
-			                    WEB-INF/lib/xml-apis*,
-			                    WEB-INF/lib/slf4j*,
-			                    WEB-INF/lib/cglib-2.2.2.jar,
-			                    WEB-INF/lib/cglib-2.1_3.jar,
-			                    WEB-INF/lib/httpclient-4.1.1.jar,
-			                    WEB-INF/lib/httpcore-4.1.jar,
-			                    WEB-INF/lib/jackson-core-asl-1.8.5.jar,
-			                    WEB-INF/lib/jackson-mapper-asl-1.8.5.jar,
-			                    WEB-INF/lib/spring-aop-3.0.3.RELEASE.jar,
-			                    WEB-INF/lib/spring-jdbc-3.0.7.RELEASE.jar,
-			                    WEB-INF/lib/spring-security-acl-3.0.2.RELEASE.jar,
-			                    WEB-INF/lib/spring-security-config-3.0.2.RELEASE.jar,
-			                    WEB-INF/lib/spring-security-core-3.0.2.RELEASE.jar,
-			                    WEB-INF/lib/spring-security-taglibs-3.0.2.RELEASE.jar,
-			                    WEB-INF/lib/spring-security-web-3.0.2.RELEASE.jar,
-			                    WEB-INF/lib/stax-api-1.0.jar,
-			                    WEB-INF/lib/jcl-over-slf4j-*,
-			                    WEB-INF/lib/ejb3-persistence-1.0.1.GA.jar
-		                	</dependentWarExcludes>
-		                    <overlays>
-		                        <overlay>
-		                            <groupId>com.emergya</groupId>
-		                            <artifactId>persistence-geo-rest</artifactId>
-		                        </overlay>
-		                    </overlays>
+							<dependentWarExcludes>
+								WEB-INF/lib/asm*,
+								WEB-INF/lib/spring*3.0.2.RELEASE.jar,
+								WEB-INF/lib/spring*3.0.7.RELEASE.jar,
+								WEB-INF/lib/spring*3.1.2.RELEASE.jar,
+								WEB-INF/lib/commons-collections*,
+								WEB-INF/lib/commons-dbcp*,
+								WEB-INF/lib/commons-io*,
+								WEB-INF/lib/commons-lang*,
+								WEB-INF/lib/ehcache*,
+								WEB-INF/lib/jai*,
+								WEB-INF/lib/jdom*,
+								WEB-INF/lib/junit*,
+								WEB-INF/lib/stax-api*,
+								WEB-INF/lib/xml-apis*,
+								WEB-INF/lib/slf4j*,
+								WEB-INF/lib/cglib-2.2.2.jar,
+								WEB-INF/lib/cglib-2.1_3.jar,
+								WEB-INF/lib/httpclient-4.1.1.jar,
+								WEB-INF/lib/httpcore-4.1.jar,
+								WEB-INF/lib/jackson-core-asl-1.8.5.jar,
+								WEB-INF/lib/jackson-mapper-asl-1.8.5.jar,
+								WEB-INF/lib/spring-aop-3.0.3.RELEASE.jar,
+								WEB-INF/lib/spring-jdbc-3.0.7.RELEASE.jar,
+								WEB-INF/lib/spring-security-acl-3.0.2.RELEASE.jar,
+								WEB-INF/lib/spring-security-config-3.0.2.RELEASE.jar,
+								WEB-INF/lib/spring-security-core-3.0.2.RELEASE.jar,
+								WEB-INF/lib/spring-security-taglibs-3.0.2.RELEASE.jar,
+								WEB-INF/lib/spring-security-web-3.0.2.RELEASE.jar,
+								WEB-INF/lib/stax-api-1.0.jar,
+								WEB-INF/lib/jcl-over-slf4j-*,
+								WEB-INF/lib/ejb3-persistence-1.0.1.GA.jar
+							</dependentWarExcludes>
+							<overlays>
+								<overlay>
+									<groupId>com.emergya</groupId>
+									<artifactId>persistence-geo-rest</artifactId>
+									<excludes>
+										<exclude>WEB-INF/classes/log4j.properties</exclude>
+									</excludes>
+								</overlay>
+							</overlays>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -757,7 +751,8 @@
 								<phase>install</phase>
 								<configuration>
 									<tasks>
-										<exec dir="${basedir}" executable="${basedir}/src/main/ci/script-weblogicdeploy.sh">
+										<exec dir="${basedir}"
+											executable="${basedir}/src/main/ci/script-weblogicdeploy.sh">
 										</exec>
 									</tasks>
 								</configuration>
@@ -771,7 +766,7 @@
 			</build>
 
 			<dependencies>
-		        
+
 				<dependency>
 					<groupId>com.sun.faces</groupId>
 					<artifactId>jsf-api</artifactId>
@@ -831,7 +826,7 @@
 
 		<profile>
 			<activation>
-      				<activeByDefault>true</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<id>release</id>
 			<build>
@@ -845,7 +840,7 @@
 								<goals>
 									<goal>war-package</goal>
 									<!--<goal>prepare-tests</goal> <goal>jsunit</goal> -->
-									<!--<goal>compress</goal>-->
+									<!--<goal>compress</goal> -->
 								</goals>
 							</execution>
 						</executions>
@@ -931,39 +926,39 @@
 							</webResources>
 							<webappDirectory>${project.build.directory}/${project.build.finalName}
 							</webappDirectory>
-		                    <dependentWarExcludes>
-			                    WEB-INF/lib/asm*,
-			                    WEB-INF/lib/spring*3.0.2.RELEASE.jar,
-			                    WEB-INF/lib/spring*3.0.7.RELEASE.jar,
-			                    WEB-INF/lib/spring*3.1.2.RELEASE.jar,
-			                    WEB-INF/lib/commons-collections*,
-			                    WEB-INF/lib/commons-dbcp*,
-			                    WEB-INF/lib/commons-io*,
-			                    WEB-INF/lib/commons-lang*,
-			                    WEB-INF/lib/ehcache*,
-			                    WEB-INF/lib/jai*,
-			                    WEB-INF/lib/jdom*,
-			                    WEB-INF/lib/junit*,
-			                    WEB-INF/lib/stax-api*,
-			                    WEB-INF/lib/xml-apis*,
-			                    WEB-INF/lib/slf4j*,
-			                    WEB-INF/lib/cglib-2.2.2.jar,
-			                    WEB-INF/lib/cglib-2.1_3.jar,
-			                    WEB-INF/lib/httpclient-4.1.1.jar,
-			                    WEB-INF/lib/httpcore-4.1.jar,
-			                    WEB-INF/lib/jackson-core-asl-1.8.5.jar,
-			                    WEB-INF/lib/jackson-mapper-asl-1.8.5.jar,
-			                    WEB-INF/lib/spring-aop-3.0.3.RELEASE.jar,
-			                    WEB-INF/lib/spring-jdbc-3.0.7.RELEASE.jar,
-			                    WEB-INF/lib/spring-security-acl-3.0.2.RELEASE.jar,
-			                    WEB-INF/lib/spring-security-config-3.0.2.RELEASE.jar,
-			                    WEB-INF/lib/spring-security-core-3.0.2.RELEASE.jar,
-			                    WEB-INF/lib/spring-security-taglibs-3.0.2.RELEASE.jar,
-			                    WEB-INF/lib/spring-security-web-3.0.2.RELEASE.jar,
-			                    WEB-INF/lib/stax-api-1.0.jar,
-			                    WEB-INF/lib/jcl-over-slf4j-*,
-			                    WEB-INF/lib/ejb3-persistence-1.0.1.GA.jar
-		                	</dependentWarExcludes>
+							<dependentWarExcludes>
+								WEB-INF/lib/asm*,
+								WEB-INF/lib/spring*3.0.2.RELEASE.jar,
+								WEB-INF/lib/spring*3.0.7.RELEASE.jar,
+								WEB-INF/lib/spring*3.1.2.RELEASE.jar,
+								WEB-INF/lib/commons-collections*,
+								WEB-INF/lib/commons-dbcp*,
+								WEB-INF/lib/commons-io*,
+								WEB-INF/lib/commons-lang*,
+								WEB-INF/lib/ehcache*,
+								WEB-INF/lib/jai*,
+								WEB-INF/lib/jdom*,
+								WEB-INF/lib/junit*,
+								WEB-INF/lib/stax-api*,
+								WEB-INF/lib/xml-apis*,
+								WEB-INF/lib/slf4j*,
+								WEB-INF/lib/cglib-2.2.2.jar,
+								WEB-INF/lib/cglib-2.1_3.jar,
+								WEB-INF/lib/httpclient-4.1.1.jar,
+								WEB-INF/lib/httpcore-4.1.jar,
+								WEB-INF/lib/jackson-core-asl-1.8.5.jar,
+								WEB-INF/lib/jackson-mapper-asl-1.8.5.jar,
+								WEB-INF/lib/spring-aop-3.0.3.RELEASE.jar,
+								WEB-INF/lib/spring-jdbc-3.0.7.RELEASE.jar,
+								WEB-INF/lib/spring-security-acl-3.0.2.RELEASE.jar,
+								WEB-INF/lib/spring-security-config-3.0.2.RELEASE.jar,
+								WEB-INF/lib/spring-security-core-3.0.2.RELEASE.jar,
+								WEB-INF/lib/spring-security-taglibs-3.0.2.RELEASE.jar,
+								WEB-INF/lib/spring-security-web-3.0.2.RELEASE.jar,
+								WEB-INF/lib/stax-api-1.0.jar,
+								WEB-INF/lib/jcl-over-slf4j-*,
+								WEB-INF/lib/ejb3-persistence-1.0.1.GA.jar
+							</dependentWarExcludes>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -1010,8 +1005,7 @@
 			</dependencies>
 
 			<properties>
-				<!-- Visor direct config (web.xml) 
-				default release conf -->
+				<!-- Visor direct config (web.xml) default release conf -->
 				<display.name>Visor SIG Sicecat</display.name>
 				<dos.puntos>:</dos.puntos>
 				<dir.win>/</dir.win>
@@ -1036,25 +1030,25 @@
 				<print.header.logo>${print.visor.url}images/pdf/logo.png</print.header.logo>
 				<print.footer.logo>${print.visor.url}images/pdf/departament_dinterior.gif</print.footer.logo>
 				<!-- JDBC -->
-                <database.jdbc.driverClass>oracle.jdbc.driver.OracleDriver</database.jdbc.driverClass>
-                <database.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</database.hibernate.dialect>
-                <database.jdbc.user>pise3_adm</database.jdbc.user>
-                <database.jdbc.password>pise3_adm</database.jdbc.password>
-                <database.jdbc.url>jdbc:oracle:thin:@dgpcpre.pise.interior.intranet:1522:dgpcint</database.jdbc.url>
-                <database.hibernate.hbm2ddl.auto>validate</database.hibernate.hbm2ddl.auto>
-                <database.schema>dgpcint</database.schema>
-                <database.catalog>dgpcint</database.catalog>
-                <database.characterEncoding>ISO-8859-15</database.characterEncoding>
-                <database.showsql>false</database.showsql>
-                <miliSecondsWaitingOpenConnection>20000</miliSecondsWaitingOpenConnection>
+				<database.jdbc.driverClass>oracle.jdbc.driver.OracleDriver</database.jdbc.driverClass>
+				<database.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</database.hibernate.dialect>
+				<database.jdbc.user>pise3_adm</database.jdbc.user>
+				<database.jdbc.password>pise3_adm</database.jdbc.password>
+				<database.jdbc.url>jdbc:oracle:thin:@dgpcpre.pise.interior.intranet:1522:dgpcint</database.jdbc.url>
+				<database.hibernate.hbm2ddl.auto>none</database.hibernate.hbm2ddl.auto>
+				<database.schema>dgpcint</database.schema>
+				<database.catalog>dgpcint</database.catalog>
+				<database.characterEncoding>ISO-8859-15</database.characterEncoding>
+				<database.showsql>false</database.showsql>
+				<miliSecondsWaitingOpenConnection>20000</miliSecondsWaitingOpenConnection>
 			</properties>
 		</profile>
 		<profile>
 			<id>pre</id>
 			<properties>
 				<!-- Proxies configuration -->
-  				<proxy.one>proxy?url=</proxy.one>
-  				<proxy.two />
+				<proxy.one>proxy?url=</proxy.one>
+				<proxy.two />
 				<searcher>rest/</searcher>
 				<proxy.proxyOn>true</proxy.proxyOn>
 				<proxy.noProxied>http://sigescat-pre.pise.interior.intranet,http://localhost</proxy.noProxied>
@@ -1064,17 +1058,17 @@
 				<proxy.proxyUser />
 				<proxy.proxyPassword />
 				<!-- JDBC -->
-                                <database.jdbc.driverClass>oracle.jdbc.driver.OracleDriver</database.jdbc.driverClass>
-                                <database.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</database.hibernate.dialect>
-                                <database.jdbc.user>pise3_adm</database.jdbc.user>
-                                <database.jdbc.password>pise3_adm</database.jdbc.password>
-                                <database.jdbc.url>jdbc:oracle:thin:@dgpcpre.pise.interior.intranet:1522:dgpcpre</database.jdbc.url>
-                                <database.hibernate.hbm2ddl.auto>validate</database.hibernate.hbm2ddl.auto>
-                                <database.schema>dgpcpre</database.schema>
-                                <database.catalog>dgpcpre</database.catalog>
-                                <database.characterEncoding>UTF-8</database.characterEncoding>
-                                <database.showsql>false</database.showsql>
-                                <miliSecondsWaitingOpenConnection>20000</miliSecondsWaitingOpenConnection>
+				<database.jdbc.driverClass>oracle.jdbc.driver.OracleDriver</database.jdbc.driverClass>
+				<database.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</database.hibernate.dialect>
+				<database.jdbc.user>pise3_adm</database.jdbc.user>
+				<database.jdbc.password>pise3_adm</database.jdbc.password>
+				<database.jdbc.url>jdbc:oracle:thin:@dgpcpre.pise.interior.intranet:1522:dgpcpre</database.jdbc.url>
+				<database.hibernate.hbm2ddl.auto>none</database.hibernate.hbm2ddl.auto>
+				<database.schema>dgpcpre</database.schema>
+				<database.catalog>dgpcpre</database.catalog>
+				<database.characterEncoding>UTF-8</database.characterEncoding>
+				<database.showsql>false</database.showsql>
+				<miliSecondsWaitingOpenConnection>20000</miliSecondsWaitingOpenConnection>
 
 			</properties>
 		</profile>
@@ -1106,17 +1100,17 @@
 				<print.header.logo>${print.visor.url}images/pdf/logo.png</print.header.logo>
 				<print.footer.logo>${print.visor.url}images/pdf/departament_dinterior.gif</print.footer.logo>
 				<!-- JDBC -->
-                                <database.jdbc.driverClass>oracle.jdbc.driver.OracleDriver</database.jdbc.driverClass>
-                                <database.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</database.hibernate.dialect>
-                                <database.jdbc.user>pise3_adm</database.jdbc.user>
-                                <database.jdbc.password>pise3_adm</database.jdbc.password>
-                                <database.jdbc.url>jdbc:oracle:thin:@dgpcpre.pise.interior.intranet:1522:dgpcint</database.jdbc.url>
-                                <database.hibernate.hbm2ddl.auto>validate</database.hibernate.hbm2ddl.auto>
-                                <database.schema>dgpcint</database.schema>
-                                <database.catalog>dgpcint</database.catalog>
-                                <database.characterEncoding>UTF-8</database.characterEncoding>
-                                <database.showsql>false</database.showsql>
-                                <miliSecondsWaitingOpenConnection>20000</miliSecondsWaitingOpenConnection>
+				<database.jdbc.driverClass>oracle.jdbc.driver.OracleDriver</database.jdbc.driverClass>
+				<database.hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</database.hibernate.dialect>
+				<database.jdbc.user>pise3_adm</database.jdbc.user>
+				<database.jdbc.password>pise3_adm</database.jdbc.password>
+				<database.jdbc.url>jdbc:oracle:thin:@dgpcpre.pise.interior.intranet:1522:dgpcint</database.jdbc.url>
+				<database.hibernate.hbm2ddl.auto>none</database.hibernate.hbm2ddl.auto>
+				<database.schema>dgpcint</database.schema>
+				<database.catalog>dgpcint</database.catalog>
+				<database.characterEncoding>UTF-8</database.characterEncoding>
+				<database.showsql>false</database.showsql>
+				<miliSecondsWaitingOpenConnection>20000</miliSecondsWaitingOpenConnection>
 
 			</properties>
 		</profile>
@@ -1129,7 +1123,7 @@
 				<database.jdbc.user>SICECAT2_ADM</database.jdbc.user>
 				<database.jdbc.password>SICECAT2_ADM</database.jdbc.password>
 				<database.jdbc.url>jdbc:oracle:thin:@oracle-apps:1521:gissicecat2</database.jdbc.url>
-				<database.hibernate.hbm2ddl.auto>validate</database.hibernate.hbm2ddl.auto>
+				<database.hibernate.hbm2ddl.auto>none</database.hibernate.hbm2ddl.auto>
 				<database.schema>gissicecatuser</database.schema>
 				<database.catalog>gissicecatuser</database.catalog>
 				<database.characterEncoding>UTF-8</database.characterEncoding>
@@ -1142,12 +1136,12 @@
 			<properties>
 				<!-- JDBC -->
 				<database.jdbc.driverClass>org.postgresql.Driver</database.jdbc.driverClass>
-				<database.hibernate.hbm2ddl.auto>validate</database.hibernate.hbm2ddl.auto>
+				<database.hibernate.hbm2ddl.auto>none</database.hibernate.hbm2ddl.auto>
 				<database.hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</database.hibernate.dialect>
 				<database.jdbc.user>persistence_geo</database.jdbc.user>
 				<database.jdbc.password>persistence_geo</database.jdbc.password>
 				<database.jdbc.url>jdbc:postgresql://localhost:5432/persistence_geo_db</database.jdbc.url>
-				<database.hibernate.hbm2ddl.auto>validate</database.hibernate.hbm2ddl.auto>
+				<database.hibernate.hbm2ddl.auto>none</database.hibernate.hbm2ddl.auto>
 				<database.schema>persistence_geo</database.schema>
 				<database.catalog>persistence_geo</database.catalog>
 				<database.characterEncoding>UTF-8</database.characterEncoding>
@@ -1170,20 +1164,20 @@
 	</dependencyManagement>
 
 	<dependencies>
-        <!-- Test dependencies-->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${org.springframework.version}</version>
-            <scope>test</scope>
-        </dependency>
-         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        
+		<!-- Test dependencies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>com.emergya</groupId>
 			<artifactId>persistence-geo-rest</artifactId>
@@ -1191,12 +1185,12 @@
 			<type>war</type>
 			<exclusions>
 				<exclusion>
-	    			<groupId>org.codehaus.jackson</groupId>
-	    			<artifactId>jackson-core-asl</artifactId>
+					<groupId>org.codehaus.jackson</groupId>
+					<artifactId>jackson-core-asl</artifactId>
 				</exclusion>
 				<exclusion>
-	    			<groupId>org.codehaus.jackson</groupId>
-	    			<artifactId>jackson-mapper-asl</artifactId>
+					<groupId>org.codehaus.jackson</groupId>
+					<artifactId>jackson-mapper-asl</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -1234,7 +1228,7 @@
 			<!-- JEE 6 -->
 			<scope>provided</scope>
 			<!-- JEE 5 -->
-			<!--scope>provided</scope-->
+			<!--scope>provided</scope -->
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -1245,62 +1239,62 @@
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
 		</dependency>
-		
-		
-        <!-- SPRING DEPENDENCIES -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-oxm</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
-	    
-	    <!-- Internal Conectors -->
-	    <dependency>
-	       <groupId>interior.cat.visor</groupId>
-  		   <artifactId>sigescat-searcher-conector</artifactId>
-     	   <version>${project.parent.version}</version>
+
+
+		<!-- SPRING DEPENDENCIES -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<!-- Internal Conectors -->
+		<dependency>
+			<groupId>interior.cat.visor</groupId>
+			<artifactId>sigescat-searcher-conector</artifactId>
+			<version>${project.parent.version}</version>
 			<exclusions>
 				<exclusion>
-	    			<groupId>asm</groupId>
-	    			<artifactId>asm</artifactId>
+					<groupId>asm</groupId>
+					<artifactId>asm</artifactId>
 				</exclusion>
 				<exclusion>
-	    			<groupId>cglib</groupId>
-	    			<artifactId>cglib</artifactId>
+					<groupId>cglib</groupId>
+					<artifactId>cglib</artifactId>
 				</exclusion>
 			</exclusions>
-	    </dependency>
-	    <dependency>
-	       <groupId>interior.cat.visor</groupId>
-  		   <artifactId>sigescat-openls-conector</artifactId>
- 	   	   <version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>interior.cat.visor</groupId>
+			<artifactId>sigescat-openls-conector</artifactId>
+			<version>${project.parent.version}</version>
 			<exclusions>
 				<exclusion>
-	    			<groupId>asm</groupId>
-	    			<artifactId>asm</artifactId>
+					<groupId>asm</groupId>
+					<artifactId>asm</artifactId>
 				</exclusion>
 				<exclusion>
-	    			<groupId>cglib</groupId>
-	    			<artifactId>cglib</artifactId>
+					<groupId>cglib</groupId>
+					<artifactId>cglib</artifactId>
 				</exclusion>
 			</exclusions>
-	    </dependency>
-	    
-	    <!-- Parseo a JSON -->
-        <dependency>
-		    <groupId>org.codehaus.jackson</groupId>
-		    <artifactId>jackson-mrbean</artifactId>
-		    <version>1.9.9</version>
+		</dependency>
+
+		<!-- Parseo a JSON -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mrbean</artifactId>
+			<version>1.9.9</version>
 		</dependency>
 
 		<!-- Tests -->
@@ -1311,8 +1305,8 @@
 			<classifier>jdk15</classifier>
 			<scope>test</scope>
 		</dependency>
-		
-		
+
+
 		<!-- Log4js dependecies -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -1338,9 +1332,9 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-		  <groupId>org.mapfish.geo</groupId>
-		  <artifactId>mapfish-geo-lib</artifactId>
-		  <version>1.2-SNAPSHOT</version>
+			<groupId>org.mapfish.geo</groupId>
+			<artifactId>mapfish-geo-lib</artifactId>
+			<version>1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.media</groupId>
@@ -1369,23 +1363,20 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-		
+
 		<!-- OLS schema -->
-	    <!--<dependency>
-	    	<groupId>org.jvnet.ogc</groupId>
-	    	<artifactId>ols-v_1_1_0-schema</artifactId>
-	    	<version>1.0.3</version>
-	    </dependency> -->
-	    <dependency>
-	    	<groupId>org.jvnet.jaxb2_commons</groupId>
-	    	<artifactId>jaxb2-basics-runtime</artifactId>
-	    	<version>0.6.0</version>
-	    </dependency>
-	    <dependency>
-	    	<groupId>org.jvnet.ogc</groupId>
-	    	<artifactId>gml-v_3_1_1-schema</artifactId>
-	    	<version>1.0.3</version>
-	    </dependency>
+		<!--<dependency> <groupId>org.jvnet.ogc</groupId> <artifactId>ols-v_1_1_0-schema</artifactId> 
+			<version>1.0.3</version> </dependency> -->
+		<dependency>
+			<groupId>org.jvnet.jaxb2_commons</groupId>
+			<artifactId>jaxb2-basics-runtime</artifactId>
+			<version>0.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jvnet.ogc</groupId>
+			<artifactId>gml-v_3_1_1-schema</artifactId>
+			<version>1.0.3</version>
+		</dependency>
 
 		<!-- Canigo -->
 		<!-- ====================================================== Core ====================================================== -->
@@ -1395,8 +1386,8 @@
 			<version>${canigo.core.version}</version>
 			<exclusions>
 				<exclusion>
-	    			<groupId>asm</groupId>
-	    			<artifactId>asm</artifactId>
+					<groupId>asm</groupId>
+					<artifactId>asm</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
