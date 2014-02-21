@@ -27,7 +27,7 @@
  * 
  * Authors:: Alejandro Díaz Torres (mailto:adiaz@emergya.com)
  */
-package interior.cat.visor.conectors.openls.service;
+package interior.cat.visor.openls.service;
 
 import java.util.List;
 

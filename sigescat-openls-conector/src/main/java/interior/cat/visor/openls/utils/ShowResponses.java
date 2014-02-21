@@ -27,7 +27,7 @@
  * 
  * Authors:: Alejandro Díaz Torres (mailto:adiaz@emergya.com)
  */
-package interior.cat.visor.conectors.openls.utils;
+package interior.cat.visor.openls.utils;
 
 import net.opengis.xls.v_1_2_0.GeocodeResponseListType;
 import net.opengis.xls.v_1_2_0.GeocodeResponseType;

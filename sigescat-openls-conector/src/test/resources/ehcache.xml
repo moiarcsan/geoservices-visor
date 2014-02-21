@@ -42,5 +42,9 @@
         maxElementsInMemory="100" overflowToDisk="true" diskPersistent="true"
         timeToIdleSeconds="1000" timeToLiveSeconds="10000"
         memoryStoreEvictionPolicy="LRU" />
+    <cache name="cercaGeneral" eternal="true"
+        maxElementsInMemory="100" overflowToDisk="true" diskPersistent="true"
+        timeToIdleSeconds="1000" timeToLiveSeconds="10000"
+        memoryStoreEvictionPolicy="LRU" />
         
 </ehcache>
