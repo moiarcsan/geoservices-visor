@@ -62,6 +62,21 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, Ext.data.XmlReader, {
 
 		return text;
 	},
+	
+	read : function(response){
+		// Esto se hace porque el servidor de DINT devuelve el responseXML vacío.
+		var doc = null;
+		if(!response.responseXML){
+			var parser = new DOMParser();
+			doc = parser.parseFromString(response.responseText, "application/xml");
+		}else{
+			doc = response.responseXML;
+		}
+        if(!doc) {
+            throw {message: "XmlReader.read: XML Document not available"};
+        }
+        return this.readRecords(doc);
+    },
 
 	readRecords : function(doc) {
 

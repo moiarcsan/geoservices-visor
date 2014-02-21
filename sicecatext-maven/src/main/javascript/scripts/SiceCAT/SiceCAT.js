@@ -69,8 +69,8 @@ SiceCAT = Ext
 					 * {String} Default text to be show
 					 */
 					typeCall: {
-						ALFANUMERICA: "alfanumérica",
-						CARTOGRAFIA: "cartografía"
+						ALFANUMERICA: "alfanumerica",
+						CARTOGRAFIA: "cartografia"
 					},
 
 					/**
