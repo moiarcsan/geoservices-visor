@@ -366,8 +366,10 @@ AuxiliaryLayer = {
 	 */
 	removeFeature : function(layername, feature) {
 		var f = AuxiliaryLayer.searchFeature(layername, feature);
-		var vectorLayer = AuxiliaryLayer.getLayer(layername);
-		vectorLayer.destroyFeatures(f);
+		var vectorLayer = AuxiliaryLayer.map.getLayersByName(layername);
+		if (vectorLayer.length == 0){
+			vectorLayer.destroyFeatures(f);
+		}
 	},
 	/*
 	 * Function: searchFeature

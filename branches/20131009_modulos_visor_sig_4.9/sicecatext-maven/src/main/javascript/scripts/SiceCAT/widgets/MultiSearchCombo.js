@@ -121,6 +121,12 @@ SiceCAT.widgets.MultiSearchCombo = Ext.extend(Ext.form.ComboBox, {
 	comboCercaSolr: null,
 	
 	comboPKSearch: null,
+	
+	/*
+	 * private: property [comboCercaGeneral]
+	 * CercaGeneral Searcher Service combo 
+	 */
+	comboCercaGeneral: null,
 
 	openlsUrl: "proxy.do?url=http://10.136.202.75/openls",
     
@@ -193,6 +199,9 @@ SiceCAT.widgets.MultiSearchCombo = Ext.extend(Ext.form.ComboBox, {
 				}else if(record.data.type == "cercasolr"){
 					this.setValue(record.data.nom);
 					this.comboCercaSolr.loadWFSResult(record);
+				}else if(record.data.type == "cercageneral"){
+					this.setValue(record.data.nom);
+					this.comboCercaGeneral.loadWFSResult(record);
 				}else if(record.data.type == "pksearch"){
 					this.setValue(record.data.nom);
 					this.comboPKSearch.getZoomToResult("s:y", "OBJECTID", record.get("id"));
@@ -245,16 +254,21 @@ SiceCAT.widgets.MultiSearchCombo = Ext.extend(Ext.form.ComboBox, {
         	this.comboOpenLS.multiData = this.multiData;
         	this.comboOpenLS.doQuery(q, forceAll, null);
         	// CercaSolr Service
-        	this.comboCercaSolr = new SiceCAT.widgets.SigescatCercaSolrGeneralSearcherCombo();
-        	this.comboCercaSolr.multiStore = this.store;
-        	this.comboCercaSolr.multiData = this.multiData;
-        	this.comboCercaSolr.doQuery(q, forceAll);
+//        	this.comboCercaSolr = new SiceCAT.widgets.SigescatCercaSolrGeneralSearcherCombo();
+//        	this.comboCercaSolr.multiStore = this.store;
+//        	this.comboCercaSolr.multiData = this.multiData;
+//        	this.comboCercaSolr.doQuery(q, forceAll);
         	// PKSearch
-        	this.comboPKSearch = new SiceCAT.PKSearchPanel();
-        	this.comboPKSearch.queryParameter = q;
-        	this.comboPKSearch.multiStore = this.store;
-        	this.comboPKSearch.multiData = this.multiData;
-        	this.comboPKSearch.query();
+//        	this.comboPKSearch = new SiceCAT.PKSearchPanel();
+//        	this.comboPKSearch.queryParameter = q;
+//        	this.comboPKSearch.multiStore = this.store;
+//        	this.comboPKSearch.multiData = this.multiData;
+//        	this.comboPKSearch.query();
+        	// CercaGeneral Service
+        	this.comboCercaGeneral = new SiceCAT.widgets.SigescatCercaGeneralSearcherCombo();
+        	this.comboCercaGeneral.multiStore = this.store;
+        	this.comboCercaGeneral.multiData = this.multiData;
+        	this.comboCercaGeneral.doQuery(q, forceAll);
     	}
     },
 

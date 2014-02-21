@@ -61,15 +61,15 @@ PersistenceGeo.loaders.WMSTLoader
 		    			maxExtent: map.maxExtent
 					}
 			};
-			//var layer_url = (OpenLayers.ProxyHost.indexOf("url2") != -1 ? OpenLayers.ProxyHost: "") + layerData.server_resource;
 			/* GetURLProxy */
 			var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, layerData.server_resource);
+			var layer_url_test = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, layerData.server_resource);
 			
 			var layer = new SiceCAT.Layer.WMS_SIGESCAT(layerData.name, layer_url,
 					layerOptions.layerOp1,
 					layerOptions.layerOp2, layerOptions);
 			
-			this.testLayer((layer_url, map, layerData, null);
+			this.testLayer(layer_url_test, map, layerData, null);
 			
 			//TODO: Wrap 
 			PersistenceGeoParser.AbstractLoader.postFunctionsWrapper(layerData, layer, layerTree);

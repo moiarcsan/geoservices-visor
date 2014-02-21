@@ -69,6 +69,10 @@ PersistenceGeo.loaders.WFSLoader
 			};
 
 			this.copyAllPosibleProperties(layerData['properties'], options);
+
+			options['version'] = '1.0.0';
+
+
 			var layer = new OpenLayers.Layer.Vector(
 					layerData['name'],
 					{
