@@ -24,6 +24,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="nom" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="score" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *         &lt;element name="tipus" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="utmX" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="utmY" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -41,7 +43,9 @@ import javax.xml.bind.annotation.XmlType;
     "municipi",
     "nom",
     "score",
-    "tipus"
+    "tipus",
+    "utmX",
+    "utmY"
 })
 public class SolrResponseItem {
 
@@ -53,6 +57,8 @@ public class SolrResponseItem {
     protected String nom;
     protected double score;
     protected String tipus;
+    protected double utmX;
+    protected double utmY;
 
     /**
      * Gets the value of the comarca property.
@@ -228,6 +234,38 @@ public class SolrResponseItem {
      */
     public void setTipus(String value) {
         this.tipus = value;
+    }
+
+    /**
+     * Gets the value of the utmX property.
+     * 
+     */
+    public double getUtmX() {
+        return utmX;
+    }
+
+    /**
+     * Sets the value of the utmX property.
+     * 
+     */
+    public void setUtmX(double value) {
+        this.utmX = value;
+    }
+
+    /**
+     * Gets the value of the utmY property.
+     * 
+     */
+    public double getUtmY() {
+        return utmY;
+    }
+
+    /**
+     * Sets the value of the utmY property.
+     * 
+     */
+    public void setUtmY(double value) {
+        this.utmY = value;
     }
 
 }

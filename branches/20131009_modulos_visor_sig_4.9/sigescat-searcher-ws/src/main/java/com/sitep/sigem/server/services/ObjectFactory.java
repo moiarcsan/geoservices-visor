@@ -26,8 +26,10 @@ public class ObjectFactory {
 
     private final static QName _CercaSolrParametritzada_QNAME = new QName("http://services.server.sigem.sitep.com/", "cercaSolrParametritzada");
     private final static QName _Cerca_QNAME = new QName("http://services.server.sigem.sitep.com/", "cerca");
+    private final static QName _CercaGeneralResponse_QNAME = new QName("http://services.server.sigem.sitep.com/", "cercaGeneralResponse");
     private final static QName _CercaSolrGeneralResponse_QNAME = new QName("http://services.server.sigem.sitep.com/", "cercaSolrGeneralResponse");
     private final static QName _CercaCarreteresResponse_QNAME = new QName("http://services.server.sigem.sitep.com/", "cercaCarreteresResponse");
+    private final static QName _CercaGeneral_QNAME = new QName("http://services.server.sigem.sitep.com/", "cercaGeneral");
     private final static QName _CercaCarreteres_QNAME = new QName("http://services.server.sigem.sitep.com/", "cercaCarreteres");
     private final static QName _CercaSolrParametritzadaResponse_QNAME = new QName("http://services.server.sigem.sitep.com/", "cercaSolrParametritzadaResponse");
     private final static QName _CercaResponse_QNAME = new QName("http://services.server.sigem.sitep.com/", "cercaResponse");
@@ -41,11 +43,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Response }
+     * Create an instance of {@link RoadResponseItem }
      * 
      */
-    public Response createResponse() {
-        return new Response();
+    public RoadResponseItem createRoadResponseItem() {
+        return new RoadResponseItem();
     }
 
     /**
@@ -57,19 +59,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RoadResponseItem }
+     * Create an instance of {@link CercaSolrGeneralResponse }
      * 
      */
-    public RoadResponseItem createRoadResponseItem() {
-        return new RoadResponseItem();
+    public CercaSolrGeneralResponse createCercaSolrGeneralResponse() {
+        return new CercaSolrGeneralResponse();
     }
 
     /**
-     * Create an instance of {@link CercaSolrParametritzada }
+     * Create an instance of {@link CercaGeneral }
      * 
      */
-    public CercaSolrParametritzada createCercaSolrParametritzada() {
-        return new CercaSolrParametritzada();
+    public CercaGeneral createCercaGeneral() {
+        return new CercaGeneral();
     }
 
     /**
@@ -81,27 +83,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SolrResponse }
+     * 
+     */
+    public SolrResponse createSolrResponse() {
+        return new SolrResponse();
+    }
+
+    /**
      * Create an instance of {@link Cerca }
      * 
      */
     public Cerca createCerca() {
         return new Cerca();
-    }
-
-    /**
-     * Create an instance of {@link CercaSolrParametritzadaResponse }
-     * 
-     */
-    public CercaSolrParametritzadaResponse createCercaSolrParametritzadaResponse() {
-        return new CercaSolrParametritzadaResponse();
-    }
-
-    /**
-     * Create an instance of {@link CercaCarreteres }
-     * 
-     */
-    public CercaCarreteres createCercaCarreteres() {
-        return new CercaCarreteres();
     }
 
     /**
@@ -113,27 +107,51 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Response }
+     * 
+     */
+    public Response createResponse() {
+        return new Response();
+    }
+
+    /**
+     * Create an instance of {@link CercaSolrParametritzada }
+     * 
+     */
+    public CercaSolrParametritzada createCercaSolrParametritzada() {
+        return new CercaSolrParametritzada();
+    }
+
+    /**
+     * Create an instance of {@link CercaCarreteres }
+     * 
+     */
+    public CercaCarreteres createCercaCarreteres() {
+        return new CercaCarreteres();
+    }
+
+    /**
+     * Create an instance of {@link CercaGeneralResponse }
+     * 
+     */
+    public CercaGeneralResponse createCercaGeneralResponse() {
+        return new CercaGeneralResponse();
+    }
+
+    /**
+     * Create an instance of {@link CercaSolrGeneral }
+     * 
+     */
+    public CercaSolrGeneral createCercaSolrGeneral() {
+        return new CercaSolrGeneral();
+    }
+
+    /**
      * Create an instance of {@link FacetSearchResponse }
      * 
      */
     public FacetSearchResponse createFacetSearchResponse() {
         return new FacetSearchResponse();
-    }
-
-    /**
-     * Create an instance of {@link SolrResponse }
-     * 
-     */
-    public SolrResponse createSolrResponse() {
-        return new SolrResponse();
-    }
-
-    /**
-     * Create an instance of {@link CercaSolrGeneralResponse }
-     * 
-     */
-    public CercaSolrGeneralResponse createCercaSolrGeneralResponse() {
-        return new CercaSolrGeneralResponse();
     }
 
     /**
@@ -145,11 +163,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CercaSolrGeneral }
+     * Create an instance of {@link CercaSolrParametritzadaResponse }
      * 
      */
-    public CercaSolrGeneral createCercaSolrGeneral() {
-        return new CercaSolrGeneral();
+    public CercaSolrParametritzadaResponse createCercaSolrParametritzadaResponse() {
+        return new CercaSolrParametritzadaResponse();
     }
 
     /**
@@ -171,6 +189,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CercaGeneralResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services.server.sigem.sitep.com/", name = "cercaGeneralResponse")
+    public JAXBElement<CercaGeneralResponse> createCercaGeneralResponse(CercaGeneralResponse value) {
+        return new JAXBElement<CercaGeneralResponse>(_CercaGeneralResponse_QNAME, CercaGeneralResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CercaSolrGeneralResponse }{@code >}}
      * 
      */
@@ -186,6 +213,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://services.server.sigem.sitep.com/", name = "cercaCarreteresResponse")
     public JAXBElement<CercaCarreteresResponse> createCercaCarreteresResponse(CercaCarreteresResponse value) {
         return new JAXBElement<CercaCarreteresResponse>(_CercaCarreteresResponse_QNAME, CercaCarreteresResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CercaGeneral }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services.server.sigem.sitep.com/", name = "cercaGeneral")
+    public JAXBElement<CercaGeneral> createCercaGeneral(CercaGeneral value) {
+        return new JAXBElement<CercaGeneral>(_CercaGeneral_QNAME, CercaGeneral.class, null, value);
     }
 
     /**
