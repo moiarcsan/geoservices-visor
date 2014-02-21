@@ -86,6 +86,26 @@ public interface SearchService {
     /**
      * 
      * @param query
+     * @param filaFinal
+     * @param filaInicial
+     * @return
+     *     returns com.sitep.sigem.server.services.Response
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "cercaGeneral", targetNamespace = "http://services.server.sigem.sitep.com/", className = "com.sitep.sigem.server.services.CercaGeneral")
+    @ResponseWrapper(localName = "cercaGeneralResponse", targetNamespace = "http://services.server.sigem.sitep.com/", className = "com.sitep.sigem.server.services.CercaGeneralResponse")
+    public Response cercaGeneral(
+        @WebParam(name = "query", targetNamespace = "")
+        String query,
+        @WebParam(name = "filaInicial", targetNamespace = "")
+        Integer filaInicial,
+        @WebParam(name = "filaFinal", targetNamespace = "")
+        Integer filaFinal);
+
+    /**
+     * 
+     * @param query
      * @return
      *     returns com.sitep.sigem.server.services.RoadResponse
      */
