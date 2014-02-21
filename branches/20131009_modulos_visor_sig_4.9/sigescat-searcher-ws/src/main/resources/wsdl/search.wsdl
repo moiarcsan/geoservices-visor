@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="SearchServiceImplService" targetNamespace="http://services.server.sigem.sitep.com/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://services.server.sigem.sitep.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://services.server.sigem.sitep.com/" xmlns:tns="http://services.server.sigem.sitep.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="cerca" type="tns:cerca" />
+    <xs:element name="cercaCarreteres" type="tns:cercaCarreteres" />
+    <xs:element name="cercaCarreteresResponse" type="tns:cercaCarreteresResponse" />
+    <xs:element name="cercaGeneral" type="tns:cercaGeneral" />
+    <xs:element name="cercaGeneralResponse" type="tns:cercaGeneralResponse" />
+    <xs:element name="cercaResponse" type="tns:cercaResponse" />
+    <xs:element name="cercaSolrGeneral" type="tns:cercaSolrGeneral" />
+    <xs:element name="cercaSolrGeneralResponse" type="tns:cercaSolrGeneralResponse" />
+    <xs:element name="cercaSolrParametritzada" type="tns:cercaSolrParametritzada" />
+    <xs:element name="cercaSolrParametritzadaResponse" type="tns:cercaSolrParametritzadaResponse" />
+    <xs:complexType name="cercaSolrParametritzada">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="query" type="xs:string" />
+            <xs:element minOccurs="0" name="entitats" type="xs:string" />
+            <xs:element minOccurs="0" name="filaInicial" type="xs:int" />
+            <xs:element minOccurs="0" name="filaFinal" type="xs:int" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="cercaSolrParametritzadaResponse">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="tns:solrResponse" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="solrResponse">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="elapsedTime" type="xs:long" />
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="facetLst" nillable="true" type="tns:facetSearchResponse" />
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="lst" nillable="true" type="tns:solrResponseItem" />
+            <xs:element minOccurs="0" name="totalHits" type="xs:long" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="facetSearchResponse">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="entitat" type="xs:string" />
+            <xs:element name="hits" type="xs:int" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="solrResponseItem">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="comarca" type="xs:string" />
+            <xs:element minOccurs="0" name="descripcio" type="xs:string" />
+            <xs:element minOccurs="0" name="entitat" type="xs:string" />
+            <xs:element name="id" type="xs:long" />
+            <xs:element minOccurs="0" name="municipi" type="xs:string" />
+            <xs:element minOccurs="0" name="nom" type="xs:string" />
+            <xs:element name="score" type="xs:double" />
+            <xs:element minOccurs="0" name="tipus" type="xs:string" />
+            <xs:element name="utmX" type="xs:double" />
+            <xs:element name="utmY" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="cercaSolrGeneral">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="query" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="cercaSolrGeneralResponse">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="tns:solrResponse" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="cerca">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="query" type="xs:string" />
+            <xs:element minOccurs="0" name="entitats" type="xs:string" />
+            <xs:element minOccurs="0" name="filaInicial" type="xs:int" />
+            <xs:element minOccurs="0" name="filaFinal" type="xs:int" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="cercaResponse">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="tns:response" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="response">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="roadResponse" type="tns:roadResponse" />
+            <xs:element minOccurs="0" name="solrResponse" type="tns:solrResponse" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="roadResponse">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="lst" nillable="true" type="tns:roadResponseItem" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="roadResponseItem">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="entitat" type="xs:string" />
+            <xs:element name="id" type="xs:int" />
+            <xs:element minOccurs="0" name="nom" type="xs:string" />
+            <xs:element minOccurs="0" name="valor" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="cercaGeneral">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="query" type="xs:string" />
+            <xs:element minOccurs="0" name="filaInicial" type="xs:int" />
+            <xs:element minOccurs="0" name="filaFinal" type="xs:int" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="cercaGeneralResponse">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="tns:response" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="cercaCarreteres">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="query" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="cercaCarreteresResponse">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="tns:roadResponse" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="cercaSolrParametritzada">
+    <wsdl:part element="tns:cercaSolrParametritzada" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cerca">
+    <wsdl:part element="tns:cerca" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cercaGeneralResponse">
+    <wsdl:part element="tns:cercaGeneralResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cercaSolrGeneralResponse">
+    <wsdl:part element="tns:cercaSolrGeneralResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cercaCarreteresResponse">
+    <wsdl:part element="tns:cercaCarreteresResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cercaGeneral">
+    <wsdl:part element="tns:cercaGeneral" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cercaCarreteres">
+    <wsdl:part element="tns:cercaCarreteres" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cercaSolrParametritzadaResponse">
+    <wsdl:part element="tns:cercaSolrParametritzadaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cercaResponse">
+    <wsdl:part element="tns:cercaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cercaSolrGeneral">
+    <wsdl:part element="tns:cercaSolrGeneral" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SearchService">
+    <wsdl:operation name="cercaSolrParametritzada">
+      <wsdl:input message="tns:cercaSolrParametritzada" name="cercaSolrParametritzada">
+    </wsdl:input>
+      <wsdl:output message="tns:cercaSolrParametritzadaResponse" name="cercaSolrParametritzadaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cercaSolrGeneral">
+      <wsdl:input message="tns:cercaSolrGeneral" name="cercaSolrGeneral">
+    </wsdl:input>
+      <wsdl:output message="tns:cercaSolrGeneralResponse" name="cercaSolrGeneralResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cerca">
+      <wsdl:input message="tns:cerca" name="cerca">
+    </wsdl:input>
+      <wsdl:output message="tns:cercaResponse" name="cercaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cercaGeneral">
+      <wsdl:input message="tns:cercaGeneral" name="cercaGeneral">
+    </wsdl:input>
+      <wsdl:output message="tns:cercaGeneralResponse" name="cercaGeneralResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cercaCarreteres">
+      <wsdl:input message="tns:cercaCarreteres" name="cercaCarreteres">
+    </wsdl:input>
+      <wsdl:output message="tns:cercaCarreteresResponse" name="cercaCarreteresResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SearchServiceImplServiceSoapBinding" type="tns:SearchService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="cercaSolrGeneral">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="cercaSolrGeneral">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="cercaSolrGeneralResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cercaSolrParametritzada">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="cercaSolrParametritzada">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="cercaSolrParametritzadaResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cerca">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="cerca">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="cercaResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cercaGeneral">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="cercaGeneral">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="cercaGeneralResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cercaCarreteres">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="cercaCarreteres">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="cercaCarreteresResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SearchServiceImplService">
+    <wsdl:port binding="tns:SearchServiceImplServiceSoapBinding" name="SearchServiceImplPort">
+      <soap:address location="http://sigescat.pise.interior.intranet/search" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
