@@ -178,9 +178,9 @@
 		  <configuration>
 		    <doCheck>false</doCheck>
 		    <doUpdate>false</doUpdate>
-	        <providerImplementations>
+	        <!--<providerImplementations>
 	          <svn>javasvn</svn>
-	        </providerImplementations>    
+	        </providerImplementations>-->    
 		  </configuration>
 	  </plugin>
     </plugins>
