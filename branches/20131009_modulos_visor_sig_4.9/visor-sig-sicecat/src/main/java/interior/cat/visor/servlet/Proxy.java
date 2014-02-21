@@ -28,7 +28,7 @@
  */
 package interior.cat.visor.servlet;
 
-import interior.cat.visor.conectors.openls.utils.HTTPRequestPoster;
+import interior.cat.visor.openls.utils.HTTPRequestPoster;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -182,7 +182,6 @@ public class Proxy extends HttpServlet {
 	public void process(HttpServletRequest request,
 			HttpServletResponse response, boolean post)
 			throws ServletException, IOException, FileNotFoundException {
-
 		OutputStream os = response.getOutputStream();
 		try {
 			// Replaces from authorizedUrls
@@ -304,7 +303,7 @@ public class Proxy extends HttpServlet {
 								e.getMessage());
 					}
 				}
-
+				response.setContentType("text/xml");
 				os.write(writer.toString().getBytes());
 
 			} else {

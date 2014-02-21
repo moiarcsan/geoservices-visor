@@ -118,6 +118,8 @@ public class EnvironmentUtils {
 	 * @param environment
 	 */
 	public static void doLog4jConfiguration(String platform, String environment){
+		String urlFile = getConfigPath(platform, environment) + "/" +  LOG4J_ALL;
+		System.out.println("url fichero log4j: " + urlFile);
 		PropertyConfigurator.configure(getConfigPath(platform, environment) + "/" +  LOG4J_ALL);
 	}
 	
