@@ -1,0 +1,1 @@
+update GIS_MAP_CONF set openlayersproxyhost = '1@@proxy.do?url=';
