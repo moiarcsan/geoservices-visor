@@ -140,7 +140,12 @@
 		<url-pattern>/files.do/*</url-pattern>
 		<!-- <url-pattern>/lib/SiceCAT/data/*</url-pattern> -->
 	</servlet-mapping>
-
+	<servlet>
+		<servlet-name>log4j-init</servlet-name>
+		<servlet-class>interior.cat.visor.servlet.Log4jInit</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
