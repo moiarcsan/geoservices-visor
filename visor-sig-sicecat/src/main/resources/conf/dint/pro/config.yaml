@@ -75,7 +75,7 @@ layouts:
             maxHeight: 40
             maxWidth: 40
             align: right
-            url: http://localhost/sicecat2/Visor/images/pdf/logo.png
+            url: file:///export/AppJavaDades/sicecat2/in/gis/pdf/logo.png
 
         - !text
           text: ''
@@ -114,5 +114,5 @@ layouts:
             maxWidth: 150
             maxHeight: 10
             spacingAfter:20
-            url:http://localhost/sicecat2/Visor/images/pdf/departament_dinterior.gif
+            url: file:///export/AppJavaDades/sicecat2/in/gis/pdf/departament_dinterior.gif
 	

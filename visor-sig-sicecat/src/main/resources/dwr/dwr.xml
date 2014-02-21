@@ -1,38 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 1.0//EN" "http://www.getahead.ltd.uk/dwr/dwr10.dtd">
 <dwr>
-  <allow>
-    <create creator="spring" javascript="webValidationService">
-      <param name="beanName" value="webValidationService"/>
-      <include method="getWebValidationResults"/>
-      <include method="getWebValidationResultsTextField"/>
-      <include method="getWebValidationResultsOnSubmit"/>
-    </create>
-    <create creator="spring" javascript="webOptionsListService">
-      <param name="beanName" value="optionsListService"/>
-    </create>
-    <create creator="spring" javascript="autocompleteService">
-      <param name="beanName" value="autocompleteService"/>
-      <include method="doAutocomplete"/>
-    </create>
-    <create creator="spring" javascript="searchPanelService">
-      <param name="beanName" value="searchPanelService"/>
-      <include method="doSearch"/>
-      <include method="doSearchSimple"/>
-    </create>
-    <!--Example for publishing a service of prototip-->
-    <create creator="spring" javascript="geoNamesService">
-      <param name="beanName" value="geoNamesService"/>
-    </create>
-    <convert converter="bean" match="org.apache.commons.validator.*"/>
-    <convert converter="bean" match="org.springframework.validation.*"/>
-    <convert converter="bean" match="net.gencat.ctti.canigo.services.validation.*"/>
-    <convert converter="bean" match="net.gencat.ctti.canigo.services.web.taglib.util.*"/>
-    <convert converter="bean" match="org.apache.struts.util.LabelValueBean"/>
-  </allow>
-  <signatures>import java.util.List;
-			import org.apache.struts.util.LabelValueBean;
-			import net.gencat.ctti.canigo.services.web.taglib.util.options.OptionsListService;
-			
-			public List&lt;LabelValueBean> OptionsListService.getOptions(Map&lt;String,String> map,String optionListName);</signatures>
+	<allow>
+		<create creator="spring" javascript="webValidationService">
+			<param name="beanName" value="webValidationService" />
+			<include method="getWebValidationResults" />
+			<include method="getWebValidationResultsTextField" />
+			<include method="getWebValidationResultsOnSubmit" />
+		</create>
+		<create creator="spring" javascript="webOptionsListService">
+			<param name="beanName" value="optionsListService" />
+		</create>
+		<create creator="spring" javascript="autocompleteService">
+			<param name="beanName" value="autocompleteService" />
+			<include method="doAutocomplete" />
+		</create>
+		<create creator="spring" javascript="searchPanelService">
+			<param name="beanName" value="searchPanelService" />
+			<include method="doSearch" />
+			<include method="doSearchSimple" />
+		</create>
+		<!--Example for publishing a service of prototip -->
+		<create creator="spring" javascript="geoNamesService">
+			<param name="beanName" value="geoNamesService" />
+		</create>
+		<convert converter="bean" match="org.apache.commons.validator.*" />
+		<convert converter="bean" match="org.springframework.validation.*" />
+		<convert converter="bean"
+			match="net.gencat.ctti.canigo.services.validation.*" />
+		<convert converter="bean"
+			match="net.gencat.ctti.canigo.services.web.taglib.util.*" />
+		<convert converter="bean" match="org.apache.struts.util.LabelValueBean" />
+	</allow>
+	<signatures>import java.util.List;
+		import
+		org.apache.struts.util.LabelValueBean;
+		import
+		net.gencat.ctti.canigo.services.web.taglib.util.options.OptionsListService;
+
+		public List&lt;LabelValueBean>
+		OptionsListService.getOptions(Map&lt;String,String> map,String
+		optionListName);</signatures>
 </dwr>

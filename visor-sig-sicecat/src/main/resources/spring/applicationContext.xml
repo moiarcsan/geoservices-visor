@@ -45,6 +45,7 @@
         <property name="locations">
             <list>
                 <value>classpath:application.properties</value>
+                <value>classpath:conf/${platform:devel}/${entorn:local}/log4j.properties</value>
             </list>
         </property>
     </bean>
