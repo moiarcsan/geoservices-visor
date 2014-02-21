@@ -43,8 +43,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import interior.cat.visor.conectors.openls.service.OpenLSService;
-import interior.cat.visor.conectors.openls.utils.ShowResponses;
+import interior.cat.visor.openls.service.OpenLSService;
+import interior.cat.visor.openls.utils.ShowResponses;
 
 /**
  * Tests junit para el conector de openls

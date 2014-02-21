@@ -26,7 +26,7 @@
  * 
  * Authors:: Alejandro Díaz Torres (mailto:adiaz@emergya.com)
  */
-package interior.cat.visor.conectors.openls.service.impl;
+package interior.cat.visor.openls.service.impl;
 
 import java.io.Reader;
 import java.io.StringReader;
@@ -54,8 +54,8 @@ import org.springframework.xml.transform.StringSource;
 
 import com.googlecode.ehcache.annotations.Cacheable;
 
-import interior.cat.visor.conectors.openls.service.OpenLSService;
-import interior.cat.visor.conectors.openls.utils.HTTPRequestPoster;
+import interior.cat.visor.openls.service.OpenLSService;
+import interior.cat.visor.openls.utils.HTTPRequestPoster;
 
 /**
  * Implementacion de conector de SearcherService

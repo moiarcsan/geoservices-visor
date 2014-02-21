@@ -1,4 +1,4 @@
-package interior.cat.visor.conectors.openls.utils;
+package interior.cat.visor.openls.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
