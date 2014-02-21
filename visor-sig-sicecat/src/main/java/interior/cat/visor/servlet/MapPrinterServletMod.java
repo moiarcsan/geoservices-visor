@@ -28,9 +28,10 @@ package interior.cat.visor.servlet;
 
 import interior.cat.visor.utils.EnvironmentUtils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import org.json.JSONException;
+import org.json.JSONWriter;
+
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,6 +58,7 @@ public class MapPrinterServletMod extends MapPrinterServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private String app = null;
 	
 	// urls sobreescritas
     protected static final String INFO_URL = "/info.json.do";
@@ -86,10 +88,53 @@ public class MapPrinterServletMod extends MapPrinterServlet {
     // doPost override
     protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
         final String additionalPath = httpServletRequest.getPathInfo();
-        if (additionalPath.equals(CREATE_URL)) {
+        final String idFile = httpServletRequest.getParameter("id");
+        if (additionalPath != null && additionalPath.equals(CREATE_URL)) {
             createPDF(httpServletRequest, httpServletResponse, getBaseUrl(httpServletRequest));
+        }else if(idFile != null){
+        	getFile(httpServletRequest, httpServletResponse, idFile);
         } else {
             error(httpServletResponse, "Unknown method: " + additionalPath, 404);
+        }
+    }
+    
+    /**
+     * To get (in JSON) the information about the available formats and CO.
+     */
+    protected void getInfo(HttpServletRequest req, HttpServletResponse resp, String basePath) throws ServletException, IOException {
+            app = req.getParameter("app");
+            //System.out.println("app = "+app);
+            
+        MapPrinter printer = getMapPrinter(app);
+        resp.setContentType("application/json; charset=utf-8");
+        final PrintWriter writer = resp.getWriter();
+
+        try {
+            final String var = req.getParameter("var");
+            if (var != null) {
+                writer.print(var + "=");
+            }
+
+            JSONWriter json = new JSONWriter(writer);
+            try {
+                json.object();
+                {
+                    printer.printClientConfig(json);
+                    json.key("printURL").value(basePath + PRINT_URL);
+                    json.key("createURL").value(basePath + CREATE_URL);
+                    if (app != null) {
+                            json.key("app").value(app);
+                    }
+                }
+                json.endObject();
+            } catch (JSONException e) {
+                throw new ServletException(e);
+            }
+            if (var != null) {
+                writer.print(";");
+            }
+        } finally {
+            writer.close();
         }
     }
     

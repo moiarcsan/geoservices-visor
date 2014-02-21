@@ -94,10 +94,13 @@ public class MapPrinterImageServlet extends MapPrinterServletMod {
 			HttpServletResponse httpServletResponse) throws ServletException,
 			IOException {
 		final String additionalPath = httpServletRequest.getPathInfo();
-		if (additionalPath.equals(CREATE_URL)) {
+		final String idFile = httpServletRequest.getParameter("id");
+		if (additionalPath != null && additionalPath.equals(CREATE_URL)) {
 			createImage(httpServletRequest, httpServletResponse,
 					getBaseUrl(httpServletRequest));
-		} else {
+		}else if(idFile != null){
+        	getImage(httpServletRequest, httpServletResponse, idFile);
+        } else {
 			error(httpServletResponse, "Unknown method: " + additionalPath, 404);
 		}
 	}
