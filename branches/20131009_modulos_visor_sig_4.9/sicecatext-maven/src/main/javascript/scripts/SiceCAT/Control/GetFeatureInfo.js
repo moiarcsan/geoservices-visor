@@ -26,7 +26,7 @@
  * 
  * Authors: Alejandro Diaz Torres (mailto:adiaz@emergya.com)
  * 
- * Edited by: Mois�s Arcos Santiago <marcos@emergya.com>
+ * Edited by: Moisés Arcos Santiago <marcos@emergya.com>
  */
 
 /**
@@ -443,26 +443,24 @@ SiceCAT.Control.GetFeatureInfo = OpenLayers
 																	message = texto;
 																}
 
-																var popup = new GeoExt.Popup(
+																var popup = new Ext.Window(
 																		{
 																			title : layer.name,
-																			location : pixel,
+																			//location : pixel,
 																			map : map,
-																			width : 700,
+																			//width : 700,
 																			html : message,
+																			layout: 'fit',
 																			collapsible : false,
 																			autoScroll : true,
 																			listeners : {
-																				'afterrender' : function(
-																						popup) {
-																					myMask
-																							.hide();
+																				'afterrender' : function(popup) {
+																					myMask.hide();
 																				}
 																			}
 																		});
 
-																popup
-																		.doLayout();
+																popup.doLayout();
 																popup.show();
 															}
 														});
@@ -625,20 +623,18 @@ SiceCAT.Control.GetFeatureInfo = OpenLayers
 												} else {
 													var pixel = new OpenLayers.Pixel(posX, posY);
 													var point = map.getLonLatFromViewPortPx(pixel);
-													var popup = new GeoExt.Popup(
+													var popup = new Ext.Window(
 															{
 																title : "Error " + " ("+this_.titleWinCoord+": X=" +  point.lon + "-"
 																		+ "Y="+ point.lat + ")",
-																location : lonlat,
+																//location : lonlat,
 																map : map,
 																width : 200,
 																html : integradorAPI.errorFeatureNotFound,
 																collapsible : false,
 																listeners : {
-																	'afterrender' : function(
-																			popup) {
-																		myMask
-																				.hide();
+																	'afterrender' : function(popup) {
+																		myMask.hide();
 																	}
 																}
 															});

@@ -229,7 +229,7 @@ OpenLayers.Control.ToolTipControl = OpenLayers
 				        	items: items_acc
 				        });
 						// Add the new accordion with the layers info
-						var popup = new GeoExt.Popup({
+						var popup = new Ext.Window({
 							title : this.titlePopup,
 							location : feature,
 							layout: 'fit',
