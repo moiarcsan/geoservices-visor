@@ -144,11 +144,6 @@ OpenLayers.Control.ToolTipControl = OpenLayers
 						if(!!this.getVectorLayers){
 							this.setLayer(this.getVectorLayers());
 						}
-						// CHECK IF THE TOOLTIP IS LOADED
-						if(actions["tooltipcontrol"]){
-							actions["tooltipcontrol"].disable();
-							actions["tooltipcontrol"].enable();
-						}
 					},
 					/**
 					 * Function: closePopUps
@@ -174,19 +169,6 @@ OpenLayers.Control.ToolTipControl = OpenLayers
 						this.events.on({
 							"featureunhighlighted" : this.closePopUps
 						});
-
-						map.events.un({
-							"removelayer" : this.updateLayers,
-							"addlayer" : this.updateLayers
-						});
-						
-						var this_ = this;
-
-						map.events.on({
-							"removelayer" : this.updateLayers,
-							"addlayer" : this.updateLayers
-						});
-
 					},
 					
 					/**
@@ -286,7 +268,7 @@ OpenLayers.Control.ToolTipControl = OpenLayers
 						var vectorLayers = [];
 						Ext.each(mapLayers, function(l){
 							// Check  if it's a vector layer
-							if(l instanceof OpenLayers.Layer.Vector){
+							if(l instanceof OpenLayers.Layer.Vector && !(l instanceof OpenLayers.Layer.Vector.RootContainer)){
 								// Add layer to the array
 								vectorLayers.push(l);
 							}
