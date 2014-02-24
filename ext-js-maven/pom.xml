@@ -126,6 +126,7 @@
         <groupId>org.codehaus.mojo.javascript</groupId>
         <artifactId>javascript-maven-plugin</artifactId>
         <extensions>true</extensions>
+        <version>1.0-alpha-1-SNAPSHOT</version>
         <executions>
             <execution>
                 <goals>
