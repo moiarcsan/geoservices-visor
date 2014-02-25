@@ -45,7 +45,7 @@
  * 
  * Author:
  * 
- *  Moisés Arcos Santiago (marcos@emergya.com)
+ *  Moises Arcos Santiago (marcos@emergya.com)
  */
 Ext.namespace("SiceCAT");
 SiceCAT.FeatureSelectedMonitor = Ext.extend(Ext.Window, {
@@ -208,6 +208,26 @@ SiceCAT.FeatureSelectedMonitor = Ext.extend(Ext.Window, {
 	 */
 	setControl: function(control){
 		this.control = control;
+	},
+	/**
+	 * Function: close
+	 * 
+	 * Deactivates the control associated and hide the window
+	 * 
+	 */
+	close: function(){
+		// Event control to chrome vs firefox
+		var evento = null;
+		if(!Ext.isGecko){
+			evento = event;
+		}else{
+			evento = evt;
+		}
+		// Deactivate the actual control and activate the tooltip control
+		if(this.control && this.control.active){
+			this.control.deactivate();
+			actions["tooltipcontrol"].control.activate();
+		}
 	}
 });
 /** api: xtype = gx_sicecat_geosearch */

@@ -911,7 +911,7 @@ SiceCAT.MapLayout = Ext
 						};
 						Sicecat.featureSelectedMonitor = new SiceCAT.FeatureSelectedMonitor({
 							title: 'Selected features by layers',
-							closeAction : 'hide',
+							closeAction : 'close',
 							width : 200,
 							height : 300,
 							id : 'features_selected',
