@@ -228,6 +228,11 @@
     <version>3.1</version>
     <scope>provided</scope>
   </dependency>
+  <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.4</version>
+    </dependency>
   </dependencies>
   <properties>
     <hibernate.version>3.5.1-Final</hibernate.version>
