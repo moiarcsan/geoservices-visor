@@ -18,6 +18,7 @@ import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.io.IOUtils;
 
 
 public class HTTPRequestPoster {
@@ -245,12 +246,7 @@ public class HTTPRequestPoster {
 	 * Pipes everything from the reader to the writer via a buffer
 	 */
 	private static void pipe(Reader reader, Writer writer) throws IOException {
-		char[] buf = new char[1024];
-		int read = 0;
-		while ((read = reader.read(buf)) >= 0) {
-			writer.write(buf, 0, read);
-		}
-		writer.flush();
+        IOUtils.copy(reader, writer);
 	}
 
 }
