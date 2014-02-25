@@ -514,19 +514,19 @@ OpenLayers.Control.ToolTipControl = OpenLayers
 					 * Params: 
 					 * 
 					 * */
-					clickHandler: function(feature){
+					clickHandler: function(evento){
 						this.closePopUps();
 						var items_acc = [];
 						// GetFeatureInfo
 						var info_control = new SiceCAT.Control.GetFeatureInfo();
-						var grid = info_control.clickEvent(event);
+						var grid = info_control.clickEvent(evento);
 						var moreInfo = new Ext.Panel({
 			            	title: this.titleSeeMore,
 			            	autoScroll: true,
 			            	layout: 'fit',
 			            	items: [grid]
 			            });
-						feature = event.xy;
+						feature = evento.xy;
 						items_acc.push(moreInfo);
 						
 						// Reverse Geocoding
