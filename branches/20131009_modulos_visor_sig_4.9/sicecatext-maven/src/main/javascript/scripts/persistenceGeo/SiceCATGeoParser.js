@@ -36,55 +36,100 @@ Ext.namespace("PersistenceGeoParser");
  * The SiceCATGeoParser is designed to parse data behind persistenceGeo 
  * library and sicecat viewer
  */
-SiceCATGeoParser = Ext.extend(PersistenceGeo.Parser,
-				{
+SiceCATGeoParser = Ext.extend(PersistenceGeo.Parser,{
 						
-					FOLDERS_ADDED:{},
-					INDEX_FOLDER: 1,
-					
-					LOADERS:{
-						"WMS":1,
-						"WFS":2,
-						"KML":3,
-						"GML":5,
-						"TEXT":6,
-						"WMST":7
-					},
+    FOLDERS_ADDED:{},
+    INDEX_FOLDER: 1,
 
-				    initComponent: function() {
+    LOADERS:{
+        "WMS":1,
+        "WFS":2,
+        "KML":3,
+        "GML":5,
+        "TEXT":6,
+        "WMST":7
+    },
 
-				    	// Change parser for WMST
-				    	this.LOADERS_CLASSES["WMST"] = new PersistenceGeo.loaders.WMSTLoader({
-				        	restBaseUrl: this.getRestBaseUrl(),
-				        	map: this.map
-				        });
-				    	// Change parser for TEXT load
-				    	this.LOADERS_CLASSES["TEXT"] = new PersistenceGeo.loaders.TEXTLoader({
-				        	restBaseUrl: this.getRestBaseUrl(),
-				        	map: this.map
-				        });
+    initComponent: function() {
 
-				        SiceCATGeoParser.superclass.initComponent.call(this);
-				    },
-					
-					/**
-					 * Include layerTree on treeConfigObject
-					 * 
-					 */
-					parseLayerTreeConfig: function(treeConfigObject, layerTree, notGroupLayers){
-						var rootFolder = layerTree;
-						
-						for ( var i = 0; i < rootFolder.length; i++) {	
-							if (rootFolder[i].text != 'overlays'
-								&& rootFolder[i].text != 'Overlays') {
-								treeConfigObject.push(rootFolder[i]);
-							} else {
-								rootFolder.visible = false;
-							}
+        // Change parser for WMST
+        this.LOADERS_CLASSES["WMST"] = new PersistenceGeo.loaders.WMSTLoader({
+            restBaseUrl: this.getRestBaseUrl(),
+            map: this.map
+        });
+        // Change parser for TEXT load
+        this.LOADERS_CLASSES["TEXT"] = new PersistenceGeo.loaders.TEXTLoader({
+            restBaseUrl: this.getRestBaseUrl(),
+            map: this.map
+        });
 
-						}
-						var treeConfig = new OpenLayers.Format.JSON().write(
-								treeConfigObject, true);	
-						return treeConfig;
-					},
+        SiceCATGeoParser.superclass.initComponent.call(this);
+    },
+
+    /**
+     * Include layerTree on treeConfigObject
+     * 
+     */
+    parseLayerTreeConfig: function(treeConfigObject, layerTree, notGroupLayers){
+        var rootFolder = layerTree;
+
+        for ( var i = 0; i < rootFolder.length; i++) {	
+            if (rootFolder[i].text != 'overlays'
+                && rootFolder[i].text != 'Overlays') {
+                treeConfigObject.push(rootFolder[i]);
+            } else {
+                rootFolder.visible = false;
+            }
+
+        }
+        var treeConfig = new OpenLayers.Format.JSON().write(
+                treeConfigObject, true);	
+        return treeConfig;
+    },
+
+    sendFormPostData: function (url, params, method, onsuccess, onfailure){
+        var tempForm = new Ext.FormPanel({
+            url: url,
+            method: method,
+            title: 'Save layer Form',
+            fileUpload: true,	   
+            items: [],
+            buttons: []
+        });
+
+        tempForm.getForm().load({
+            url: url,
+            headers: {Accept: 'application/json, text/javascript, */*; q=0.01'},
+            waitMsg: method==="GET"?null:"loading...",
+            params : params,
+            fileUpload: true,
+            success: onsuccess ? onsuccess : function(){},
+            failure: onfailure ? onfailure: function(){}
+        });
+    }
 });
+
+
+var loadingAwareSendFormPostData = function (url, params, method, onsuccess, onfailure){
+    var tempForm = new Ext.FormPanel({
+        url: url,
+        method: method,
+        title: 'Save layer Form',
+        fileUpload: true,	   
+        items: [],
+        buttons: []
+    });
+
+    tempForm.getForm().load({
+        url: url,
+        headers: {Accept: 'application/json, text/javascript, */*; q=0.01'},
+        waitMsg: !!loadingIndicator?null:"loading...",
+        params : params,
+        fileUpload: true,
+        success: onsuccess ? onsuccess : function(){},
+        failure: onfailure ? onfailure: function(){}
+    });
+};
+
+SiceCATGeoParser.prototype.sendFormPostData = loadingAwareSendFormPostData;
+PersistenceGeoParser.sendFormPostData = loadingAwareSendFormPostData;
