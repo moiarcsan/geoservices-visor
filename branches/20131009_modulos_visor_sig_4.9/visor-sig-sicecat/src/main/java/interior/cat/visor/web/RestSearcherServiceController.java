@@ -229,6 +229,7 @@ public class RestSearcherServiceController {
 	 * @return SolrResponse
 	 */
 	@RequestMapping(value = "/geocode/{query}")
+    @Deprecated
 	public @ResponseBody
 	GeocodeResponseType geocode(@PathVariable("query") String query) {
 		LOG.trace("Entro en geocode");
