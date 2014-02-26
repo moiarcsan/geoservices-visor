@@ -330,7 +330,7 @@ SiceCAT = Ext
 					 * 
 					 * <overrideConfiguration>
 					 */
-					loadConfiguration : function() {
+					loadConfiguration : function(callback) {
 
 						/*
 						 * Default options
@@ -359,7 +359,12 @@ SiceCAT = Ext
 															this_
 																	.overrideConfiguration(this_.jsonMapConfiguration["openLayersProxyHost"]);
 															this_.initGPCL();
-														});
+															
+															if(!!callback) {
+																callback();
+															}
+															
+														},true);
 											});
 								});
 						// this.loadMapConfiguration(function() {
@@ -992,7 +997,7 @@ SiceCAT = Ext
 								this_.loadUserFolder(Sicecat.user.login, function(){
 									setTimeout(function() {
 									      // Refresh after 1 second
-									      load_fifth();
+									      initComposer();
 									}, 1000);
 									if(!!continueLoading)
 										continueLoading();
@@ -1314,6 +1319,8 @@ SiceCAT = Ext
 								this_instance.loadMapConfigurationPost(map);
 							continueLoading();
 						} else {
+							// So we only do one ajax request.
+							this.jsonMapConfiguration = {};
 							// Persistence
 							parser.loadMapConfiguration(function(form, action){
 								// ON SUCCESS
@@ -1451,16 +1458,6 @@ SiceCAT = Ext
 							this.user.logo = this.jsonMapConfiguration['defaultUserLogo'];
 							this.layout = new Object();
 							this.layout.idioma = this.jsonMapConfiguration['defaultIdioma'];
-							
-							// AddLayer Listener
-							map.events.register("addlayer", map, function(){
-								if(actions["tooltipcontrol"]){
-									if(actions["tooltipcontrol"].control.active){
-										actions["tooltipcontrol"].control.deactivate();
-										actions["tooltipcontrol"].control.activate();
-									}
-								}
-							});
 
 							this.map = map;
 
@@ -1958,7 +1955,7 @@ SiceCAT = Ext
 							// No se usará ningún proxy para ninguna llamada a SIGESCAT
 							url_req = url;
 						}else if(configType == 1){
-							// Se usará el “proxy.do” sólo en las llamadas alfanuméricas, las llamadas de cartografía van directas a SIGESCAT [DINT]
+							// Se usará el ?proxy.do? sólo en las llamadas alfanuméricas, las llamadas de cartografía van directas a SIGESCAT [DINT]
 							if(typeCall == "alfanumerica"){
 								var index = url.indexOf("?");
 								while(index > 0){
@@ -1970,7 +1967,7 @@ SiceCAT = Ext
 								url_req = url;
 							}
 						}else if(configType == 2){
-							// Se usará el “proxy.do” en todas las llamadas tanto alfanuméricas como de cartografía [PISE]
+							// Se usará el ?proxy.do? en todas las llamadas tanto alfanuméricas como de cartografía [PISE]
 							var index = url.indexOf("?");
 							while(index > 0){
 								url = url.replace("?", "&");

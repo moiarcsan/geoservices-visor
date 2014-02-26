@@ -47,7 +47,11 @@ var integrator;
 var stupid = false;
 var secondAPI = null;
 
+var loadingIndicator;
+
 Ext.onReady(function() {
+	
+	loadingIndicator = Ext.Msg.wait("loading...");
 
 	// if(Ext.isIE){
 	// alert("Actualmente el visor sólo está preparado para su uso Chorme o
@@ -60,7 +64,7 @@ Ext.onReady(function() {
 	Ext.QuickTips.init();
 	Sicecat = new SiceCAT({
 		listeners : {
-			readyToCreateMap : load_first
+			readyToCreateMap : requestLogin
 		}
 	});
 	Sicecat.loadConfiguration();
@@ -94,51 +98,45 @@ Ext.onReady(function() {
 function init_all() {
 	if (Sicecat.isLogEnable)
 		console.log("Initialize Visor Sicecat");
-	Sicecat.loadMapConfiguration(function() {
-		map = Sicecat.map;
-	}, true);
 }
 
-function load_first() {
-	if (Sicecat.isLogEnable)
-		console.log("[Sicecat] load_first");
-	if (Sicecat.isLogEnable)
-		console.log("[Sicecat] load_first user --> " + Global_TMP.user);
-	if (Sicecat.isLogEnable)
-		console.log("[Sicecat] load_first permisos --> " + Global_TMP.permisos);
-	if (Sicecat.isLogEnable)
-		console.log("[Sicecat] load_first municipio --> "
-				+ Global_TMP.idMunicipio);
+function requestLogin() {
+	if (Sicecat.isLogEnable) {
+        console.log("[Sicecat] requestLogin");
+        console.log("[Sicecat] requestLogin user --> " + Global_TMP.user);
+        console.log("[Sicecat] requestLogin permisos --> " + Global_TMP.permisos);
+        console.log("[Sicecat] requestLogin municipio --> "+ Global_TMP.idMunicipio);
+    }
 
 	var userGroup = 'CECAT';
 
-	if (integrator.modo == integrator.TIPO_GPCL) {
+	if (integrator.modo === integrator.TIPO_GPCL) {
 		userGroup = 'GPCL';
 	}
 
 	PersistenceGeoParser.login(Global_TMP.user, userGroup,
 			Global_TMP.idMunicipio, function(form, action) {
 				console.log("test");
-				Sicecat.loadStyling(load_second);
+				Sicecat.loadStyling(onStylingLoaded);
 			}, function(form, action) {
+				// lroman: This is the failure handling but it enters here in success anyways.
+				// problably the response should say "SUCCESS" to prevent this.
 				if (!!action && !!action.response && !!action.response.status
 						&& action.response.status == "200"
 						&& !!action.response.responseText) {
-					Sicecat.loadStyling(load_second);
+					Sicecat.loadStyling(onStylingLoaded);
 				} else {
 					Ext.Msg.alert('Warning', 'Login error');
 				}
 			});
 }
 
-function load_second() {
+function onStylingLoaded() {
 	if (Sicecat.isLogEnable)
-		console.log("[Sicecat] load_second");
-	map = Sicecat.map;
+		console.log("[Sicecat] onStylingLoaded");
 	Sicecat.loadSearchServices(function() {
-		;
-	});
-	Sicecat.loadLayers(load_third);
+		Sicecat.loadLayers(onCommonLayersLoaded);
+	});	
 }
 
 function loadApiLayers() {
@@ -214,9 +212,9 @@ function refreshElements() {
 	this.loadApiLayers();
 }
 
-function load_third() {
+function onCommonLayersLoaded() {
 	if (Sicecat.isLogEnable)
-		console.log("[Sicecat] load_third");
+		console.log("[Sicecat] onCommonLayersLoaded");
 	var self = this;
 	var refreshDisablerControl = new OpenLayers.Control.RefreshDisabler({
 		onRefresh : function(evt) {
@@ -229,11 +227,11 @@ function load_third() {
 	map.addControl(refreshDisablerControl);
 	refreshDisablerControl.activate();
 
-	if (Global_TMP.permisos.indexOf("admin") > -1) {
-		load_fourth();
-	}
+	
 	// Load user folder
-	Sicecat.loadUserFolder(Global_TMP.user, load_fourth);
+	Sicecat.loadUserFolder(Global_TMP.user, function() {
+		loadSicecatInfo();
+	});
 
 }
 /*
@@ -374,8 +372,7 @@ function createDefLayer(layer) {
 	integrator.msGisCreateCapa(layer.id, layer.name, layer.order, false);
 }
 
-function load_fourth() {
-	// do the Ext.Ajax.request
+function loadSicecatInfo() {
 	Ext.Ajax.request({
 		// the url to the remote source
 		url : 'files.do/sicecatext-info.json.do',
@@ -384,17 +381,17 @@ function load_fourth() {
 			json = Ext.util.JSON.decode(response.responseText);
 			sicecatVersion = json.version;
 			sicecatBuildNumber = json.buildNumber;
-			load_fifth();
+			initComposer();
 		},
 		failure : function() {
 			sicecatVersion = 'version desconocida';
 			sicecatBuildNumber = null;
-			load_fifth();
+			initComposer();
 		}
 	});
 }
 
-function load_fifth() {
+function initComposer() {
 
 	var mapLayout = new SiceCAT.MapLayout();
 	mapLayout.sicecatInstance = Sicecat;
@@ -436,6 +433,10 @@ function load_fifth() {
 		init_viewport();
 	} catch (e) {
 	}
+	
+	
+	loadingIndicator.hide();
+	loadingIndicator = null;
 
 	// Establece el mapa
 	integrator.map = map;
@@ -488,11 +489,15 @@ function load_fifth() {
 		Sicecat.map.addLayer(Sicecat.layerComarcaMunicipio);
 		Sicecat.map.zoomToExtent(Sicecat.loadedBBox, true);
 	} else if (Sicecat.map.maxExtent) {
-		Sicecat.map.zoomToExtent(Sicecat.map.maxExtent, true);
+		try{
+			Sicecat.map.zoomToExtent(Sicecat.map.maxExtent, true);	
+		} catch(e) {
+			
+		}
+		
 	}
 
 	AuxiliaryLayer.map = Sicecat.map;
-
 	Sicecat.parser = new SiceCATGeoParser({
 		map : this.map
 	});
@@ -618,7 +623,7 @@ function init_header() {
 	
 	// Remove all temporal elements before close 
 	window.onbeforeunload = function(event){
-		// Enviamos una petici�n para eliminar los elementos temporales
+		// Enviamos una petici?n para eliminar los elementos temporales
 		Ext.Ajax.request({
 			url: 'rest/persistenceGeo/userContext/removeAll',
 			success: function(response){
@@ -721,9 +726,7 @@ OpenLayers.Util.onImageLoadError = function() {
 				new_url = urls[guess];
 			}
 			this.src = src.replace(current_url, new_url);
-		} else {
-			this.src = this.src;
-		}
+		} 
 	} else {
 		// Cambiamos la imagen por un div para evitar el bucle infinito
 		var div = document.createElement("div");
