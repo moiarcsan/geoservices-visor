@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -59,8 +60,10 @@ import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthPolicy;
 import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.util.ByteArrayBuffer;
 
 /**
  * When working with Web Feature Service (WFS) Requests a proxy needs to be used
@@ -195,61 +198,15 @@ public class Proxy extends HttpServlet {
 			HttpClient client = getHttpClient(requestURL);
 
 			if (request.getMethod().toLowerCase().equals("get")) {
-				String decodedURL = URLDecoder.decode(requestURL, "UTF-8");
-				StringBuffer getUrl = new StringBuffer(decodedURL.replaceAll(
-						" ", "%20"));
-				Set<String> parameters = request.getParameterMap().keySet();
-				boolean first = true;
+				String getUrl = buildURL(request, requestURL);
 
-				for (String p : parameters) {
-					if ((p.equals("url") && request.getParameter("url2") == null)
-							|| p.equals("url2"))
-						continue; // skip the url parameter
+				if (log.isTraceEnabled()) log.trace("Get = " + getUrl);
 
-					if (p.startsWith("wicket:"))
-						continue; // skip the wicket parameters
-
-					String value = request.getParameter(p);
-
-					// The url contain any parameter in get method
-					if (parameters.size() > 1) {
-						if (first) {
-							// first parameter needs to applied with question
-							// mark
-							// if this is not exist.
-							if (!decodedURL.contains("?")) {
-								getUrl.append("?");
-							} else if (decodedURL.indexOf("?") < (decodedURL
-									.length() - 1)) {
-								getUrl.append("&");
-							}
-							first = false;
-						} else {
-							getUrl.append("&");
-						}
-
-						getUrl.append(p.equals("url2") ? "url" : p);
-						getUrl.append("=");
-					}
-
-					getUrl.append(URLEncoder.encode(value, "UTF-8"));
-
-				}
-
-				if (log.isTraceEnabled()) log.trace("Get = " + getUrl.toString());
-
-				GetMethod getMethod = new GetMethod(getUrl.toString());
+				GetMethod getMethod = new GetMethod(getUrl);
 
 				int proxyResponseCode = client.executeMethod(getMethod);
 
 				if (log.isTraceEnabled()) log.trace("redirected get, code = " + proxyResponseCode);
-
-				// if (proxyResponseCode != 200) {
-				// response.sendError(HttpServletResponse.SC_FORBIDDEN,
-				// "Proxy only to local requests.");
-				// throw new Exception("Trying to proxy from "
-				// + request.getRemoteHost());
-				// }
 
 				// Pass response headers back to the client
 				Header[] headerArrayResponse = getMethod.getResponseHeaders();
@@ -261,17 +218,9 @@ public class Proxy extends HttpServlet {
 				InputStream inputStreamProxyResponse = getMethod
 						.getResponseBodyAsStream();
 
-				int read = 0;
-				byte[] bytes = new byte[1024];
-				while ((read = inputStreamProxyResponse.read(bytes)) != -1) {
-					os.write(bytes, 0, read);
-				}
-				inputStreamProxyResponse.close();
+                IOUtils.copy(inputStreamProxyResponse, os);
 
 			} else if (request.getMethod().toLowerCase().equals("post")) {
-
-				// New poster
-				Writer writer = new StringWriter();
 
 				String endPoint = urlParameter;
 
@@ -283,11 +232,12 @@ public class Proxy extends HttpServlet {
 				try {
 					//Solo si es necesario en post
 					if(this.proxyOn && !isSkipped(requestURL)){
-						HTTPRequestPoster.postData(request, new URL(endPoint),
-								writer, proxyUrl, proxyPort, proxyUser, proxyPassword);
+						HTTPRequestPoster.postData(
+                                request, new URL(endPoint),os, 
+                                proxyUrl, proxyPort, proxyUser, proxyPassword);
 					}else{
-						HTTPRequestPoster.postData(request, new URL(endPoint),
-							writer);
+						HTTPRequestPoster.postData(
+                                request, new URL(endPoint),os);
 					}
 				} catch (MalformedURLException e) {
 					log.error(e);
@@ -304,7 +254,6 @@ public class Proxy extends HttpServlet {
 					}
 				}
 				response.setContentType("text/xml");
-				os.write(writer.toString().getBytes());
 
 			} else {
 				// unsupported
@@ -424,4 +373,51 @@ public class Proxy extends HttpServlet {
 
 		return result;
 	}
+
+    private String buildURL(HttpServletRequest request, String requestURL) 
+            throws UnsupportedEncodingException {
+        
+        String decodedURL = URLDecoder.decode(requestURL, "UTF-8");
+        StringBuilder getUrl = new StringBuilder(decodedURL.replaceAll(
+                " ", "%20"));
+        Set<String> parameters = request.getParameterMap().keySet();
+        boolean first = true;
+
+        for (String p : parameters) {
+            if ((p.equals("url") && request.getParameter("url2") == null)
+                    || p.equals("url2"))
+                continue; // skip the url parameter
+
+            if (p.startsWith("wicket:"))
+                continue; // skip the wicket parameters
+
+            String value = request.getParameter(p);
+
+            // The url contain any parameter in get method
+            if (parameters.size() > 1) {
+                if (first) {
+                    // first parameter needs to applied with question
+                    // mark
+                    // if this is not exist.
+                    if (!decodedURL.contains("?")) {
+                        getUrl.append("?");
+                    } else if (decodedURL.indexOf("?") < (decodedURL
+                            .length() - 1)) {
+                        getUrl.append("&");
+                    }
+                    first = false;
+                } else {
+                    getUrl.append("&");
+                }
+
+                getUrl.append(p.equals("url2") ? "url" : p);
+                getUrl.append("=");
+            }
+
+            getUrl.append(URLEncoder.encode(value, "UTF-8"));
+
+        }
+        
+        return getUrl.toString();
+    }
 }

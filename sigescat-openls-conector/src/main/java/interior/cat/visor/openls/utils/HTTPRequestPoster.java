@@ -73,7 +73,7 @@ public class HTTPRequestPoster {
 	 * 
 	 * @throws Exception
 	 */
-	public static void postData(HttpServletRequest request, URL endpoint, Writer output)
+	public static void postData(HttpServletRequest request, URL endpoint, OutputStream output)
 			throws Exception {
 		postData(request, endpoint, output, null, 0, null, null);
 	}
@@ -85,7 +85,7 @@ public class HTTPRequestPoster {
 	 * 
 	 * @throws Exception
 	 */
-	public static void postData(HttpServletRequest request, URL endpoint, Writer output, String proxyUrl, int proxyPort, 
+	public static void postData(HttpServletRequest request, URL endpoint, OutputStream output, String proxyUrl, int proxyPort, 
 			String proxyUser, String proxyPassword)
 					throws Exception {
 		HttpURLConnection urlc = null;
@@ -112,26 +112,16 @@ public class HTTPRequestPoster {
 					urlc.setRequestProperty(headerName, request.getHeader(headerName));
 				}
 			}
-			Reader data = request.getReader();
 
-			OutputStream out = urlc.getOutputStream();
-
-			try {
-				Writer writer = new OutputStreamWriter(out, "UTF-8");
-				pipe(data, writer);
-				writer.close();
+			try {             
+                IOUtils.copy(request.getInputStream(), urlc.getOutputStream());				
 			} catch (IOException e) {
 				throw new Exception("IOException while posting data", e);
-			} finally {
-				if (out != null)
-					out.close();
-			}
+			} 
 
 			InputStream in = urlc.getInputStream();
-			try {
-				Reader reader = new InputStreamReader(in);
-				pipe(reader, output);
-				reader.close();
+			try {				
+                IOUtils.copy(urlc.getInputStream(), output);				
 			} catch (IOException e) {
 				throw new Exception("IOException while reading response", e);
 			} finally {
@@ -189,7 +179,7 @@ public class HTTPRequestPoster {
 	 * 
 	 * @throws Exception
 	 */
-	public static void postData(Reader data, URL endpoint, Writer output)
+	public static void postData(Reader data, URL endpoint, OutputStream output)
 			throws Exception {
 		HttpURLConnection urlc = null;
 		try {
@@ -211,9 +201,7 @@ public class HTTPRequestPoster {
 			OutputStream out = urlc.getOutputStream();
 
 			try {
-				Writer writer = new OutputStreamWriter(out, "UTF-8");
-				pipe(data, writer);
-				writer.close();
+				IOUtils.copy(data, out,"UTF-8");
 			} catch (IOException e) {
 				throw new Exception("IOException while posting data", e);
 			} finally {
@@ -223,9 +211,7 @@ public class HTTPRequestPoster {
 
 			InputStream in = urlc.getInputStream();
 			try {
-				Reader reader = new InputStreamReader(in);
-				pipe(reader, output);
-				reader.close();
+				IOUtils.copy(in, output);
 			} catch (IOException e) {
 				throw new Exception("IOException while reading response", e);
 			} finally {
@@ -241,12 +227,4 @@ public class HTTPRequestPoster {
 				urlc.disconnect();
 		}
 	}
-
-	/**
-	 * Pipes everything from the reader to the writer via a buffer
-	 */
-	private static void pipe(Reader reader, Writer writer) throws IOException {
-        IOUtils.copy(reader, writer);
-	}
-
 }

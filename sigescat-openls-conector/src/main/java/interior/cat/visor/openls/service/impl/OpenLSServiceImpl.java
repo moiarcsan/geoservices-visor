@@ -56,6 +56,7 @@ import com.googlecode.ehcache.annotations.Cacheable;
 
 import interior.cat.visor.openls.service.OpenLSService;
 import interior.cat.visor.openls.utils.HTTPRequestPoster;
+import java.io.ByteArrayOutputStream;
 
 /**
  * Implementacion de conector de SearcherService
@@ -118,10 +119,10 @@ public class OpenLSServiceImpl implements OpenLSService {
 				+ "</FreeFormAddress></Address></GeocodeRequest></Request></XLS>";
 
 		Reader reader = new StringReader(xls);
-		Writer writer = new StringWriter();
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
 
 		try {
-			HTTPRequestPoster.postData(reader, new URL(openLSEndpoint), writer);
+			HTTPRequestPoster.postData(reader, new URL(openLSEndpoint), output);
 		} catch (MalformedURLException e) {
 			LOG.error(e);
 		} catch (Exception e) {
@@ -129,7 +130,7 @@ public class OpenLSServiceImpl implements OpenLSService {
 		}
 
 		try {
-			response = writer.toString();
+			response = output.toString("UTF-8");
 			JAXBElement<XLSType> obj = (JAXBElement<XLSType>) unmarshaler
 					.unmarshal(new StringSource(response));
 			respObj = (GeocodeResponseType) (((ResponseType) (((JAXBElement) ((List) obj
