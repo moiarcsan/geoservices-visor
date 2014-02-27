@@ -1458,6 +1458,16 @@ SiceCAT = Ext
 							this.user.logo = this.jsonMapConfiguration['defaultUserLogo'];
 							this.layout = new Object();
 							this.layout.idioma = this.jsonMapConfiguration['defaultIdioma'];
+							
+							// AddLayer Listener
+							map.events.register("addlayer", map, function(){
+								if(actions["tooltipcontrol"]){
+									if(actions["tooltipcontrol"].control.active){
+										actions["tooltipcontrol"].control.deactivate();
+										actions["tooltipcontrol"].control.activate();
+									}
+								}
+							});
 
 							this.map = map;
 
@@ -1517,6 +1527,26 @@ SiceCAT = Ext
 								this.styles[this.jsonStyles[i]['name']] = styleDefined;
 							}
 						}
+						this.styles["hoverDefault"] = {
+							cursor: "pointer",
+							fillColor: "#ee9900",
+							fillOpacity: 0.4,
+							graphicName: "square",
+							hoverFillColor: "white",
+							hoverFillOpacity: 0.8,
+							hoverPointRadius: "1",
+							hoverPointUnit: "%",
+							hoverStrokeColor: "red",
+							hoverStrokeOpacity: 1,
+							hoverStrokeWidth: "0.2",
+							pointRadius: "6",
+							pointerEvents: "visiblePainted",
+							strokeColor: "#ee9900",
+							strokeDashstyle: "solid",
+							strokeLinecap: "round",
+							strokeOpacity: 1,
+							strokeWidth: "1"
+						};
 					},
 
 					/**
@@ -1758,11 +1788,51 @@ SiceCAT = Ext
 								cursor : "inherit"
 							}
 						};
+						
+						var sketchSymbolizers_select = {
+								"Point" : {
+									fillColor : "#000000",
+									strokeColor : "#000000"
+								},
+								"Line" : {
+									fillColor : "#000000",
+									strokeColor : "#000000"
+								},
+								"Polygon" : {
+									fillColor : "#000000",
+									strokeColor : "#000000"
+								}
+							};
+						
+						var sketchSymbolizers_temporary = {
+								"Point" : {
+									fillColor : "#ffffff",
+									strokeColor : "#ffffff"
+								},
+								"Line" : {
+									fillColor : "#ffffff",
+									strokeColor : "#ffffff"
+								},
+								"Polygon" : {
+									fillColor : "#ffffff",
+									strokeColor : "#ffffff"
+								}
+							};
 
 						return new OpenLayers.StyleMap({
 							"default" : new OpenLayers.Style(null, {
 								rules : [ new OpenLayers.Rule({
 									symbolizer : sketchSymbolizers
+								}) ]
+							}),
+							"select" : new OpenLayers.Style(null, {
+								rules : [ new OpenLayers.Rule({
+									symbolizer : sketchSymbolizers_select
+								}) ]
+							}),
+							"temporary" : new OpenLayers.Style(null, {
+								rules : [ new OpenLayers.Rule({
+									symbolizer : sketchSymbolizers_temporary
 								}) ]
 							})
 						});

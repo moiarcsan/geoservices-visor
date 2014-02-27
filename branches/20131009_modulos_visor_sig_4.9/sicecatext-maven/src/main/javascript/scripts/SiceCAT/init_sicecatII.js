@@ -227,7 +227,7 @@ function onCommonLayersLoaded() {
 	map.addControl(refreshDisablerControl);
 	refreshDisablerControl.activate();
 
-	
+
 	// Load user folder
 	Sicecat.loadUserFolder(Global_TMP.user, function() {
 		loadSicecatInfo();
@@ -623,7 +623,7 @@ function init_header() {
 	
 	// Remove all temporal elements before close 
 	window.onbeforeunload = function(event){
-		// Enviamos una petici?n para eliminar los elementos temporales
+		// Enviamos una petición para eliminar los elementos temporales
 		Ext.Ajax.request({
 			url: 'rest/persistenceGeo/userContext/removeAll',
 			success: function(response){

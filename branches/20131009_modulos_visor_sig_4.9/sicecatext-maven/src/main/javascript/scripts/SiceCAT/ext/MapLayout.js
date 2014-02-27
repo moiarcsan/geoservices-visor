@@ -819,7 +819,6 @@ SiceCAT.MapLayout = Ext
 								clickout : false,
 								toggle : true,
 								multiple : true,
-								hover : false,
 								multipleKey : "shiftKey",
 								box : true,
 								selectStyle : Sicecat.styles["select"]
@@ -924,7 +923,6 @@ SiceCAT.MapLayout = Ext
 								clickout : false,
 								toggle : true,
 								multiple : true,
-								hover : false,
 								highlightOnly : true,
 								selectStyle : Sicecat.styles["select"]
 							}),

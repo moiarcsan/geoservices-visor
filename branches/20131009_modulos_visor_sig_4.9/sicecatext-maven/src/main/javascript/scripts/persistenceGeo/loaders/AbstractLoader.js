@@ -193,6 +193,7 @@ PersistenceGeo.loaders.AbstractLoader =  Ext.extend(Ext.Component,
 		},
 		
 		postFunctionsStyle: function(layerData, layer){
+			var symbolizer = {};
 			if(!!layerData.styles
 					&& !!layerData.styles
 					&& !!layerData.styles['default']){
@@ -201,10 +202,13 @@ PersistenceGeo.loaders.AbstractLoader =  Ext.extend(Ext.Component,
 					if(styleName == 'default'){
 						var rules = new Array();
 						for(var ruleFilter in layerData.styles[styleName]){
-							var symbolizer = {};
 							if(ruleFilter == 'true'){
 								for(var property in layerData.styles[styleName][ruleFilter]){
-									symbolizer[property] = this.parseValueStyle(property, layerData.styles[styleName][ruleFilter][property]);
+									if(property == "cursor"){
+										symbolizer[property] = "pointer";
+									}else{
+										symbolizer[property] = this.parseValueStyle(property, layerData.styles[styleName][ruleFilter][property]);
+									}
 								}
 							}else{
 								//TODO: Use OGC filter
@@ -217,26 +221,35 @@ PersistenceGeo.loaders.AbstractLoader =  Ext.extend(Ext.Component,
 					}
 				}
 				styleMap = new OpenLayers.StyleMap(styleMap);
-				layer.events.register("loadend", 
+				layer.styleMap = styleMap;
+			}else{
+				symbolizer["cursor"] = "pointer";
+			}
+			layer.events.register("loadend", 
 					{
-						layer:layer, 
-						symbolizer:symbolizer
+						layer: layer, 
+						symbolizer: symbolizer
 					}, 
 					function() {
 						//Forze style
-						for(var i = 0; i < this.layer.features.length; i++){
-							var styleDefined = OpenLayers.Util
-								.applyDefaults(
-										this.symbolizer,
-									OpenLayers.Feature.Vector.style["default"]);
-							this.layer.features[i].style = styleDefined;
+						if(!this.layer.features || this.layer.features.length == 0){
+							if(this.layer.styleMap 
+									&& this.layer.styleMap.styles 
+									&& this.layer.styleMap.styles.default 
+									&& this.layer.styleMap.styles.default.defaultStyle
+									&& this.layer.styleMap.styles.default.defaultStyle.cursor){
+								if(this.layer.styleMap.styles.default.defaultStyle.cursor != "pointer"){
+									this.layer.styleMap.styles.default.defaultStyle.cursor = "pointer";
+								}
+							}
+						}else{
+							for(var i = 0; i < this.layer.features.length; i++){
+								var styleDefined = OpenLayers.Util.applyDefaults(this.symbolizer, OpenLayers.Feature.Vector.style["default"]);
+								this.layer.features[i].style = styleDefined;
+							}
+							this.layer.redraw();
 						}
-						this.layer.redraw();
 					}
 	            );
-				//window.setInterval(this.UpdateKmlLayer, 5000, layer, styleMap);
-				layer.styleMap = styleMap;
-			}
 		}
-		
 });

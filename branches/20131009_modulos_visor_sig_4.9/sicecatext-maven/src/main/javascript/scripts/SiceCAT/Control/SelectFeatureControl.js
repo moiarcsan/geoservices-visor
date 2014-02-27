@@ -94,8 +94,6 @@ OpenLayers.Control.SelectFeatureControl = OpenLayers.Class(
 				this.setLayer(this.getVectorLayers());
 				// Le asignamos el control activo a la ventana
 				Sicecat.featureSelectedMonitor.setControl(this);
-				// Mostramos la ventana
-				Sicecat.featureSelectedMonitor.show();
 				var ret = OpenLayers.Control.SelectFeature.prototype.activate.apply(this, arguments);
 				Sicecat.featuresSelected = this.featuresSelected;
 				// Recorremos las features guardadas y las volvemos aseleccionar
@@ -142,6 +140,8 @@ OpenLayers.Control.SelectFeatureControl = OpenLayers.Class(
 			 * 
 			 */
 			onSelect : function(feature) {
+				// Mostramos la ventana
+				Sicecat.featureSelectedMonitor.show();
 				this.featuresSelected.push(feature);
 				this.classifyFeature(feature);
 				this.countFeaturesSelected();

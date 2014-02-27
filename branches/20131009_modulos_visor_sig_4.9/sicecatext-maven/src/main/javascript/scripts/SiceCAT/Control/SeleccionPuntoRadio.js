@@ -165,8 +165,6 @@ OpenLayers.Control.SeleccionPuntoRadio = OpenLayers
 						this.setLayer(this.getVectorLayers());
 						// Le asignamos el control activo a la ventana
 						Sicecat.featureSelectedMonitor.setControl(this);
-						// Mostramos la ventana
-						Sicecat.featureSelectedMonitor.show();
 						var res = OpenLayers.Control.SelectFeature.prototype.activate.apply(this, arguments);
 						Sicecat.featuresSelected = this.featuresSelected;
 						// Recorremos las features guardadas y las volvemos aseleccionar
@@ -641,6 +639,8 @@ OpenLayers.Control.SeleccionPuntoRadio = OpenLayers
 					 */
 					onSelect : function(feature) {
 						if(!this.containsFeature(feature) && (feature.seleccionar || feature.seleccionar == undefined)){
+							// Mostramos la ventana
+							Sicecat.featureSelectedMonitor.show();
 							this.featuresSelected.push(feature);
 							this.classifyFeature(feature);
 							this.countFeaturesSelected();
