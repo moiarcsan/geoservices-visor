@@ -21,6 +21,17 @@ var jsfiles = new Array();
 
 // Feature Handler
 jsfiles.push("SiceCAT/Handler/Feature.js");
+//PersistenceGeo
+jsfiles.push("persistenceGeo/loaders/AbstractLoader.js");
+jsfiles.push("persistenceGeo/loaders/WFSLoader.js");
+jsfiles.push("persistenceGeo/loaders/WMSLoader.js");
+jsfiles.push("persistenceGeo/loaders/WMSTLoader.js");
+jsfiles.push("persistenceGeo/loaders/TEXTLoader.js");
+jsfiles.push("persistenceGeo/loaders/KMLLoader.js");
+jsfiles.push("persistenceGeo/loaders/GMLLoader.js");
+jsfiles.push("persistenceGeo/Parser.js");
+jsfiles.push("persistenceGeo/PersistenceGeoParser.js");
+jsfiles.push("persistenceGeo/SiceCATGeoParser.js");
 // OpenLayers Controls
 jsfiles.push("SiceCAT/SiceCAT.js");
 jsfiles.push("SiceCAT/Control.js");
@@ -156,12 +167,7 @@ jsfiles.push("SiceCAT/Tools/AuxiliaryLayer.js");
 // Downloadify
 jsfiles.push("downloadify/js/downloadify.min.js");
 jsfiles.push("downloadify/js/swfobject.js");
-//PersistenceGeo
-jsfiles.push("persistenceGeo/loaders/WFSLoader.js");
-jsfiles.push("persistenceGeo/loaders/WMSLoader.js");
-jsfiles.push("persistenceGeo/loaders/WMSTLoader.js");
-jsfiles.push("persistenceGeo/loaders/TEXTLoader.js");
-jsfiles.push("persistenceGeo/SiceCATGeoParser.js");
+
 // Init script
 jsfiles.push("SiceCAT/init_sicecatII.js");
 jsfiles.push("SiceCAT/configuration.js");
