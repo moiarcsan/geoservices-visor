@@ -59,8 +59,8 @@ PersistenceGeo.loaders.GMLLoader
 	 */
 	formatType : function(externalProjectionText, type) {
 		var targetProj = this.map.projection;
-		if(!!externalProjection){
-			targetProj = externalProjection;
+		if(!!externalProjectionText){
+			targetProj = externalProjectionText;
 		}
 		var internalProjection = new OpenLayers.Projection(this.map.projection);
 		var externalProjection = new OpenLayers.Projection(targetProj);
