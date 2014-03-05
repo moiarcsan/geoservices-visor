@@ -1159,23 +1159,19 @@ SiceCAT.MapLayout = Ext
 								if(type == 0){
 									// Direcciones
 									place = data.place;
-									if(place != null && place.indexOf(",") != -1){
-										arrayPlace = place.split(",");
-										nom = arrayPlace[0];
-										municipi = arrayPlace[1];
-									}
-									if(nom == null && data.text != null){
-										nom = data.text;
-									}
-									if(nom == null && data.typePlace != null){
-										nom = data.typePlace;
-									}
+									nom = data.text;
+									number = data.number;
 									var cadena = "";
 									if(nom != null){
 										cadena+=nom;
 									}
-									if(municipi != null && nom != null){
-										cadena+="<br/>" + municipi;
+									if(number != null && nom != null){
+										cadena+= " " + number;
+									}else{
+										cadena+=number;
+									}
+									if(place != null && nom != null){
+										cadena+="<br/>" + place;
 									}else if(municipi != null && nom == null){
 										cadena+=municipi;
 									}

@@ -35,32 +35,30 @@ SiceCAT.data.OpenLS_XLSReader = function(meta, recordType) {
 
 Ext.extend(SiceCAT.data.OpenLS_XLSReader, Ext.data.XmlReader, {
 
-	addOptXlsText: function(format, text, node, tagname, sep) {
+	addOptXlsText: function(format, node, tagname, sep) {
+		var str = "";
 		var elms = format.getElementsByTagNameNS(node, "http://www.opengis.net/xls", tagname);
 		if (elms) {
 			Ext.each(elms, function(elm, index) {
-				var str = format.getChildValue(elm);
-				if (str) {
-					text = text + sep + str;
-				}
+				str = format.getChildValue(elm);
 			});
 		}
 
-		return text;
+		return str;
 	},
 
-	addOptXlsPropertyText: function(format, text, node, tagname, sep, property) {
+	addOptXlsPropertyText: function(format, node, tagname, sep, property) {
+		var str = "";
 		var elms = format.getElementsByTagNameNS(node, "http://www.opengis.net/xls", tagname);
 		if (elms) {
 			Ext.each(elms, function(elm, index) {
-				var str = format.getAttributeNodeNS(elm, "http://www.opengis.net/xls", property);
-				if (str) {
-					text = text + sep + str;
+				if(elm.attributes){
+					str = elm.attributes.getNamedItem(property).value;
 				}
 			});
 		}
 
-		return text;
+		return str;
 	},
 	
 	read : function(response){
@@ -152,15 +150,16 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReader, Ext.data.XmlReader, {
 	                </xls:GeocodedAddress>
 			 *
 			 */
-			text = reader.addOptXlsText(format, text, address, 'Street', '');
-//			text = reader.addOptXlsText(format, text, address, 'StreetAddress', '');
-			place = reader.addOptXlsText(format, text, address, 'Place', ',');
-			typePlace = reader.addOptXlsPropertyText(format, text, address, 'Place', ',', 'type');
+			text = reader.addOptXlsText(format, address, 'Street', '');
+			number = reader.addOptXlsPropertyText(format, address, 'Building', ',', 'number');
+			place = reader.addOptXlsText(format, address, 'Place', ',');
+			typePlace = reader.addOptXlsPropertyText(format, address, 'Place', ',', 'type');
 			var values = {
 				lon : parseFloat(xyArr[0]),
 				lat : parseFloat(xyArr[1]),
 				place: place,
 				typePlace: typePlace,
+				number: number,
 				text : text
 			};
 			var record = new recordType(values, index);
