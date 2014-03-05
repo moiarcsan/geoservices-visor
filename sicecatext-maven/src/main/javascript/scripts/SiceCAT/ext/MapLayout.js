@@ -728,7 +728,7 @@ SiceCAT.MapLayout = Ext
 							// button options
 							enableToggle: true,
 							toggleGroup : "draw",
-							iconCls : "ToolTipControl",
+							iconCls : "GetFeatureInfo",
 							tooltip : this.toolTipTooltipText,
 							pressed: true,
 							handler: function(){
