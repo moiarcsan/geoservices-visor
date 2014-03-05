@@ -103,7 +103,6 @@ jsfiles.push("SiceCAT/widgets/ZoomToResultPanel.js");
 jsfiles.push("SiceCAT/widgets/GeoSearch.js");
 jsfiles.push("SiceCAT/widgets/PKSearchPanel.js");
 jsfiles.push("SiceCAT/widgets/SigescatCercaSolrGeneralSearcherCombo.js");
-jsfiles.push("SiceCAT/widgets/SigescatCercaGeneralSearcherCombo.js");
 jsfiles.push("SiceCAT/widgets/OpenlsSigescatSearchCombo.js");
 jsfiles.push("SiceCAT/widgets/OpenlsSigescatReverseGeocodePanel.js");
 jsfiles.push("SiceCAT/widgets/CopyFeaturesPanel.js");
