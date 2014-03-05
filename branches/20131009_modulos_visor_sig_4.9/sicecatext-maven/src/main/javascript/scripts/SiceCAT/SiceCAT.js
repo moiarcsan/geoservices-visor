@@ -2044,6 +2044,9 @@ SiceCAT = Ext
 								index = url.indexOf("?");
 							}
 							url_req = OpenLayers.ProxyHost + url;
+						}else{
+							// Caso particular para cuando no este definido el confType
+							url_req = OpenLayers.ProxyHost + url;
 						}
 						return url_req;
 					},

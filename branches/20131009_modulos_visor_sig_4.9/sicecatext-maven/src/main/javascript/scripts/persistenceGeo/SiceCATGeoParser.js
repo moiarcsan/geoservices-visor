@@ -37,18 +37,18 @@ Ext.namespace("PersistenceGeoParser");
  * library and sicecat viewer
  */
 SiceCATGeoParser = Ext.extend(PersistenceGeo.Parser,{
+						
+    FOLDERS_ADDED:{},
+    INDEX_FOLDER: 1,
 
-	FOLDERS_ADDED:{},
-	INDEX_FOLDER: 1,
-
-	LOADERS:{
-		"WMS":1,
-		"WFS":2,
-		"KML":3,
-		"GML":5,
-		"TEXT":6,
-		"WMST":7
-	},
+    LOADERS:{
+        "WMS":1,
+        "WFS":2,
+        "KML":3,
+        "GML":5,
+        "TEXT":6,
+        "WMST":7
+    },
 
     initComponent: function() {
 
@@ -87,7 +87,7 @@ SiceCATGeoParser = Ext.extend(PersistenceGeo.Parser,{
         return treeConfig;
     },
 
-	sendFormPostData: function (url, params, method, onsuccess, onfailure){
+    sendFormPostData: function (url, params, method, onsuccess, onfailure){
         var tempForm = new Ext.FormPanel({
             url: url,
             method: method,

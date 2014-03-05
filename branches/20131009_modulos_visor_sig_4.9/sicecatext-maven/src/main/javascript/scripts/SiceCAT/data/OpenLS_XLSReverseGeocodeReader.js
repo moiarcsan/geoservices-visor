@@ -145,7 +145,7 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, Ext.data.XmlReader, {
 						<xls:Address countryCode="ES" language="CAT">
 							<xls:StreetAddress>
 								<xls:Building number="209" />
-								<xls:Street>Carrer dels Almog√†vers</xls:Street>
+								<xls:Street>Carrer dels Almog‡vers</xls:Street>
 							</xls:StreetAddress>
 							<xls:Place type="Municipality">Barcelona</xls:Place>
 						</xls:Address>
