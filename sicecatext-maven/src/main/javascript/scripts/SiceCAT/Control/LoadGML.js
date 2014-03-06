@@ -65,8 +65,24 @@ OpenLayers.Control.LoadGML = OpenLayers.Class(OpenLayers.Control.LoadKML, {
 	 * 
 	 * Display class name, for CSS.
 	 */
-	displayClass : "ControlLoadGML",
+	displayClass : "ControlLoadGML",    
+    
+    /**
+     * Constant: TYPE_GML_V2
+     */
+	TYPE_GML_V2: "GML Version 2",
 	
+	/**
+     * Constant: TYPE_GML_V3
+     */
+	TYPE_GML_V3: "GML Version 3",
+	
+    /**
+     * Property: gmlType
+     * 
+     * The selected gmlType [TYPE_GML2,TYPE_GML3]
+     */
+    gmlType: null,
 	/**
 	 * i18n
 	 */
@@ -109,10 +125,11 @@ OpenLayers.Control.LoadGML = OpenLayers.Class(OpenLayers.Control.LoadKML, {
 			        scope: this}
 		    });
 			
-			this.fp.add(comboType);
+			
 			this.comboType = comboType;
 		}
-		
+		this.fp.add(this.comboType);
+        
 		return windowImporter;
 	},
 
@@ -123,23 +140,14 @@ OpenLayers.Control.LoadGML = OpenLayers.Class(OpenLayers.Control.LoadKML, {
 	 */
 	importType: function(idType, type){
     	if(Sicecat.isLogEnable) console.log("Importing layer in "+type);
-    	this.type = type;
+    	this.gmlType = type;
 	},
-	/**
-     * Constant: TYPE_GML_V2
-     */
-	TYPE_GML_V2: "GML Version 2",
 	
-	/**
-     * Constant: TYPE_GML_V3
-     */
-	TYPE_GML_V3: "GML Version 3",
-
 	/*
 	 * Use to desc layer type
 	 */
 	getFormatTypeDesc: function(){
-		return this.type;
+		return this.gmlType;
 	},
 
 	/*
@@ -152,7 +160,7 @@ OpenLayers.Control.LoadGML = OpenLayers.Class(OpenLayers.Control.LoadKML, {
 		var externalProjection = new OpenLayers.Projection(this.externalProjection);
 
 		var formatType;
-    	if(this.type == this.TYPE_GML_V3){
+    	if(this.gmlType === this.TYPE_GML_V3){
     		formatType = new OpenLayers.Format.GML.v3({
                 internalProjection: internalProjection,
                 externalProjection: externalProjection,
