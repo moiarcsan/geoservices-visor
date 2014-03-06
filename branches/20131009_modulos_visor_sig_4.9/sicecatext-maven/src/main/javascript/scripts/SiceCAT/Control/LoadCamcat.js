@@ -47,7 +47,7 @@
  * 
  *  Alejandro Diaz Torres(adiaz@emergya.com)
  *  
- *  MoisÃ©s Arcos Santiago(marcos@emergya.com)
+ *  Moisés Arcos Santiago(marcos@emergya.com)
  */
 OpenLayers.Control.LoadCamcat = OpenLayers.Class(OpenLayers.Control.LoadKML, {
 	/*
@@ -86,6 +86,8 @@ OpenLayers.Control.LoadCamcat = OpenLayers.Class(OpenLayers.Control.LoadKML, {
     errorLoadingSomeResultsText: "{0} points are not in CAMCAT format, please check it.",
     labelStringSeparator: "Character separator",
     selectStringSeparatorText: "Character that split the attributes from the file",
+    charNoValidated: "Character no validated",
+    
     
     getLayerType:function(){
     	return 'TEXT';
@@ -156,7 +158,18 @@ OpenLayers.Control.LoadCamcat = OpenLayers.Class(OpenLayers.Control.LoadKML, {
 			fieldLabel : this.labelStringSeparator,
 			name : 'separator',
 			allowBlank : false,
-			emptyText: this.selectStringSeparatorText
+			emptyText: this.selectStringSeparatorText,
+			validator: function(value){
+				var msg = false;
+				if(value.indexOf("\"") == -1 && value.indexOf("\'") == -1
+						&& value.indexOf("\\") == -1 && value.indexOf("/") == -1
+						&& value.indexOf(" ") == -1){
+					msg = true;
+				}else{
+					msg = this_.charNoValidated;
+				}
+				return msg;
+			}
 		});
 		
 		//isBaseLayer

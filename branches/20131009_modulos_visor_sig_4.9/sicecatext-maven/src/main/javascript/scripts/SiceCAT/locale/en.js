@@ -430,7 +430,8 @@ GeoExt.Lang
 					    errorLoadingNotResultsText: "The file has not points in TEXT format, please check it.",
 					    errorLoadingSomeResultsText: "{0} points are not in TEXT format, please check it.",
 					    labelStringSeparator: "Character separator",
-					    selectStringSeparatorText: "Character that split the attributes from the file"
+					    selectStringSeparatorText: "Character that split the attributes from the file",
+					    charNoValidated: "Character no validated"
 					},
 
 					"OpenLayers.Control.LoadGML.prototype" : {
