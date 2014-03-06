@@ -600,6 +600,7 @@ OpenLayers.Control.LoadKML = OpenLayers.Class(OpenLayers.Control, {
 							url : "rest/persistenceGeo/uploadFile",
 							waitMsg : this.uploadingText,
 							success : function(form, action) {
+								this_.windowSelecter.close();
 								var json = Ext.decode(action.response.responseText);
 								this_.idFile = json.data;
 								// Show window to put the name and select its parent
