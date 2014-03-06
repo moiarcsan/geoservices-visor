@@ -33,90 +33,12 @@ SiceCAT.data.OpenLS_XLSReverseGeocodeReader = function(meta, recordType) {
 	SiceCAT.data.OpenLS_XLSReverseGeocodeReader.superclass.constructor.call(this, meta, recordType || meta.fields);
 };
 
-Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, Ext.data.XmlReader, {
+Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, SiceCAT.data.OpenLS_XLSReader, {
 	
-	/**
-	 * Property: lon {String} Default text to be show
-	 */
-	lon: "Longitude",
-	/**
-	 * Property: lat {String} Default text to be show
-	 */
-	lat: "Latitude",
-	/**
-	 * Property: street {String} Default text to be show
-	 */
-	street: "Street",
-	/**
-	 * Property: number {String} Default text to be show
-	 */
-	number: "Number",
-	/**
-	 * Property: place {String} Default text to be show
-	 */
-	place: "Place",
-	/**
-	 * Property: typePlace {String} Default text to be show
-	 */
-	typePlace: "Type place",
 	/**
 	 * Property: searchCenterDistance {String} Default text to be show
 	 */
 	searchCenterDistance: "Search center distance",
-
-	addOptXlsText: function(format, node, tagname, sep) {
-		var str = "";
-		var elms = format.getElementsByTagNameNS(node, "http://www.opengis.net/xls", tagname);
-		if (elms) {
-			Ext.each(elms, function(elm, index) {
-				str = format.getChildValue(elm);
-			});
-		}
-		return str;
-	},
-
-	addOptXlsPropertyText: function(format, node, tagname, sep, property) {
-		var str = "";
-		var elms = format.getElementsByTagNameNS(node, "http://www.opengis.net/xls", tagname);
-		if (elms) {
-			Ext.each(elms, function(elm, index) {
-				if(elm.attributes){
-					str = elm.attributes.getNamedItem(property).value;
-				}
-			});
-		}
-		return str;
-	},
-	
-	read : function(response){
-		// Esto se hace porque el servidor de DINT devuelve el responseXML vacio.
-		var doc = null;
-		if(!response.responseXML){
-			var parser = new DOMParser();
-			doc = parser.parseFromString(response.responseText, "application/xml");
-		}else{
-			doc = response.responseXML;
-		}
-        if(!doc) {
-            throw {message: "XmlReader.read: XML Document not available"};
-        }
-        return this.readRecords(doc);
-    },
-
-	readRecords : function(doc) {
-
-		this.xmlData = doc;
-
-		var root = doc.documentElement || doc;
-
-		var records = this.extractData(root);
-
-		return {
-			success : true,
-			records : records,
-			totalRecords : records.length
-		};
-	},
 
 	extractData: function(root) {
 		var opts = {
@@ -147,7 +69,7 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, Ext.data.XmlReader, {
 		var reader = this;
 
 		Ext.each(addresses, function(address, index) {
-			var pos = format.getElementsByTagNameNS(address, "http://www.opengis.net/gml", 'pos');
+			var pos = format.getElementsByTagNameNS(address, opts.namespaces.gml, 'pos');
 			var xy = '';
 			if (pos && pos[0]) {
 				xy = format.getChildValue(pos[0]);
@@ -159,9 +81,6 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, Ext.data.XmlReader, {
 			var place = '';
 			var typePlace = '';
 			var searchCentreDistance = '';
-			
-			if(Sicecat.isLogEnable) console.log("Reading a reverseLocation");
-			
 			/**
 			 * SIGESCAT Result:
 					<ReverseGeocodedLocation>
@@ -180,15 +99,15 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, Ext.data.XmlReader, {
 			 *
 			 */
 			/* Get street name */
-			text = reader.addOptXlsText(format, address, 'Street', '');
+			text = reader.addOptXlsText(format, address, 'Street', opts.namespaces.xls);
 			/* Get street number */
-			number = reader.addOptXlsPropertyText(format, address, 'Building', ',', 'number');
+			number = reader.addOptXlsPropertyText(format, address, 'Building', opts.namespaces.xls, 'number');
 			/* Get municipality place */
-			place = reader.addOptXlsText(format, address, 'Place', ',');
+			place = reader.addOptXlsText(format, address, 'Place', opts.namespaces.xls);
 			/* Get center distance */
-			searchCentreDistance = reader.addOptXlsText(format, address, 'SearchCentreDistance', ',');
+			searchCentreDistance = reader.addOptXlsPropertyText(format, address, 'SearchCentreDistance', "", 'value');
 			/* Get type place */
-			typePlace = reader.addOptXlsPropertyText(format, address, 'Place', ',', 'type');
+			typePlace = reader.addOptXlsPropertyText(format, address, 'Place', opts.namespaces.xls, 'type');
 			/* Make object with values to show */
 			var values = {};
 			values[reader.lon] = parseFloat(xyArr[0]);
