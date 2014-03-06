@@ -1065,5 +1065,22 @@ GeoExt.Lang
 						titleFeatureWindow: 'Elements seleccionats per capes',
 						textButtonDeselectAll: 'Desseleccionar Tot',
 						textButtonIntersect: 'Creuar',
+					},
+					"SiceCAT.data.OpenLS_XLSReader.prototype": {
+						lon: "Longitud",
+						lat: "Latitud",
+						street: "Via",
+						number: "Nombre",
+						place: "Zona",
+						typePlace: "Tipus de la zona"
+					},
+					"SiceCAT.data.OpenLS_XLSReverseGeocodeReader.prototype": {
+						lon: "Longitud",
+						lat: "Latitud",
+						street: "Via",
+						number: "Nombre",
+						place: "Zona",
+						typePlace: "Tipus de la zona",
+						searchCenterDistance: "Dist\u00e0ncia al centre de la cerca"
 					}
 				});

@@ -991,5 +991,22 @@ GeoExt.Lang
 						titleFeatureWindow: 'Selected features by layers',
 						textButtonDeselectAll: 'Deselect All',
 						textButtonIntersect: 'Intersect',
+					},
+					"SiceCAT.data.OpenLS_XLSReader.prototype": {
+						lon: "Longitude",
+						lat: "Latitude",
+						street: "Street",
+						number: "Number",
+						place: "Place",
+						typePlace: "Type place"
+					},
+					"SiceCAT.data.OpenLS_XLSReverseGeocodeReader.prototype": {
+						lon: "Longitude",
+						lat: "Latitude",
+						street: "Street",
+						number: "Number",
+						place: "Place",
+						typePlace: "Type place",
+						searchCenterDistance: "Search center distance"
 					}
 				});

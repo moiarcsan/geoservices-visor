@@ -34,37 +34,62 @@ SiceCAT.data.OpenLS_XLSReverseGeocodeReader = function(meta, recordType) {
 };
 
 Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, Ext.data.XmlReader, {
+	
+	/**
+	 * Property: lon {String} Default text to be show
+	 */
+	lon: "Longitude",
+	/**
+	 * Property: lat {String} Default text to be show
+	 */
+	lat: "Latitude",
+	/**
+	 * Property: street {String} Default text to be show
+	 */
+	street: "Street",
+	/**
+	 * Property: number {String} Default text to be show
+	 */
+	number: "Number",
+	/**
+	 * Property: place {String} Default text to be show
+	 */
+	place: "Place",
+	/**
+	 * Property: typePlace {String} Default text to be show
+	 */
+	typePlace: "Type place",
+	/**
+	 * Property: searchCenterDistance {String} Default text to be show
+	 */
+	searchCenterDistance: "Search center distance",
 
-	addOptXlsText: function(format, text, node, tagname, sep) {
+	addOptXlsText: function(format, node, tagname, sep) {
+		var str = "";
 		var elms = format.getElementsByTagNameNS(node, "http://www.opengis.net/xls", tagname);
 		if (elms) {
 			Ext.each(elms, function(elm, index) {
-				var str = format.getChildValue(elm);
-				if (str) {
-					text = text + sep + str;
-				}
+				str = format.getChildValue(elm);
 			});
 		}
-
-		return text;
+		return str;
 	},
 
-	addOptXlsPropertyText: function(format, text, node, tagname, sep, property) {
+	addOptXlsPropertyText: function(format, node, tagname, sep, property) {
+		var str = "";
 		var elms = format.getElementsByTagNameNS(node, "http://www.opengis.net/xls", tagname);
 		if (elms) {
 			Ext.each(elms, function(elm, index) {
-				var str = format.getAttributeNodeNS(elm, "http://www.opengis.net/xls", property);
-				if (str) {
-					text = text + sep + str;
+				if(elm.attributes){
+					str = elm.attributes.getNamedItem(property).value;
 				}
 			});
 		}
-
-		return text;
+		return str;
 	},
 	
 	read : function(response){
-		// Esto se hace porque el servidor de DINT devuelve el responseXML vacío.
+		// Esto se hace porque el servidor de DINT devuelve el responseXML vacio.
 		var doc = null;
 		if(!response.responseXML){
 			var parser = new DOMParser();
@@ -114,6 +139,7 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, Ext.data.XmlReader, {
 			{name: "lon", type: "number"},
 			{name: "lat", type: "number"},
 			{name: "text", type: "string"},
+			{name: "number", type: "string"},
 			{name: "place", type: "string"},
 			{name: "typePlace", type: "string"},
 			{name: "searchCentreDistance", type: "number"}
@@ -145,7 +171,7 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, Ext.data.XmlReader, {
 						<xls:Address countryCode="ES" language="CAT">
 							<xls:StreetAddress>
 								<xls:Building number="209" />
-								<xls:Street>Carrer dels Almogàvers</xls:Street>
+								<xls:Street>Carrer dels AlmogÃ vers</xls:Street>
 							</xls:StreetAddress>
 							<xls:Place type="Municipality">Barcelona</xls:Place>
 						</xls:Address>
@@ -153,28 +179,26 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, Ext.data.XmlReader, {
 					</ReverseGeocodedLocation>
 			 *
 			 */
-			text = reader.addOptXlsText(format, text, address, 'Street', '');
-//			text = reader.addOptXlsText(format, text, address, 'StreetAddress', '');
-			place = reader.addOptXlsText(format, text, address, 'Place', ',');
-			searchCentreDistance = reader.addOptXlsText(format, text, address, 'SearchCentreDistance', ',');
-			typePlace = reader.addOptXlsPropertyText(format, text, address, 'Place', ',', 'type');
-			var values = {
-				lon : parseFloat(xyArr[0]),
-				lat : parseFloat(xyArr[1]),
-				place: place,
-				searchCentreDistance: searchCentreDistance,
-				typePlace: typePlace,
-				text : text
-			};
+			/* Get street name */
+			text = reader.addOptXlsText(format, address, 'Street', '');
+			/* Get street number */
+			number = reader.addOptXlsPropertyText(format, address, 'Building', ',', 'number');
+			/* Get municipality place */
+			place = reader.addOptXlsText(format, address, 'Place', ',');
+			/* Get center distance */
+			searchCentreDistance = reader.addOptXlsText(format, address, 'SearchCentreDistance', ',');
+			/* Get type place */
+			typePlace = reader.addOptXlsPropertyText(format, address, 'Place', ',', 'type');
+			/* Make object with values to show */
+			var values = {};
+			values[reader.lon] = parseFloat(xyArr[0]);
+			values[reader.lat] = parseFloat(xyArr[1]);
+			values[reader.street] = text;
+			values[reader.number] = number;
+			values[reader.place] = place;
+			values[reader.typePlace] = typePlace;
+			values[reader.searchCenterDistance] = searchCentreDistance;
 			var record = new recordType(values, index);
-			record.data['lon'] = values.lon; // updates record, but not the view
-			record.data['lat'] = values.lat; // updates record, but not the view
-			record.data['place'] = values.place; // updates record, but not the view
-			record.data['searchCentreDistance'] = values.lonsearchCentreDistance; // updates record, but not the view
-			record.data['typePlace'] = values.typePlace; // updates record, but not the view
-			record.data['text'] = values.text; // updates record, but not the view
-			record.commit(); // updates the view
-			
 			records.push(record);
 		});
 		return records;
