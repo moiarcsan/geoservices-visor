@@ -431,7 +431,8 @@ GeoExt.Lang
 						errorLoadingNotResultsText: "Aquest fitxer no cont\u00E9 punts en el format TEXT, si us plau, comprovi-ho.",
 						errorLoadingSomeResultsText: "{0} punts no s\u00F3n el format TEXT, si us plau, compru\u00E9belos.",
 						labelStringSeparator: "Car\u00E0cter separador",
-						selectStringSeparatorText: "Car\u00E0cter que separa els atributs del fitxer"
+						selectStringSeparatorText: "Car\u00E0cter que separa els atributs del fitxer",
+						charNoValidated: "Car\u00E0cter no v\u00e0lid"
 					},
 
 					"OpenLayers.Control.LoadGML.prototype" : {

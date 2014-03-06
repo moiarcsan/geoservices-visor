@@ -431,7 +431,8 @@ GeoExt.Lang
 					    errorLoadingNotResultsText: "Este fichero no contiene puntos en el formato TEXT, por favor, compru\u00E9belo.",
 					    errorLoadingSomeResultsText: "{0} puntos no est\u00E1n en el formato TEXT, por favor, compru\u00E9belos.",
 					    labelStringSeparator: "Caracter separador",
-					    selectStringSeparatorText: "Caracter que separa los atributos del fichero"
+					    selectStringSeparatorText: "Caracter que separa los atributos del fichero",
+					    charNoValidated: "Caracter no v\u00E1lido"
 					},
 
 					"OpenLayers.Control.LoadGML.prototype" : {
