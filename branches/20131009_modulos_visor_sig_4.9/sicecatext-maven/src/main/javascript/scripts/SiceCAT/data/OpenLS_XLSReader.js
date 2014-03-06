@@ -34,6 +34,31 @@ SiceCAT.data.OpenLS_XLSReader = function(meta, recordType) {
 };
 
 Ext.extend(SiceCAT.data.OpenLS_XLSReader, Ext.data.XmlReader, {
+	
+	/**
+	 * Property: lon {String} Default text to be show
+	 */
+	lon: "Longitude",
+	/**
+	 * Property: lat {String} Default text to be show
+	 */
+	lat: "Latitude",
+	/**
+	 * Property: street {String} Default text to be show
+	 */
+	street: "Street",
+	/**
+	 * Property: number {String} Default text to be show
+	 */
+	number: "Number",
+	/**
+	 * Property: place {String} Default text to be show
+	 */
+	place: "Place",
+	/**
+	 * Property: typePlace {String} Default text to be show
+	 */
+	typePlace: "Type place",
 
 	addOptXlsText: function(format, node, tagname, sep) {
 		var str = "";
@@ -154,14 +179,13 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReader, Ext.data.XmlReader, {
 			number = reader.addOptXlsPropertyText(format, address, 'Building', ',', 'number');
 			place = reader.addOptXlsText(format, address, 'Place', ',');
 			typePlace = reader.addOptXlsPropertyText(format, address, 'Place', ',', 'type');
-			var values = {
-				lon : parseFloat(xyArr[0]),
-				lat : parseFloat(xyArr[1]),
-				place: place,
-				typePlace: typePlace,
-				number: number,
-				text : text
-			};
+			var values = {};
+			values[reader.lon] = parseFloat(xyArr[0]);
+			values[reader.lat] = parseFloat(xyArr[1]);
+			values[reader.street] = text;
+			values[reader.number] = number;
+			values[reader.place] = place;
+			values[reader.typePlace] = typePlace;
 			var record = new recordType(values, index);
 			records.push(record);
 		});

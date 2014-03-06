@@ -1158,9 +1158,10 @@ SiceCAT.MapLayout = Ext
 								// Diferenciamos entre los tipos de resultados
 								if(type == 0){
 									// Direcciones
-									place = data.place;
-									nom = data.text;
-									number = data.number;
+									var format = new SiceCAT.data.OpenLS_XLSReader();
+									place = data[format.place];
+									nom = data[format.street];
+									number = data[format.number];
 									var cadena = "";
 									if(nom != null){
 										cadena+=nom;
@@ -1175,7 +1176,7 @@ SiceCAT.MapLayout = Ext
 									}else if(municipi != null && nom == null){
 										cadena+=municipi;
 									}
-									json.push([cadena, data.lon, data.lat, null, null, data]);
+									json.push([cadena, data[format.lon], data[format.lat], null, null, data]);
 								}else if(type == 1){
 									// Vía PK
 									nom = json_data.nom;

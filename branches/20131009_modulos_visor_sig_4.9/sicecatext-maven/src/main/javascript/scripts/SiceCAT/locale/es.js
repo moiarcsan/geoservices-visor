@@ -1060,5 +1060,22 @@ GeoExt.Lang
 						titleFeatureWindow: 'Elementos seleccionados por capas',
 						textButtonDeselectAll: 'Deseleccionar Todo',
 						textButtonIntersect: 'Cruzar',
+					},
+					"SiceCAT.data.OpenLS_XLSReader.prototype": {
+						lon: "Longitud",
+						lat: "Latitud",
+						street: "V\u00eda",
+						number: "N\u00famero",
+						place: "Zona",
+						typePlace: "Tipo de la zona"
+					},
+					"SiceCAT.data.OpenLS_XLSReverseGeocodeReader.prototype": {
+						lon: "Longitud",
+						lat: "Latitud",
+						street: "V\u00eda",
+						number: "N\u00famero",
+						place: "Zona",
+						typePlace: "Tipo de la zona",
+						searchCenterDistance: "Distancia al centro de la b\u00fasqueda"
 					}
 				});
