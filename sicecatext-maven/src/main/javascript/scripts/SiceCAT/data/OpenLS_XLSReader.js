@@ -60,9 +60,9 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReader, Ext.data.XmlReader, {
 	 */
 	typePlace: "Type place",
 
-	addOptXlsText: function(format, node, tagname, sep) {
+	addOptXlsText: function(format, node, tagname, namespace) {
 		var str = "";
-		var elms = format.getElementsByTagNameNS(node, "http://www.opengis.net/xls", tagname);
+		var elms = format.getElementsByTagNameNS(node, namespace, tagname);
 		if (elms) {
 			Ext.each(elms, function(elm, index) {
 				str = format.getChildValue(elm);
@@ -72,9 +72,9 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReader, Ext.data.XmlReader, {
 		return str;
 	},
 
-	addOptXlsPropertyText: function(format, node, tagname, sep, property) {
+	addOptXlsPropertyText: function(format, node, tagname, namespace, property) {
 		var str = "";
-		var elms = format.getElementsByTagNameNS(node, "http://www.opengis.net/xls", tagname);
+		var elms = format.getElementsByTagNameNS(node, namespace, tagname);
 		if (elms) {
 			Ext.each(elms, function(elm, index) {
 				if(elm.attributes){
@@ -134,7 +134,7 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReader, Ext.data.XmlReader, {
 
 		var records = [];
 		var format = new OpenLayers.Format.XML(opts);
-		var addresses = format.getElementsByTagNameNS(root, "http://www.opengis.net/xls", 'GeocodedAddress');
+		var addresses = format.getElementsByTagNameNS(root, opts.namespaces.xls, 'GeocodedAddress');
 
 		// Create record for each address
 		var recordType = Ext.data.Record.create([
@@ -145,7 +145,7 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReader, Ext.data.XmlReader, {
 		var reader = this;
 
 		Ext.each(addresses, function(address, index) {
-			var pos = format.getElementsByTagNameNS(address, "http://www.opengis.net/gml", 'pos');
+			var pos = format.getElementsByTagNameNS(address, opts.namespaces.gml, 'pos');
 			var xy = '';
 			if (pos && pos[0]) {
 				xy = format.getChildValue(pos[0]);
@@ -175,10 +175,10 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReader, Ext.data.XmlReader, {
 	                </xls:GeocodedAddress>
 			 *
 			 */
-			text = reader.addOptXlsText(format, address, 'Street', '');
-			number = reader.addOptXlsPropertyText(format, address, 'Building', ',', 'number');
-			place = reader.addOptXlsText(format, address, 'Place', ',');
-			typePlace = reader.addOptXlsPropertyText(format, address, 'Place', ',', 'type');
+			text = reader.addOptXlsText(format, address, 'Street', opts.namespaces.xls);
+			number = reader.addOptXlsPropertyText(format, address, 'Building', opts.namespaces.xls, 'number');
+			place = reader.addOptXlsText(format, address, 'Place', opts.namespaces.xls);
+			typePlace = reader.addOptXlsPropertyText(format, address, 'Place', opts.namespaces.xls, 'type');
 			var values = {};
 			values[reader.lon] = parseFloat(xyArr[0]);
 			values[reader.lat] = parseFloat(xyArr[1]);
