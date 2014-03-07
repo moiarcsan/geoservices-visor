@@ -98,6 +98,7 @@ jsfiles.push("GeoExt/data/WFSCapabilitiesReader.js");
 jsfiles.push("GeoExt/data/WFSCapabilitiesStore.js");
 // WFS & Searchers widgets
 jsfiles.push("SiceCAT/widgets/QueryPanel.js");
+jsfiles.push("SiceCAT/widgets/QueryDialog.js");
 jsfiles.push("SiceCAT/widgets/ColorField.js");
 jsfiles.push("SiceCAT/widgets/ZoomToResultPanel.js");
 jsfiles.push("SiceCAT/widgets/GeoSearch.js");

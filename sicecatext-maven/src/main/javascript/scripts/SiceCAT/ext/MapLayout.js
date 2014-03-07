@@ -1010,7 +1010,7 @@ SiceCAT.MapLayout = Ext
 						// Obtiene la url del wms en funcion del servidor wms:
 						// http://sigescat.pise.interior.intranet/ows/wms? --> 
 						// http://sigescat.pise.interior.intranet/openls
-						// e incluye el proxy
+						// e incluye el proxyq
 						/* GetURLProxy */
 						var openlsUrl = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, Sicecat.defaultWMSServer.replace("ows/wms?", "openls"));
 						
@@ -1652,234 +1652,22 @@ SiceCAT.MapLayout = Ext
 					 * for GXP WFS panel
 					 */
 					getSearchWFSAction : function(layers) {
-						var searchWFSDefaultStateText = this.searchWFSDefaultStateText;
-						var searchWFSNotFoundStateText = this.searchWFSNotFoundStateText;
-						var searchWFSFoundsStateText = this.searchWFSFoundsStateText;
-						var errorText = this.errorWFSText;
-						var errorWFSDetailsTitleText = this.errorWFSDetailsTitleText;
-
-						var statusBar = new Ext.ux.StatusBar({
-							defaultText : searchWFSDefaultStateText,
-							width : 365,
-							height : 50
-						});
-
-						var sicecatInstance = this.sicecatInstance;
-
-						var this_ = this;
-						Ext.QuickTips.init();
-						var panel = new SiceCAT.QueryPanel(
-								{
-									id: "queryPanel",
-									width : 365,
-									height : 350,
-									map : map,
-									maxFeatures : 200,
-									layerStore : new Ext.data.JsonStore({
-										data : {
-											layers : layers
-										},
-										root : "layers",
-										fields : [ "title", "name",
-												"namespace", "url", "schema" ],
-										sortInfo: {
-											field: 'title',
-											direction: 'ASC'
-										}
-									}),
-									listeners : {
-										storeload : function(panel, store) {
-											if(store.getTotalCount() > 0){
-												var axiliaryLayerWFS = AuxiliaryLayer.getLayer(sicecatInstance.nombreCapaResultadoText);
-												axiliaryLayerWFS.events.on({
-													"featuresadded": function(obj, el){
-														// Comprobamos que el control no este activo
-														if(actions["select"].control.active != null && actions["select"].control.active){
-															actions["select"].control.deactivate();
-															actions["select"].control.activate();
-														}
-														if(actions["selectBox"].control.active != null && actions["selectBox"].control.active){
-															actions["selectBox"].control.deactivate();
-															actions["selectBox"].control.activate();
-														}
-														if(actions["pointRadiusSelection"].control.active != null && actions["pointRadiusSelection"].control.active){
-															actions["pointRadiusSelection"].control.deactivate();
-															actions["pointRadiusSelection"].control.activate();
-														}
-													}
-												});
-												if(Sicecat.parentNode){
-													Sicecat.parentNode.expand();
-												}
-												// Nos quedamos con el control activo
-												var active_control = null;
-												if(actions["select"].control.active){
-													active_control = actions["select"].control;
-												}else if(actions["selectBox"].control.active){
-													active_control = actions["selectBox"].control;
-												}else if(actions["pointRadiusSelection"].control.active){
-													active_control = actions["pointRadiusSelection"].control;
-												}
-												// Antes de destruir las features hay que deseleccionarlas
-												if(axiliaryLayerWFS.selectedFeatures.length > 0){
-													for(var i=0; i<axiliaryLayerWFS.selectedFeatures.length; i++){
-														active_control.unselect(axiliaryLayerWFS.selectedFeatures[i]);
-													}
-												}
-												axiliaryLayerWFS.destroyFeatures();
-												var features = [];
-												var founds = 0;
-												store.each(function(record) {
-													features.push(record.get("feature"));
-													founds++;
-												});
-												statusBar.setText(String.format(
-														searchWFSFoundsStateText,
-														founds,
-														sicecatInstance.nombreCapaResultadoText));
-												axiliaryLayerWFS.addFeatures(features);
-											}else{
-												statusBar.setText(searchWFSNotFoundStateText);
-											}
-										},
-										loadexception : function(e, e2, e3) {
-											if (!!e.queryTypeSiceCAT) {
-												statusBar.setText(errorText);
-												var msgText = String
-														.format(
-																this_.errorDescribeFeatureNotFound,
-																e.url
-																		.replace(
-																				"proxy.do?url=",
-																				""),
-																e.queryTypeSiceCAT
-																		.substring(e.queryTypeSiceCAT
-																				.indexOf("=") + 1));
-												console.log(msgText);
-												if (!!Ext
-														.get('error_msg_wfs_detail'))
-													Ext
-															.get(
-																	'error_msg_wfs_detail')
-															.on(
-																	'click',
-																	function(e) {
-																		Ext.MessageBox
-																				.show({
-																					title : errorWFSDetailsTitleText,
-																					msg : msgText,
-																					width : 300,
-																					icon : Ext.Msg.INFO,
-																					buttons : Ext.Msg.OK
-																				});
-																	});
-												// statusBar.setText(String.format(errorText,
-												// String.format(this_.errorDescribeFeatureNotFound,
-												// e.url,
-												// e.queryTypeSiceCAT.substring(e.queryTypeSiceCAT.indexOf("=")+1))));
-											} else if (!!e2
-													&& !!e2.response
-													&& !!e2.response.priv
-													&& !!e2.response.priv.responseText) {
-												var text = e2.response.priv.responseText;
-												statusBar.setText(errorText);
-												if (!!Ext
-														.get('error_msg_wfs_detail'))
-													Ext
-															.get(
-																	'error_msg_wfs_detail')
-															.on(
-																	'click',
-																	function(e) {
-																		Ext.MessageBox
-																				.show({
-																					title : errorWFSDetailsTitleText,
-																					msg : text,
-																					width : 300,
-																					icon : Ext.Msg.INFO,
-																					buttons : Ext.Msg.OK
-																				});
-																	});
-											} else if (!!e2
-													&& !!e2.response
-													&& !!e2.response.priv
-													&& !!e2.response.priv.responseXML) {
-												var text = e2.response.priv.responseXML;
-												statusBar.setText(errorText);
-												if (!!Ext
-														.get('error_msg_wfs_detail'))
-													Ext
-															.get(
-																	'error_msg_wfs_detail')
-															.on(
-																	'click',
-																	function(e) {
-																		Ext.MessageBox
-																				.show({
-																					title : errorWFSDetailsTitleText,
-																					msg : text,
-																					width : 300,
-																					icon : Ext.Msg.INFO,
-																					buttons : Ext.Msg.OK
-																				});
-																	});
-											} else {
-												statusBar.setText(String
-														.format(errorText));
-												if (!!Ext
-														.get('error_msg_wfs_detail')) {
-													Ext
-															.get(
-																	'error_msg_wfs_detail')
-															.on(
-																	'click',
-																	function(e) {
-																		Ext.MessageBox
-																				.show({
-																					title : errorWFSDetailsTitleText,
-																					msg : 'Error en la consulta',
-																					width : 300,
-																					icon : Ext.Msg.INFO,
-																					buttons : Ext.Msg.OK
-																				});
-																	});
-												}
-											}
-										},
-										beforequery : function() {
-											statusBar.showBusy();
-										}
-									}
-								});
-
-						var button = new Ext.Button({
-							text : this.queryText,
-							handler : function() {
-								panel.query();
-							}
-						});
-
-						panel.addButton(button);
-
+						
 						var sicecatInstance = this.sicecatInstance;
 
 						Sicecat.wfsSearcherWindow = null;
-						var searcherTitleText = this.searcherTitleText;
 						if (!Sicecat.wfsSearcherWindow) {
-							Sicecat.wfsSearcherWindow = new Ext.Window({
-								title : searcherTitleText,
-								shadow : false,
-								width : 380,
-								plain : true,
-								closeAction : "hide",
-								items : [ panel, statusBar ],
-								listeners : {
-									beforehide : function() {
-										statusBar.clearStatus({
-											useDefaults : true
-										});
-									}
-								}
+							Sicecat.wfsSearcherWindow = new SiceCAT.QueryDialog({
+                                layers: layers,
+                                queryText: this.queryText,
+                                searchWFSDefaultStateText: this.searchWFSDefaultStateText,
+                                searchWFSNotFoundStateText: this.searchWFSNotFoundStateText,
+                                searchWFSFoundsStateText: this.searchWFSFoundsStateText,
+                                errorWFSText: this.errorWFSText,
+                                errorWFSDetailsTitleText: this.errorWFSDetailsTitleText,                                
+                                sicecatInstance: sicecatInstance,  
+                                errorDescribeFeatureNotFound: this.errorDescribeFeatureNotFound,
+								title : this.searcherTitleText
 							});
 						}
 						var action = new GeoExt.Action(
