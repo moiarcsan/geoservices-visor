@@ -2021,6 +2021,12 @@ SiceCAT = Ext
 					 * @returns {String}
 					 */
 					getURLProxy: function (configType, typeCall, url){
+                        if(url.indexOf(OpenLayers.ProxyHost)===0) {
+                            // If the url comes proxied by default we remove the proxy,
+                            // as we have to add a proxy only if needed or required by 
+                            // config.
+                            url = url.substring(OpenLayers.ProxyHost.length);
+                        }
 						var url_req = "";
 						if(configType == 0){
 							// No se usará ningún proxy para ninguna llamada a SIGESCAT
