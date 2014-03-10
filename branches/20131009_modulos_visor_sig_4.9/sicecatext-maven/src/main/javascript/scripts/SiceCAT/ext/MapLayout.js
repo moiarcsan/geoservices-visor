@@ -1519,56 +1519,6 @@ SiceCAT.MapLayout = Ext
 				            }
 						}));
 						
-						// Search WFS Action
-						var layers;
-						if (!!this.sicecatInstance.jsonSearchServices) {
-							layers = new Array();
-							var j = 0;
-							for ( var i = 0; i < this.sicecatInstance.jsonSearchServices.length; i++) {
-								if (this.sicecatInstance.jsonSearchServices[i]['type'] == "search_wfs") {
-									var url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.sicecatInstance.jsonSearchServices[i]["url"]);
-									var url_schema = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.sicecatInstance.jsonSearchServices[i]["schema"]);
-									layers[j++] = {
-										title : this.sicecatInstance.jsonSearchServices[i]["title"],
-										name : this.sicecatInstance.jsonSearchServices[i]["name"],
-										namespace : this.sicecatInstance.jsonSearchServices[i]["namespace"],
-										url : url,
-										schema : url_schema,
-										maxFeatures : this.sicecatInstance.jsonSearchServices[i]["maxFeatures"]
-									};
-								} else if (this.sicecatInstance.jsonSearchServices[i]['type'] == "search_wfs_all"
-										&& !!this.sicecatInstance.jsonSearchServices[i]["featureTypes"]
-										&& !!this.sicecatInstance.jsonSearchServices[i]["featureTypes"].length
-										&& this.sicecatInstance.jsonSearchServices[i]["featureTypes"].length > 0) {
-									var url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.sicecatInstance.jsonSearchServices[i]["url"]);
-									for ( var k = 0; k < this.sicecatInstance.jsonSearchServices[i]["featureTypes"].length; k++) {
-										var title;
-										if (!!this.titlesForLayer[this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k]]) {
-											title = this.titlesForLayer[this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k]];
-										} else {
-											title = this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k];
-										}
-										var url_schema = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, 
-												this.sicecatInstance.jsonSearchServices[i]["schema_base"] + this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k]);
-										layers[j++] = {
-											title : title,
-											name : this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k]
-													.split(":")[1],
-											namespace : this.sicecatInstance.jsonSearchServices[i]["namespace"],
-											url : url,
-											schema : url_schema,
-											maxFeatures : this.sicecatInstance.jsonSearchServices[i]["maxFeatures"]
-										};
-									}
-								} else if (this.sicecatInstance.jsonSearchServices[i]['type'] == "geocode") {
-									var url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.sicecatInstance.jsonSearchServices[i]["url"]);
-									var name = this.sicecatInstance.jsonSearchServices[i]["name"];
-									if (Sicecat.isLogEnable)
-										console.log("Registred + " + url + " as direct geocode service in '" + name + "'");
-								}
-							}
-						}
-						
 						// Get layers from getCapabilities
 						var urlWMS = Sicecat.defaultWMSServer;
 						var urlWFS = null;
@@ -1621,7 +1571,7 @@ SiceCAT.MapLayout = Ext
 						    	queryPanel.layerStore.loadData(data, false);
 						    }
 						});
-						var action_wfs = this.getSearchWFSAction(layers);
+						var action_wfs = this.getSearchWFSAction();
 						actions["wfs_searcher"] = action_wfs;
 						this.toolbarNav.push(action_wfs);
 						
@@ -1651,7 +1601,51 @@ SiceCAT.MapLayout = Ext
 					 * Parameters: layers - <Array<Map>> with layer parameters
 					 * for GXP WFS panel
 					 */
-					getSearchWFSAction : function(layers) {
+					getSearchWFSAction : function() {
+                        // Search WFS Action
+						var layers;
+						if (!!this.sicecatInstance.jsonSearchServices) {
+							layers = new Array();
+							var j = 0;
+							for ( var i = 0; i < this.sicecatInstance.jsonSearchServices.length; i++) {
+								if (this.sicecatInstance.jsonSearchServices[i]['type'] == "search_wfs") {
+									var url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.A, this.sicecatInstance.jsonSearchServices[i]["url"]);
+									var url_schema = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, this.sicecatInstance.jsonSearchServices[i]["schema"]);
+									layers[j++] = {
+										title : this.sicecatInstance.jsonSearchServices[i]["title"],
+										name : this.sicecatInstance.jsonSearchServices[i]["name"],
+										namespace : this.sicecatInstance.jsonSearchServices[i]["namespace"],
+										url : url,
+										schema : url_schema,
+										maxFeatures : this.sicecatInstance.jsonSearchServices[i]["maxFeatures"]
+									};
+								} else if (this.sicecatInstance.jsonSearchServices[i]['type'] == "search_wfs_all"
+										&& !!this.sicecatInstance.jsonSearchServices[i]["featureTypes"]
+										&& !!this.sicecatInstance.jsonSearchServices[i]["featureTypes"].length
+										&& this.sicecatInstance.jsonSearchServices[i]["featureTypes"].length > 0) {
+									var url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, this.sicecatInstance.jsonSearchServices[i]["url"]);
+									for ( var k = 0; k < this.sicecatInstance.jsonSearchServices[i]["featureTypes"].length; k++) {
+										var title;
+										if (!!this.titlesForLayer[this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k]]) {
+											title = this.titlesForLayer[this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k]];
+										} else {
+											title = this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k];
+										}
+										var url_schema = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, 
+												this.sicecatInstance.jsonSearchServices[i]["schema_base"] + this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k]);
+										layers[j++] = {
+											title : title,
+											name : this.sicecatInstance.jsonSearchServices[i]["featureTypes"][k]
+													.split(":")[1],
+											namespace : this.sicecatInstance.jsonSearchServices[i]["namespace"],
+											url : url,
+											schema : url_schema,
+											maxFeatures : this.sicecatInstance.jsonSearchServices[i]["maxFeatures"]
+										};
+									}
+								} 
+							}
+						}
 						
 						var sicecatInstance = this.sicecatInstance;
 
