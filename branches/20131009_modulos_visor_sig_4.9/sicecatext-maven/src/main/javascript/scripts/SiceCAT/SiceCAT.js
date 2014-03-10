@@ -1460,14 +1460,15 @@ SiceCAT = Ext
 							this.layout.idioma = this.jsonMapConfiguration['defaultIdioma'];
 							
 							// AddLayer Listener
-							map.events.register("addlayer", map, function(){
-								if(actions["tooltipcontrol"]){
-									if(actions["tooltipcontrol"].control.active){
-										actions["tooltipcontrol"].control.deactivate();
-										actions["tooltipcontrol"].control.activate();
-									}
-								}
-							});
+							// Conflict with refresh loader
+//							map.events.register("addlayer", map, function(){
+//								if(actions["tooltipcontrol"]){
+//									if(actions["tooltipcontrol"].control.active){
+//										actions["tooltipcontrol"].control.deactivate();
+//										actions["tooltipcontrol"].control.activate();
+//									}
+//								}
+//							});
 
 							this.map = map;
 

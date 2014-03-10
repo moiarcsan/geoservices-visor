@@ -125,6 +125,12 @@ OpenLayers.Control.CreateFolder = OpenLayers.Class(OpenLayers.Control.LoadKML, {
 		
 		return items;
 	},
+	
+	callbackSave: function(form, action){
+		var json = Ext.util.JSON.decode(action.response.responseText);
+		Sicecat.refreshLayers(loadSicecatInfo);
+		this.window.close();
+	},
     
 	/*
 	 * Function: submitForm
@@ -135,43 +141,9 @@ OpenLayers.Control.CreateFolder = OpenLayers.Class(OpenLayers.Control.LoadKML, {
 	submitForm: function(){
 		var self = this;
     	if(!!Sicecat.SELECTED_GROUP){
-    		PersistenceGeoParser.saveFolderByGroup(Sicecat.SELECTED_GROUP, self.nameLayer, true, false, false, self.folderID, 
-	        		function(form, action){
-	        			/*
-	        			 * ON SUCCESS
-	        			 */
-						var json = Ext.util.JSON.decode(action.response.responseText);
-	        			Sicecat.refreshLayers(load_fourth);
-	        			self.window.close();
-	        		},
-	        		function(form, action){
-	        			/*
-	        			 * ON SUCCESS
-	        			 */
-	        			var json = Ext.util.JSON.decode(action.response.responseText);
-	        			Sicecat.refreshLayers(load_fourth);
-	        			self.window.close();
-	        		}
-	        );
+    		PersistenceGeoParser.saveFolderByGroup(Sicecat.SELECTED_GROUP, self.nameLayer, true, false, false, self.folderID, self.callbackSave, self.callbackSave);
     	}else{
-	        PersistenceGeoParser.saveFolderByUser(Sicecat.user.login, self.nameLayer, true, false, false, self.folderID, 
-	        		function(form, action){
-	        			/*
-	        			 * ON SUCCESS
-	        			 */
-						var json = Ext.util.JSON.decode(action.response.responseText);
-	        			Sicecat.refreshLayers(load_fourth);
-	        			self.window.close();
-	        		},
-	        		function(form, action){
-	        			/*
-	        			 * ON SUCCESS
-	        			 */
-	        			var json = Ext.util.JSON.decode(action.response.responseText);
-	        			Sicecat.refreshLayers(load_fourth);
-	        			self.window.close();
-	        		}
-	        );
+	        PersistenceGeoParser.saveFolderByUser(Sicecat.user.login, self.nameLayer, true, false, false, self.folderID, self.callbackSave, self.callbackSave);
     	}
 	}
 });

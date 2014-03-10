@@ -434,9 +434,10 @@ function initComposer() {
 	} catch (e) {
 	}
 	
-	
-	loadingIndicator.hide();
-	loadingIndicator = null;
+	if(loadingIndicator){
+		loadingIndicator.hide();
+		loadingIndicator = null;
+	}
 
 	// Establece el mapa
 	integrator.map = map;
