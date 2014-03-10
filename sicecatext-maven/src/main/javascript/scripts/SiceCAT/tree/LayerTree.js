@@ -385,16 +385,15 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 		// button options
 		allowDepress : false
 	}));
-
-		var items = [ new Ext.Button(
-			{
-				iconCls : 'addButton',
-				menu : new Ext.menu.Menu(
-						{
-							items : addItems
-						})
-			}), 
-				new GeoExt.Action(
+	
+	var items = [ new Ext.Button({
+		iconCls : 'addButton',
+		menu : new Ext.menu.Menu({items : addItems})
+	})];
+	
+	// Add initial config panel only for level 1 admin
+	if(Global_TMP.permisos.indexOf("admin1") >= 0){
+		items.push(new GeoExt.Action(
 				{
 					itemID : "configurationPanel",
 					tooltip : configurationText,
@@ -402,8 +401,8 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 					map : map,
 					iconCls : "InitialConf",
 					allowDepress : false
-				})
-			];
+				}));
+	}
 		
 		this.tbar = new Ext.Toolbar(
 				{
