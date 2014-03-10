@@ -112,7 +112,8 @@ div.olcontroloverviewmapcontainer {
 	background-image: url("../../../images/SiceCAT/button_active.png");
 }
 
-.x-toolbar .x-btn-tl,.x-toolbar .x-btn-tc,.x-toolbar .x-btn-tr,.x-toolbar .x-btn-ml,.x-toolbar .x-btn-mc,.x-toolbar .x-btn-mr,.x-toolbar .x-btn-bl,.x-toolbar .x-btn-bc,.x-toolbar .x-btn-br
+.x-toolbar .x-btn-tl,.x-toolbar .x-btn-tc,.x-toolbar .x-btn-tr,.x-toolbar .x-btn-ml,.x-toolbar .x-btn-mc,.x-toolbar .x-btn-mr,.x-toolbar .x-btn-bl,.x-toolbar .x-btn-bc,.x-toolbar .x-btn-br,
+.x-column-inner .x-btn-tl,.x-column-inner .x-btn-tl,.x-column-inner .x-btn-tc,.x-column-inner .x-btn-tr,.x-column-inner .x-btn-ml,.x-column-inner .x-btn-mc,.x-column-inner .x-btn-mr,.x-column-inner .x-btn-bl,.x-column-inner .x-btn-bc,.x-column-inner .x-btn-br
 	{
 	background-image: none;
 }
