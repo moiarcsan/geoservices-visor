@@ -1609,7 +1609,7 @@ SiceCAT.MapLayout = Ext
 							var j = 0;
 							for ( var i = 0; i < this.sicecatInstance.jsonSearchServices.length; i++) {
 								if (this.sicecatInstance.jsonSearchServices[i]['type'] == "search_wfs") {
-									var url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.A, this.sicecatInstance.jsonSearchServices[i]["url"]);
+									var url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, this.sicecatInstance.jsonSearchServices[i]["url"]);
 									var url_schema = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, this.sicecatInstance.jsonSearchServices[i]["schema"]);
 									layers[j++] = {
 										title : this.sicecatInstance.jsonSearchServices[i]["title"],
