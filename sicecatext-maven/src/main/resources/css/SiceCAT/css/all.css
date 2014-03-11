@@ -893,6 +893,12 @@ button.x-btn-text.CreateFolder, .CreateFolder{
 }
 
 /* Paneles del buscador */
+
+#wayPanel, #addressPanel, #generalPanel {
+    position: relative !important;
+    top: 0!important;
+}
+
 #wayPanel .ext-el-mask {
 	background-color: #EEEEEE;
 	opacity: 0;
