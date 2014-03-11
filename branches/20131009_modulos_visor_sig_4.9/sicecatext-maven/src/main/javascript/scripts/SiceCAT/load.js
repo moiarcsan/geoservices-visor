@@ -109,6 +109,7 @@ jsfiles.push("SiceCAT/widgets/OpenlsSigescatReverseGeocodePanel.js");
 jsfiles.push("SiceCAT/widgets/CopyFeaturesPanel.js");
 jsfiles.push("SiceCAT/widgets/MultiSearchCombo.js");
 jsfiles.push("SiceCAT/widgets/WFSDialog.js");
+jsfiles.push("SiceCAT/widgets/CombinedSearchField.js");
 // Format SIGESCAT
 //jsfiles.push("SiceCAT/Format/XML.js");
 jsfiles.push("SiceCAT/Format/WFST/v1_1_0.js");
