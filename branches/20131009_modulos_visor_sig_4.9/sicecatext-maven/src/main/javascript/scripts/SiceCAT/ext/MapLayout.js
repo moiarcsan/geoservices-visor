@@ -1010,7 +1010,7 @@ SiceCAT.MapLayout = Ext
 						// Obtiene la url del wms en funcion del servidor wms:
 						// http://sigescat.pise.interior.intranet/ows/wms? --> 
 						// http://sigescat.pise.interior.intranet/openls
-						// e incluye el proxyq
+						// e incluye el proxy
                         
                         // TODO: This isn't used, should be removed? (lroman)
 						/* GetURLProxy */

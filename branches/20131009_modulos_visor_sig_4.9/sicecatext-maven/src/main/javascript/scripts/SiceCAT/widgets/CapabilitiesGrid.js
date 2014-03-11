@@ -182,7 +182,7 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
      */
     getCapabilitiesUrl: function(url){
     	/* GetURLProxy */
-		var capabilitiesUrl = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, url);
+		var capabilitiesUrl = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, url);
     	var index = capabilitiesUrl.indexOf("request=getCapabilities");
     	var indexService = capabilitiesUrl.indexOf("service=wms");
     	var index2 = capabilitiesUrl.indexOf("?");
