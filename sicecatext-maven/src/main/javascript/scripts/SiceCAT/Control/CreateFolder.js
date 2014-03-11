@@ -141,9 +141,19 @@ OpenLayers.Control.CreateFolder = OpenLayers.Class(OpenLayers.Control.LoadKML, {
 	submitForm: function(){
 		var self = this;
     	if(!!Sicecat.SELECTED_GROUP){
-    		PersistenceGeoParser.saveFolderByGroup(Sicecat.SELECTED_GROUP, self.nameLayer, true, false, false, self.folderID, self.callbackSave, self.callbackSave);
+    		PersistenceGeoParser.saveFolderByGroup(Sicecat.SELECTED_GROUP, self.nameLayer, true, false, false, self.folderID, 
+    				function(form, action){
+    			self.callbackSave(form, action);
+    		}, function(form, action){
+    			self.callbackSave(form, action);
+    		});
     	}else{
-	        PersistenceGeoParser.saveFolderByUser(Sicecat.user.login, self.nameLayer, true, false, false, self.folderID, self.callbackSave, self.callbackSave);
+	        PersistenceGeoParser.saveFolderByUser(Sicecat.user.login, self.nameLayer, true, false, false, self.folderID, 
+	        	function(form, action){
+    				self.callbackSave(form, action);
+    		}, function(form, action){
+    				self.callbackSave(form, action);
+    		});
     	}
 	}
 });

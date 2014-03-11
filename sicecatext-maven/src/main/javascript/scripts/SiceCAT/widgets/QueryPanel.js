@@ -257,7 +257,7 @@ SiceCAT.QueryPanel = Ext.extend(gxp.QueryPanel, {
     	//Show error if schema not found
     	var this_ = this;
 		Ext.Ajax.request({
-			url: record.get("schema"),
+			url: Sicecat.getURLProxy(Sicecat.configType, Sicecat.typeCall.ALFANUMERICA, record.get("schema")),
 			method: 'GET',
 			failure: function ( result, request) {
 				this_.url = record.get("schema");
