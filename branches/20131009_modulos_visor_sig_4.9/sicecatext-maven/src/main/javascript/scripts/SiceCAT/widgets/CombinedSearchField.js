@@ -155,16 +155,15 @@ SiceCAT.CombinedSearchField = Ext.extend(Ext.form.TextField, {
                     cls: 'addressPanelStyle',
                     title: this.titleAddressPanel,
                     autoScroll: true,
+                    ref: "addressPanel",
                     width: '100%',
                     collapsible: true,
-                    flex: 1,                   
+                    flex: 1,    
+                    height: 200,
+                    titleCollapse: true,
                     listeners: {
-                        collapse: function() {
-                            this.searcher_win_new.doLayout();
-                        },
-                        expand: function() {
-                            this.searcher_win_new.doLayout();
-                        },
+                        collapse: this._handleWindowHeight,
+                        expand: this._handleWindowHeight,
                         scope: this
                     }
                 }, {
@@ -173,16 +172,15 @@ SiceCAT.CombinedSearchField = Ext.extend(Ext.form.TextField, {
                     title: this.titleWayPanel,
                     autoScroll: true,
                     width: '100%',
+                    ref: "wayPanel",
+                    height: 200,
                     collapsible: true,
                     style: "position:relative !important",
                     flex: 1,
+                    titleCollapse: true,
                     listeners: {
-                        collapse: function() {
-                            this.searcher_win_new.doLayout();
-                        },
-                        expand: function() {
-                            this.searcher_win_new.doLayout();
-                        },
+                        collapse: this._handleWindowHeight,
+                        expand: this._handleWindowHeight,
                         scope: this
                     }
                 }, {
@@ -191,16 +189,15 @@ SiceCAT.CombinedSearchField = Ext.extend(Ext.form.TextField, {
                     title: this.titleGeneralPanel,
                     autoScroll: true,
                     width: '100%',
+                    ref: "generalPanel",
+                    height: 200,
+                    titleCollapse: true,
                     collapsible: true,
                     style: "position:relative !important",
                     flex: 1,
                     listeners: {
-                        collapse: function() {
-                            this.searcher_win_new.doLayout();
-                        },
-                        expand: function() {
-                            this.searcher_win_new.doLayout();
-                        },
+                        collapse: this._handleWindowHeight,
+                        expand: this._handleWindowHeight,
                         scope: this
                     }
                 }]
@@ -404,11 +401,16 @@ SiceCAT.CombinedSearchField = Ext.extend(Ext.form.TextField, {
             if (this.num_results[i].records === 0) {               
                 if (!Ext.getCmp(this.num_results[i].panel).collapsed) {
                     Ext.getCmp(this.num_results[i].panel).collapse();
+                } else {
+                    
                 }
+            } else {
+                Ext.getCmp(this.num_results[i].panel).expand();
             }
         }
         this.num_results = [];
         this.searcher_mask.hide();
+        this._handleWindowHeight();
     },
     loadOpenLS: function(store, records, options) {
         // Set the title with the records size
@@ -569,6 +571,20 @@ SiceCAT.CombinedSearchField = Ext.extend(Ext.form.TextField, {
         });
         store_cg.load();
     },
+    
+    _handleWindowHeight: function() {
+        var height = 0;
+        Ext.each([
+            this.searcher_win_new.wayPanel,
+            this.searcher_win_new.generalPanel,
+            this.searcher_win_new.addressPanel
+        ], function(panel) {
+            height += panel.getHeight();
+        });
+        
+        this.searcher_win_new.setHeight(height);
+    },
+    
     onKeyPressed: function(field, event) {
         if (event.getKey() === event.ENTER) {
             var value = field.getValue();
