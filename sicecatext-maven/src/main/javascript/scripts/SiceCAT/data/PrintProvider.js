@@ -551,27 +551,7 @@ SiceCAT.data.PrintProvider = Ext.extend(Ext.util.Observable, {
      *  :param url: ``String``
      */
     download: function(url) {
-    	var indexDo = url.indexOf(".do");
-    	var base_url = "";
-    	var idFile = "";
-    	var array_url = null;
-    	if(indexDo != -1){
-    		// Get the url first part
-    		base_url = url.substr(0, indexDo+3);
-    		array_url = url.split("/");
-    		idFile = array_url[array_url.length-1];
-    		if(idFile.indexOf(".printout") != -1){
-    			idFile = idFile.replace(".printout", "");
-    		}
-    	}
-    	Ext.Ajax.request({
-    		url: base_url,
-    		isUpload: true,
-    		params: {
-    			id: idFile
-    		}
-    	});
-        /*if (this.fireEvent("beforedownload", this, url) !== false) {
+        if (this.fireEvent("beforedownload", this, url) !== false) {
             if (Ext.isOpera) {
                 // Make sure that Opera don't replace the content tab with
                 // the pdf
@@ -580,7 +560,7 @@ SiceCAT.data.PrintProvider = Ext.extend(Ext.util.Observable, {
                 // This avoids popup blockers for all other browsers
                 window.location.href = url;                        
             } 
-        }*/
+        }
         this.fireEvent("print", this, url);
     },
     

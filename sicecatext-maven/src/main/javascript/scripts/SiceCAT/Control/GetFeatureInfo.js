@@ -201,7 +201,7 @@ SiceCAT.Control.GetFeatureInfo = OpenLayers
 								waitMsg.hide();
 							}).defer(30000);
 								Ext.Ajax.request({
-								    url: Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, urlSigescat),
+								    url: Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, urlSigescat),
 								    method: 'GET',
 								    params: {
 								    	SERVICE: 'WMS',
