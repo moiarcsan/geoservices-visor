@@ -242,7 +242,67 @@ SiceCAT.QueryPanel = Ext.extend(gxp.QueryPanel, {
         }];
         
         gxp.QueryPanel.superclass.initComponent.apply(this, arguments);
+        
+        
+        this._getFeatureTypes();
 
+    },
+    
+    _getFeatureTypes : function() {
+        // Get layers from getCapabilities
+        var urlWMS = Sicecat.defaultWMSServer;
+        var urlWFS = null;
+        if(urlWMS.indexOf("wms") != -1){
+            urlWFS = urlWMS.replace("wms", "wfs");
+        }
+        if(urlWFS.indexOf("?") != -1){
+            urlWFS = urlWFS.replace("?", "");
+        }
+        var url_layer = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, urlWFS);
+        Ext.Ajax.request({
+            url: url_layer,
+            method: 'GET',
+            params: {
+                SERVICE: 'WFS',
+                VERSION: '1.1.0',
+                REQUEST: 'GetCapabilities'
+            },
+            success: function(response, options){
+                var wfsReader = new OpenLayers.Format.WFSCapabilities.v1_1_0();
+                var objectCapabilities = null;
+                if(!!response && !!response.responseText){
+                    objectCapabilities = wfsReader.read(response.responseText);
+                }
+                var featureTypes = objectCapabilities.featureTypeList.featureTypes;
+                
+                this.layerStore.removeAll();
+                var featuresToLoad = [];
+                for(var i=0; i<featureTypes.length; i++){
+                    var featureToLoad = {};
+                    featureToLoad.maxFeatures = 200;
+                    featureToLoad.name = featureTypes[i].name;
+                    featureToLoad.namespace = featureTypes[i].featureNS;
+                    featureToLoad.schema = options.url + "?version=" 
+                                            + options.params.VERSION 
+                                            + "&request=DescribeFeatureType&typeName=" 
+                                            + featureTypes[i].nameComplete;
+                    var abstractTitle = featureTypes[i].abstract;
+                    if(!!abstractTitle){
+                        featureToLoad.title = abstractTitle;
+                    }else{
+                        featureToLoad.title = String.format(this.emptyNameLayerText, featureTypes[i].nameComplete); 
+                    }
+                    featureToLoad.url = options.url;
+                    featuresToLoad.push(featureToLoad);
+                }
+                var data = {
+                    layers: featuresToLoad
+                };
+                this.layerStore.loadData(data, false);
+            },
+            scope: this
+        });
+        
     },
     
     /** private: method[createFilterBuilder]
