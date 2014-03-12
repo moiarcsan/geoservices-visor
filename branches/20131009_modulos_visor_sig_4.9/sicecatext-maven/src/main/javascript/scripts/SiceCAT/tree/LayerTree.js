@@ -715,9 +715,9 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 		// var map = this.map;
 		Ext.QuickTips.init();
 		/* GetURLProxy */
-		var wms_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, this.sicecatInstance.defaultWMSServer);
-		var taure_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, "http://taure.icc.cat/cgi-bin/mapserv?");
-		var galileo_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, "http://galileo.icc.cat/arcgis/services/icc_limadmin_v_r/MapServer/WMSServer");
+		var wms_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, this.sicecatInstance.defaultWMSServer);
+		var taure_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, "http://taure.icc.cat/cgi-bin/mapserv?");
+		var galileo_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, "http://galileo.icc.cat/arcgis/services/icc_limadmin_v_r/MapServer/WMSServer");
 		var panel = new SiceCAT.widgets.AddLayers(
 				{
 					width : 365,
