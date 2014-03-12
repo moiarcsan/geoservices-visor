@@ -498,7 +498,7 @@ GeoExt.Lang
 						labelLayerSchema: "Esquema",
 						selectSchema: "Introdueix l'URL de l'esquema",
 						buttonSaveFormLayer: "Desa",
-						buttonCancelFormLayer: "Cancel·lar",
+						buttonCancelFormLayer: "Cancelï¿½lar",
 						labelGeometryType: "Tipus de geometria",
 						labelGeometryTypeEmpty: "Selecciona el tipus de geometria"
 					},
@@ -592,10 +592,10 @@ GeoExt.Lang
 						editTooltipText : "Edita un element",
 						editAttributesTooltipText : "Edita els atributs",
 						dragFeatureTooltipText : "Mou elements",
-						warningEditMsgTitle: "Avís",
-						warningEditMsg: "La capa que intenta editar no està visible",
+						warningEditMsgTitle: "Avï¿½s",
+						warningEditMsg: "La capa que intenta editar no estï¿½ visible",
 						errorEditMsgTitle: "Error",
-						errorEditMsg: "La capa que intenta editar no està disponible. Consulti amb el seu administrador",
+						errorEditMsg: "La capa que intenta editar no estï¿½ disponible. Consulti amb el seu administrador",
 						errorDeleteMsg: "No hi ha cap capa editable disponible. Consulti amb el seu administrador"
 					},
 
@@ -645,7 +645,12 @@ GeoExt.Lang
 						errorTitleText: 'Error',
 						errorText: 'A produ\u00EFt un error en realitzar l\'operaci\u00f3.',
 						notPoolWFSTitleText: 'Error',
-						notPoolWFSText: 'No pots marcar la capa \'{0}\' com ocupada. No queden m\u00e9s capes disponibles del tipus \'{1}\''
+						notPoolWFSText: 'No pots marcar la capa \'{0}\' com ocupada. No queden m\u00e9s capes disponibles del tipus \'{1}\'',
+                        
+                        // Respect the initial space!
+                        noRasterDisabledText: " (capes vectorials nomÃ©s)",
+                        noVectorDisabledText: " (capes raster nomÃ©s)",
+                        notSupportedFormatDisabledText: " (capa no suportat)"
 					},
 
 					"SiceCAT.tree.FolderContextMenu.prototype" : {
@@ -715,8 +720,8 @@ GeoExt.Lang
 						titleAddressPanel: "Adreces - {0}",
 						titleWayPanel: "Via PK - {0}",
 						titleGeneralPanel: "General - {0}",
-						titleWarningPanel: "Error de localització",
-						msgWarningPanel: "La localització no s'ha tornat correctament pel servidor",
+						titleWarningPanel: "Error de localitzaciï¿½",
+						msgWarningPanel: "La localitzaciï¿½ no s'ha tornat correctament pel servidor",
 						titleResultLayer: "Resultats de la consulta",
 						msgErrorServer: "Error de servidor",
 						msgResults: "resultats"
@@ -733,9 +738,9 @@ GeoExt.Lang
 
 					"SiceCAT.QueryPanel.prototype" : {
 						maxFeaturesText : "L\u00EDmit de resultats",
-						queryByCrossedFeature: "Intersecció de features",
+						queryByCrossedFeature: "IntersecciÃ³ de features",
 					    emptyTextLayer: "Seleccioneu una capa",
-					    emptyNameLayerText: "Sense descripció ({0})"
+					    emptyNameLayerText: "Sense descripciÃ³ ({0})"
 					},
 
 					"SiceCAT.form.ColorField.prototype" : {
@@ -928,7 +933,7 @@ GeoExt.Lang
 						nameText: 'Nom',
 						typeText: 'Tipus',
 						titleWinCoord : 'Coordenades',
-						titleWarningWin : 'Avís',
+						titleWarningWin : 'Avï¿½s',
 						msgWarningWin : 'Les capes {0} no s\'han trobat.',
 					},
 					"Ext.ux.StatusBar.prototype":{

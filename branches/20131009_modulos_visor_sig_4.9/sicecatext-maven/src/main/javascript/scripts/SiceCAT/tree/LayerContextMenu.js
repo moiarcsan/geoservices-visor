@@ -25,7 +25,7 @@
  * This exception does not however invalidate any other reasons why the
  * executable file might be covered by the GNU General Public License.
  * 
- * Authors:: Alejandro Díaz Torres (mailto:adiaz@emergya.com)
+ * Authors:: Alejandro Dï¿½az Torres (mailto:adiaz@emergya.com)
  * 
  */
 
@@ -55,7 +55,7 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 	 * viewer
 	 */
 	sicecatInstance : null,
-
+	
 	layer : null,
 	
 	/** i18n **/
@@ -84,6 +84,9 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 	notPoolWFSTitleText: 'Error',
 	notPoolWFSText: 'You must\'n mark \'{0}\' layer as occupied. There aren\'t more available layers of geometry type \'{1}\'',
 	
+    noRasterDisabledText: " (vector layers only)",
+    noVectorDisabledText: " (raster layers only)",
+    notSupportedFormatDisabledText: " (not supported layer)",
     
     /** private: method[initComponent]
      */
@@ -269,27 +272,27 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 		var items = [];
 
 		// Init context menus
-		var layerDeleteContext = this.getDefaultContextMenu(
+		var layerDeleteContext =  this.createMenuAction(
 				layerDeleteText, deleteLayerControl,
 				"DeleteLayer");
 		
-		var layerInfoContext = this.getDefaultContextMenu(
+		var layerInfoContext = this.createMenuAction(
 				layerInfoText, layerInformationControl,
 				"LayerInformation");
 
-		var layerStylerContext = this.getDefaultContextMenu(
+		var layerStylerContext = this.createMenuAction(
 				layerStyleText, stylerControl, "StyleEdit");
 
-		var layerZoomContext = this.getDefaultContextMenu(
+		var layerZoomContext = this.createMenuAction(
 				layerZoomText, zoomToLayerControl,
 				"ZoomToLayer");
 		var layerOpacityContext = this
 				.getOpacitySliderContextMenu(
 						layerOpacityMenuText, layer);
 		exporterWFS.closed = false;
-		var layerExportContext = this.getDefaultContextMenu(
+		var csvExporterContext = this.createMenuAction(
 				layerExportMenuText, exporterWFS, "ExportWFS");
-		var layerExporterContext = this.getDefaultContextMenu(
+		var gmlExporterContext = this.createMenuAction(
 				layerExportToGMLMenuText, layerExporterControl,
 				"ExportToGML");
 		// Delete Layer
@@ -312,9 +315,9 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 				&& !(layer instanceof SiceCAT.Layer.WMS_SIGESCAT)) {
 				items.push(layerInfoContext);
 				items.push(layerZoomContext);
-			}
-			// Comprobación para una capa WFS-T
-			if (layer instanceof OpenLayers.Layer.Vector
+                
+                // Comprobaciï¿½n para una capa WFS-T
+			} else if (layer instanceof OpenLayers.Layer.Vector
 					&& !!layer.protocol
 					&& !!(layer.protocol.format)
 					&& ((layer.protocol.format instanceof OpenLayers.Format.WFST.v1) // extensiones
@@ -331,25 +334,35 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 		if (layer instanceof OpenLayers.Layer.Vector) {
 			if (!layer.layerFromSicecat) {
 				items.push(layerStylerContext);
-			}
+            }
 			items.push(layerZoomContext);
-		}
+        }
 		if (layer instanceof OpenLayers.Layer.WMS) {
 			items.push(layerOpacityContext);
 		}
 		if (layer instanceof OpenLayers.Layer.Vector
-		// && layer.protocol //#50084 .Descomentar esta línea si
+		// && layer.protocol //#50084 .Descomentar esta lï¿½nea si
 		// no se quieren exportar todas las vectoriales
 		) {
 			exporterWFS.setLayerToExport(layer);
 			layerExporterControl.setLayerToExport(layer);
-			items.push(layerExporterContext);
+			
 			if (!!layer.protocol
 					&& !!(layer.protocol.format)) { // o
 				// v1_0_0
-				items.push(layerExportContext);
-			}
-		}
+				//items.push(csvExporterContext);
+			} else {
+                csvExporterContext.text+= this.notSupportedFormatDisabledText;
+                csvExporterContext.disabled = true;
+            }
+		} else {
+            gmlExporterContext.text+= this.noVectorDisabledText;
+            gmlExporterContext.disabled = true;
+            csvExporterContext.text+= this.noVectorDisabledText;
+            csvExporterContext.disabled = true;
+        }
+        items.push(gmlExporterContext);
+        items.push(csvExporterContext);
 		
 		if(!!layer.layerID){
 			items.push(this.getRenameLayerContextMenu(
@@ -447,7 +460,7 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 											}
 										}
 								);
-							} // TODO: else ¿save layer visibility by user?
+							} // TODO: else ï¿½save layer visibility by user?
 						},
 						scope : this
 					});
@@ -487,7 +500,7 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 	},
 
 	/**
-	 * Method: getDefaultContextMenu
+	 * Method: createMenuAction
 	 * 
 	 * Obtain default contextMenu for call control.trigger()
 	 * 
@@ -496,7 +509,7 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 	 * on click (trigger) iconCls <String> - Class for icon on
 	 * context menu
 	 */
-	getDefaultContextMenu : function(menuText, control, iconCls) {
+	createMenuAction : function(menuText, control, iconCls) {
 		return {
 			text : menuText,
 			itemId : menuText,
@@ -551,7 +564,7 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 												PersistenceGeoParser.saveLayerProperties(node.attributes.layer.layerID,{
 													opacity: opacity
 												});
-											} // TODO: else ¿save layer visibility by user?
+											} // TODO: else ï¿½save layer visibility by user?
 										}
 									}
 								},
