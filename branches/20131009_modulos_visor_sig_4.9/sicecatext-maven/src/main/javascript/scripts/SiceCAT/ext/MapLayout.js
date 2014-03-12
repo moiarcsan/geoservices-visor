@@ -1028,58 +1028,6 @@ SiceCAT.MapLayout = Ext
                             titleWayPanel: this.titleWayPanel
 						}));
 						
-						// Get layers from getCapabilities
-						var urlWMS = Sicecat.defaultWMSServer;
-						var urlWFS = null;
-						if(urlWMS.indexOf("wms") != -1){
-							urlWFS = urlWMS.replace("wms", "wfs");
-						}
-						if(urlWFS.indexOf("?") != -1){
-							urlWFS = urlWFS.replace("?", "");
-						}
-						var url_layer = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, urlWFS);
-						Ext.Ajax.request({
-							url: url_layer,
-							method: 'GET',
-						    params: {
-						    	SERVICE: 'WFS',
-						    	VERSION: '1.1.0',
-						    	REQUEST: 'GetCapabilities'
-						    },
-						    success: function(response, options){
-						    	var wfsReader = new OpenLayers.Format.WFSCapabilities.v1_1_0();
-						    	var objectCapabilities = null;
-						    	if(response != null && response.responseText != null){
-						    		objectCapabilities = wfsReader.read(response.responseText);
-						    	}
-						    	var featureTypes = objectCapabilities.featureTypeList.featureTypes;
-						    	var queryPanel = Ext.getCmp("queryPanel");
-						    	queryPanel.layerStore.removeAll();
-						    	var featuresToLoad = [];
-						    	for(var i=0; i<featureTypes.length; i++){
-						    		var featureToLoad = {};
-						    		featureToLoad.maxFeatures = 200;
-						    		featureToLoad.name = featureTypes[i].name;
-						    		featureToLoad.namespace = featureTypes[i].featureNS;
-						    		featureToLoad.schema = options.url + "?version=" 
-						    								+ options.params.VERSION 
-						    								+ "&request=DescribeFeatureType&typeName=" 
-						    								+ featureTypes[i].nameComplete;
-						    		var abstractTitle = featureTypes[i].abstract;
-						    		if(abstractTitle != null && abstractTitle != ""){
-						    			featureToLoad.title = abstractTitle;
-						    		}else{
-						    			featureToLoad.title = String.format(queryPanel.emptyNameLayerText, featureTypes[i].nameComplete); 
-						    		}
-						    		featureToLoad.url = options.url;
-						    		featuresToLoad.push(featureToLoad);
-						    	}
-						    	var data = {
-						    		layers: featuresToLoad
-						    	};
-						    	queryPanel.layerStore.loadData(data, false);
-						    }
-						});
 						var action_wfs = this.getSearchWFSAction();
 						actions["wfs_searcher"] = action_wfs;
 						this.toolbarNav.push(action_wfs);
