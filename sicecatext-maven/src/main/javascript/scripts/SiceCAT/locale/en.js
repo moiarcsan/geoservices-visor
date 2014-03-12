@@ -605,6 +605,11 @@ GeoExt.Lang
 						renameLayerWindowText : "Rename Layer",
 						deleteLayerWindowText : "Remove Layer",
 						saveLayerNameText : "Save Name",
+                        
+                        // Respect the inital space!
+                        noRasterDisabledText: " (vector layers only)",
+                        noVectorDisabledText: " (raster layers only)",
+                        notSupportedFormatDisabledText: " (not supported layer)"
 					},
 
 					"SiceCAT.tree.FolderContextMenu.prototype" : {

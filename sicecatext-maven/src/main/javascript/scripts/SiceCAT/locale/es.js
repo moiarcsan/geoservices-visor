@@ -486,7 +486,7 @@ GeoExt.Lang
 						enviarPosicionPosText : "Enviar posici\u00F3n {0}",
 						enviarOrigenRuta: "Ruta desde aqu\u00ED",
 						errorLayersTitleText: "Error al cargar {0} de las capas",
-						errorLayersBodyText: "La capa '{0}' no est\\u00e1  disponible",
+						errorLayersBodyText: "La capa '{0}' no est\\u00e1ï¿½ disponible",
 						errorLayersBodyInfoText: "Pulsa en 'Exportar' para descargar el log con todas las capas que no est\u00E1n disponibles",
 						openDetailsText: "Mostrar detalles del incidente",
 						hideDetailsText: "Ocultar detalles del incidente", 
@@ -571,9 +571,9 @@ GeoExt.Lang
 						editAttributesTooltipText : "Edita los atributos",
 						dragFeatureTooltipText : "Mueve elementos",
 						warningEditMsgTitle: "Aviso",
-						warningEditMsg: "La capa que intenta editar no está visible",
+						warningEditMsg: "La capa que intenta editar no estï¿½ visible",
 						errorEditMsgTitle: "Error",
-						errorEditMsg: "La capa que intenta editar no está disponible. Consulte con su administrador",
+						errorEditMsg: "La capa que intenta editar no estï¿½ disponible. Consulte con su administrador",
 						errorDeleteMsg: "No hay ninguna capa editable disponible. Consulte con su administrador"
 					},
 
@@ -623,7 +623,12 @@ GeoExt.Lang
 						errorTitleText: 'Error',
 						errorText: 'A ocurrido un error al realizar la operaci\u00f3n.',
 						notPoolWFSTitleText: 'Error',
-						notPoolWFSText: 'No puedes marcar la capa \'{0}\' como ocupada. No quedan m\u00E1s capas disponibles del tipo \'{1}\''
+						notPoolWFSText: 'No puedes marcar la capa \'{0}\' como ocupada. No quedan m\u00E1s capas disponibles del tipo \'{1}\'',
+                        
+                        // Respect the initial space
+                        noRasterDisabledText: " (sÃ³lo capas vectoriales)",
+                        noVectorDisabledText: " (sÃ³lo capas raster)",
+                        notSupportedFormatDisabledText: " (capa no soportada)"
 					},
 
 					"SiceCAT.tree.FolderContextMenu.prototype" : {
@@ -692,8 +697,8 @@ GeoExt.Lang
 						titleAddressPanel: "Direcciones - {0}",
 						titleWayPanel: "V\u00cda PK - {0}",
 						titleGeneralPanel: "General - {0}",
-						titleWarningPanel: "Error de localización",
-						msgWarningPanel: "La localización no se ha devuelto correctamente por el servidor",
+						titleWarningPanel: "Error de localizaciï¿½n",
+						msgWarningPanel: "La localizaciï¿½n no se ha devuelto correctamente por el servidor",
 						titleResultLayer: "Resultados de la consulta",
 						msgErrorServer: "Error de servidor",
 						msgResults: "resultados"
