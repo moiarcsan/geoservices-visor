@@ -500,8 +500,7 @@ SiceCAT.MapLayout = Ext
 						});
 						actions["zoomToLayer"] = action;
 
-						// TODO: #48206
-						var zoom_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, Sicecat.defaultWMSServer.replace("ows/wms?", "ows/wfs"));
+						var zoom_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, Sicecat.defaultWMSServer.replace("ows/wms?", "ows/wfs"));
 						action = new GeoExt.Action(
 								{
 									control : new OpenLayers.Control.ZoomToMunicipioComarca(),
@@ -1012,11 +1011,6 @@ SiceCAT.MapLayout = Ext
 						// http://sigescat.pise.interior.intranet/openls
 						// e incluye el proxy
                         
-                        // TODO: This isn't used, should be removed? (lroman)
-						/* GetURLProxy */
-						var openlsUrl = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, Sicecat.defaultWMSServer.replace("ows/wms?", "openls"));
-						
-					
 						this.toolbarNav.push(new SiceCAT.CombinedSearchField({                            
 							id: 'searchbar',
                             titleAddressPanel: this.titleAddressPanel,

@@ -568,6 +568,10 @@ SiceCAT = Ext
 					 */
 					testLayerInformation: function (url, map, layerToLoad, continueLoading){
 						var this_instance = this;
+						var index = url.indexOf("&");
+						if(index > -1){
+							url = url.replace("&", "");
+						}
 			            Ext.Ajax.request({
 			                url:  url,
 							params : { SERVICE : 'WMS' , REQUEST : 'GetCapabilities', VERSION: '1.1.1'},

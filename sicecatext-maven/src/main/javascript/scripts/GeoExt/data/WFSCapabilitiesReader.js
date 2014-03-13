@@ -100,7 +100,7 @@ Ext.extend(GeoExt.data.WFSCapabilitiesReader, Ext.data.DataReader, {
     	}
         
     	/* GetURLProxy */
-		var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, record.data.layer.protocol.url);
+		var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, record.data.layer.protocol.url);
         OpenLayers.Request.GET({
             url: layer_url,
             params: {

@@ -198,7 +198,7 @@ Ext.namespace("Viewer.view.dialog");
             this.layout.setActiveItem('step-2');
             this.progressBar.wait();
             /* GetURLProxy */
-    		var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, url.getValue());
+    		var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, url.getValue());
             OpenLayers.Request.GET({
                 url: layer_url,
                 callback: this.remoteCapabilitiesLoaded,
@@ -309,7 +309,7 @@ Ext.namespace("Viewer.view.dialog");
         							+ featureTypeName;
         	}
         	/* GetURLProxy */
-    		var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, record.data.layer.protocol.url);
+    		var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, record.data.layer.protocol.url);
             OpenLayers.Request.GET({
                 url: layer_url,
                 params: {
