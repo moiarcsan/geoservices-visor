@@ -379,7 +379,7 @@ OpenLayers.Control.ExportWFS = OpenLayers
 								+ layer.protocol.featureType;
 						
 						/* GetURLProxy */
-						urlVectorWFS = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, urlVectorWFS);
+						urlVectorWFS = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, urlVectorWFS);
 //						if(urlVectorWFS.indexOf(OpenLayers.ProxyHost) != 0){
 //							urlVectorWFS = OpenLayers.ProxyHost + urlVectorWFS;
 //						}

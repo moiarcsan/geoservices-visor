@@ -146,13 +146,13 @@ OpenLayers.Control.LayerInformation = OpenLayers
 							urlSinProxy = url;
 						}
 						if(urlSinProxy != null){
+							/* GetURLProxy */
 							if(urlSinProxy.indexOf("?")!=-1){
-								ret = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, urlSinProxy.replace("?", "&"));
+								ret = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, urlSinProxy.replace("?", "&"));
 							}else{
-								ret = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, urlSinProxy + "&");
+								ret = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, urlSinProxy + "&");
 							}
 						}
-						/* GetURLProxy */
 						return ret;
 					},
 					
