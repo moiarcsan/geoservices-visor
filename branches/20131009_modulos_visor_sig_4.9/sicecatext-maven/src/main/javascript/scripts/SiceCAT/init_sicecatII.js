@@ -24,9 +24,9 @@
  * This exception does not however invalidate any other reasons why the
  * executable file might be covered by the GNU General Public License.
  * 
- * Authors:: Alejandro D√≠az Torres (mailto:adiaz@emergya.com)
+ * Authors:: Alejandro DÌaz Torres (mailto:adiaz@emergya.com)
  * Author: Maria Arias de Reyna Dominguez (marias@emergya.com)
- * Author: Mois√©s Arcos Santiago (marcos@emergya.com)
+ * Author: MoisÈs Arcos Santiago (marcos@emergya.com)
  * 
  */
 
@@ -54,7 +54,7 @@ Ext.onReady(function() {
 	loadingIndicator = Ext.Msg.wait("loading...");
 
 	// if(Ext.isIE){
-	// alert("Actualmente el visor s√≥lo est√° preparado para su uso Chorme o
+	// alert("Actualmente el visor sÛlo est· preparado para su uso Chorme o
 	// Firefox, por favor, disculpe las molestias");
 	// }else{
 
@@ -351,7 +351,7 @@ function createDefElement(element) {
 			// Hay una capa auxiliar creada
 			layerAux = layerArray[0];
 		} else {
-			// No est√° la capa creada
+			// No est· la capa creada
 			layerAux = new OpenLayers.Layer.Vector(layerName, {
 				strategies : [ new OpenLayers.Strategy.Save() ],
 				styleMap : Sicecat.createStyleMap()
@@ -624,7 +624,7 @@ function init_header() {
 	
 	// Remove all temporal elements before close 
 	window.onbeforeunload = function(event){
-		// Enviamos una petici√≥n para eliminar los elementos temporales
+		// Enviamos una peticiÛn para eliminar los elementos temporales
 		Ext.Ajax.request({
 			url: 'rest/persistenceGeo/userContext/removeAll',
 			success: function(response){
@@ -693,7 +693,7 @@ function init_viewport() {
 
 function saveFail() {
 	/*
-	 * Ventana de alerta al fallar la actualizaci√≥n de una feature
+	 * Ventana de alerta al fallar la actualizaciÛn de una feature
 	 */
 	var alertTitleText = "Save";
 	var alertMessageText = "Error: Changes don't saved";
@@ -746,7 +746,7 @@ OpenLayers.Util.onImageLoadError = function() {
 		console.log("error loading src " + this.src);
 		// Comentamos this.src = ""; porque geoext lo usa para lanzarlo
 		// recursivamente
-		// y por tanto entrar√≠a en bucle infinito
+		// y por tanto entrarÌa en bucle infinito
 		this.parentElement.removeChild(this);
 	}
 	this.style.display = "";
