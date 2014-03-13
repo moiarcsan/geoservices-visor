@@ -193,10 +193,10 @@ GeoExt.Lang
 					},
 
 					"gxp.FeatureEditPopup.prototype" : {
-						closeMsgTitle : "¿Desea guardar los cambios?",
-						closeMsg : "Los cambios en este elemento no se han guardado. ¿Desea guardar los cambios?",
-						deleteMsgTitle : "¿Desea borrar el elemento?",
-						deleteMsg : "¿Est\u00E1 seguro de querer borrar este elemento?",
+						closeMsgTitle : "\u00bfDesea guardar los cambios?",
+						closeMsg : "Los cambios en este elemento no se han guardado. \u00bfDesea guardar los cambios?",
+						deleteMsgTitle : "\u00bfDesea borrar el elemento?",
+						deleteMsg : "\u00bfEst\u00E1 seguro de querer borrar este elemento?",
 						editButtonText : "Editar",
 						editButtonTooltip : "Hacer editable este elemento",
 						deleteButtonText : "Borrar",
@@ -311,7 +311,7 @@ GeoExt.Lang
 					},
 
 					"gxp.EmbedMapDialog.prototype" : {
-						publishMessage : "¡Ya puede publicar su mapa en otras webs! Simplemente copie el siguiente c\u00F3digo HTML en el lugar donde desee incrustarlo:",
+						publishMessage : "\u00a1Ya puede publicar su mapa en otras webs! Simplemente copie el siguiente c\u00F3digo HTML en el lugar donde desee incrustarlo:",
 						heightLabel : 'Alto',
 						widthLabel : 'Ancho',
 						mapSizeLabel : 'Tama\u00F1o',
@@ -486,7 +486,7 @@ GeoExt.Lang
 						enviarPosicionPosText : "Enviar posici\u00F3n {0}",
 						enviarOrigenRuta: "Ruta desde aqu\u00ED",
 						errorLayersTitleText: "Error al cargar {0} de las capas",
-						errorLayersBodyText: "La capa '{0}' no est\\u00e1� disponible",
+						errorLayersBodyText: "La capa '{0}' no est\u00e1  disponible",
 						errorLayersBodyInfoText: "Pulsa en 'Exportar' para descargar el log con todas las capas que no est\u00E1n disponibles",
 						openDetailsText: "Mostrar detalles del incidente",
 						hideDetailsText: "Ocultar detalles del incidente", 
@@ -502,7 +502,7 @@ GeoExt.Lang
 						enviarPosicionPosText : "Enviar posici\u00F3n {0}",
 						enviarOrigenRuta: "Ruta desde aqu\u00ED",
 						errorLayersTitleText: "Error al cargar {0} de las capas",
-						errorLayersBodyText: "La capa '{0}' no està disponible",
+						errorLayersBodyText: "La capa '{0}' no est\u00e1 disponible",
 						errorLayersBodyInfoText: "Pulsa en 'Exportar' para descargar el log con todas las capas que no est\u00E1n disponibles",
 						openDetailsText: "Mostrar detalles del incidente",
 						hideDetailsText: "Ocultar detalles del incidente", 
@@ -513,13 +513,13 @@ GeoExt.Lang
 						nombreCapaAuxiliarText : "Auxiliar",
 						compatibiltyIEText: "Este navegador no es compatible al 100% con este visor, por favor, use Mozilla Firefox 7+ o Google Chrome 15+",
 						compatibiltyScreenText: "La pantalla no est\u00E1 optimizado para este visor. La resoluci\u00F3n m\u00EDnima recomendada es 1280x1024",
-						compatibiltywindiwTitleText: "¡Cuidado!",
+						compatibiltywindiwTitleText: "\u00a1Cuidado!",
 						errorTitle: "Error al editar la capa",
 						errorMsg: "No es posible guardar sus cambios",
 						buttonText: "Aceptar",
 						basicInformation: "Informaci\u00F3n B\u00E1sica",
 						errorLayersTitleText: "Error al cargar {0} de las capas",
-						errorLayersBodyText: "La capa '{0}' no està disponible",
+						errorLayersBodyText: "La capa '{0}' no est\u00e1 disponible",
 						errorLayersBodyInfoText: "Pulsa en 'Exportar' para descargar el log con todas las capas que no est\u00E1n disponibles", 
 						moreInformation: "M\u00E1s Informaci\u00F3n",
 						errorLayerInfoTitle: "Error",
@@ -571,9 +571,9 @@ GeoExt.Lang
 						editAttributesTooltipText : "Edita los atributos",
 						dragFeatureTooltipText : "Mueve elementos",
 						warningEditMsgTitle: "Aviso",
-						warningEditMsg: "La capa que intenta editar no est� visible",
+						warningEditMsg: "La capa que intenta editar no est\u00e1 visible",
 						errorEditMsgTitle: "Error",
-						errorEditMsg: "La capa que intenta editar no est� disponible. Consulte con su administrador",
+						errorEditMsg: "La capa que intenta editar no est\u00e1 disponible. Consulte con su administrador",
 						errorDeleteMsg: "No hay ninguna capa editable disponible. Consulte con su administrador"
 					},
 
@@ -626,8 +626,8 @@ GeoExt.Lang
 						notPoolWFSText: 'No puedes marcar la capa \'{0}\' como ocupada. No quedan m\u00E1s capas disponibles del tipo \'{1}\'',
                         
                         // Respect the initial space
-                        noRasterDisabledText: " (sólo capas vectoriales)",
-                        noVectorDisabledText: " (sólo capas raster)",
+                        noRasterDisabledText: " (solo capas vectoriales)",
+                        noVectorDisabledText: " (solo capas raster)",
                         notSupportedFormatDisabledText: " (capa no soportada)"
 					},
 
@@ -691,14 +691,14 @@ GeoExt.Lang
 						searchWFSNotFoundStateText : "No se han encontrado elementos con los criterios indicados",
 						searchWFSFoundsStateText : "<ul><li>Se han encontrado {0} elementos</li><li>Se han volcado en la capa '{1}'</li></ul>",
 						queryText : "Consultar",
-						errorWFSText: "El servicio WFS de SIGESCAT no est\u00E1 disponible. <a href='#' id='error_msg_wfs_detail'\">Informaci\u00F3n técnica</a>",
+						errorWFSText: "El servicio WFS de SIGESCAT no est\u00E1 disponible. <a href='#' id='error_msg_wfs_detail'\">Informaci\u00F3n t\u00e9cnica</a>",
 						errorWFSDetailsTitleText: "Detalles",
 						searcherTitleText : "Buscador",
 						titleAddressPanel: "Direcciones - {0}",
 						titleWayPanel: "V\u00cda PK - {0}",
 						titleGeneralPanel: "General - {0}",
-						titleWarningPanel: "Error de localizaci�n",
-						msgWarningPanel: "La localizaci�n no se ha devuelto correctamente por el servidor",
+						titleWarningPanel: "Error de localizaci\u00f3n",
+						msgWarningPanel: "La localizaci\u00f3n no se ha devuelto correctamente por el servidor",
 						titleResultLayer: "Resultados de la consulta",
 						msgErrorServer: "Error de servidor",
 						msgResults: "resultados"
@@ -803,7 +803,7 @@ GeoExt.Lang
 						folderSaved: "Capa guardada",
 					    folderSavedText: "La capa %s% ha sido guardada correctamente.",
 					    folderCancel: "Aviso",
-					    folderCancelText: "Error al guardar la capa. Inténtelo de nuevo."
+					    folderCancelText: "Error al guardar la capa. Int\u00e9ntelo de nuevo."
 					},
 
 					"OpenLayers.Control.ExportWFS.prototype" : {
@@ -889,7 +889,7 @@ GeoExt.Lang
 					    zoomingText: "Haciendo el zoom a '{0}'",
 					    buttonText: "Hacer Zoom",
 					    doneText: "Hecho el zoom a '{0}'",
-					    errorText: "El servicio WFS de SIGESCAT no est\u00E1 disponible. <a href='#' onclick=\"Ext.MessageBox.alert('Detalles', '{0}');\">Informaci\u00F3n técnica</a>",
+					    errorText: "El servicio WFS de SIGESCAT no est\u00E1 disponible. <a href='#' onclick=\"Ext.MessageBox.alert('Detalles', '{0}');\">Informaci\u00F3n t\u00e9cnica</a>",
 					    //errorText: "El servicio WFS de SIGESCAT no est\u00E1 disponible.",
 					    errorTraceText: "Traza: {0}",
 					    errorDescribeFeatureNotFound: "Error al acceder al <a href={0}>esquema de la entidad {1}"
@@ -1009,7 +1009,7 @@ GeoExt.Lang
 					    successLinesText: "<li>{0} l\u00EDneas copiados a la capa '{1}'</li>",
 					    successPolygonsText: "<li>{0} pol\u00EDgonos copiados a la capa '{1}'</li>",
 					    successText: "<ul>{0}</ul>",
-					    alertTitleText: "¡Cuidado!",
+					    alertTitleText: "\u00a1Cuidado!",
 					    alertMessageText: "Se van a perder datos en la copia de elementos al WFS-T. S\u00F3lo se compiar\u00E1n los atributos TITOL y COMENTARI si estos existen y se trata de elementos procedentes de la herramienta de gesti\u00F3n."
 					},
 					"SiceCAT.tree.LayerNode.prototype":{
@@ -1026,8 +1026,8 @@ GeoExt.Lang
 						contextLoadedTitleText : 'Contexto cargado',
 						contextLoadedText : "El contexto del usuario '{0}' se ha cargado correctamente",
 						userText : "Usuario",
-						confirmTitleText: "¿Est\u00E1 seguro?",
-						confirmText: "Todas sus carpetas y capas de usuario ser\u00E1n borradas para cargar las del usuario '{0}'. ¿Desea continuar de todas formas?"
+						confirmTitleText: "\u00bfEst\u00E1 seguro?",
+						confirmText: "Todas sus carpetas y capas de usuario ser\u00E1n borradas para cargar las del usuario '{0}'. \u00bfDesea continuar de todas formas?"
 					},
 					"Viewer.view.dialog.WfsWizard.prototype":{
 					   	title: 'Asistente WFS',
