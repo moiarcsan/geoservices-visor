@@ -39,7 +39,7 @@ GeoExt.Lang
 						firstPageTip : "Primera p\u00E0gina",
 						previousPageTip : "P\u00E0gina anterior",
 						zoomPageExtentTip : "Ajusta vista a l'extensi\u00F3 de la p\u00E0gina",
-						nextPageTip : "P\u00E0gina següent",
+						nextPageTip : "P\u00E0gina seg\u00fcent",
 						nextPageTip : "P\u00E0gina anterior",
 						totalMsg : "Total: {0} records"
 					},
@@ -97,9 +97,9 @@ GeoExt.Lang
 
 					"gxp.plugins.Measure.prototype" : {
 						lengthMenuText : "Longitud",
-						areaMenuText : "Àrea",
+						areaMenuText : "\u00c0rea",
 						lengthTooltip : "Mesura Longitud",
-						areaTooltip : "Mesura Àrea",
+						areaTooltip : "Mesura \u00c0rea",
 						measureTooltip : "Mesura"
 					},
 
@@ -110,9 +110,9 @@ GeoExt.Lang
 
 					"gxp.plugins.NavigationHistory.prototype" : {
 						previousMenuText : "Vista anterior",
-						nextMenuText : "Vista següent",
+						nextMenuText : "Vista seg\u00fcent",
 						previousTooltip : "Vista anterior",
-						nextTooltip : "Vista següent"
+						nextTooltip : "Vista seg\u00fcent"
 					},
 
 					"gxp.plugins.OSMSource.prototype" : {
@@ -131,21 +131,21 @@ GeoExt.Lang
 
 					"gxp.plugins.MapQuestSource.prototype" : {
 						title : "MapQuest Layers",
-						osmAttribution : "Tessel·les cortesia de <a href='http://open.mapquest.co.uk/' target='_blank'>MapQuest</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png' border='0'>",
+						osmAttribution : "TesselÂ·les cortesia de <a href='http://open.mapquest.co.uk/' target='_blank'>MapQuest</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png' border='0'>",
 						osmTitle : "MapQuest OpenStreetMap",
-						naipAttribution : "Tessel·les cortesia de <a href='http://open.mapquest.co.uk/' target='_blank'>MapQuest</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png' border='0'>",
+						naipAttribution : "TesselÂ·les cortesia de <a href='http://open.mapquest.co.uk/' target='_blank'>MapQuest</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png' border='0'>",
 						naipTitle : "MapQuest Imatge"
 					},
 
 					"gxp.plugins.QueryForm.prototype" : {
 						queryActionText : "Consulta",
 						queryMenuText : "Consulta layer",
-						queryActionTip : "Consulta la capa sel·leccionada",
+						queryActionTip : "Consulta la capa selÂ·leccionada",
 						queryByLocationText : "Consulta per lloc",
 						currentTextText : "Extensi\u00F3 de la vista actual",
 						queryByAttributesText : "Consulta per atributs",
 						queryMsg : "Consultant...",
-						cancelButtonText : "Cancel·la",
+						cancelButtonText : "CancelÂ·la",
 						noFeaturesTitle : "Sense coincid\u00E8ncies",
 						noFeaturesMessage : "La vostra consulta no ha produ\u00EFt resultats."
 					},
@@ -201,7 +201,7 @@ GeoExt.Lang
 						editButtonTooltip : "Fes que aquest element sigui editable",
 						deleteButtonText : "Esborra",
 						deleteButtonTooltip : "Esborra aquest element",
-						cancelButtonText : "Cancel·la",
+						cancelButtonText : "CancelÂ·la",
 						cancelButtonTooltip : "Deixa d'editar, descarta els canvis",
 						saveButtonText : "Desa",
 						saveButtonTooltip : "Desa els canvis"
@@ -217,7 +217,7 @@ GeoExt.Lang
 						builderTypeNames : [ "alguna de", "totes", "cap de",
 								"no totes" ],
 						preComboText : "Acompleix",
-						postComboText : "les condicions següents:",
+						postComboText : "les condicions seg\u00fcents:",
 						addConditionText : "afegeix condici\u00F3",
 						addGroupText : "afegeix grup",
 						removeConditionText : "treu condici\u00F3"
@@ -311,7 +311,7 @@ GeoExt.Lang
 					},
 
 					"gxp.EmbedMapDialog.prototype" : {
-						publishMessage : "Ja podeu incloure el vostre mapa a altres webs! Simplement copieu el següent codi HTML all\u00E0 on desitgeu incrustar-ho:",
+						publishMessage : "Ja podeu incloure el vostre mapa a altres webs! Simplement copieu el seg\u00fcent codi HTML all\u00E0 on desitgeu incrustar-ho:",
 						heightLabel : 'Al\u00E7\u00E0ria',
 						widthLabel : 'Amplada',
 						mapSizeLabel : 'Mida',
@@ -326,21 +326,21 @@ GeoExt.Lang
 						addStyleTip : "Afegeix nou estil",
 						chooseStyleText : "Escull estil",
 						deleteStyleText : "Treu",
-						deleteStyleTip : "Esborra l'estil sel·leccionat",
+						deleteStyleTip : "Esborra l'estil selÂ·leccionat",
 						editStyleText : "Canvia",
-						editStyleTip : "Edita l'estil sel·leccionat",
+						editStyleTip : "Edita l'estil selÂ·leccionat",
 						duplicateStyleText : "Clona",
-						duplicateStyleTip : "Duplica l'estil sel·leccionat",
+						duplicateStyleTip : "Duplica l'estil selÂ·leccionat",
 						addRuleText : "Afegeix",
 						addRuleTip : "Afegeix nova regla",
 						newRuleText : "Nova regla",
 						deleteRuleText : "Treu",
-						deleteRuleTip : "Esborra la regla sel·leccionada",
+						deleteRuleTip : "Esborra la regla selÂ·leccionada",
 						editRuleText : "Edita",
-						editRuleTip : "Edita la regla sel·leccionada",
+						editRuleTip : "Edita la regla selÂ·leccionada",
 						duplicateRuleText : "Clona",
-						duplicateRuleTip : "Duplica la regla sel·leccionada",
-						cancelText : "Cancel·la",
+						duplicateRuleTip : "Duplica la regla selÂ·leccionada",
+						cancelText : "CancelÂ·la",
 						saveText : "Desa",
 						styleWindowTitle : "Estil: {0}",
 						ruleWindowTitle : "Regla: {0}",
@@ -367,7 +367,7 @@ GeoExt.Lang
 
 					"gxp.NewSourceWindow.prototype" : {
 						title : "Afegeix Servidor...",
-						cancelText : "Cancel·la",
+						cancelText : "CancelÂ·la",
 						addServerText : "Afegeix Servidor",
 						invalidURLText : "Introdu\u00EFu una URL que apunti a un WMS (p.e. http://example.com/geoserver/wms)",
 						contactingServerText : "Connectant amb el Servidor..."
@@ -472,7 +472,7 @@ GeoExt.Lang
 						labelLayerSchema: "Esquema",
 						selectSchema: "Introdueix la URL de l'esquema",
 						buttonSaveFormLayer: "Guardar",
-						buttonCancelFormLayer: "Cancel·lar",
+						buttonCancelFormLayer: "CancelÂ·lar",
 					},
 
 					"OpenLayers.Control.LoadWFS.prototype": {
@@ -498,7 +498,7 @@ GeoExt.Lang
 						labelLayerSchema: "Esquema",
 						selectSchema: "Introdueix l'URL de l'esquema",
 						buttonSaveFormLayer: "Desa",
-						buttonCancelFormLayer: "Cancel�lar",
+						buttonCancelFormLayer: "Cancel·lar",
 						labelGeometryType: "Tipus de geometria",
 						labelGeometryTypeEmpty: "Selecciona el tipus de geometria"
 					},
@@ -592,10 +592,10 @@ GeoExt.Lang
 						editTooltipText : "Edita un element",
 						editAttributesTooltipText : "Edita els atributs",
 						dragFeatureTooltipText : "Mou elements",
-						warningEditMsgTitle: "Av�s",
-						warningEditMsg: "La capa que intenta editar no est� visible",
+						warningEditMsgTitle: "Av\u00eds",
+						warningEditMsg: "La capa que intenta editar no est\u00e0 visible",
 						errorEditMsgTitle: "Error",
-						errorEditMsg: "La capa que intenta editar no est� disponible. Consulti amb el seu administrador",
+						errorEditMsg: "La capa que intenta editar no est\u00e0 disponible. Consulti amb el seu administrador",
 						errorDeleteMsg: "No hi ha cap capa editable disponible. Consulti amb el seu administrador"
 					},
 
@@ -603,7 +603,7 @@ GeoExt.Lang
 						gmlText : "GML",
 						kmlText : "KML",
 						wmsText : "WMS",
-						areaEmergenciaText : "Àrea d'emerg\u00e8ncia",
+						areaEmergenciaText : "\u00c0rea d'emerg\u00e8ncia",
 						baseLayersText : "Cartografia base",
 						overlayLayersText : "Capes superposades u Overlays",
 						editableLayersText : "Capes editables",
@@ -646,10 +646,9 @@ GeoExt.Lang
 						errorText: 'A produ\u00EFt un error en realitzar l\'operaci\u00f3.',
 						notPoolWFSTitleText: 'Error',
 						notPoolWFSText: 'No pots marcar la capa \'{0}\' com ocupada. No queden m\u00e9s capes disponibles del tipus \'{1}\'',
-                        
                         // Respect the initial space!
-                        noRasterDisabledText: " (capes vectorials només)",
-                        noVectorDisabledText: " (capes raster només)",
+                        noRasterDisabledText: " (capes vectorials nom\u00e9s)",
+                        noVectorDisabledText: " (capes raster nom\u00e9s)",
                         notSupportedFormatDisabledText: " (capa no suportat)"
 					},
 
@@ -679,8 +678,8 @@ GeoExt.Lang
 						navigationTooltipText : "Navegaci\u00F3 normal del mapa",
 						previousText : "Anterior",
 						previousTooltipText : "Zoom anterior en l'historial",
-						nextText : "Següent",
-						nextTooltipText : "Següent zoom en l'historial",
+						nextText : "Seg\u00fcent",
+						nextTooltipText : "Seg\u00fcent zoom en l'historial",
 						measureLineTooltipText : "Mesura la longitud d'una l\u00EDnia",
 						measurePolygonTooltipText : "Mesura l'\u00e0rea d'un pol\u00EDgon",
 						calculadoraText : "Calculadora",
@@ -720,8 +719,8 @@ GeoExt.Lang
 						titleAddressPanel: "Adreces - {0}",
 						titleWayPanel: "Via PK - {0}",
 						titleGeneralPanel: "General - {0}",
-						titleWarningPanel: "Error de localitzaci�",
-						msgWarningPanel: "La localitzaci� no s'ha tornat correctament pel servidor",
+						titleWarningPanel: "Error de localitzaci\u00f3",
+						msgWarningPanel: "La localitzaci\u00f3 no s'ha tornat correctament pel servidor",
 						titleResultLayer: "Resultats de la consulta",
 						msgErrorServer: "Error de servidor",
 						msgResults: "resultats"
@@ -822,8 +821,8 @@ GeoExt.Lang
 						downloadErrorTitleText: "Error en exportar",
 						layerEmptyText: "No \u00E9s possible exportar una capa buida",
 						downloadErrorText: "Error en exportar la capa.",
-						downloadCancelTitleText: "Exportaci\u00F3 cancel · lada",
-						downloadCancelText: "Has cancel · lant l'exportaci\u00F3 de la capa seleccionada.",
+						downloadCancelTitleText: "Exportaci\u00F3 cancel Â· lada",
+						downloadCancelText: "Has cancel Â· lant l'exportaci\u00F3 de la capa seleccionada.",
 						downloadSuccessTitleText: "Fet",
 						downloadSuccessText: "S'ha exportat amb \u00E8xit la capa '{1}' al format '{0}'",
 					    downloadImage: "images/downloadify/export_ca.png"
@@ -912,8 +911,8 @@ GeoExt.Lang
 						downloadErrorTitleText: "Error en exportar",
 						layerEmptyText: "No \u00E9s possible exportar una capa buida",
 						downloadErrorText: "Error en exportar la capa.",
-						downloadCancelTitleText: "Exportaci\u00F3 cancel · lada",
-						downloadCancelText: "Has cancel · lant l'exportaci\u00F3 de la capa seleccionada.",
+						downloadCancelTitleText: "Exportaci\u00F3 cancel Â· lada",
+						downloadCancelText: "Has cancel Â· lant l'exportaci\u00F3 de la capa seleccionada.",
 						downloadSuccessTitleText: "Fet",
 						downloadSuccessText: "S'ha exportat amb \u00E8xit la capa '{1}' al format '{0}'",
 					    downloadImage: "images/downloadify/export_ca.png"
@@ -923,8 +922,8 @@ GeoExt.Lang
 						downloadErrorTitleText: "Error en exportar",
 						layerEmptyText: "No \u00E9s possible exportar una capa buida",
 						downloadErrorText: "Error en exportar la capa.",
-						downloadCancelTitleText: "Exportaci\u00F3 cancel · lada",
-						downloadCancelText: "Has cancel · lant l'exportaci\u00F3 de la capa seleccionada.",
+						downloadCancelTitleText: "Exportaci\u00F3 cancel Â· lada",
+						downloadCancelText: "Has cancel Â· lant l'exportaci\u00F3 de la capa seleccionada.",
 						downloadSuccessTitleText: "Fet",
 						downloadSuccessText: "S'ha exportat amb \u00E8xit la capa '{1}' al format '{0}'",
 					    downloadImage: "images/downloadify/export_ca.png"
@@ -933,7 +932,7 @@ GeoExt.Lang
 						nameText: 'Nom',
 						typeText: 'Tipus',
 						titleWinCoord : 'Coordenades',
-						titleWarningWin : 'Av�s',
+						titleWarningWin : 'Av\u00eds',
 						msgWarningWin : 'Les capes {0} no s\'han trobat.',
 					},
 					"Ext.ux.StatusBar.prototype":{
@@ -1044,7 +1043,7 @@ GeoExt.Lang
 						waitTitle: 'si us plau ...',
 						blankText: 'Introdu\u00EFu la URL del servei WFS',
 						vtypeText: 'Aquest camp ha de ser una URL en format "http://www.ejemplo.com/service/wfs?request=GetCapabilities"',
-						nextButtonText: 'Següent',
+						nextButtonText: 'Seg\u00fcent',
 						loadingServiceText: 'Obtenir dades del servei ...',
 						errorOneTitleText: "Error recuperant WFSCapabilities",
 						errorOneText: "S'ha produ\u00EFt un error en recuperar"

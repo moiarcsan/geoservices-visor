@@ -25,7 +25,7 @@
  * This exception does not however invalidate any other reasons why the
  * executable file might be covered by the GNU General Public License.
  * 
- * Authors:: Alejandro D�az Torres (mailto:adiaz@emergya.com)
+ * Authors:: Alejandro Diaz Torres (mailto:adiaz@emergya.com)
  * 
  */
 
@@ -316,7 +316,7 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 				items.push(layerInfoContext);
 				items.push(layerZoomContext);
                 
-                // Comprobaci�n para una capa WFS-T
+                // Comprobacion para una capa WFS-T
 			} else if (layer instanceof OpenLayers.Layer.Vector
 					&& !!layer.protocol
 					&& !!(layer.protocol.format)
@@ -341,7 +341,7 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 			items.push(layerOpacityContext);
 		}
 		if (layer instanceof OpenLayers.Layer.Vector
-		// && layer.protocol //#50084 .Descomentar esta l�nea si
+		// && layer.protocol //#50084 .Descomentar esta linea si
 		// no se quieren exportar todas las vectoriales
 		) {
 			exporterWFS.setLayerToExport(layer);
@@ -460,7 +460,7 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 											}
 										}
 								);
-							} // TODO: else �save layer visibility by user?
+							} // TODO: else save layer visibility by user?
 						},
 						scope : this
 					});
@@ -564,7 +564,7 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 												PersistenceGeoParser.saveLayerProperties(node.attributes.layer.layerID,{
 													opacity: opacity
 												});
-											} // TODO: else �save layer visibility by user?
+											} // TODO: else save layer visibility by user?
 										}
 									}
 								},
