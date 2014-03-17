@@ -60,7 +60,7 @@ PersistenceGeo.loaders.WFSLoader
 			
 			var renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
 			/* GetURLProxy */
-			var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, layerData['properties']['url'] ? layerData['properties']['url'] : layerData.server_resource);
+			var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, layerData['properties']['url'] ? layerData['properties']['url'] : layerData.server_resource);
 			var options = {
 				url : layer_url,
 	            maxFeatures: maxFeatures,
@@ -75,14 +75,16 @@ PersistenceGeo.loaders.WFSLoader
 
 			options['version'] = '1.0.0';
 
-
+			// Get layer style
+			var styleMap = this.preFunctionStyle(layerData);
 			var layer = new OpenLayers.Layer.Vector(
 					layerData['name'],
 					{
 						'groupLayers' : layerData['groupLayers'],
 						'visibility' : visibility,
 						'strategies' : _strategies,
-						'protocol' : new OpenLayers.Protocol.WFS(options)
+						'protocol' : new OpenLayers.Protocol.WFS(options),
+						styleMap: styleMap
 						// ,
 						// 'renderers' : renderer
 					});

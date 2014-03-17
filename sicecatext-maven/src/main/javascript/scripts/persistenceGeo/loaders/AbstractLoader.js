@@ -192,39 +192,36 @@ PersistenceGeo.loaders.AbstractLoader =  Ext.extend(Ext.Component,
 			}
 		},
 		
+		getStyleFromData: function(layerData, style){
+			var ret = null;
+			if(layerData.styles[style] && layerData.styles[style].true){
+				ret = layerData.styles[style].true;
+			}else{
+				ret = layerData.styles[style];
+			}
+			return ret;
+		},
+		
+		preFunctionStyle: function(layerData){
+			// Get default style from data base
+			var defaultStyle = null;
+			if(layerData.styles){
+				if(layerData.styles["default"]){
+					defaultStyle = this.getStyleFromData(layerData, "default");
+					defaultStyle["cursor"] = "pointer";
+				}
+			}
+			// Others styles by default from OpenLayers
+			return new OpenLayers.StyleMap({
+				'default': defaultStyle, 
+				'select': OpenLayers.Feature.Vector.style["select"],
+				'delete': OpenLayers.Feature.Vector.style["delete"],
+				'temporary': OpenLayers.Feature.Vector.style["temporary"]
+			});
+		},
+		
 		postFunctionsStyle: function(layerData, layer){
 			var symbolizer = {};
-			if(!!layerData.styles
-					&& !!layerData.styles
-					&& !!layerData.styles['default']){
-				var styleMap = {};
-				for(var styleName in layerData.styles){
-					if(styleName == 'default'){
-						var rules = new Array();
-						for(var ruleFilter in layerData.styles[styleName]){
-							if(ruleFilter == 'true'){
-								for(var property in layerData.styles[styleName][ruleFilter]){
-									if(property == "cursor"){
-										symbolizer[property] = "pointer";
-									}else{
-										symbolizer[property] = this.parseValueStyle(property, layerData.styles[styleName][ruleFilter][property]);
-									}
-								}
-							}else{
-								//TODO: Use OGC filter
-							}
-							rules.push(new OpenLayers.Rule({symbolizer: symbolizer}));
-				        }
-						styleMap[styleName] = new OpenLayers.Style(null, {
-			                rules: rules
-			            });
-					}
-				}
-				styleMap = new OpenLayers.StyleMap(styleMap);
-				layer.styleMap = styleMap;
-			}else{
-				symbolizer["cursor"] = "pointer";
-			}
 			layer.events.register("loadend", 
 					{
 						layer: layer, 
@@ -245,7 +242,7 @@ PersistenceGeo.loaders.AbstractLoader =  Ext.extend(Ext.Component,
 						}else{
 							for(var i = 0; i < this.layer.features.length; i++){
 								var styleDefined = OpenLayers.Util.applyDefaults(this.symbolizer, OpenLayers.Feature.Vector.style["default"]);
-								this.layer.features[i].style = styleDefined;
+								this.layer.features[i].style = null;
 							}
 							this.layer.redraw();
 						}

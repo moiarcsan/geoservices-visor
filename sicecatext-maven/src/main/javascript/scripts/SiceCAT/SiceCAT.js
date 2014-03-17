@@ -1513,15 +1513,13 @@ SiceCAT = Ext
 					/**
 					 * Method: loadStylingPost
 					 * 
-					 * Load this.jsonStyles to this.styles
+					 * Load data base stored styles into style array on context
 					 * 
 					 * Parameters: this.styles - {<Array>} styles defined to
 					 * use in features in vector layers this.jsonStyles - {<Array>}
 					 * styles defined in json file
 					 */
 					loadStylingPost : function() {
-
-						// alert("this.jsonLayers --> " + this.jsonLayers);
 						if (!!this.jsonStyles) {
 							this.styles = new Object();
 							for ( var i = 0; i < this.jsonStyles.length; i++) {
@@ -1532,26 +1530,6 @@ SiceCAT = Ext
 								this.styles[this.jsonStyles[i]['name']] = styleDefined;
 							}
 						}
-						this.styles["hoverDefault"] = {
-							cursor: "pointer",
-							fillColor: "#ee9900",
-							fillOpacity: 0.4,
-							graphicName: "square",
-							hoverFillColor: "white",
-							hoverFillOpacity: 0.8,
-							hoverPointRadius: "1",
-							hoverPointUnit: "%",
-							hoverStrokeColor: "red",
-							hoverStrokeOpacity: 1,
-							hoverStrokeWidth: "0.2",
-							pointRadius: "6",
-							pointerEvents: "visiblePainted",
-							strokeColor: "#ee9900",
-							strokeDashstyle: "solid",
-							strokeLinecap: "round",
-							strokeOpacity: 1,
-							strokeWidth: "1"
-						};
 					},
 
 					/**
