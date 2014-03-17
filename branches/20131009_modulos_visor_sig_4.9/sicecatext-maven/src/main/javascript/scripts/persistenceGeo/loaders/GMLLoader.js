@@ -90,9 +90,11 @@ PersistenceGeo.loaders.GMLLoader
 	},
 
 	load : function(layerData, layerTree) {
-
+		// Get layer style
+		var styleMap = this.preFunctionStyle(layerData);
 		var layer = new OpenLayers.Layer.Vector(layerData.name, {
 			strategies : [ new OpenLayers.Strategy.Fixed() ],
+			styleMap: styleMap,
 			protocol : new OpenLayers.Protocol.HTTP({
 				url : layerData.server_resource,
 				format : this

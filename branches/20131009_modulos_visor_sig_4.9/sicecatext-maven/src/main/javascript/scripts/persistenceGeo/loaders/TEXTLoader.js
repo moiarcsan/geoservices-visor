@@ -63,7 +63,9 @@ PersistenceGeo.loaders.TEXTLoader
 		
 		var separator = layerData.properties ? layerData.properties.separator: "";
 		
-		var layer = this.loadLayer(layerData.name, layerData.server_resource, proj_orig, separator);
+		// Get layer style
+		var styleMap = this.preFunctionStyle(layerData);
+		var layer = this.loadLayer(layerData.name, layerData.server_resource, proj_orig, separator, styleMap);
 
 		// TODO: Wrap
 		this.postFunctionsWrapper(layerData, layer, layerTree);
@@ -91,9 +93,11 @@ PersistenceGeo.loaders.TEXTLoader
 	 * 
 	 * name - Name of the new layer url - URL where the file is
 	 */
-	loadLayer : function(name, url, proj_orig, separator) {
+	loadLayer : function(name, url, proj_orig, separator, styleMap) {
 		var this_ = this;
-		var layer = new OpenLayers.Layer.Vector(name);
+		var layer = new OpenLayers.Layer.Vector(name, {
+			styleMap: styleMap
+		});
 		
 		Ext.Ajax.request({
             url:  url,
