@@ -195,6 +195,9 @@ OpenLayers.Control.Styler = OpenLayers.Class(OpenLayers.Control, {
     
     changeStyle: function(symbolizer) {
 		if (!!this.layer) {
+			if(symbolizer.cursor && symbolizer.cursor != "pointer"){
+				symbolizer.cursor = "pointer";
+			}
 			if(symbolizer.strokeDashstyle == "4 4"){
 				symbolizer.strokeDashstyle = "dash";
 			}else if(symbolizer.strokeDashstyle == "2 4"){
