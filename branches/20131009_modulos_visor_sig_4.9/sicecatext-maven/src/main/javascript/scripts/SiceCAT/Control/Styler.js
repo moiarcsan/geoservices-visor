@@ -99,15 +99,8 @@ OpenLayers.Control.Styler = OpenLayers.Class(OpenLayers.Control, {
     trigger: function() {
     	if(this.windowSelecter == null){
     		this.currentSymbolizer = this.obtainSymbolizer();
-    		if(!!this.layer.features
-    				&& this.layer.features.length > 0){
-    			var style = null;
-    			for(var i = 0; i < this.layer.features.length; i++){
-    				if(!!this.layer.features[i].style){
-    					style = this.layer.features[i].style;
-    					this.layer.features[i].style = null;
-    				}
-    			}
+    		if(this.layer.styleMap && this.layer.styleMap.styles){
+    			var style = this.layer.styleMap.styles["default"].defaultStyle;
     			if(style != null){
     				this.currentSymbolizer = style;
     				this.windowSelecter = this.getPointSymbolizerWindow();

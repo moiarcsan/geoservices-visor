@@ -277,7 +277,7 @@ OpenLayers.Control.ZoomToMunicipioComarca = OpenLayers.Class(OpenLayers.Control,
      * Obtain query url to make a query for a queryType
      */
     getQueryUrl: function(queryType){
-        return Sicecat.getURLProxy(Sicecat.configType, Sicecat.typeCall.ALFANUMERICA, this.wfsUrl + '?' + String.format(this.queryUrlParameters, queryType));
+        return Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, this.wfsUrl + '?' + String.format(this.queryUrlParameters, queryType));
     },
     
     /**
