@@ -242,10 +242,6 @@ OpenLayers.Control.ZoomToMunicipioComarca = OpenLayers.Class(OpenLayers.Control,
      * Load this.localizator
      */
     getZoomToResult: function (queryTypeSiceCAT, propertyFilter, idFilter, layerName) {
-        if(!!this.lastLayerCreated){
-            AuxiliaryLayer.deleteLayer(this.lastLayerCreated);
-        }
-        
         this.lastLayerCreated = layerName;
         var errorText = this.errorText;
         this.sicecatInstance = Sicecat;
