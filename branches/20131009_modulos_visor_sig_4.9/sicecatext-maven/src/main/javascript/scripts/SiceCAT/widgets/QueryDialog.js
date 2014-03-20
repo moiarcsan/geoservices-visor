@@ -43,13 +43,14 @@ SiceCAT.QueryDialog = Ext.extend(Ext.Window, {
     width: 380,
     plain: true,
     closeAction: "hide",
-    layout:"vbox",
+    layout: "fit",
+    loadingText: "Loading ...",
     initComponent: function() {
         SiceCAT.QueryDialog.superclass.initComponent.apply(this, arguments);
 
         var statusBar = this.statusBar = new Ext.ux.StatusBar({
             defaultText: this.searchWFSDefaultStateText,
-            width: "auto",
+            width: 335,
             height: 50
         });
 
@@ -88,7 +89,9 @@ SiceCAT.QueryDialog = Ext.extend(Ext.Window, {
             text: this.queryText,
             handler: function() {
                 if(!this.loadMask) {
-                    this.loadMask = new Ext.LoadMask(this.body);
+                    this.loadMask = new Ext.LoadMask(this.body, {
+                    	msg: this.loadingText
+                    });
                 }
                 this.loadMask.show();
                 panel.query();
@@ -96,11 +99,10 @@ SiceCAT.QueryDialog = Ext.extend(Ext.Window, {
             scope: this
         });
 
+        panel.add(statusBar);
         panel.addButton(button);
-        //panel.add(statusBar);
         
         this.add(panel);
-        this.add(statusBar);
 
         this.addListener("beforehide", function() {
             this.statusBar.clearStatus({

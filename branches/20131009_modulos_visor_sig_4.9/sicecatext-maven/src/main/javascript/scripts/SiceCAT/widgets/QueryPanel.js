@@ -55,8 +55,6 @@ SiceCAT.QueryPanel = Ext.extend(gxp.QueryPanel, {
     
     intersectQuery: true,
     
-    //url: "http://localhost:8080/Visor-SPM20/proxy.do?url=http://10.136.200.76/ows/wfs",
-    
     index: 0,
 
     /** i18n */
