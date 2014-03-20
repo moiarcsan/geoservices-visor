@@ -892,7 +892,8 @@ GeoExt.Lang
 					    errorText: "El servicio WFS de SIGESCAT no est\u00E1 disponible. <a href='#' onclick=\"Ext.MessageBox.alert('Detalles', '{0}');\">Informaci\u00F3n t\u00e9cnica</a>",
 					    //errorText: "El servicio WFS de SIGESCAT no est\u00E1 disponible.",
 					    errorTraceText: "Traza: {0}",
-					    errorDescribeFeatureNotFound: "Error al acceder al <a href={0}>esquema de la entidad {1}"
+					    errorDescribeFeatureNotFound: "Error al acceder al <a href={0}>esquema de la entidad {1}",
+					    loadingText: "Cargando ..."
 					    	//+
 					    		//". <a href='#' onclick='$moreInfoErrorTxtZoomToMunicipioComarca.style.display=;'>M\u00E1s informaci\u00F3n</a> <div id='moreInfoErrorTxtZoomToMunicipioComarca' style=\"display:'none'\">{0}</div>"
 					},

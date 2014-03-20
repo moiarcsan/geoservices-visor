@@ -95,6 +95,7 @@ OpenLayers.Control.ZoomToMunicipioComarca = OpenLayers.Class(OpenLayers.Control,
     errorText: "Error ocurred in WFS. <a href='#' onclick=\"Ext.MessageBox.alert('Detalles', '{0}');\">More information</a>",
     errorDescribeFeatureNotFound: "Failed to access the <a href={0}>{1} entity  scheme</ a>",
     errorTraceText: "Trace: {0}",
+    loadingText: "Loading ...",
     
     /*
      * private: window to show
@@ -183,13 +184,18 @@ OpenLayers.Control.ZoomToMunicipioComarca = OpenLayers.Class(OpenLayers.Control,
                 defaultText: this.helpText,
                 width: 480,
                 height: 50});
-            
+            var this_ = this;
             var button = new Ext.Button({
                     text: this.buttonText,
                     menuAlign: "b",
                     cls: "formZoomToMunicipioComarca",
                     handler: function() {
                         this.statusBar.setText(String.format(this.zoomingText, this.nameSelected));
+                        if(!this_.loadMask) {
+                        	this_.loadMask = new Ext.LoadMask(this.windowSelecter.body, {
+                            	msg: this_.loadingText
+                            });
+                        }
                         if(this.lastTypeSelected == this.SELECT_TYPE_T){
                             this.selectTown(this.idSelected, this.nameSelected);
                         }else{
@@ -228,11 +234,13 @@ OpenLayers.Control.ZoomToMunicipioComarca = OpenLayers.Class(OpenLayers.Control,
     
     selectRegion: function(idRegion, comarca){
         if(Sicecat.isLogEnable) console.log("Zooming to region "+idRegion);
+        this.loadMask.show();
         this.getZoomToResult("s:k", "OBJECTID", idRegion, String.format(this.regionLayerText,comarca));
     },
     
     selectTown: function(idMunicipio, municipio){
         if(Sicecat.isLogEnable) console.log("Zooming to town "+idMunicipio);
+        this.loadMask.show();
         this.getZoomToResult("s:i", "OBJECTID", idMunicipio, String.format(this.townLayerText, municipio));
     },
 
@@ -290,6 +298,7 @@ OpenLayers.Control.ZoomToMunicipioComarca = OpenLayers.Class(OpenLayers.Control,
             listeners:{
                 zoomDone:function(){
                     this.statusBar.setText(String.format(this.doneText,this.nameSelected) + this.helpText);
+                    this.loadMask.hide();
                 }, 
                 loadexception: function(exception, exc2){
                     //this.statusBar.setText(this.errorText + String.format(this.errorTraceText, exception));

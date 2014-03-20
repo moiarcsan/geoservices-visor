@@ -858,7 +858,8 @@ GeoExt.Lang
 						errorText: "Error ocurred in WFS. <a href='#' onclick=\"Ext.MessageBox.alert('Details', '{0}');\">Thecnical information</a>",
 						//errorText: "Error ocurred in WFS.",
 						errorTraceText: "Trace: {0}",
-						errorDescribeFeatureNotFound: "Failed to access the <a href={0}>{1} entity  scheme</ a>"
+						errorDescribeFeatureNotFound: "Failed to access the <a href={0}>{1} entity  scheme</ a>",
+						loadingText: "Loading ..."
 					},
 					"SiceCAT.Control.ExportToGMLKML.prototype" : {
 						selectTypeText : "Select KML or GML export",

@@ -898,7 +898,8 @@ GeoExt.Lang
 					    errorText: "El servei WFS de SIGESCAT no est\u00E0 disponible. <a href='#' onclick=\"Ext.MessageBox.alert('Detalls', '{0}');\">Informaci\u00f3 t\u00e8cnica</a>",
 					    //errorText: "El servei WFS de SIGESCAT no est\u00E0 disponible.",
 					    errorTraceText: "Tra\u00E7a: {0}",
-					    errorDescribeFeatureNotFound: "Error en accedir al <a href={0}>esquema de l'Entitat {1}</a>'"
+					    errorDescribeFeatureNotFound: "Error en accedir al <a href={0}>esquema de l'Entitat {1}</a>'",
+					    loadingText: "Carregant ..."
 					},
 					"SiceCAT.Control.ExportToGMLKML.prototype": {
 						selectTypeText: "Selecciona el tipus d'exportaci\u00F3",
