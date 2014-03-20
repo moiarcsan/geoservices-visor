@@ -1015,5 +1015,8 @@ GeoExt.Lang
 						place: "Place",
 						typePlace: "Type place",
 						searchCenterDistance: "Search center distance"
+					},
+					"SiceCAT.QueryDialog.prototype": {
+						loadingText: "Loading ..."
 					}
 				});

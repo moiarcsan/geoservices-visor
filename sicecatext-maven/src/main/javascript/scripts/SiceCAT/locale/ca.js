@@ -1088,5 +1088,8 @@ GeoExt.Lang
 						place: "Zona",
 						typePlace: "Tipus de la zona",
 						searchCenterDistance: "Dist\u00e0ncia al centre de la cerca"
+					},
+					"SiceCAT.QueryDialog.prototype": {
+						loadingText: "Carregant ..."
 					}
 				});

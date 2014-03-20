@@ -1084,5 +1084,8 @@ GeoExt.Lang
 						place: "Zona",
 						typePlace: "Tipo de la zona",
 						searchCenterDistance: "Distancia al centro de la b\u00fasqueda"
+					},
+					"SiceCAT.QueryDialog.prototype": {
+						loadingText: "Cargando ..."
 					}
 				});
