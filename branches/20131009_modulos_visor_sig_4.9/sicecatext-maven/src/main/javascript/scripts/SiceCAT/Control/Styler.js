@@ -202,14 +202,6 @@ OpenLayers.Control.Styler = OpenLayers.Class(OpenLayers.Control, {
 	                rules: [new OpenLayers.Rule({symbolizer: symbolizer})]
 	            })
 	        });
-			//Forze style
-			for(var i = 0; i < this.layer.features.length; i++){
-				var styleDefined = OpenLayers.Util
-					.applyDefaults(
-						symbolizer,
-						OpenLayers.Feature.Vector.style["default"]);
-				this.layer.features[i].style = styleDefined;
-			}
 			this.layer.styleMap = styleMap;
 			this.layer.redraw();
 		}
@@ -227,8 +219,6 @@ OpenLayers.Control.Styler = OpenLayers.Class(OpenLayers.Control, {
 		    			 */
 		    			var json = Ext.util.JSON.decode(action.response.responseText);
 		    			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.data.type].load(json.data);
-//		    			Sicecat.removeLayer(this_layer);
-//		    			Sicecat.addLayer(layer);
 		    		},
 		    		function(form, action){
 		    			/*
