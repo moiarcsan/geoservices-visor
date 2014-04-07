@@ -201,9 +201,7 @@ SIGIntegrator = Ext
 								element.setCapa('Auxiliar');
 							}
 
-							if (!!element.getType()
-									&& (element.getType() == this.ELEMENT_TYPE_COMARCA || element
-											.getType() == this.ELEMENT_TYPE_MUNICIPIO)) {
+							if (!!element.getType() && (element.getType() == this.ELEMENT_TYPE_COMARCA || element.getType() == this.ELEMENT_TYPE_MUNICIPIO)) {
 								if (element.getType() == this.ELEMENT_TYPE_COMARCA) {
 									this.getZoomToResult("s:k", "OBJECTID", element
 											.getId(), element.getCapa(), false,
@@ -226,39 +224,56 @@ SIGIntegrator = Ext
 								feature.id = element.getId();
 								feature.description = element.getDescription();
 								feature.type = element.getType();
-
-								// Feature style
-								var style = Sicecat.styles['default'];
-								if (!!element.getStyle()) {
-									style = Sicecat.styles[element.getStyle()];
-								}
-								feature.style = this.cloneObject(style);
+								// Remove feature style
+								feature.style = null;
 								// Save feature style
 								feature.estilo = element.getStyle();
-								
-								 // Show a label with the id
-								 if(element.getType() == integrator.ELEMENT_TYPE_INCIDENTE){
-								 	feature.style.label = feature.id.toString();
-								 	feature.style.labelAlign = "rt";
-								 	feature.style.labelXOffset = 20;
-								 	feature.style.labelYOffset = 20;
-								 }
-
-								var pre_feature = AuxiliaryLayer.searchFeature(
-										element.getCapa(), feature);
-
+								// Get Style
+								var defaultStyle = Sicecat.styles[element.getStyle()];
+								var selectStyle = Sicecat.styles[element.getStyle()+"_s"];
+								// Show a label with the id
+								if(element.getType() == integrator.ELEMENT_TYPE_INCIDENTE){
+									// Default style
+									defaultStyle.label = feature.id.toString();
+									defaultStyle.labelAlign = "rt";
+									defaultStyle.labelXOffset = 20;
+									defaultStyle.labelYOffset = 20;
+									// Select style
+									selectStyle.label = feature.id.toString();
+									selectStyle.labelAlign = "rt";
+									selectStyle.labelXOffset = 20;
+									selectStyle.labelYOffset = 20;
+								}
+								var styleMap = new OpenLayers.StyleMap({
+									'default': defaultStyle, 
+									'select': selectStyle,
+									'delete': OpenLayers.Feature.Vector.style["delete"],
+									'temporary': OpenLayers.Feature.Vector.style["temporary"]
+								});
+								// Add style to the layer
+								var layer_array = map.getLayersByName(element.getCapa());
+								var aux_layer = null;
+								if(layer_array.length > 0){
+									aux_layer = layer_array[0];
+								}
+								if(aux_layer == null){
+									aux_layer = new OpenLayers.Layer.Vector(element.getCapa(), {
+										strategies : [ new OpenLayers.Strategy.Save() ],
+										styleMap: styleMap
+									});
+									AuxiliaryLayer.map.addLayer(aux_layer);
+								}
+								var pre_feature = AuxiliaryLayer.searchFeature(element.getCapa(), feature);
 								if (!!pre_feature && !!pre_feature[0]) {
 									if (this.isLogEnabled()){
 										console.debug("Updating " + element_info);	
 									}
-									AuxiliaryLayer.updateFeature(element.getCapa(),
-											feature);
+									AuxiliaryLayer.updateFeature(element.getCapa(), feature);
 								} else {
 									if (this.isLogEnabled()){
 										console.info("Adding " + element_info);
 									}
-									AuxiliaryLayer.addFeature(element.getCapa(),
-											feature);
+									AuxiliaryLayer.addFeature(element.getCapa(), feature);
 								}
 							}
 						}else{
