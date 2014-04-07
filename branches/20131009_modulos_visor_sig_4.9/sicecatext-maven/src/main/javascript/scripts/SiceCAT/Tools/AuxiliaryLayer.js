@@ -262,11 +262,11 @@ AuxiliaryLayer = {
 			feature.style = {};
 
 		// adiaz: Feature styling
-		var style = feature.style;
-		if (!style) {
-			// If feature.style is not defined, generate style
-			style = AuxiliaryLayer.generateStyle(feature.style, feature);
-		}
+//		var style = feature.style;
+//		if (!style) {
+//			// If feature.style is not defined, generate style
+//			style = AuxiliaryLayer.generateStyle(feature.style, feature);
+//		}
 
 		var data = {};
 		data.pk_id = feature.id;
@@ -280,7 +280,7 @@ AuxiliaryLayer = {
 		var geom = new OpenLayers.Geometry.Point(feature.position[0],
 				feature.position[1]);
 
-		var feature2 = new OpenLayers.Feature.Vector(geom, data, style);
+		var feature2 = new OpenLayers.Feature.Vector(geom, data, null);
 		vectorLayer.addFeatures(feature2);
 		
 		data.sicecat_feature = new SiceCAT.Feature(feature2);
