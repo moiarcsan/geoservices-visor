@@ -25,7 +25,18 @@
             graphicOpacity:1,
             fillColor: '#27F543',
             strokeColor: '#27F543',
-            externalGraphic: "http://localhost:8080/Visor/images/SiceCAT/icono_incidente.png"
+            externalGraphic: "https://integracio.dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_incidente.png"
+            }
+   },
+   {
+      'name':'emergency_s',
+      'options': {
+            graphicWidth: 20, 
+            graphicHeight: 34,
+            graphicOpacity:1,
+            fillColor: '#27F543',
+            strokeColor: '#27F543',
+            externalGraphic: "https://integracio.dinterior.gencat.intranet/sicecat2/images/gisIcons/icono_incidente_d.png"
             }
    },
    {
