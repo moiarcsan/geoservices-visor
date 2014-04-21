@@ -228,9 +228,16 @@ SIGIntegrator = Ext
 								feature.style = null;
 								// Save feature style
 								feature.estilo = element.getStyle();
-								// Get Style
+								// Get default style
 								var defaultStyle = Sicecat.styles[element.getStyle()];
+								if(defaultStyle == null){
+									defaultStyle = OpenLayers.Feature.Vector.style["default"];
+								}
+								// Get select style
 								var selectStyle = Sicecat.styles[element.getStyle()+"_s"];
+								if(selectStyle == null){
+									selectStyle = OpenLayers.Feature.Vector.style["select"];
+								}
 								// Show a label with the id
 								if(element.getType() == integrator.ELEMENT_TYPE_INCIDENTE){
 									// Default style
