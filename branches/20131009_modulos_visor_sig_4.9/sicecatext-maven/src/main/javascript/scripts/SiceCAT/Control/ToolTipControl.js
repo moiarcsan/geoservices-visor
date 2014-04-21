@@ -477,10 +477,8 @@ OpenLayers.Control.ToolTipControl = OpenLayers
 						// GetFeatureInfo
 						var info_control = new SiceCAT.Control.GetFeatureInfo();
 						var evento = null;
-						if(!Ext.isGecko){
+						if(feature.parentEvt != null){
 							evento = feature.parentEvt;
-						}else{
-							evento = feature.parentEvent;
 						}
 						var grid = info_control.clickEvent(evento);
 						var moreInfo = new Ext.Panel({
