@@ -234,12 +234,12 @@ SIGIntegrator = Ext
 								// Show a label with the id
 								if(element.getType() == integrator.ELEMENT_TYPE_INCIDENTE){
 									// Default style
-									defaultStyle.label = feature.id.toString();
+									defaultStyle.label = '${pk_id}';
 									defaultStyle.labelAlign = "rt";
 									defaultStyle.labelXOffset = 20;
 									defaultStyle.labelYOffset = 20;
 									// Select style
-									selectStyle.label = feature.id.toString();
+									selectStyle.label = '${pk_id}';
 									selectStyle.labelAlign = "rt";
 									selectStyle.labelXOffset = 20;
 									selectStyle.labelYOffset = 20;
