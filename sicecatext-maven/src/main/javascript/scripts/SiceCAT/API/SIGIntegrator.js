@@ -191,7 +191,7 @@ SIGIntegrator = Ext
 									+ element.getPosY() + ")";
 							}
 							// Guardamos el elemento que hemos recibido
-							this.saveDefElement(element);
+							//this.saveDefElement(element);
 							if (!feature) {
 								var feature = {};
 								feature.position = new Array();
@@ -665,9 +665,6 @@ SIGIntegrator = Ext
 					msGisLogin : function(usuario, permisos, idioma, tipo,
 							idComarca, idMunicipio, idSession, urlSession, infoExtra) {
 						
-						// Comprobamos si la sesion está activa
-						if(this.checkSession(usuario, permisos, idioma, tipo,
-								idComarca, idMunicipio, idSession, urlSession)){
 							// TODO comprobaciones de usuario con secondaryAPI
 							if (this.isLogEnabled()) {
 								console.info("El usuario " + usuario
@@ -740,12 +737,6 @@ SIGIntegrator = Ext
 							// Funcion de inicializacion de SiceCAT en
 							// init_sicecatII.js.
 							init_all();
-						}else{
-							// Mostramos aviso
-							if (this.isLogEnabled()) {
-								console.error("[Error] La sesión ha caducado");
-							}
-						}
 					},
 					
 					LAYER_AUX_INCIDENTS: "LAYER_AUX_INCIDENTS",
