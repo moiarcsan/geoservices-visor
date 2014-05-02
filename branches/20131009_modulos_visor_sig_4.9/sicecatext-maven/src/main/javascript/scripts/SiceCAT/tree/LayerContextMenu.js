@@ -656,12 +656,14 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 						PersistenceGeoParser.saveLayerProperties(newLayer.layerID, {
 							occupied: false,
 							available:false, 
-							inUse: true
+							inUse: true,
+							visibility: false
 						});
 						PersistenceGeoParser.saveLayerProperties(layer.layerID, {
 							inUse:false,
 							available:false, 
-							occupied: true
+							occupied: true,
+							visibility: false
 						});
 						Sicecat.refreshLayers();
 					}else if(!!Sicecat.poolWFSAvalaibles
