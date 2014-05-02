@@ -105,7 +105,7 @@ PersistenceGeo.loaders.AbstractLoader =  Ext.extend(Ext.Component,
 		
 		postFunctionsVisibility: function (layerData, layer){
 			if(!!layerData.properties){
-				var visibility = layerData.properties.visibility ? this.toBoolean(layerData.properties.visibility) : true;
+				var visibility = layerData.properties.visibility ? this.toBoolean(layerData.properties.visibility) : false;
 				if(layer.visibility != visibility){
 					layer.setVisibility(visibility);
 				}
