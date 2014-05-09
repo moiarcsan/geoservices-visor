@@ -718,6 +718,7 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 		var wms_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, this.sicecatInstance.defaultWMSServer);
 		var taure_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, "http://taure.icc.cat/cgi-bin/mapserv?");
 		var galileo_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, "http://galileo.icc.cat/arcgis/services/icc_limadmin_v_r/MapServer/WMSServer");
+		var wms_sec_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, "http://sigescat.pise.interior.intranet/ows2");
 		var panel = new SiceCAT.widgets.AddLayers(
 				{
 					width : 365,
@@ -750,6 +751,17 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 							url : galileo_url,
 							version : "1.1.1",
 							ptype : "gxp_wmssource"
+						},
+						"proteccion civil" : {
+							url : wms_sec_url,
+							version : "1.1.1",
+							ptype : "gxp_wmssource",
+							baseParams: {
+								user: Global_TMP.userWMSSecurity,
+								pass: Global_TMP.passWMSSecurity,
+								SERVICE : "WMS",
+								REQUEST : "getCapabilities"
+							}
 						}
 					// ,
 					// sagitari.icc.cat: {

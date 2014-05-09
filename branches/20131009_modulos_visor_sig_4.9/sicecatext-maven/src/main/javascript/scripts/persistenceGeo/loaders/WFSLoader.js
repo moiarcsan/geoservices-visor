@@ -91,37 +91,62 @@ PersistenceGeo.loaders.WFSLoader
 			
 			this.postFunctionsWrapper(layerData, layer, layerTree);
 			
-			//Editable(in use)/Ocuppied/availabled
-			if(layerData['properties']['editable']){
-				if(layerData['properties']['available']
-					&& this.toBoolean(layerData['properties']['available'])){
-					layer.groupLayers = "available";
-					layer.subgroupLayers = "available";
-					layer.visibility = false;
-					if(!(Global_TMP.permisos.contains('admin'))){
-						layer.groupLayers = 'false';
-						layer.subgroupLayers = 'false';
-						layer.displayInLayerSwitcher = false;
-					}
-					if(!!layerData['properties']['geometry'] 
-						&& !!Sicecat
-						&& !!Sicecat.poolWFSAvalaibles
-						&& !!Sicecat.poolWFSAvalaibles[layerData['properties']['geometry']])
-						Sicecat.poolWFSAvalaibles[layerData['properties']['geometry']].push(layer);
-				}else if(!!layerData['properties']['inUse']
-					&& this.toBoolean(layerData['properties']['inUse'])){
-					layer.groupLayers = "editables";
-					layer.subgroupLayers = "editables";
-				}else{
-					layer.visibility = false;
-					if(!(Global_TMP.permisos.contains('admin'))){
-						layer.groupLayers = 'false';
-						layer.subgroupLayers = 'false';
-						layer.displayInLayerSwitcher = false;
+			// Dinstict load depends on role user
+			if(Global_TMP.permisos.contains('admin')){
+				// He's an admin
+				if(layerData['properties']['editable'] && this.toBoolean(layerData['properties']['editable'])){
+					// It's an editable layer
+					if(layerData['properties']['inUse'] && this.toBoolean(layerData['properties']['inUse'])){
+						// In use layer
+						layer.visibility = false;
+					}else if(layerData['properties']['available'] && this.toBoolean(layerData['properties']['available'])){
+						// Available layer
+						layer.groupLayers = "available";
+						layer.subgroupLayers = "available";
+						if(!!layerData['properties']['geometry'] 
+							&& !!Sicecat
+							&& !!Sicecat.poolWFSAvalaibles
+							&& !!Sicecat.poolWFSAvalaibles[layerData['properties']['geometry']]){
+							Sicecat.poolWFSAvalaibles[layerData['properties']['geometry']].push(layer);
+						}
 					}else{
+						// Occupied layer
 						layer.groupLayers = "occupied";
 						layer.subgroupLayers = "occupied";
 					}
+				}else{
+					// It's not an editable layer
+					layer.visibility = false;
+				}
+			}else{
+				// He's an user
+				if(layerData['properties']['editable'] && this.toBoolean(layerData['properties']['editable'])){
+					if(layerData['properties']['inUse'] && this.toBoolean(layerData['properties']['inUse'])){
+						// In use layer
+						layer.groupLayers = "editables";
+						layer.subgroupLayers = "editables";
+					}else if(layerData['properties']['available'] && this.toBoolean(layerData['properties']['available'])){
+						// Available layer
+						layer.groupLayers = 'false';
+						layer.subgroupLayers = 'false';
+						layer.displayInLayerSwitcher = false;
+						layer.visibility = false;
+						if(!!layerData['properties']['geometry'] 
+							&& !!Sicecat
+							&& !!Sicecat.poolWFSAvalaibles
+							&& !!Sicecat.poolWFSAvalaibles[layerData['properties']['geometry']]){
+							Sicecat.poolWFSAvalaibles[layerData['properties']['geometry']].push(layer);
+						}
+					}else{
+						// Occupied layer
+						layer.groupLayers = 'false';
+						layer.subgroupLayers = 'false';
+						layer.displayInLayerSwitcher = false;
+						layer.visibility = false;
+					}
+				}else{
+					// It's not an editable layer
+					layer.visibility = false;
 				}
 			}
 			

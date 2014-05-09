@@ -701,6 +701,17 @@ SIGIntegrator = Ext
 							if(infoExtra != null && infoExtra.nombreMunicipio != null){
 								Global_TMP.nombreMunicipio = infoExtra.nombreMunicipio;
 							}
+							// Mientras nos pasan los parámetros
+							if(infoExtra == null){
+								infoExtra = {};
+							}
+							infoExtra.userWMSSecurity = "usrpcivil1";
+							infoExtra.passWMSSecurity = "t9OqR7gK";
+							// Credenciales de wms securizado
+							if(infoExtra != null && infoExtra.userWMSSecurity != null && infoExtra.passWMSSecurity != null){
+								Global_TMP.userWMSSecurity = infoExtra.userWMSSecurity;
+								Global_TMP.passWMSSecurity = infoExtra.passWMSSecurity;
+							}
 							if (!!tipo) {
 								// GPCL
 								if (this.TIPO_GPCL == tipo) {
