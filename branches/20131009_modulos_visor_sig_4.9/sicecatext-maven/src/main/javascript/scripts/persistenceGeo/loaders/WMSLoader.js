@@ -44,45 +44,60 @@ Ext.namespace("PersistenceGeo.loaders.WMSLoader");
 PersistenceGeo.loaders.WMSLoader 
 	= Ext.extend(PersistenceGeo.loaders.AbstractLoader,{
 
-	load: function (layerData, layerTree){
-		var visibility = false;
-		var transparent = true;
-		var isBaseLayer = false;
-		var opacity = 0.5;
-		var buffer = 0;
-		var format = 'image/png';
-		var layers = layerData.name;
-		
-		if(!!layerData.properties){
-			visibility = this.toBoolean(layerData.properties.visibility) || false;
-			transparent = this.toBoolean(layerData.properties.transparent) || true;
-			isBaseLayer = this.toBoolean(layerData.properties.isBaseLayer) || false;
-			opacity = this.toNumber(layerData.properties.opacity) || 0.5;
-			buffer = this.toNumber(layerData.properties.buffer) || 0;	
-			format = layerData.properties.format;
-			layers = layerData.properties.layers;
-		}
-		/* GetURLProxy */
-		var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, layerData.server_resource);
-		
-		var layer = new OpenLayers.Layer.WMS(
-				layerData.name,
-				layer_url,
-				{
+		load: function (layerData, layerTree){
+			var visibility = false;
+			var transparent = true;
+			var isBaseLayer = false;
+			var opacity = 0.5;
+			var buffer = 0;
+			var format = 'image/png';
+			var layers = layerData.name;
+			var security = false;
+			var layer_url = null;
+			var params = null;
+			
+			if(!!layerData.properties){
+				visibility = this.toBoolean(layerData.properties.visibility) || false;
+				transparent = this.toBoolean(layerData.properties.transparent) || true;
+				isBaseLayer = this.toBoolean(layerData.properties.isBaseLayer) || false;
+				opacity = this.toNumber(layerData.properties.opacity) || 0.5;
+				buffer = this.toNumber(layerData.properties.buffer) || 0;	
+				format = layerData.properties.format;
+				layers = layerData.properties.layers;
+				security = this.toBoolean(layerData.properties.security) || false;
+			}
+			/* GetURLProxy */
+			if(security){
+				layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, layerData.server_resource);
+				params = {
 					layers: layers,
-	    			transparent: transparent
-				},
-				{
-					format: format,
-	    			isBaseLayer: isBaseLayer,
-	    			visibility: visibility,
-	     			opacity: opacity,
-	    			buffer : buffer
-				});
-		
-		//TODO: Wrap 
-		this.postFunctionsWrapper(layerData, layer, layerTree);
-		
-		return layer;
-	}
+	    			transparent: transparent,
+	    			user: Global_TMP.userWMSSecurity,
+	    			pass: Global_TMP.passWMSSecurity
+	    		};
+			}else{
+				layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, layerData.server_resource);
+				params = {
+						layers: layers,
+		    			transparent: transparent,
+		    			user: Global_TMP.userWMSSecurity,
+		    			pass: Global_TMP.passWMSSecurity
+		    		};
+			}
+			
+			var options = {
+				format: format,
+	    		isBaseLayer: isBaseLayer,
+	    		visibility: visibility,
+	     		opacity: opacity,
+	    		buffer : buffer
+			};
+			
+			var layer = new OpenLayers.Layer.WMS(layerData.name, layer_url, params, options);
+			
+			//TODO: Wrap 
+			this.postFunctionsWrapper(layerData, layer, layerTree);
+			
+			return layer;
+		}
 });
