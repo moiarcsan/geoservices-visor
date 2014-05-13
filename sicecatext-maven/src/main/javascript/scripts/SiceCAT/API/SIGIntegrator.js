@@ -118,7 +118,7 @@ SIGIntegrator = Ext
 					constructor : function(config) {
 						if (config) {
 							if (this.isLogEnabled()){
-								console.info("Ha entrado en el método constructor de SIGIntegrator, con el parámetro config igual a: ");
+								console.info("Ha entrado en el mÃ©todo constructor de SIGIntegrator, con el parÃ¡metro config igual a: ");
 								console.dir(config);
 							}
 							this.addEvents({
@@ -143,7 +143,7 @@ SIGIntegrator = Ext
 								console.error("[Error] Ha intentado entrar en el constructor de SIGIntegrator con config igual a: ");
 								console.dir(config);
 							}
-							alert("No se puede abrir el visor de forma independiente, Ã¡brelo desde SICECAT");
+							alert("No se puede abrir el visor de forma independiente, ÃÂ¡brelo desde SICECAT");
 						}
 					},
 
@@ -172,10 +172,10 @@ SIGIntegrator = Ext
 					 * description, posX, posY) parameters and getters & setters
 					 */
 					msGisShowElement : function(element) {
-						// Comprobamos que el parámetro no sea null
+						// Comprobamos que el parÃ¡metro no sea null
 						if(element != null){
 							if (this.isLogEnabled()){
-								console.info("Ha entrado en el método msGisShowElement de SIGIntegrator, con el parámetro element igual a: ");
+								console.info("Ha entrado en el mÃ©todo msGisShowElement de SIGIntegrator, con el parÃ¡metro element igual a: ");
 								console.dir(element);
 								var element_info = "element(id,name,capa,description,X,Y) = ("
 									+ element.getId()
@@ -285,7 +285,7 @@ SIGIntegrator = Ext
 							}
 						}else{
 							if (this.isLogEnabled()){
-								console.error("[Error] Ha intentado entrar en el método msGisShowElement de SIGIntegrator con element igual a: ");
+								console.error("[Error] Ha intentado entrar en el mÃ©todo msGisShowElement de SIGIntegrator con element igual a: ");
 								console.dir(element);
 							}
 						}
@@ -340,7 +340,7 @@ SIGIntegrator = Ext
 					msGisShowList : function(list) {
 						if(list != null){
 							if (this.isLogEnabled()){
-								console.info("Ha entrado en el método msGisShowList de SIGIntegrator, con el parámetro list igual a: ");
+								console.info("Ha entrado en el mÃ©todo msGisShowList de SIGIntegrator, con el parÃ¡metro list igual a: ");
 								console.dir(list);
 							}
 							if (!!list) {
@@ -350,7 +350,7 @@ SIGIntegrator = Ext
 							}
 						}else{
 							if (this.isLogEnabled()){
-								console.error("[Error] Ha intentado entrar en el método msGisShowList de SIGIntegrator con list igual a: ");
+								console.error("[Error] Ha intentado entrar en el mÃ©todo msGisShowList de SIGIntegrator con list igual a: ");
 								console.dir(list);
 							}
 						}
@@ -363,13 +363,13 @@ SIGIntegrator = Ext
 					 * 
 					 * Parameters: id - {<Long>} Del elemento a centrar capa - {<String>}
 					 * nombre de la capa en la que se encuentra. Si no se define
-					 * se buscarÃ¡ en la capa 'Auxiliar'
+					 * se buscarÃÂ¡ en la capa 'Auxiliar'
 					 */
 					msGisFocusElement : function(id, capa) {
-						// Controlamos los parámetros que recibimos
+						// Controlamos los parÃ¡metros que recibimos
 						if(id != null && capa != null){
 							if (this.isLogEnabled()){
-								console.info("Ha entrado en el método msGisFocusElement de SIGIntegrator, con los parámetros id y capa igual a: ");
+								console.info("Ha entrado en el mÃ©todo msGisFocusElement de SIGIntegrator, con los parÃ¡metros id y capa igual a: ");
 								console.dir(id);
 								console.dir(capa);
 							}
@@ -401,7 +401,7 @@ SIGIntegrator = Ext
 							}
 						}else{
 							if (this.isLogEnabled()){
-								console.error("[Error] Ha intentado entrar en el método msGisFocusElement de SIGIntegrator con id y capa igual a: ");
+								console.error("[Error] Ha intentado entrar en el mÃ©todo msGisFocusElement de SIGIntegrator con id y capa igual a: ");
 								console.dir(id);
 								console.dir(capa);
 							}
@@ -420,7 +420,7 @@ SIGIntegrator = Ext
 					msGisFocusList : function(list) {
 						if (list != null) {
 							if (this.isLogEnabled()){
-								console.info("Ha entrado en el método msGisFocusList de SIGIntegrator, con el parámetro list igual a: ");
+								console.info("Ha entrado en el mÃ©todo msGisFocusList de SIGIntegrator, con el parÃ¡metro list igual a: ");
 								console.dir(list);
 							}
 							for ( var i = 0; i < list.length; i++) {
@@ -455,7 +455,7 @@ SIGIntegrator = Ext
 							}
 						}else{
 							if (this.isLogEnabled()){
-								console.error("[Error] Ha intentado entrar en el método msGisFocusList de SIGIntegrator con list igual a: ");
+								console.error("[Error] Ha intentado entrar en el mÃ©todo msGisFocusList de SIGIntegrator con list igual a: ");
 								console.dir(list);
 							}
 						}
@@ -489,13 +489,13 @@ SIGIntegrator = Ext
 					 * 
 					 * Parameters: id - {<Long>} capa - {<String>} nombre de
 					 * la capa en la que se encuentra. Si no se define se
-					 * buscarÃ¡ en la capa 'Auxiliar'
+					 * buscarÃÂ¡ en la capa 'Auxiliar'
 					 */
 					msGisRemoveElement : function(id, capa) {
 						// TODO Comprobar si es necesario ver que la capa no sea nula 
 						if(id != null){
 							if (this.isLogEnabled()){
-								console.info("Ha entrado en el método msGisRemoveElement de SIGIntegrator, con los parámetros id y capa igual a: ");
+								console.info("Ha entrado en el mÃ©todo msGisRemoveElement de SIGIntegrator, con los parÃ¡metros id y capa igual a: ");
 								console.dir(id);
 								console.dir(capa);
 							}
@@ -517,7 +517,7 @@ SIGIntegrator = Ext
 							this.removeDefElement(id);
 						}else{
 							if (this.isLogEnabled()){
-								console.error("[Error] Ha intentado entrar en el método msGisRemoveElement de SIGIntegrator con id y capa igual a: ");
+								console.error("[Error] Ha intentado entrar en el mÃ©todo msGisRemoveElement de SIGIntegrator con id y capa igual a: ");
 								console.dir(id);
 								console.dir(capa);
 							}
@@ -534,7 +534,7 @@ SIGIntegrator = Ext
 					msGisRemoveList : function(list) {
 						if (list != null) {
 							if (this.isLogEnabled()){
-								console.info("Ha entrado en el método msGisRemoveList de SIGIntegrator, con el parámetro list igual a: ");
+								console.info("Ha entrado en el mÃ©todo msGisRemoveList de SIGIntegrator, con el parÃ¡metro list igual a: ");
 								console.dir(list);
 							}
 							for ( var i = 0; i < list.length; i++) {
@@ -543,7 +543,7 @@ SIGIntegrator = Ext
 							}
 						}else{
 							if (this.isLogEnabled()){
-								console.error("[Error] Ha intentado entrar en el método msGisRemoveList de SIGIntegrator con list igual a: ");
+								console.error("[Error] Ha intentado entrar en el mÃ©todo msGisRemoveList de SIGIntegrator con list igual a: ");
 								console.dir(list);
 							}
 						}
@@ -558,7 +558,7 @@ SIGIntegrator = Ext
 					 * Parameters: 
 					 * 		- id - {<String>} Id de la capa 
 					 * 		- nombre - {<String>} 
-					 * 		- order - {<Integer>} indica el orden de prioridad de la capa. A más orden, la capa se pinta más arriba 
+					 * 		- order - {<Integer>} indica el orden de prioridad de la capa. A mÃ¡s orden, la capa se pinta mÃ¡s arriba 
 					 * 		- hideInLayerSwitcher - {<String>} indica si la capa se debe ocultar
 					 * Nombre de la capa
 					 */
@@ -569,7 +569,7 @@ SIGIntegrator = Ext
 						}
 						if(id != null && nombre != null && hideInLayerSwitcher != null){
 							if (this.isLogEnabled()){
-								console.info("Ha entrado en el metodo msGisCreateCapa de SIGIntegrator, con los par�metros id, nombre y hideInLayerSwitcher igual a: ");
+								console.info("Ha entrado en el metodo msGisCreateCapa de SIGIntegrator, con los parï¿œmetros id, nombre y hideInLayerSwitcher igual a: ");
 								console.dir(id);
 								console.dir(nombre);
 								console.dir(order);
@@ -605,7 +605,7 @@ SIGIntegrator = Ext
 							this.saveDefLayer(layer);
 						}else{
 							if (this.isLogEnabled()){
-								console.error("[Error] Ha entrado en el metodo msGisCreateCapa de SIGIntegrator, con los par�metros id, nombre y hideInLayerSwitcher igual a: ");
+								console.error("[Error] Ha entrado en el metodo msGisCreateCapa de SIGIntegrator, con los parï¿œmetros id, nombre y hideInLayerSwitcher igual a: ");
 								console.dir(id);
 								console.dir(nombre);
 								console.dir(hideInLayerSwitcher);
@@ -624,7 +624,7 @@ SIGIntegrator = Ext
 					msGisRemoveCapa : function(id) {
 						if(id != null){
 							if (this.isLogEnabled()){
-								console.info("Ha entrado en el método msGisRemoveCapa de SIGIntegrator, con el parámetro id igual a: ");
+								console.info("Ha entrado en el mÃ©todo msGisRemoveCapa de SIGIntegrator, con el parÃ¡metro id igual a: ");
 								console.dir(id);
 							}
 							this.removeDefLayer(id);
@@ -640,7 +640,7 @@ SIGIntegrator = Ext
 							}
 						}else{
 							if (this.isLogEnabled()){
-								console.error("[Error] Ha entrado en el método msGisRemoveCapa de SIGIntegrator, con el parámetro id igual a: ");
+								console.error("[Error] Ha entrado en el mÃ©todo msGisRemoveCapa de SIGIntegrator, con el parÃ¡metro id igual a: ");
 								console.dir(id);
 							}
 						}
@@ -678,7 +678,7 @@ SIGIntegrator = Ext
 							// PERMISOS
 							_permisos = new Object();
 
-							// TODO: aquÃ­ hay que inicializar
+							// TODO: aquÃÂ­ hay que inicializar
 							// integrator.sicecatInstance.permisos.editWFS
 							// salvo que venga ya hecho
 							Ext.each(permisos.split(" "), function(p) {
@@ -701,17 +701,6 @@ SIGIntegrator = Ext
 							if(infoExtra != null && infoExtra.nombreMunicipio != null){
 								Global_TMP.nombreMunicipio = infoExtra.nombreMunicipio;
 							}
-							// Mientras nos pasan los par�metros
-							if(infoExtra == null){
-								infoExtra = {};
-							}
-							infoExtra.userWMSSecurity = "usrpcivil1";
-							infoExtra.passWMSSecurity = "t9OqR7gK";
-							// Credenciales de wms securizado
-							if(infoExtra != null && infoExtra.userWMSSecurity != null && infoExtra.passWMSSecurity != null){
-								Global_TMP.userWMSSecurity = infoExtra.userWMSSecurity;
-								Global_TMP.passWMSSecurity = infoExtra.passWMSSecurity;
-							}
 							if (!!tipo) {
 								// GPCL
 								if (this.TIPO_GPCL == tipo) {
@@ -732,6 +721,31 @@ SIGIntegrator = Ext
 								}
 							}
 							var self = this;
+							// Mientras nos pasan los par�metros
+							if(infoExtra == null){
+								infoExtra = {};
+							}
+							infoExtra.WMSSecured = {
+								wmssecurized: {
+									"http://sigescat.pise.interior.intranet/ows2/wms": {
+										user: "usrpcivil1",
+										pass: "t9OqR7gK"
+									},
+									"http://sigescat.pise.interior.intranet/ows3/wms": {
+										user: "user2",
+										pass: "pass2"
+									}
+								}
+							};
+							// Credenciales de wms securizado
+							if(infoExtra != null && infoExtra.WMSSecured != null){
+								// Lanzamos la peticion de securizacion
+								var url_proxy = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.SECURIZADA, "configureAuth.do");
+								Ext.Ajax.request({
+									url: url_proxy,
+									jsonData: infoExtra.WMSSecured
+								});
+							}
 							Ext.Ajax.request({
 								url: 'rest/persistenceGeo/getUserInfoById/' + usuario,
 								success: function(response){
@@ -740,11 +754,6 @@ SIGIntegrator = Ext
 									self.sicecatInstance.userInfo = obj.data;
 								}
 							});
-							// TODO Temporalmente
-							if(idSession == null){
-								idSession = "88";
-							}
-							this.sicecatInstance.idSession = idSession;
 							// Funcion de inicializacion de SiceCAT en
 							// init_sicecatII.js.
 							init_all();
@@ -765,14 +774,14 @@ SIGIntegrator = Ext
 					/**
 					 * Method: msGisLogout
 					 * 
-					 * FinalizaciÃ³n del visor SIG.
+					 * FinalizaciÃÂ³n del visor SIG.
 					 * 
 					 */
 					msGisLogout : function() {
 						if (this.isLogEnabled()){
-							console.info("Ha entrado en el método msGisLogout de SIGIntegrator.");
+							console.info("Ha entrado en el mÃ©todo msGisLogout de SIGIntegrator.");
 						}
-						// Enviamos una petición para eliminar los elementos temporales
+						// Enviamos una peticiÃ³n para eliminar los elementos temporales
 						Ext.Ajax.request({
 							url: 'rest/persistenceGeo/userContext/removeAll',
 							success: function(response){
@@ -790,7 +799,7 @@ SIGIntegrator = Ext
 					 */
 					msGisGetSelectedElements : function() {
 						if (this.isLogEnabled()){
-							console.info("Ha entrado en el método msGisGetSelectedElements de SIGIntegrator.");
+							console.info("Ha entrado en el mÃ©todo msGisGetSelectedElements de SIGIntegrator.");
 						}
 						return this.elementsSelected;
 					},
@@ -804,7 +813,7 @@ SIGIntegrator = Ext
 					msGisAddSelectedElement : function(idSelected) {
 						if(idSelected != null){
 							if (this.isLogEnabled()) {
-								console.info("Ha entrado en el método msGisAddSelectedElement de SIGIntegrator, con el parámetro idSelected igual a: ");
+								console.info("Ha entrado en el mÃ©todo msGisAddSelectedElement de SIGIntegrator, con el parÃ¡metro idSelected igual a: ");
 								console.dir(idSelected);
 							}
 							var enc = false;
@@ -818,7 +827,7 @@ SIGIntegrator = Ext
 							}
 						}else{
 							if (this.isLogEnabled()) {
-								console.error("[Error] Ha entrado en el método msGisAddSelectedElement de SIGIntegrator, con el parámetro idSelected igual a: ");
+								console.error("[Error] Ha entrado en el mÃ©todo msGisAddSelectedElement de SIGIntegrator, con el parÃ¡metro idSelected igual a: ");
 								console.dir(idSelected);
 							}
 						}
@@ -833,7 +842,7 @@ SIGIntegrator = Ext
 					msGisDelUnselectedElement : function(idSelected) {
 						if(idSelected != null){
 							if (this.isLogEnabled()) {
-								console.info("Ha entrado en el método msGisDelUnselectedElement de SIGIntegrator, con el parámetro idSelected igual a: ");
+								console.info("Ha entrado en el mÃ©todo msGisDelUnselectedElement de SIGIntegrator, con el parÃ¡metro idSelected igual a: ");
 								console.dir(idSelected);
 							}
 							var enc = false;
@@ -850,7 +859,7 @@ SIGIntegrator = Ext
 							this.elementsSelected = result;
 						}else{
 							if (this.isLogEnabled()) {
-								console.error("[Error] Ha entrado en el método msGisDelUnselectedElement de SIGIntegrator, con el parámetro idSelected igual a: ");
+								console.error("[Error] Ha entrado en el mÃ©todo msGisDelUnselectedElement de SIGIntegrator, con el parÃ¡metro idSelected igual a: ");
 								console.dir(idSelected);
 							}
 						}
@@ -867,7 +876,7 @@ SIGIntegrator = Ext
 					msGisRenameAllLayers : function(layers) {
 						if(layers != null){
 							if (this.isLogEnabled()) {
-								console.info("Ha entrado en el método msGisRenameAllLayers de SIGIntegrator, con el parámetro layers igual a: ");
+								console.info("Ha entrado en el mÃ©todo msGisRenameAllLayers de SIGIntegrator, con el parÃ¡metro layers igual a: ");
 								console.dir(layers);
 							}
 							for ( var i = 0; i < layers.length; i++) {
@@ -876,7 +885,7 @@ SIGIntegrator = Ext
 							}
 						}else{
 							if (this.isLogEnabled()) {
-								console.error("[Error] Ha entrado en el método msGisRenameAllLayers de SIGIntegrator, con el parámetro layers igual a: ");
+								console.error("[Error] Ha entrado en el mÃ©todo msGisRenameAllLayers de SIGIntegrator, con el parÃ¡metro layers igual a: ");
 								console.dir(layers);
 							}
 						}
@@ -893,7 +902,7 @@ SIGIntegrator = Ext
 					msGisRenameLayer : function(id, name) {
 						if(id != null && name != null){
 							if (this.isLogEnabled()) {
-								console.info("Ha entrado en el método msGisRenameLayer de SIGIntegrator, con los parámetros id y name igual a: ");
+								console.info("Ha entrado en el mÃ©todo msGisRenameLayer de SIGIntegrator, con los parÃ¡metros id y name igual a: ");
 								console.dir(id);
 								console.dir(name);
 							}
@@ -912,7 +921,7 @@ SIGIntegrator = Ext
 							}
 						}else{
 							if (this.isLogEnabled()) {
-								console.error("[Error] Ha entrado en el método msGisRenameLayer de SIGIntegrator, con los parámetros id y name igual a: ");
+								console.error("[Error] Ha entrado en el mÃ©todo msGisRenameLayer de SIGIntegrator, con los parÃ¡metros id y name igual a: ");
 								console.dir(id);
 								console.dir(name);
 							}
@@ -926,7 +935,7 @@ SIGIntegrator = Ext
 					 * indicada.
 					 * 
 					 * Parameters: - id {<String>} Identificador del incidente -
-					 * URL {<String>} DirecciÃ³n URL desde la que descargar el
+					 * URL {<String>} DirecciÃÂ³n URL desde la que descargar el
 					 * archivo GML. - capa {<String>} Identificador de la capa
 					 * en la que mostrar el elemento.
 					 */
@@ -962,7 +971,7 @@ SIGIntegrator = Ext
 					msAplElementSelected : function(posX, posY, id, tipo,
 							direccion, municipio, comarca, list) {
 						if (this.isLogEnabled()) {
-							console.info("Ha entrado en el método msAplElementSelected de SIGIntegrator, los siguientes parámetros: " 
+							console.info("Ha entrado en el mÃ©todo msAplElementSelected de SIGIntegrator, los siguientes parÃ¡metros: " 
 									+ "posX: " + posX 
 									+ " posY:" + posY 
 									+ " id: " + id 
@@ -987,7 +996,7 @@ SIGIntegrator = Ext
 					 */
 					msAplHideElements : function(id, layer) {
 						if (this.isLogEnabled()) {
-							//console.info("Ha entrado en el metodo msAplHideElements de SIGIntegrator, los siguientes parámetros: " 
+							//console.info("Ha entrado en el metodo msAplHideElements de SIGIntegrator, los siguientes parÃ¡metros: " 
 							//		+ "id: " + id + "," + " layer:" + layer ");
 						}
 						this.getSecondaryAPI().msAplHideElements(id, layer);
@@ -1061,7 +1070,7 @@ SIGIntegrator = Ext
 					/**
 					 * Method: msGisResolveAddress
 					 * 
-					 * Resuelve una direcciÃ³n a partir de un texto y devuelve un
+					 * Resuelve una direcciÃÂ³n a partir de un texto y devuelve un
 					 * listado de coincidencias
 					 * 
 					 * Parameters: direccion - {<String>}
@@ -1069,7 +1078,7 @@ SIGIntegrator = Ext
 					msGisResolveAddress : function(direccion) {
 						if(direccion != null){
 							if (this.isLogEnabled()) {
-								console.info("Ha entrado en el método msGisResolveAddress de SIGIntegrator, con el parámetro direccion igual a: ");
+								console.info("Ha entrado en el mÃ©todo msGisResolveAddress de SIGIntegrator, con el parÃ¡metro direccion igual a: ");
 								console.dir(direccion);
 							}
 							this.direccion_ = direccion;
@@ -1111,7 +1120,7 @@ SIGIntegrator = Ext
 									direccion.getDescription(), false, true);
 						}else{
 							if (this.isLogEnabled()) {
-								console.error("[Error] Ha entrado en el método msGisResolveAddress de SIGIntegrator, con el parámetro direccion igual a: ");
+								console.error("[Error] Ha entrado en el mÃ©todo msGisResolveAddress de SIGIntegrator, con el parÃ¡metro direccion igual a: ");
 								console.dir(direccion);
 							}
 						}
@@ -1134,7 +1143,7 @@ SIGIntegrator = Ext
 					/**
 					 * Method: msAplPointSelected
 					 * 
-					 * PosiciÃ³n pulsada por el usuario sobre un punto del Visor
+					 * PosiciÃÂ³n pulsada por el usuario sobre un punto del Visor
 					 * SIG Lista <Identificador, Tipo>
 					 */
 					msAplPointSelected : function(posX, posY, direccion,
@@ -1175,7 +1184,7 @@ SIGIntegrator = Ext
 					 * Method: msAplRectangleSelected
 					 * 
 					 * Coordenadas de la esquina superior izquierda y la esquina
-					 * inferior derecha de un rectÃ¡ngulo dibujado sobre el mapa.
+					 * inferior derecha de un rectÃÂ¡ngulo dibujado sobre el mapa.
 					 * 
 					 * Parameters: - x1 <Integer> - y1 <Integer> - x2 <Integer> -
 					 * y2 <Integer>
@@ -1236,8 +1245,8 @@ SIGIntegrator = Ext
 					 * Descriptor de la capa de tipo defLayer
 					 * 
 					 * Parameter: - defLayer <SiceCAT.Layer> Devuelve la lista
-					 * de definiciones de capas que estÃ¡n almacenadas en la
-					 * aplicaciÃ³n alfanumÃ©rica.
+					 * de definiciones de capas que estÃÂ¡n almacenadas en la
+					 * aplicaciÃÂ³n alfanumÃÂ©rica.
 					 */
 					msAplSaveLayerName : function(defLayer) {
 						this.getSecondaryAPI().msAplSaveLayerName(defLayer);
@@ -1255,7 +1264,7 @@ SIGIntegrator = Ext
 					/**
 					 * Method: msAplGMLSaved
 					 * 
-					 * Identificador del incidente al que estÃ¡ asociado el GML
+					 * Identificador del incidente al que estÃÂ¡ asociado el GML
 					 * 
 					 */
 					msAplGMLSaved : function(id) {
@@ -1279,7 +1288,7 @@ SIGIntegrator = Ext
 					 */
 					msIntGetElements : function(id, type) {
 						if (this.isLogEnabled()){
-							console.info("Ha entrado en el método msIntGetElements de SIGIntegrator, con los parámetros (id='" 
+							console.info("Ha entrado en el mÃ©todo msIntGetElements de SIGIntegrator, con los parÃ¡metros (id='" 
 										+ id + "', type='" + type + "')");
 						}
 						// now don't return elements, only mark!!
@@ -1320,7 +1329,7 @@ SIGIntegrator = Ext
 					msIntRemoveElements : function(id, type) {
 						
 						if (this.isLogEnabled()){
-							console.info("Ha entrado en el método msIntHideElements de SIGIntegrator, con los parámetros (id='" 
+							console.info("Ha entrado en el mÃ©todo msIntHideElements de SIGIntegrator, con los parÃ¡metros (id='" 
 										+ id + "', type='" + type + "')");
 						}
 						//now call to new API method and unmark
@@ -1350,22 +1359,22 @@ SIGIntegrator = Ext
 					/**
 					 * Method: msGisActiveSelectZone
 					 * 
-					 * Activa el control de localización de recursos por rectángulo
+					 * Activa el control de localizaciÃ³n de recursos por rectÃ¡ngulo
 					 */
 					msGisActiveSelectZone: function(){
 						if (this.isLogEnabled()) {
-							console.info("Ha entrado en el método msGisActiveSelectZone de SIGIntegrator");
+							console.info("Ha entrado en el mÃ©todo msGisActiveSelectZone de SIGIntegrator");
 						}
 						Sicecat.locate_box_control.activate();
 					},
 					/**
 					 * Method: msGisDeactiveSelectZone
 					 * 
-					 * Desactiva el control de localización de recursos por rectángulo
+					 * Desactiva el control de localizaciÃ³n de recursos por rectÃ¡ngulo
 					 */
 					msGisDeactiveSelectZone: function(){
 						if (this.isLogEnabled()) {
-							console.info("Ha entrado en el método msGisDeactiveSelectZone de SIGIntegrator");
+							console.info("Ha entrado en el mÃ©todo msGisDeactiveSelectZone de SIGIntegrator");
 						}
 						Sicecat.locate_box_control.deactivate();
 					},
@@ -1616,7 +1625,7 @@ SIGIntegrator = Ext
 					 * 		tipo - Tipo de usuario
 					 * 		idComarca - id de la comarca a la que pertenece
 					 * 		idMunicipio - id del municipio al que pertenece
-					 * 		idSession - id de la sesión del usuario.
+					 * 		idSession - id de la sesiÃ³n del usuario.
 					 * 
 					 * Returns:
 					 * 
@@ -1624,7 +1633,7 @@ SIGIntegrator = Ext
 					 */
 					checkSession: function(usuario, permisos, idioma, tipo,
 							idComarca, idMunicipio, idSession, urlSession){
-						// Petición al servicio rest de la parte alfanumérica
+						// PeticiÃ³n al servicio rest de la parte alfanumÃ©rica
 						Ext.Ajax.request({
 							url: urlSession + '/openSession',
 							method: 'POST',
@@ -1651,7 +1660,7 @@ SIGIntegrator = Ext
 					/**
 					 * Property: TIPO_SICECAT
 					 * 
-					 * Indica que la aplicación se ha abierto en modo 'SICECAT'
+					 * Indica que la aplicaciÃ³n se ha abierto en modo 'SICECAT'
 					 * 
 					 * See also: <SIGIntegrator.msGisLogin>
 					 */
@@ -1660,7 +1669,7 @@ SIGIntegrator = Ext
 					/**
 					 * Property: TIPO_GPCL
 					 * 
-					 * Indica que la aplicación se ha abierto en modo 'GPCL'
+					 * Indica que la aplicaciÃ³n se ha abierto en modo 'GPCL'
 					 * 
 					 * See also: <SIGIntegrator.msGisLogin>
 					 */
@@ -1672,10 +1681,10 @@ SIGIntegrator = Ext
 					ELEMENT_TYPE_COMARCA : "Comarca",
 					ELEMENT_TYPE_MUNICIPIO : "Municipi",
 					ELEMENT_TYPE_INCIDENTE : "INC",
-					ELEMENT_TYPE_OBSERVACION : "Observación",
+					ELEMENT_TYPE_OBSERVACION : "ObservaciÃ³n",
 					ELEMENT_TYPE_MEDIO : "Medio/Recurso",
 					ELEMENT_TYPE_SIRENA : "Sirena",
-					ELEMENT_TYPE_ESTACION : "Estación meteorológica",
+					ELEMENT_TYPE_ESTACION : "EstaciÃ³n meteorolÃ³gica",
 
 					/**
 					 * Properties: Projections

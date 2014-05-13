@@ -69,21 +69,14 @@ PersistenceGeo.loaders.WMSLoader
 			/* GetURLProxy */
 			if(security){
 				layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, layerData.server_resource);
-				params = {
-					layers: layers,
-	    			transparent: transparent,
-	    			user: Global_TMP.userWMSSecurity,
-	    			pass: Global_TMP.passWMSSecurity
-	    		};
 			}else{
 				layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, layerData.server_resource);
-				params = {
-						layers: layers,
-		    			transparent: transparent,
-		    			user: Global_TMP.userWMSSecurity,
-		    			pass: Global_TMP.passWMSSecurity
-		    		};
 			}
+			params = {
+				layers: layers,
+	    		transparent: transparent,
+	    		security: security
+	    	};
 			
 			var options = {
 				format: format,
