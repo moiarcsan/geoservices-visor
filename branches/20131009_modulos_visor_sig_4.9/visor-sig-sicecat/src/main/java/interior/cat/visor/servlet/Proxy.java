@@ -30,17 +30,18 @@ package interior.cat.visor.servlet;
 
 import interior.cat.visor.openls.utils.HTTPRequestPoster;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -52,7 +53,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
@@ -63,7 +66,9 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.util.ByteArrayBuffer;
+import org.richfaces.json.JSONException;
+import org.richfaces.json.JSONObject;
+
 
 /**
  * When working with Web Feature Service (WFS) Requests a proxy needs to be used
@@ -104,6 +109,8 @@ public class Proxy extends HttpServlet {
 	private String proxyPassword;
 	private boolean proxyOn = false; //Default proxy off
 	private String [] noProxied = null; //Default null
+	
+	protected static final String AUTH_URL = "/configureAuth.do";
 
 	/**
 	 * Indica si se debe autorizar cualquier URL o solo los de la lista
@@ -182,9 +189,18 @@ public class Proxy extends HttpServlet {
 	 *             if an error occurred
 	 */
 	@SuppressWarnings("unchecked")
-	public void process(HttpServletRequest request,
-			HttpServletResponse response, boolean post)
+	public void process(HttpServletRequest request, HttpServletResponse response, boolean post)
 			throws ServletException, IOException, FileNotFoundException {
+		String additionalRequest = request.getPathInfo();
+		if(additionalRequest != null && additionalRequest.equals(AUTH_URL)){
+			executeConfigureAuth(request, response, post);
+		}else{
+			executeRequest(request, response, post);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void executeRequest(HttpServletRequest request, HttpServletResponse response, boolean post) throws IOException{
 		OutputStream os = response.getOutputStream();
 		try {
 			// Replaces from authorizedUrls
@@ -201,9 +217,17 @@ public class Proxy extends HttpServlet {
 				String getUrl = buildURL(request, requestURL);
 
 				if (log.isTraceEnabled()) log.trace("Get = " + getUrl);
-
+				
 				GetMethod getMethod = new GetMethod(getUrl);
-
+				String security = request.getParameter("SECURITY");
+				if(Boolean.parseBoolean(security)){
+					String authorizationString = getBasicAuth(requestURL, request);
+			        if(authorizationString != null){
+			        	Header header = new Header("Authorization", authorizationString);
+				        getMethod.addRequestHeader(header);
+			        }
+				}
+				
 				int proxyResponseCode = client.executeMethod(getMethod);
 
 				if (log.isTraceEnabled()) log.trace("redirected get, code = " + proxyResponseCode);
@@ -271,6 +295,58 @@ public class Proxy extends HttpServlet {
 		} finally {
 			os.flush();
 			os.close();
+		}
+	}
+	
+	private String getBasicAuth(String requestURL, HttpServletRequest request) throws JSONException, MalformedURLException{
+		String user = null;
+    	String pass = null;
+    	String authorizationString = null;
+		HttpSession session = request.getSession();
+		JSONObject json = (JSONObject)session.getAttribute("wmssecurized");
+		Iterator it = json.keys();
+		while(it.hasNext()){
+			String url = (String)it.next();
+			URL json_url = new URL(url);
+        	URL request_url = new URL(requestURL);
+        	if(json_url.equals(request_url)){
+        		JSONObject obj = (JSONObject)json.get(url);
+        		user = (String)obj.get("user");
+        		pass = (String)obj.get("pass");
+        		authorizationString = "Basic " + Base64.encodeBase64String((user + ":" + pass).getBytes()).trim();
+        	}
+		}
+        return authorizationString;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void executeConfigureAuth(HttpServletRequest request, HttpServletResponse response, boolean post) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+		HttpSession session = request.getSession();
+        String json = "";
+        if(br != null){
+            json = br.readLine();
+        }
+        JSONObject jObj;
+		try {
+			jObj = new JSONObject(json);
+			saveInSession(jObj, session);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void saveInSession(JSONObject json, HttpSession session){
+		JSONObject obj = null;
+		Iterator it = json.keys();
+		while(it.hasNext()){
+			String key = (String)it.next();
+			try {
+				session.putValue(key, json.get(key));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
