@@ -70,7 +70,8 @@ SiceCAT = Ext
 					 */
 					typeCall: {
 						ALFANUMERICA: "alfanumerica",
-						CARTOGRAFIA: "cartografia"
+						CARTOGRAFIA: "cartografia",
+						SECURIZADA: "securizada"
 					},
 
 					/**
@@ -2022,6 +2023,8 @@ SiceCAT = Ext
 									index = url.indexOf("?");
 								}
 								url_req = OpenLayers.ProxyHost + url;
+							}else if(typeCall == "securizada"){
+								url_req = "proxy.do/" + url;
 							}else{
 								url_req = url;
 							}
@@ -2035,7 +2038,11 @@ SiceCAT = Ext
 							url_req = OpenLayers.ProxyHost + url;
 						}else{
 							// Caso particular para cuando no este definido el confType
-							url_req = OpenLayers.ProxyHost + url;
+							if(typeCall == "securizada"){
+								url_req = "proxy.do/" + url;
+							}else{
+								url_req = OpenLayers.ProxyHost + url;
+							}
 						}
 						return url_req;
 					},

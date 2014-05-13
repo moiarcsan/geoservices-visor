@@ -281,6 +281,17 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
                         	order: map.layers.length
                     };
                     
+                    if(this.sourceComboBox.selectedIndex 
+                    		&& this.sourceComboBox 
+                    		&& this.sourceComboBox.getStore()
+                    		&& this.sourceComboBox.getStore().getAt(this.sourceComboBox.selectedIndex)
+                    		&& this.sourceComboBox.getStore().getAt(this.sourceComboBox.selectedIndex).data
+                    		&& this.sourceComboBox.getStore().getAt(this.sourceComboBox.selectedIndex).data.store
+                    		&& this.sourceComboBox.getStore().getAt(this.sourceComboBox.selectedIndex).data.store.baseParams
+                    		&& this.sourceComboBox.getStore().getAt(this.sourceComboBox.selectedIndex).data.store.baseParams.SECURITY){
+                    	properties.security = true;
+                    }
+                    
                     var url = layer.url;
                     
                     if(url.indexOf(OpenLayers.ProxyHost) > -1){
