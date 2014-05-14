@@ -150,14 +150,19 @@ SiceCAT.Control.GetFeatureInfo = OpenLayers
 						var layers_request = [];
 						var result = [];
 						var exc_layers = [];
+						var urlSigescat = null;
+						var indexUrl = Sicecat.defaultWMSServer.indexOf("?");
+						if(indexUrl != -1){
+							urlSigescat = Sicecat.defaultWMSServer.replace("?", "");
+						}else{
+							urlSigescat = Sicecat.defaultWMSServer;
+						}
 						Ext.each(map.layers, function(layer, index) {
 							if (layer.visibility) {
 								var type = null;
-								if (layer instanceof OpenLayers.Layer.WMS
-										&& !(layer instanceof SiceCAT.Layer.WMS_SIGESCAT)){
+								if (layer instanceof OpenLayers.Layer.WMS && !(layer instanceof SiceCAT.Layer.WMS_SIGESCAT)){
 									type = "WMS";
-								}else if (layer instanceof OpenLayers.Layer.Vector
-														&& !!layer.protocol){
+								}else if (layer instanceof OpenLayers.Layer.Vector && !!layer.protocol){
 									type = "WFS";
 								}
 								if (type != null && layer.name.indexOf("OpenLayers") < 0 && !layers_map[layer.name]){
@@ -168,7 +173,17 @@ SiceCAT.Control.GetFeatureInfo = OpenLayers
 									}else{
 										layers_availables.push([layer.name, type, layer ]);
 										if(layer.params != null && layer.params.LAYERS != null){
-											layers_request.push(layer.params.LAYERS);
+											var layer_name = layer.params.LAYERS;
+											var layer_url = layer.url;
+											var security = false;
+											if(layer.params.SECURITY){
+												security = true;
+											}
+											layers_request.push({
+												layer: layer_name,
+												url: layer_url,
+												security: security
+											});
 											result.push({layer: layer.params.LAYERS, res: null, loaded: false});
 										}
 										
@@ -177,13 +192,7 @@ SiceCAT.Control.GetFeatureInfo = OpenLayers
 								}
 							}
 						});
-						var urlSigescat = null;
-						var indexUrl = Sicecat.defaultWMSServer.indexOf("?");
-						if(indexUrl != -1){
-							urlSigescat = Sicecat.defaultWMSServer.replace("?", "");
-						}else{
-							urlSigescat = Sicecat.defaultWMSServer;
-						}
+						
 						
 						var waitMsg = new Ext.LoadMask(Ext.getBody(), {
 							msg : "Loading ..."
@@ -196,26 +205,27 @@ SiceCAT.Control.GetFeatureInfo = OpenLayers
 						if(layers_request.length == 0){
 							waitMsg.hide();
 						}
-						Ext.each(layers_request, function(layer, index) {
+						Ext.each(layers_request, function(layer_obj, index) {
 							(function(){
 								waitMsg.hide();
 							}).defer(30000);
 								Ext.Ajax.request({
-								    url: Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, urlSigescat),
+								    url: Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, layer_obj.url),
 								    method: 'GET',
 								    params: {
 								    	SERVICE: 'WMS',
 								    	VERSION: '1.1.1',
 								    	REQUEST: 'GetFeatureInfo',
-								        LAYERS: layer,
-								        QUERY_LAYERS: layer,
+								        LAYERS: layer_obj.layer,
+								        QUERY_LAYERS: layer_obj.layer,
 								        INFO_FORMAT: 'application/vnd.ogc.gml',
 								        BBOX: map.getExtent(),
 								        X: posX,
 								        Y: posY,
 								        HEIGHT: map.size.h,
 								        WIDTH: map.size.w,
-								        SRS: map.getProjection()
+								        SRS: map.getProjection(),
+								        SECURITY: layer_obj.security
 								    },
 								    success: function(response, options){
 								        var text = response.responseText;
@@ -277,71 +287,6 @@ SiceCAT.Control.GetFeatureInfo = OpenLayers
 								});
 							
 						});
-						
-						/* En bloque */
-						/*Ext.Ajax.request({
-						    url: OpenLayers.ProxyHost + urlSigescat,
-						    method: 'GET',
-						    params: {
-						    	SERVICE: 'WMS',
-						    	VERSION: '1.1.1',
-						    	REQUEST: 'GetFeatureInfo',
-						        LAYERS: layers_request.toString(),
-						        QUERY_LAYERS: layers_request.toString(),
-						        INFO_FORMAT: 'application/vnd.ogc.gml',
-						        BBOX: map.getExtent(),
-						        X: posX,
-						        Y: posY,
-						        HEIGHT: map.size.h,
-						        WIDTH: map.size.w,
-						        SRS: map.getProjection()
-						    },
-						    success: function(response){
-						        var text = response.responseText;
-						        var theParser = new OpenLayers.Format.GML();
-						        var features = theParser.read(text);
-						        var layers_names = [];
-						        var features_names = [];
-						        var layers_in_grid = [];
-						        // Nos quedamos con los nombres de las capas activas
-						        for(var i=0; i<layers_availables.length; i++){
-						        	if(layers_availables[i] != null 
-						        			&& layers_availables[i][2] != null
-						        			&& layers_availables[i][2].params != null
-						        			&& layers_availables[i][2].params.LAYERS != null){
-						        		layers_names.push({
-						        			name: layers_availables[i][2].params.LAYERS,
-						        			layer: layers_availables[i]
-						        		});
-						        	}
-						        }
-						        // A partir de las features fabricamos un array con sus nombres
-						        for(var i=0; i<features.length; i++){
-						        	var name_feature = "";
-						        	if(features[i] != null && features[i].gml != null){
-						        		if(features[i].gml.featureNSPrefix != null){
-						        			name_feature += features[i].gml.featureNSPrefix + ":";
-						        		}
-						        		if(features[i].gml.featureType != null){
-						        			name_feature += features[i].gml.featureType;
-						        		}else if(name_feature.indexOf(":") != -1){
-						        			name_feature = name_feature.replace(":", "");
-						        		}
-						        		features_names.push(name_feature);
-						        	}
-						        }
-						        // Comparamos ambos arrays para saber que mostrar en el grid
-						        for(var i=0; i<layers_names.length; i++){
-						        	for(var j=0; j<features_names.length; j++){
-						        		if(isNaN(parseFloat(layers_names[i].name)) && layers_names[i].name == features_names[j]){
-						        			layers_in_grid.push(layers_names[i].layer);
-						        		}
-						        	}
-						        }
-						        layer_store.loadData(layers_in_grid, false);
-						        waitMsg.hide();
-						    }
-						});*/
 						
 						var layer_store = new Ext.data.Store(
 								{
@@ -411,17 +356,17 @@ SiceCAT.Control.GetFeatureInfo = OpenLayers
 										'rowclick' : function(grid, rowIndex, e) {
 											myMask.enable(true);
 											myMask.show();
-											var rec = grid.store
-													.getAt(rowIndex);
+											var rec = grid.store.getAt(rowIndex);
 											var layer = rec.get('layer');
-											var pixel = new OpenLayers.Pixel(
-													posX, posY);
-
+											var pixel = new OpenLayers.Pixel(posX, posY);
 											if (layer instanceof OpenLayers.Layer.WMS) {
 												control = new OpenLayers.Control.WMSGetFeatureInfo(
 														{
 															layers : [ layer ],
 															title : layer.name,
+															vendorParams: {
+																SECURITY: layer.params.SECURITY
+															},
 															handleResponse : function(
 																	xy,
 																	request,
