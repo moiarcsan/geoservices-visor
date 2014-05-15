@@ -69,6 +69,16 @@ PersistenceGeo.loaders.WMSLoader
 			/* GetURLProxy */
 			if(security){
 				layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, layerData.server_resource);
+				var wmssecurized = Global_TMP.WMSSecured.wmssecurized;
+				var user = null;
+				var pass = null;
+				for(server in wmssecurized){
+					if(this.urlCompare(layer_url, server)){
+						user = Global_TMP.WMSSecured.wmssecurized[server]["user"];
+						pass = Global_TMP.WMSSecured.wmssecurized[server]["pass"];
+						layer_url += "user=" + user + "&pass=" + pass;
+					}
+				}
 			}else{
 				layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, layerData.server_resource);
 			}
@@ -88,9 +98,56 @@ PersistenceGeo.loaders.WMSLoader
 			
 			var layer = new OpenLayers.Layer.WMS(layerData.name, layer_url, params, options);
 			
-			//TODO: Wrap 
 			this.postFunctionsWrapper(layerData, layer, layerTree);
 			
 			return layer;
+		},
+		
+		/**
+		 * Method: urlCompare
+		 * 
+		 * Devuelve true si las dos url son iguales
+		 * 
+		 * @param urlCompare
+		 * @param target_url
+		 * 
+		 * @returns {Boolean}
+		 */
+		urlCompare: function (source_url, target_url){
+			var url_array = this.urlSplit(target_url);
+			var ret = true;
+			for(var i=0; i<url_array.length; i++){
+				if(source_url.indexOf(url_array[i]) != -1){
+					ret = ret && true;
+				}else{
+					ret = ret && false;
+				}
+			}
+			return ret;
+		},
+		
+		/**
+		 * Method: urlSplit
+		 * 
+		 * Devuelve un array con las partes que conforman una url
+		 * Formato: http://host:port/additionalpath
+		 * 
+		 * @param url
+		 * 
+		 * @returns {Array}
+		 */
+		urlSplit: function(url){
+			var urlsplit, urlhttp, urladd, urlsplit2 = null;
+			if(url!=null){
+				urlsplit = server.split("//");
+				if(urlsplit.length > 0){
+					urlhttp = urlsplit[0];
+					urladd = urlsplit[1];
+				}
+				urlsplit2 = urladd.split("/");
+				if(urlsplit2.length > 0){
+					return urlsplit2;
+				}
+			}
 		}
 });

@@ -81,13 +81,13 @@ OpenLayers.Control.LayerInformation = OpenLayers
 					prefixLayerText : "Prefix",
 					descriptionLayerText : "Description",
 					previewLayerText : "Preview of '{0}' layer",
-					capabilitiesTitleText : "Informaci贸n sobre capa WMS '{0}'",
-					capabilitiesTitleTextLayerSelected : "Informaci贸n sobre la capa seleccionada",
-					capabilitiesListLayer : "Informaci贸n sobre el resto de capas cargadas",
-					capabilitiesListProperties: "Informaci贸n sobre los atributos de la capa",
+					capabilitiesTitleText : "Informaci髇 sobre capa WMS '{0}'",
+					capabilitiesTitleTextLayerSelected : "Informaci髇 sobre la capa seleccionada",
+					capabilitiesListLayer : "Informaci髇 sobre el resto de capas cargadas",
+					capabilitiesListProperties: "Informaci髇 sobre los atributos de la capa",
 					type: "Tipo",
 					alertMessageTitle: "Advertencia",
-					alertMessageContent: "No se ha podido cargar la informaci贸n de la capa",
+					alertMessageContent: "No se ha podido cargar la informaci髇 de la capa",
 
 					/** i18n */
 					nameHeaderField : "Property",
@@ -150,7 +150,11 @@ OpenLayers.Control.LayerInformation = OpenLayers
 							if(urlSinProxy.indexOf("?")!=-1){
 								ret = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, urlSinProxy.replace("?", "&"));
 							}else{
-								ret = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, urlSinProxy + "&");
+								if(urlSinProxy.charAt(urlSinProxy.length-1) != "&"){
+									ret = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, urlSinProxy + "&");
+								}else{
+									ret = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, urlSinProxy);
+								}
 							}
 						}
 						return ret;
@@ -461,6 +465,13 @@ OpenLayers.Control.LayerInformation = OpenLayers
 					mapPreview : function(grid, index) {
 						var record = grid.getStore().getAt(index);
 						var layer = record.getLayer().clone();
+						
+						var wmssecurized = Global_TMP.WMSSecured.wmssecurized;
+						for(server in wmssecurized){
+							if(Sicecat.urlCompare(layer.url, server)){
+								layer.url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, layer.url);
+							}
+						}
 
 						var win = new Ext.Window({
 							title : String.format(this.previewLayerText, record
