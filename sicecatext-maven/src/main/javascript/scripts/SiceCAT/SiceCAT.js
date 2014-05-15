@@ -2046,6 +2046,54 @@ SiceCAT = Ext
 						}
 						return url_req;
 					},
+					
+					/**
+					 * Method: urlCompare
+					 * 
+					 * Devuelve true si las dos url son iguales
+					 * 
+					 * @param urlCompare
+					 * @param target_url
+					 * 
+					 * @returns {Boolean}
+					 */
+					urlCompare: function (source_url, target_url){
+						var url_array = this.urlSplit(target_url);
+						var ret = true;
+						for(var i=0; i<url_array.length; i++){
+							if(source_url.indexOf(url_array[i]) != -1){
+								ret = ret && true;
+							}else{
+								ret = ret && false;
+							}
+						}
+						return ret;
+					},
+					
+					/**
+					 * Method: urlSplit
+					 * 
+					 * Devuelve un array con las partes que conforman una url
+					 * Formato: http://host:port/additionalpath
+					 * 
+					 * @param url
+					 * 
+					 * @returns {Array}
+					 */
+					urlSplit: function(url){
+						var urlsplit, urlhttp, urladd, urlsplit2 = null;
+						if(url!=null){
+							urlsplit = server.split("//");
+							if(urlsplit.length > 0){
+								urlhttp = urlsplit[0];
+								urladd = urlsplit[1];
+							}
+							urlsplit2 = urladd.split("/");
+							if(urlsplit2.length > 0){
+								return urlsplit2;
+							}
+						}
+					},
 
 					CLASS_NAME : "SiceCAT"
 				});

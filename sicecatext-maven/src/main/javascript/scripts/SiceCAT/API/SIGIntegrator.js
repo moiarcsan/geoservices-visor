@@ -743,7 +743,10 @@ SIGIntegrator = Ext
 								var url_proxy = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.SECURIZADA, "configureAuth.do");
 								Ext.Ajax.request({
 									url: url_proxy,
-									jsonData: infoExtra.WMSSecured
+									jsonData: infoExtra.WMSSecured,
+									success: function(response){
+										Global_TMP.WMSSecured = infoExtra.WMSSecured;
+									}
 								});
 							}
 							Ext.Ajax.request({

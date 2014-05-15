@@ -175,14 +175,9 @@ SiceCAT.Control.GetFeatureInfo = OpenLayers
 										if(layer.params != null && layer.params.LAYERS != null){
 											var layer_name = layer.params.LAYERS;
 											var layer_url = layer.url;
-											var security = false;
-											if(layer.params.SECURITY){
-												security = true;
-											}
 											layers_request.push({
 												layer: layer_name,
-												url: layer_url,
-												security: security
+												url: layer_url
 											});
 											result.push({layer: layer.params.LAYERS, res: null, loaded: false});
 										}
@@ -224,8 +219,7 @@ SiceCAT.Control.GetFeatureInfo = OpenLayers
 								        Y: posY,
 								        HEIGHT: map.size.h,
 								        WIDTH: map.size.w,
-								        SRS: map.getProjection(),
-								        SECURITY: layer_obj.security
+								        SRS: map.getProjection()
 								    },
 								    success: function(response, options){
 								        var text = response.responseText;
@@ -364,9 +358,6 @@ SiceCAT.Control.GetFeatureInfo = OpenLayers
 														{
 															layers : [ layer ],
 															title : layer.name,
-															vendorParams: {
-																SECURITY: layer.params.SECURITY
-															},
 															handleResponse : function(
 																	xy,
 																	request,
