@@ -110,6 +110,12 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
          */
         if (layer instanceof OpenLayers.Layer.WMS) {
         	var url_layer = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, layer.url);
+        	var wmssecurized = Global_TMP.WMSSecured.wmssecurized;
+            for (server in wmssecurized) {
+                if (Sicecat.urlCompare(layer.url, server)) {
+                	url_layer = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, layer.url);
+                }
+            }
             layer = new OpenLayers.Layer.WMS(
                 layer.name, url_layer,
                 {layers: layer.params["LAYERS"]},

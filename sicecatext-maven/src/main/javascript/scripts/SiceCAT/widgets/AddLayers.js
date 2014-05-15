@@ -321,8 +321,6 @@ SiceCAT.widgets.AddLayers = Ext.extend(Ext.Panel, {
             metaStore: sources
         });
 
-        //capGridPanel.on("rowdblclick", capGridPanel.addLayers, capGridPanel);
-
         var items = {
             xtype: "container",
             region: "center",
