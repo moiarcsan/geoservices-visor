@@ -164,14 +164,12 @@ public class Proxy extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		process(req, resp, true);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		process(request, response);
 	}
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException, FileNotFoundException {
-		process(request, response, false);
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, ServletException, IOException {
+		process(request, response);
 	}
 
 	/**
@@ -189,25 +187,30 @@ public class Proxy extends HttpServlet {
 	 *             if an error occurred
 	 */
 	@SuppressWarnings("unchecked")
-	public void process(HttpServletRequest request, HttpServletResponse response, boolean post)
+	public void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, FileNotFoundException {
 		String additionalRequest = request.getPathInfo();
 		if(additionalRequest != null && additionalRequest.equals(AUTH_URL)){
-			executeConfigureAuth(request, response, post);
+			executeConfigureAuth(request);
 		}else{
-			executeRequest(request, response, post);
+			executeRequest(request, response);
 		}
 	}
 	
+	private String getURLRequest(HttpServletRequest request){
+		String urlParameter = request.getParameter("url");
+		if (request.getParameter("url2") != null) {
+			urlParameter = request.getParameter("url2");
+		}
+		return urlParameter;
+	}
+	
 	@SuppressWarnings("unchecked")
-	private void executeRequest(HttpServletRequest request, HttpServletResponse response, boolean post) throws IOException{
+	private void executeRequest(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		OutputStream os = response.getOutputStream();
 		try {
 			// Replaces from authorizedUrls
-			String urlParameter = request.getParameter("url");
-			if (request.getParameter("url2") != null) {
-				urlParameter = request.getParameter("url2");
-			}
+			String urlParameter = getURLRequest(request);
 			String requestURL = manageUrl(urlParameter, request, response);
 
 			// Execute Openlayers proxy
@@ -215,17 +218,25 @@ public class Proxy extends HttpServlet {
 
 			if (request.getMethod().toLowerCase().equals("get")) {
 				String getUrl = buildURL(request, requestURL);
-
 				if (log.isTraceEnabled()) log.trace("Get = " + getUrl);
-				
 				GetMethod getMethod = new GetMethod(getUrl);
-				String security = request.getParameter("SECURITY");
-				if(Boolean.parseBoolean(security)){
+				// Add authorization header if request url is in session
+				if(isUrlInSession(requestURL, request)){
 					String authorizationString = getBasicAuth(requestURL, request);
 			        if(authorizationString != null){
 			        	Header header = new Header("Authorization", authorizationString);
 				        getMethod.addRequestHeader(header);
 			        }
+				}else{
+					String user = request.getParameter("user");
+					String pass = request.getParameter("pass");
+					if(user != null && pass != null){
+						String authorizationString = "Basic " + Base64.encodeBase64String((user + ":" + pass).getBytes()).trim();
+						if(authorizationString != null){
+				        	Header header = new Header("Authorization", authorizationString);
+					        getMethod.addRequestHeader(header);
+				        }
+					}
 				}
 				
 				int proxyResponseCode = client.executeMethod(getMethod);
@@ -239,42 +250,27 @@ public class Proxy extends HttpServlet {
 				}
 
 				// Send the content to the client
-				InputStream inputStreamProxyResponse = getMethod
-						.getResponseBodyAsStream();
+				InputStream inputStreamProxyResponse = getMethod.getResponseBodyAsStream();
 
                 IOUtils.copy(inputStreamProxyResponse, os);
 
 			} else if (request.getMethod().toLowerCase().equals("post")) {
-
-				String endPoint = urlParameter;
-
-				if (request.getParameter("url2") != null) {
-					endPoint = request.getParameter("url2") + "?url="
-							+ request.getParameter("url");
-				}
-
+				String endPoint = getURLRequest(request);
 				try {
 					//Solo si es necesario en post
 					if(this.proxyOn && !isSkipped(requestURL)){
-						HTTPRequestPoster.postData(
-                                request, new URL(endPoint),os, 
-                                proxyUrl, proxyPort, proxyUser, proxyPassword);
+						HTTPRequestPoster.postData(request, new URL(endPoint), os, proxyUrl, proxyPort, proxyUser, proxyPassword);
 					}else{
-						HTTPRequestPoster.postData(
-                                request, new URL(endPoint),os);
+						HTTPRequestPoster.postData(request, new URL(endPoint), os);
 					}
 				} catch (MalformedURLException e) {
 					log.error(e);
-					response.sendError(HttpServletResponse.SC_FORBIDDEN,
-							"Proxy only to local requests.");
-					throw new Exception("Trying to proxy from "
-							+ request.getRemoteHost());
+					response.sendError(HttpServletResponse.SC_FORBIDDEN, "Proxy only to local requests.");
+					throw new Exception("Trying to proxy from " + request.getRemoteHost());
 				} catch (Exception e) {
 					log.error(e);
-					if(e.getMessage() != null 
-							&& e.getMessage().indexOf("CODE: ") > 0){
-						response.sendError(Integer.decode(e.getMessage().split("CODE: ")[1]),
-								e.getMessage());
+					if(e.getMessage() != null && e.getMessage().indexOf("CODE: ") > 0){
+						response.sendError(Integer.decode(e.getMessage().split("CODE: ")[1]), e.getMessage());
 					}
 				}
 				response.setContentType("text/xml");
@@ -296,6 +292,22 @@ public class Proxy extends HttpServlet {
 			os.flush();
 			os.close();
 		}
+	}
+	
+	private Boolean isUrlInSession(String url, HttpServletRequest request) throws MalformedURLException{
+		Boolean ret = false;
+		HttpSession session = request.getSession();
+		JSONObject json = (JSONObject)session.getAttribute("wmssecurized");
+		if(json != null){
+			Iterator it = json.keys();
+			while(it.hasNext()){
+				String wms_url = (String)it.next();
+				URL json_url = new URL(wms_url);
+	        	URL request_url = new URL(url);
+	        	ret = json_url.equals(request_url);
+			}
+		}
+		return ret;
 	}
 	
 	private String getBasicAuth(String requestURL, HttpServletRequest request) throws JSONException, MalformedURLException{
@@ -320,7 +332,7 @@ public class Proxy extends HttpServlet {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void executeConfigureAuth(HttpServletRequest request, HttpServletResponse response, boolean post) throws IOException{
+	private void executeConfigureAuth(HttpServletRequest request) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
 		HttpSession session = request.getSession();
         String json = "";
@@ -332,7 +344,6 @@ public class Proxy extends HttpServlet {
 			jObj = new JSONObject(json);
 			saveInSession(jObj, session);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
