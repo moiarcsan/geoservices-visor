@@ -737,18 +737,19 @@ SIGIntegrator = Ext
 									}
 								}
 							};
+							Global_TMP.WMSSecured = infoExtra.WMSSecured;
 							// Credenciales de wms securizado
-							if(infoExtra != null && infoExtra.WMSSecured != null){
-								// Lanzamos la peticion de securizacion
-								var url_proxy = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.SECURIZADA, "configureAuth.do");
-								Ext.Ajax.request({
-									url: url_proxy,
-									jsonData: infoExtra.WMSSecured,
-									success: function(response){
-										Global_TMP.WMSSecured = infoExtra.WMSSecured;
-									}
-								});
-							}
+//							if(infoExtra != null && infoExtra.WMSSecured != null){
+//								// Lanzamos la peticion de securizacion
+//								var url_proxy = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.SECURIZADA, "configureAuth.do");
+//								Ext.Ajax.request({
+//									url: url_proxy,
+//									jsonData: infoExtra.WMSSecured,
+//									success: function(response){
+//										Global_TMP.WMSSecured = infoExtra.WMSSecured;
+//									}
+//								});
+//							}
 							Ext.Ajax.request({
 								url: 'rest/persistenceGeo/getUserInfoById/' + usuario,
 								success: function(response){
