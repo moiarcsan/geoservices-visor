@@ -69,16 +69,7 @@ PersistenceGeo.loaders.WMSLoader
 			/* GetURLProxy */
 			if(security){
 				layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, layerData.server_resource);
-				var wmssecurized = Global_TMP.WMSSecured.wmssecurized;
-				var user = null;
-				var pass = null;
-				for(server in wmssecurized){
-					if(this.urlCompare(layer_url, server)){
-						user = Global_TMP.WMSSecured.wmssecurized[server]["user"];
-						pass = Global_TMP.WMSSecured.wmssecurized[server]["pass"];
-						layer_url += "user=" + user + "&pass=" + pass;
-					}
-				}
+				layer_url = Sicecat.getUrlSecurized(layer_url);
 			}else{
 				layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, layerData.server_resource);
 			}

@@ -24,7 +24,7 @@
  * This exception does not however invalidate any other reasons why the
  * executable file might be covered by the GNU General Public License.
  * 
- * Authors:: Alejandro DÃ­az Torres (mailto:adiaz@emergya.com)
+ * Authors:: Alejandro Díaz Torres (mailto:adiaz@emergya.com)
  * 
  */
 
@@ -111,10 +111,16 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
         if (layer instanceof OpenLayers.Layer.WMS) {
         	var url_layer = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.CARTOGRAFIA, layer.url);
         	var wmssecurized = Global_TMP.WMSSecured.wmssecurized;
+        	var securized = false;
             for (server in wmssecurized) {
                 if (Sicecat.urlCompare(layer.url, server)) {
                 	url_layer = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, layer.url);
+                	securized = true;
+                	break;
                 }
+            }
+            if(securized){
+            	url_layer = Sicecat.getUrlSecurized(url_layer);
             }
             layer = new OpenLayers.Layer.WMS(
                 layer.name, url_layer,
