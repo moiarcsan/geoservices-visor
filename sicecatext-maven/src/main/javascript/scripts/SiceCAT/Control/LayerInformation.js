@@ -81,13 +81,13 @@ OpenLayers.Control.LayerInformation = OpenLayers
 					prefixLayerText : "Prefix",
 					descriptionLayerText : "Description",
 					previewLayerText : "Preview of '{0}' layer",
-					capabilitiesTitleText : "Información sobre capa WMS '{0}'",
-					capabilitiesTitleTextLayerSelected : "Información sobre la capa seleccionada",
-					capabilitiesListLayer : "Información sobre el resto de capas cargadas",
-					capabilitiesListProperties: "Información sobre los atributos de la capa",
+					capabilitiesTitleText : "Informaciï¿½n sobre capa WMS '{0}'",
+					capabilitiesTitleTextLayerSelected : "Informaciï¿½n sobre la capa seleccionada",
+					capabilitiesListLayer : "Informaciï¿½n sobre el resto de capas cargadas",
+					capabilitiesListProperties: "Informaciï¿½n sobre los atributos de la capa",
 					type: "Tipo",
 					alertMessageTitle: "Advertencia",
-					alertMessageContent: "No se ha podido cargar la información de la capa",
+					alertMessageContent: "No se ha podido cargar la informaciï¿½n de la capa",
 
 					/** i18n */
 					nameHeaderField : "Property",
@@ -465,13 +465,8 @@ OpenLayers.Control.LayerInformation = OpenLayers
 					mapPreview : function(grid, index) {
 						var record = grid.getStore().getAt(index);
 						var layer = record.getLayer().clone();
-						
-						var wmssecurized = Global_TMP.WMSSecured.wmssecurized;
-						for(server in wmssecurized){
-							if(Sicecat.urlCompare(layer.url, server)){
-								layer.url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, layer.url);
-							}
-						}
+						layer.url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, layer.url);
+						layer.url = Sicecat.getUrlSecurized(layer.url);
 
 						var win = new Ext.Window({
 							title : String.format(this.previewLayerText, record

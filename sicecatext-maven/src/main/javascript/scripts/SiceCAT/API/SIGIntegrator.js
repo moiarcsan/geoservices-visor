@@ -730,10 +730,6 @@ SIGIntegrator = Ext
 									"http://sigescat.pise.interior.intranet/ows2/wms": {
 										user: "usrpcivil1",
 										pass: "t9OqR7gK"
-									},
-									"http://sigescat.pise.interior.intranet/ows3/wms": {
-										user: "user2",
-										pass: "pass2"
 									}
 								}
 							};

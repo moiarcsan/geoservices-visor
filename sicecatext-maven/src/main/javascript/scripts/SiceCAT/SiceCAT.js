@@ -2094,6 +2094,32 @@ SiceCAT = Ext
 							}
 						}
 					},
+					
+					/**
+					 * Method: getUrlSecurized
+					 * 
+					 * Devuelve un string que representa la url con las credenciales
+					 * 
+					 * @param url
+					 * 
+					 * @returns {String}
+					 */
+					getUrlSecurized: function(url){
+						var wmssecurized = Global_TMP.WMSSecured.wmssecurized;
+						var user, pass = null;
+						for(server in wmssecurized){
+							if(this.urlCompare(url, server)){
+								user = Global_TMP.WMSSecured.wmssecurized[server]["user"];
+								pass = Global_TMP.WMSSecured.wmssecurized[server]["pass"];
+								if(url.charAt(url.length-1) == "&"){
+									url += "user=" + user + "&pass=" + pass;
+								}else{
+									url += "&user=" + user + "&pass=" + pass;
+								}
+							}
+						}
+						return url;
+					},
 
 					CLASS_NAME : "SiceCAT"
 				});
