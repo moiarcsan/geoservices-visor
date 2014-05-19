@@ -81,13 +81,13 @@ OpenLayers.Control.LayerInformation = OpenLayers
 					prefixLayerText : "Prefix",
 					descriptionLayerText : "Description",
 					previewLayerText : "Preview of '{0}' layer",
-					capabilitiesTitleText : "Informaci�n sobre capa WMS '{0}'",
-					capabilitiesTitleTextLayerSelected : "Informaci�n sobre la capa seleccionada",
-					capabilitiesListLayer : "Informaci�n sobre el resto de capas cargadas",
-					capabilitiesListProperties: "Informaci�n sobre los atributos de la capa",
+					capabilitiesTitleText : "Información sobre capa WMS '{0}'",
+					capabilitiesTitleTextLayerSelected : "Información sobre la capa seleccionada",
+					capabilitiesListLayer : "Información sobre el resto de capas cargadas",
+					capabilitiesListProperties: "Información sobre los atributos de la capa",
 					type: "Tipo",
 					alertMessageTitle: "Advertencia",
-					alertMessageContent: "No se ha podido cargar la informaci�n de la capa",
+					alertMessageContent: "No se ha podido cargar la información de la capa",
 
 					/** i18n */
 					nameHeaderField : "Property",

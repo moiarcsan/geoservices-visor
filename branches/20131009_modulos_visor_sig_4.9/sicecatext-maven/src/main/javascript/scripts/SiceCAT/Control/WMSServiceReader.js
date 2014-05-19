@@ -91,10 +91,17 @@ Ext.extend(SiceCAT.Control.WMSServiceReader, GeoExt.data.WMSCapabilitiesReader,
 				for ( var i = 2; i < paramURL.length; i++) {
 					nameParam[i] = unescape(paramURL[i].split("=")[1]);
 				}
-				// Activated layer information
-				v[0] = nameParam[2];
-				v[1] = nameParam[3];
-				v[2] = nameParam[4];
+				if(url.indexOf("user") != -1){
+					// Activated layer information
+					v[0] = nameParam[5];
+					v[1] = nameParam[6];
+					v[2] = nameParam[7];
+				}else{
+					// Activated layer information
+					v[0] = nameParam[2];
+					v[1] = nameParam[3];
+					v[2] = nameParam[4];
+				}
 
 				return this.readRecords(data, v);
 			},
