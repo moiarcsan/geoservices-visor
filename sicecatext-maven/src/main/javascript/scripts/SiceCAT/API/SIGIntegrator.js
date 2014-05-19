@@ -721,7 +721,7 @@ SIGIntegrator = Ext
 								}
 							}
 							var self = this;
-							// Mientras nos pasan los par�metros
+							// Mientras nos pasan los parametros
 							if(infoExtra == null){
 								infoExtra = {};
 							}
