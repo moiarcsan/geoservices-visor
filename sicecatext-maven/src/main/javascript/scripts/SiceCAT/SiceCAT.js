@@ -118,6 +118,18 @@ SiceCAT = Ext
 					errorLayerInfoTitle: "Error",
 					errorLayerInfo: "Error to get the layer information",
 					userLayersText: "User's layers",
+					status_text: "Warning",
+					warning_text: "Algo en SIGESCAT va mal, la funcionalidad que se verá afectada será: <br/>",
+					search_wfs: "<ul><li>Buscador WFS</li>",
+					export_pdf: "<li>Exportar PDF/PNG</li>",
+					layer_information: "<li>Ver información de capa</li>",
+					zoom: "<li>Zoom a la capa</li>",
+					edit_style: "<li>Editar estilo de la capa</li>",
+					export_csv: "<li>Exportar a CSV/GML/KML</li>",
+					available: "<li>Marcar como disponible/ocupada</li>",
+					add_wfs_layer: "<li>Añadir capa WFS</li>",
+					edit: "<li>Edición</li>",
+					admin_edit_layer: "<li>Administración de capas editables</li></ul>",
 
 					// overrided by localized this.userLayersText
 					DEFAULT_USER_LAYERS_FOLDER: "User's layers",
@@ -2119,6 +2131,67 @@ SiceCAT = Ext
 							}
 						}
 						return url;
+					},
+					
+					/**
+					 * Method: showWarningSigescat
+					 * 
+					 * Muestra un mensaje de aviso por problemas con SIGESCAT
+					 * 
+					 */
+					showWarningSigescat: function(){
+						var msg_text = this.warning_text + this.search_wfs + this.export_pdf + this.layer_information +
+						this.zoom + this.edit_style + this.export_csv + this.available + this.add_wfs_layer + this.edit + this.admin_edit_layer;
+						Ext.MessageBox.alert(this.status_text, msg_text, Ext.Msg.OK);
+					},
+					
+					/**
+					 * Method: isSigescatOk
+					 * 
+					 * Comprueba si la conexión con SIGESCAT es fluida
+					 * 
+					 */
+					isSigescatOk: function(){
+						// Default params to send request
+						var request_getCapabilities = "GetCapabilities";
+						var request_getFeature = "GetFeature";
+						var service = "WFS";
+						var version = "1.1.0";
+						var maxFeatures = "200";
+						var name = "s:x";
+						var self = this;
+						if(Sicecat.defaultWMSServer != null && Sicecat.defaultWMSServer.indexOf("wms") != -1){
+							var wfs_url = Sicecat.defaultWMSServer.replace("wms", "wfs");
+							// Send GetCapabilities Request
+							Ext.Ajax.request({
+								url: Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, wfs_url) + "request=" + request_getCapabilities + "&service=" + service + "&version=" + version,
+								success: function(response){
+									// Send GetFeature from first entity
+									if(response.responseXML != null 
+											&& response.responseXML.getElementsByTagName("FeatureType") != null 
+											&& response.responseXML.getElementsByTagName("FeatureType")[1] != null){
+										var feature_type = response.responseXML.getElementsByTagName("FeatureType")[1];
+										name = feature_type.getElementsByTagName("Name")[0].textContent;
+									}
+									Ext.Ajax.request({
+										url: Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, wfs_url) + "request=" + request_getFeature + "&version=" + version + "&typeName=" + name + "&maxFeatures=" + maxFeatures,
+										method: 'GET',
+										timeout: 5000,
+										success: function(response){
+											// Get the feature less than 5 seconds --> ok
+										},
+										failure: function(response){
+											// Get the feature more than 5 seconds --> show warning
+											self.showWarningSigescat();
+										}
+									});
+								},
+								failure: function(response){
+									// GetCapabilities services haven't answered --> show warning
+									self.showWarningSigescat();
+								}
+							});
+						}
 					},
 
 					CLASS_NAME : "SiceCAT"
