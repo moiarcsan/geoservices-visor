@@ -24,9 +24,9 @@
  * This exception does not however invalidate any other reasons why the
  * executable file might be covered by the GNU General Public License.
  * 
- * Authors:: Alejandro D√≠az Torres (mailto:adiaz@emergya.com)
- * Author: Mar√≠a Arias de Reyna Dom√≠nguez (mailto:marias@emergya.com)
- * Author: Mois√©s Arcos Santiago (mailto:marcos@emergya.com)
+ * Authors:: Alejandro DÌaz Torres (mailto:adiaz@emergya.com)
+ * Author: MarÌa Arias de Reyna DomÌnguez (mailto:marias@emergya.com)
+ * Author: MoisÈs Arcos Santiago (mailto:marcos@emergya.com)
  * 
  */
 
@@ -254,13 +254,13 @@ SiceCAT.West = Ext
 								activeOnTop : false
 							},
 							items : [
-							// √Årbol de capas (Capas)
+							// ¡rbol de capas (Capas)
 							this.tree,
 							// Leyenda (Leyenda)
 							legend,
-							// Edici√≥n de capas (Edici√≥n)
+							// EdiciÛn de capas (EdiciÛn)
 							buttonsEdition,
-							// Creaci√≥n de rutas (Ruta)
+							// CreaciÛn de rutas (Ruta)
 							buttonsRouting]
 							// Buscador
 							//buttonsLocalizator]
@@ -337,7 +337,7 @@ SiceCAT.West = Ext
 												handler : function() {
 													// Comprobamos que los
 													// campos obligatorios no
-													// est√©n vac√≠os
+													// estÈn vacÌos
 													var srcValue = Ext.getCmp("fromRoute").getValue();
 													var targetValue = Ext.getCmp("toRoute").getValue();
 													var shortestValue = Ext.getCmp("shortestType").getValue();
@@ -352,8 +352,8 @@ SiceCAT.West = Ext
 															type = "TIME";
 														}
 														var formatSoap = new OpenLayers.Format.XMLSOAP();
-														// Par√°metros que se
-														// envian en la petici√≥n
+														// Par·metros que se
+														// envian en la peticiÛn
 														var paramInput = {
 															srsName : map.projection,
 															startPoint : srcValue,
@@ -363,17 +363,17 @@ SiceCAT.West = Ext
 														};
 														var inputData = formatSoap.write(paramInput);
 														var url = Sicecat.defaultWMSServer.replace("ows/wms?", "mrk");
-														// M√©todo que se lanza
+														// MÈtodo que se lanza
 														// cuando la consulta al
 														// servicio no tiene
-														// √©xito
+														// Èxito
 														var requestFailure = function(response) {
 															Ext.Msg.alert(control.titleError, control.msgError);
 														};
 
-														// M√©todo que se lanza
-														// cuando la petici√≥n al
-														// servicio tiene √©xito
+														// MÈtodo que se lanza
+														// cuando la peticiÛn al
+														// servicio tiene Èxito
 														var requestSuccess = function(response) {
 															var format = new OpenLayers.Format.XMLSOAP();
 															var output = format.read(response.responseText);
@@ -391,7 +391,7 @@ SiceCAT.West = Ext
 															var edge = [];
 															var routingGeom = [];
 															if (output.path) {
-																// A√±adir la
+																// AÒadir la
 																// lista de
 																// pasos al grid
 																grid = Ext.getCmp("routingGrid");
@@ -435,7 +435,7 @@ SiceCAT.West = Ext
 																}
 																store.loadData(routingData);
 																// Dibujar la
-																// geometr√≠a de
+																// geometrÌa de
 																// la respuesta
 																for ( var i = 0; i < arrayEdge.length; i++) {
 																	edge = arrayEdge[i];
@@ -443,7 +443,7 @@ SiceCAT.West = Ext
 																		routingGeom.push(edge[j]);
 																	}
 																}
-																// A√±adir la
+																// AÒadir la
 																// informacion
 																// de tiempo y
 																// distancia
@@ -529,7 +529,7 @@ SiceCAT.West = Ext
 																				false);
 															}
 														};
-														// Petici√≥n de datos al
+														// PeticiÛn de datos al
 														// servicio
 														OpenLayers.Request
 																.POST({
@@ -547,7 +547,7 @@ SiceCAT.West = Ext
 												}
 											},
 											{
-												// Bot√≥n de borrar
+												// BotÛn de borrar
 												text : this.removePath,
 												hideLabel : true,
 												width : 60,
@@ -686,7 +686,7 @@ SiceCAT.West = Ext
 										}
 									}
 								});
-						// Panel con informaci√≥n de la ruta completa (Tiempo
+						// Panel con informaciÛn de la ruta completa (Tiempo
 						// total y distancia total)
 						var routingInfoPanel = new Ext.Panel({
 							id : "routingInfoPanel",
@@ -876,6 +876,7 @@ SiceCAT.West = Ext
 							//Check if the layer is editable
 							if(map.layers[l].protocol 
 									&& map.layers[l].protocol.editable
+									&& map.layers[l].protocol.inUse === "true"
 									&& map.layers[l].protocol.geometry == "POINT"){
 								pointLayerSicecat = map.layers[l];
 								// Add layer to array to enable the delete feature control
@@ -883,6 +884,7 @@ SiceCAT.West = Ext
 							}
 							if(map.layers[l].protocol 
 									&& map.layers[l].protocol.editable
+									&& map.layers[l].protocol.inUse === "true"
 									&& map.layers[l].protocol.geometry == "LINE"){
 								lineLayerSicecat = map.layers[l];
 								// Add layer to array to enable the delete feature control
@@ -890,6 +892,7 @@ SiceCAT.West = Ext
 							}
 							if(map.layers[l].protocol 
 									&& map.layers[l].protocol.editable
+									&& map.layers[l].protocol.inUse === "true"
 									&& map.layers[l].protocol.geometry == "POLYGON"){
 								polygonLayerSicecat = map.layers[l];
 								// Add layer to array to enable the delete feature control
@@ -973,9 +976,20 @@ SiceCAT.West = Ext
 							tooltip : this.drawLineTooltipText,
 							// check item options
 							group : "draw",
+							scope: this,
 							handler: function(){
-								if(!controlLineLayer.active){
-									actions["tooltipcontrol"].control.activate();
+								if(controlLineLayer.active){
+									if(!!controlLineLayer.layer){
+										if(!controlLineLayer.layer.visibility){
+											showMsg(this, "warning");
+											controlLineLayer.deactivate();
+										}
+									}else{
+										showMsg(this, "error");
+										controlLineLayer.deactivate();
+									}
+								}else{
+								    actions["tooltipcontrol"].control.activate();
 								}
 							}
 						});
@@ -999,9 +1013,20 @@ SiceCAT.West = Ext
 							tooltip : this.drawPointTooltipText,
 							// check item options
 							group : "draw",
+							scope: this,
 							handler: function(){
-								if(!controlPointLayer.active){
-									actions["tooltipcontrol"].control.activate();
+								if(controlPointLayer.active){
+									if(!!controlPointLayer.layer){
+										if(!controlPointLayer.layer.visibility){
+											showMsg(this, "warning");
+											controlPointLayer.deactivate();
+										}
+									}else{
+										showMsg(this, "error");
+										controlPointLayer.deactivate();
+									}
+								}else{
+								    actions["tooltipcontrol"].control.activate();
 								}
 							}
 						});
@@ -1285,21 +1310,21 @@ SiceCAT.West = Ext
 					/**
 					 * Method: init_layers_tree_2
 					 * 
-					 * Inicializa el √°rbol de capas
+					 * Inicializa el ·rbol de capas
 					 * 
-					 * Cartograf√≠a base: Son capas que forman la base del mapa.
+					 * CartografÌa base: Son capas que forman la base del mapa.
 					 * Normalmente son opacas, por lo que no permiten visualizar
-					 * las capas que hay bajo ellas. Por este motivo s√≥lo podr√°
+					 * las capas que hay bajo ellas. Por este motivo sÛlo podr·
 					 * haber una capa base activa a la vez. Su
-					 * activaci√≥n/desactivaci√≥n se realizar√° mediante un control
+					 * activaciÛn/desactivaciÛn se realizar· mediante un control
 					 * de tipo radio. Capas superpuestas u Overlays: Se trata
 					 * normalmente capas que contienen zonas transparentes, por
 					 * lo que pueden ser superpuestas a la capa base activa. Su
-					 * activaci√≥n/desactivaci√≥n se realizar√° mediante un control
+					 * activaciÛn/desactivaciÛn se realizar· mediante un control
 					 * de tipo checkbox ya que puede haber varias activas al
-					 * mismo tiempo. Capas editables: En esta categor√≠a se
+					 * mismo tiempo. Capas editables: En esta categorÌa se
 					 * agrupan las capas WFS-T editables por el usuario. Capas
-					 * del usuario: Se trata de las capas que el usuario a√±ade
+					 * del usuario: Se trata de las capas que el usuario aÒade
 					 * mediante el asistente WMS. Se activan y desactivan
 					 * mediante un checkbox.
 					 */
