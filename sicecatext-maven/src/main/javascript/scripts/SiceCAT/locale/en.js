@@ -524,7 +524,7 @@ GeoExt.Lang
 						zoom: "<li>Zoom to layer</li>",
 						edit_style: "<li>Edit layer style</li>",
 						export_csv: "<li>Export to CSV/GML/KML</li>",
-						available: "<li>Mark as available/busy</li>",
+						available: "<li>Mark as available/discarded</li>",
 						add_wfs_layer: "<li>Add WFS layer</li>",
 						edit: "<li>Edition</li>",
 						admin_edit_layer: "<li>Administration editable layers</li></ul>"
@@ -590,12 +590,12 @@ GeoExt.Lang
 						userContextText: "User context",
 						configurationText: "Configuration panel",
 						createFolderText: "Create a folder",
-						markLayerAsOccuped: "Mark as occuped",
+						markLayerAsOccuped: "Mark as discarded",
 						markLayerAsAvailable: "Mark as available",
 						errorTitleText: 'Error',
 						errorText: 'An error ocurred performing this operation.',
 						notPoolWFSTitleText: 'Error',
-						notPoolWFSText: 'You must\'n mark \'{0}\' layer as occupied. There aren\'t more available layers of geometry type \'{1}\''
+						notPoolWFSText: 'You must\'n mark \'{0}\' layer as discarded. There aren\'t more available layers of geometry type \'{1}\''
 					},
 
 					"SiceCAT.tree.LayerContextMenu.prototype" : {

@@ -533,7 +533,7 @@ GeoExt.Lang
 						zoom: "<li>Zoom a la capa</li>",
 						edit_style: "<li>Editar estilo de la capa</li>",
 						export_csv: "<li>Exportar a CSV/GML/KML</li>",
-						available: "<li>Marcar como disponible/ocupada</li>",
+						available: "<li>Marcar como disponible/descartada</li>",
 						add_wfs_layer: "<li>A\u00f1adir capa WFS</li>",
 						edit: "<li>Edici\u00f3n</li>",
 						admin_edit_layer: "<li>Administraci\u00f3n de capas editables</li></ul>"
@@ -608,7 +608,7 @@ GeoExt.Lang
 						configurationText: "Configuraci\u00F3n inicial del mapa",
 						createFolderText: "Crear una nueva carpeta",
 						avalaibleText: "Disponibles",
-						occupiedText: "Ocupadas"
+						occupiedText: "Descartadas"
 					},
 
 					"SiceCAT.tree.LayerContextMenu.prototype" : {
@@ -630,12 +630,12 @@ GeoExt.Lang
 						renameLayerWindowText: "Cambiar Nombre",
 						deleteLayerWindowText: "Eliminar capa",
 						saveLayerNameText: "Guardar",
-						markLayerAsOccuped: "Marcar como ocupada",
+						markLayerAsOccuped: "Marcar como descartada",
 						markLayerAsAvailable: "Marcar como disponible",
 						errorTitleText: 'Error',
 						errorText: 'A ocurrido un error al realizar la operaci\u00f3n.',
 						notPoolWFSTitleText: 'Error',
-						notPoolWFSText: 'No puedes marcar la capa \'{0}\' como ocupada. No quedan m\u00E1s capas disponibles del tipo \'{1}\'',
+						notPoolWFSText: 'No puedes marcar la capa \'{0}\' como descartada. No quedan m\u00E1s capas disponibles del tipo \'{1}\'',
                         
                         // Respect the initial space
                         noRasterDisabledText: " (solo capas vectoriales)",
