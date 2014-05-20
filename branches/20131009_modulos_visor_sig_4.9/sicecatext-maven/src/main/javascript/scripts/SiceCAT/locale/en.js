@@ -515,7 +515,19 @@ GeoExt.Lang
 						moreInformation: "More Information",
 						contextRefreshedText: "Map context refreshed",
 						errorLayerInfoTitle: "Error",
-						errorLayerInfo: "Error to get the layer information"
+						errorLayerInfo: "Error to get the layer information",
+						status_text: "Warning",
+						warning_text: "Something on SIGESCAT goes wrong, the functionality will be afected: <br/>",
+						search_wfs: "<ul><li>Search WFS</li>",
+						export_pdf: "<li>Export to PDF/PNG</li>",
+						layer_information: "<li>View layer information</li>",
+						zoom: "<li>Zoom to layer</li>",
+						edit_style: "<li>Edit layer style</li>",
+						export_csv: "<li>Export to CSV/GML/KML</li>",
+						available: "<li>Mark as available/busy</li>",
+						add_wfs_layer: "<li>Add WFS layer</li>",
+						edit: "<li>Edition</li>",
+						admin_edit_layer: "<li>Administration editable layers</li></ul>"
 					},
 					
 					"SiceCAT.FeatureSelectedMonitor.prototype" : {

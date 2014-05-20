@@ -392,6 +392,8 @@ function loadSicecatInfo() {
 }
 
 function initComposer() {
+	
+	Sicecat.isSigescatOk();
 
 	var mapLayout = new SiceCAT.MapLayout();
 	mapLayout.sicecatInstance = Sicecat;

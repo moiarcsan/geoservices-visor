@@ -524,7 +524,19 @@ GeoExt.Lang
 						moreInformation: "M\u00E1s Informaci\u00F3n",
 						errorLayerInfoTitle: "Error",
 						errorLayerInfo: "Error al obtener informaci\u00F3n de la capa",
-						userLayersText : "Capas del usuario"
+						userLayersText : "Capas del usuario",
+						status_text: "Advertencia",
+						warning_text: "Algo en SIGESCAT va mal, la funcionalidad que se ver\u00e1 afectada ser\u00e1: <br/>",
+						search_wfs: "<ul><li>Buscador WFS</li>",
+						export_pdf: "<li>Exportar PDF/PNG</li>",
+						layer_information: "<li>Ver informaci\u00f3n de capa</li>",
+						zoom: "<li>Zoom a la capa</li>",
+						edit_style: "<li>Editar estilo de la capa</li>",
+						export_csv: "<li>Exportar a CSV/GML/KML</li>",
+						available: "<li>Marcar como disponible/ocupada</li>",
+						add_wfs_layer: "<li>A\u00f1adir capa WFS</li>",
+						edit: "<li>Edici\u00f3n</li>",
+						admin_edit_layer: "<li>Administraci\u00f3n de capas editables</li></ul>"
 					},
 					
 					"SiceCAT.FeatureSelectedMonitor.prototype" : {
