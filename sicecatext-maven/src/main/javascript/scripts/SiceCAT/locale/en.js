@@ -527,7 +527,8 @@ GeoExt.Lang
 						available: "<li>Mark as available/discarded</li>",
 						add_wfs_layer: "<li>Add WFS layer</li>",
 						edit: "<li>Edition</li>",
-						admin_edit_layer: "<li>Administration editable layers</li></ul>"
+						admin_edit_layer: "<li>Administration editable layers</li></ul>",
+						msgLoadingMask: "Loading..."
 					},
 					
 					"SiceCAT.FeatureSelectedMonitor.prototype" : {

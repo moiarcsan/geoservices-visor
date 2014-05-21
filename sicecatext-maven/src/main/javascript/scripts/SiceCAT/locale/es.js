@@ -536,7 +536,8 @@ GeoExt.Lang
 						available: "<li>Marcar como disponible/descartada</li>",
 						add_wfs_layer: "<li>A\u00f1adir capa WFS</li>",
 						edit: "<li>Edici\u00f3n</li>",
-						admin_edit_layer: "<li>Administraci\u00f3n de capas editables</li></ul>"
+						admin_edit_layer: "<li>Administraci\u00f3n de capas editables</li></ul>",
+						msgLoadingMask: "Cargando..."
 					},
 					
 					"SiceCAT.FeatureSelectedMonitor.prototype" : {

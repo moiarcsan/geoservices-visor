@@ -2193,6 +2193,17 @@ SiceCAT = Ext
 							});
 						}
 					},
+					
+					/**
+					 * Method: createLoadingMask
+					 * 
+					 * Crea una máscara de "cargando" para esperar a que se active una funcionalidad
+					 * 
+					 * @returns {Object}
+					 */
+					createLoadingMask: function(){
+						return new Ext.LoadMask(Ext.getBody(), {msg: this.msgLoadingMask});
+					},
 
 					CLASS_NAME : "SiceCAT"
 				});

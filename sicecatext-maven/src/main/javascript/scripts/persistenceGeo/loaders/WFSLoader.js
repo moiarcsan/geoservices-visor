@@ -150,6 +150,15 @@ PersistenceGeo.loaders.WFSLoader
 				}
 			}
 			
+			var mask = Sicecat.createLoadingMask();
+			
+			layer.events.register("loadstart", layer, function(object, element){
+				mask.show();
+			});
+			layer.events.register("loadend", layer, function(object, element){
+				mask.hide();
+			});
+			
 			return layer;
 		},
 
