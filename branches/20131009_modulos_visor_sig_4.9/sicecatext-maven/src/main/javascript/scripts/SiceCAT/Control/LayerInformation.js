@@ -106,6 +106,8 @@ OpenLayers.Control.LayerInformation = OpenLayers
 					 * Method: trigger Do the zoom to selected features.
 					 */
 					trigger : function() {
+						this.myMask = Sicecat.createLoadingMask();
+						this.myMask.show();
 						var layerURLTest = null;
 						if(!this.layer.url){
 							layerURLTest = this.prepareURL(this.layer.protocol.url);
@@ -114,10 +116,7 @@ OpenLayers.Control.LayerInformation = OpenLayers
 						}
 						var this_layerInfo = this;
 						Sicecat.testLayerInformation(layerURLTest, map, this.layer, function(){
-							this_layerInfo.myMask = new Ext.LoadMask(Ext.getBody(), {msg:"Loading ..."});
 							if (!!this_layerInfo.layer) {
-								this_layerInfo.myMask.enable(true);
-								this_layerInfo.myMask.show();
 								this_layerInfo.showLayerInformation(this_layerInfo.layer);
 							}
 						});
