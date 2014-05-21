@@ -1070,10 +1070,22 @@ SiceCAT.West = Ext
 							// button options
 							enableToggle : true,
 							tooltip : this.deleteTooltipText,
+							scope: this,
 							handler: function(){
-								if(deleteFeatureControl.layers.length == 0){
+								var result = false;
+								if(!!deleteFeatureControl.layers && deleteFeatureControl.layers.length > 0){
+									var num_layers = deleteFeatureControl.layers.length;
+									for(var i = 0; i<num_layers; i++){
+										result = result || deleteFeatureControl.layers[i].visibility;
+									}
+								}
+								if(!!deleteFeatureControl.layers && deleteFeatureControl.layers.length == 0){
 									// Si no hay capas editables
 									showMsg(this, "deleteFeatureError");
+									deleteFeatureControl.deactivate();
+								}else if(!result){
+									showMsg(this, "warning");
+									deleteFeatureControl.deactivate();
 								}else if(!deleteFeatureControl.active){
 									actions["tooltipcontrol"].control.activate();
 								}
@@ -1092,8 +1104,27 @@ SiceCAT.West = Ext
 							// button options
 							enableToggle : true,
 							tooltip : this.editTooltipText,
+							scope: this,
 							handler: function(){
-								if(!modifyFeatureControl.active){
+								var result = false;
+								if(!!modifyFeatureControl.selectControl 
+										&& !!modifyFeatureControl.selectControl.layers
+										&& modifyFeatureControl.selectControl.layers.length > 0){
+									var num_layers = modifyFeatureControl.selectControl.layers.length;
+									for(var i = 0; i<num_layers; i++){
+										result = result || modifyFeatureControl.selectControl.layers[i].visibility;
+									}
+								}
+								if(!!modifyFeatureControl.selectControl
+										&& !!modifyFeatureControl.selectControl.layers
+										&& modifyFeatureControl.selectControl.layers.length == 0){
+									// Si no hay capas editables
+									showMsg(this, "deleteFeatureError");
+									modifyFeatureControl.deactivate();
+								}else if(!result){
+									showMsg(this, "warning");
+									modifyFeatureControl.deactivate();
+								}else if(!modifyFeatureControl.active){
 									actions["tooltipcontrol"].control.activate();
 								}
 							}
@@ -1112,8 +1143,23 @@ SiceCAT.West = Ext
 									// button options
 									enableToggle : true,
 									tooltip : this.editAttributesTooltipText,
+									scope: this,
 									handler: function(){
-										if(!editAtrControl.active){
+										var result = false;
+										if(!!editAtrControl.layers && editAtrControl.layers.length > 0){
+											var num_layers = editAtrControl.layers.length;
+											for(var i = 0; i<num_layers; i++){
+												result = result || editAtrControl.layers[i].visibility;
+											}
+										}
+										if(!!editAtrControl.layers && editAtrControl.layers.length == 0){
+											// Si no hay capas editables
+											showMsg(this, "deleteFeatureError");
+											editAtrControl.deactivate();
+										}else if(!result){
+											showMsg(this, "warning");
+											editAtrControl.deactivate();
+										}else if(!editAtrControl.active){
 											actions["tooltipcontrol"].control.activate();
 										}
 									}
@@ -1169,8 +1215,27 @@ SiceCAT.West = Ext
 									tooltip : this.dragFeatureTooltipText,
 									// check item options
 									group : "draw",
+									scope: this,
 									handler: function(){
-										if(!dragFeatureControl.active){
+										var result = false;
+										if(!!dragFeatureControl.selectControl 
+												&& !!dragFeatureControl.selectControl.layers
+												&& dragFeatureControl.selectControl.layers.length > 0){
+											var num_layers = dragFeatureControl.selectControl.layers.length;
+											for(var i = 0; i<num_layers; i++){
+												result = result || dragFeatureControl.selectControl.layers[i].visibility;
+											}
+										}
+										if(!!dragFeatureControl.selectControl
+												&& !!dragFeatureControl.selectControl.layers
+												&& dragFeatureControl.selectControl.layers.length == 0){
+											// Si no hay capas editables
+											showMsg(this, "deleteFeatureError");
+											dragFeatureControl.deactivate();
+										}else if(!result){
+											showMsg(this, "warning");
+											dragFeatureControl.deactivate();
+										}else if(!dragFeatureControl.active){
 											actions["tooltipcontrol"].control.activate();
 										}
 									}
