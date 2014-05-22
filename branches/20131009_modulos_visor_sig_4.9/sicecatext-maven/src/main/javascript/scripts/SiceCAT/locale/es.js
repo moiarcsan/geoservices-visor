@@ -433,8 +433,8 @@ GeoExt.Lang
 					    labelStringSeparator: "Caracter separador",
 					    selectStringSeparatorText: "Caracter que separa los atributos del fichero",
 					    charNoValidated: "Caracter no v\u00E1lido",
-                                            layerLoadedTitleText: 'Hecho',
-                                            layerLoadedText: 'La capa se ha cargado'
+                        layerLoadedTitleText: 'Hecho',
+                        layerLoadedText: 'La capa se ha cargado'
 					},
 
 					"OpenLayers.Control.LoadGML.prototype" : {
@@ -477,7 +477,7 @@ GeoExt.Lang
 						buttonCancelFormLayer: "Cancelar",
 						labelGeometryType: "Tipo de geometr\u00EDa",
 						labelGeometryTypeEmpty: "Seleccione un tipo de geometr\u00EDa",
-                                                layerLoadedTitleText: 'Hecho',
+                        layerLoadedTitleText: 'Hecho',
 						layerLoadedText: 'La capa WFS se ha cargado'
 					},
 

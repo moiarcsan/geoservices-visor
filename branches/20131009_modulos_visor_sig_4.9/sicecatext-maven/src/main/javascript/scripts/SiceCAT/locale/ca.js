@@ -433,8 +433,8 @@ GeoExt.Lang
 						labelStringSeparator: "Car\u00E0cter separador",
 						selectStringSeparatorText: "Car\u00E0cter que separa els atributs del fitxer",
 						charNoValidated: "Car\u00E0cter no v\u00e0lid",
-                                                layerLoadedTitleText: 'Fet',
-                                                layerLoadedText: 'La cape s\'ha carregat',
+                        layerLoadedTitleText: 'Fet',
+                        layerLoadedText: 'La cape s\'ha carregat',
 					},
 
 					"OpenLayers.Control.LoadGML.prototype" : {
@@ -503,8 +503,8 @@ GeoExt.Lang
 						buttonCancelFormLayer: "Cancel·lar",
 						labelGeometryType: "Tipus de geometria",
 						labelGeometryTypeEmpty: "Selecciona el tipus de geometria",
-                                                 layerLoadedTitleText: 'Fet',
-                                                layerLoadedText: 'WFS s\'ha carregat',
+                        layerLoadedTitleText: 'Fet',
+                        layerLoadedText: 'WFS s\'ha carregat',
 					},
 
 					"OpenLayers.Control.MapMenu.prototype" : {

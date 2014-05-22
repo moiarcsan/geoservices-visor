@@ -432,8 +432,8 @@ GeoExt.Lang
 					    labelStringSeparator: "Character separator",
 					    selectStringSeparatorText: "Character that split the attributes from the file",
 					    charNoValidated: "Character no validated",
-                                            layerLoadedTitleText: 'Done',
-                                            layerLoadedText: 'Layer has been loaded'
+                        layerLoadedTitleText: 'Done',
+                        layerLoadedText: 'Layer has been loaded'
 					},
 
 					"OpenLayers.Control.LoadGML.prototype" : {
@@ -474,8 +474,8 @@ GeoExt.Lang
 						selectSchema: "Introduce the schema url",
 						buttonSaveFormLayer: "Save",
 						buttonCancelFormLayer: "Cancel",
-                                                 layerLoadedTitleText: 'Done',
-                                                layerLoadedText: 'WFS has been loaded'
+                        layerLoadedTitleText: 'Done',
+                        layerLoadedText: 'WFS has been loaded'
 					},
 
 					"OpenLayers.Control.MapMenu.prototype" : {

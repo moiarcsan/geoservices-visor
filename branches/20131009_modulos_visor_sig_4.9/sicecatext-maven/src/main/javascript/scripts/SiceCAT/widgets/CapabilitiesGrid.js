@@ -334,7 +334,7 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
             	        			var json = Ext.util.JSON.decode(action.response.responseText);
             	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
             	        			Sicecat.addLayer(layer);
-                                                Ext.Msg.alert(this_.folderSaved, this_.folderSavedText);
+                                    Ext.Msg.alert(this_.folderSaved, this_.folderSavedText);
             	        			this_.windowLocationLayer.close();
             	        		},
             	        		function(form, action){
@@ -344,7 +344,7 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
             	        			var json = Ext.util.JSON.decode(action.response.responseText);
             	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
             	        			Sicecat.addLayer(layer);
-                                                Ext.Msg.alert(this_.folderSaved, this_.folderSavedText);
+                                    Ext.Msg.alert(this_.folderSaved, this_.folderSavedText);
             	        			this_.windowLocationLayer.close();
             	        });
             		}else{
@@ -356,7 +356,7 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
             	        			var json = Ext.util.JSON.decode(action.response.responseText);
             	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
             	        			Sicecat.addLayer(layer);
-                                                Ext.Msg.alert(this_.folderSaved, this_.folderSavedText);
+                                    Ext.Msg.alert(this_.folderSaved, this_.folderSavedText);
             	        			this_.windowLocationLayer.close();
             	        		},
             	        		function(form, action){
@@ -366,7 +366,7 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
             	        			var json = Ext.util.JSON.decode(action.response.responseText);
             	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
             	        			Sicecat.addLayer(layer);
-                                                Ext.Msg.alert(this_.folderSaved, this_.folderSavedText);
+                                    Ext.Msg.alert(this_.folderSaved, this_.folderSavedText);
             	        			this_.windowLocationLayer.close();
             	        });
             		}
