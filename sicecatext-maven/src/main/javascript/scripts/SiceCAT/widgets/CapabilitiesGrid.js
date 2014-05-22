@@ -67,7 +67,7 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
     expanderTemplateText: "<p><b>Abstract:</b> {abstract}</p>", 
     previewLayerText: "Preview of '{0}' layer",
     folderSaved: "Folder saved",
-    folderSavedText: "The layer %s% have been saved correctly.",
+    folderSavedText: "The layer have been saved correctly.",
     folderCancel: "Warning",
     folderCancelText: "Error to load layer. Try again.",
     
@@ -334,6 +334,7 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
             	        			var json = Ext.util.JSON.decode(action.response.responseText);
             	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
             	        			Sicecat.addLayer(layer);
+                                                Ext.Msg.alert(this_.folderSaved, this_.folderSavedText);
             	        			this_.windowLocationLayer.close();
             	        		},
             	        		function(form, action){
@@ -343,6 +344,7 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
             	        			var json = Ext.util.JSON.decode(action.response.responseText);
             	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
             	        			Sicecat.addLayer(layer);
+                                                Ext.Msg.alert(this_.folderSaved, this_.folderSavedText);
             	        			this_.windowLocationLayer.close();
             	        });
             		}else{
@@ -354,6 +356,7 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
             	        			var json = Ext.util.JSON.decode(action.response.responseText);
             	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
             	        			Sicecat.addLayer(layer);
+                                                Ext.Msg.alert(this_.folderSaved, this_.folderSavedText);
             	        			this_.windowLocationLayer.close();
             	        		},
             	        		function(form, action){
@@ -363,6 +366,7 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
             	        			var json = Ext.util.JSON.decode(action.response.responseText);
             	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
             	        			Sicecat.addLayer(layer);
+                                                Ext.Msg.alert(this_.folderSaved, this_.folderSavedText);
             	        			this_.windowLocationLayer.close();
             	        });
             		}

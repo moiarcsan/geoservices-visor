@@ -410,7 +410,7 @@ GeoExt.Lang
 						uploadingText: 'Cargando...',
 						emptyText: 'Seleccione un {0}',
 						layerLoadedTitleText: '\u00E9xito',
-						layerLoadedText: 'La capa {0} se ha cargado',
+						layerLoadedText: "La capa {0} se ha cargado",
 						inProjectionText: "Proyecci\u00F3n",
 						selectFileText : "Selecciona el fichero {0} a cargar",
 						titleWindowLocationLayer: "Introduce el nombre de la capa y el de su carpeta padre",
@@ -432,7 +432,9 @@ GeoExt.Lang
 					    errorLoadingSomeResultsText: "{0} puntos no est\u00E1n en el formato TEXT, por favor, compru\u00E9belos.",
 					    labelStringSeparator: "Caracter separador",
 					    selectStringSeparatorText: "Caracter que separa los atributos del fichero",
-					    charNoValidated: "Caracter no v\u00E1lido"
+					    charNoValidated: "Caracter no v\u00E1lido",
+                                            layerLoadedTitleText: 'Hecho',
+                                            layerLoadedText: 'La capa se ha cargado'
 					},
 
 					"OpenLayers.Control.LoadGML.prototype" : {
@@ -474,7 +476,9 @@ GeoExt.Lang
 						buttonSaveFormLayer: "Guardar",
 						buttonCancelFormLayer: "Cancelar",
 						labelGeometryType: "Tipo de geometr\u00EDa",
-						labelGeometryTypeEmpty: "Seleccione un tipo de geometr\u00EDa"
+						labelGeometryTypeEmpty: "Seleccione un tipo de geometr\u00EDa",
+                                                layerLoadedTitleText: 'Hecho',
+						layerLoadedText: 'La capa WFS se ha cargado'
 					},
 
 					"OpenLayers.Control.MapMenu.prototype" : {
@@ -512,7 +516,7 @@ GeoExt.Lang
 					"SiceCAT.prototype" : {
 						nombreCapaAuxiliarText : "Auxiliar",
 						compatibiltyIEText: "Este navegador no es compatible al 100% con este visor, por favor, use Mozilla Firefox 7+ o Google Chrome 15+",
-						compatibiltyScreenText: "La pantalla no est\u00E1 optimizado para este visor. La resoluci\u00F3n m\u00EDnima recomendada es 1280x1024",
+						compatibiltyScreenText: "La pantalla no est\u00E1 optimizada para este visor. La resoluci\u00F3n m\u00EDnima recomendada es 1280x1024",
 						compatibiltywindiwTitleText: "\u00a1Cuidado!",
 						errorTitle: "Error al editar la capa",
 						errorMsg: "No es posible guardar sus cambios",
@@ -814,7 +818,7 @@ GeoExt.Lang
 						previewLayerText : "Vista previa de la capa '{0}'",
 						expanderTemplateText : "<p><b>Resumen:</b> {abstract}</p>",
 						folderSaved: "Capa guardada",
-					    folderSavedText: "La capa %s% ha sido guardada correctamente.",
+					    folderSavedText: "La capa ha sido guardada correctamente.",
 					    folderCancel: "Aviso",
 					    folderCancelText: "Error al guardar la capa. Int\u00e9ntelo de nuevo."
 					},

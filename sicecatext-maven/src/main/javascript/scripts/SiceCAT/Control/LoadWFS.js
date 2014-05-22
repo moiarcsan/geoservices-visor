@@ -113,6 +113,8 @@ OpenLayers.Control.LoadWFS = OpenLayers.Class(OpenLayers.Control.LoadKML,{
 	labelLayerEtitable: "Editable",
 	labelGeometryType: "Geometry type",
 	labelGeometryTypeEmpty: "Select a geometry type",
+        layerLoadedTitleText: 'Done',
+	layerLoadedText: 'WFS has been loaded',
 
 	// Geometry type to edit
 	geomType: null,
@@ -269,6 +271,7 @@ OpenLayers.Control.LoadWFS = OpenLayers.Class(OpenLayers.Control.LoadKML,{
 	        			var json = Ext.util.JSON.decode(action.response.responseText);
 	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
 	        			Sicecat.addLayer(layer);
+                                        Ext.Msg.alert(this_.layerLoadedTitleText, this_.layerLoadedText);
 	        			this_.window.close();
 	        		},
 	        		function(form, action){
@@ -278,6 +281,7 @@ OpenLayers.Control.LoadWFS = OpenLayers.Class(OpenLayers.Control.LoadKML,{
 	        			var json = Ext.util.JSON.decode(action.response.responseText);
 	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
 	        			Sicecat.addLayer(layer);
+                                        Ext.Msg.alert(this_.layerLoadedTitleText, this_.layerLoadedText);
 	        			this_.window.close();
 	        });
 		}else{
@@ -289,6 +293,7 @@ OpenLayers.Control.LoadWFS = OpenLayers.Class(OpenLayers.Control.LoadKML,{
 	        			var json = Ext.util.JSON.decode(action.response.responseText);
 	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
 	        			Sicecat.addLayer(layer);
+                                        Ext.Msg.alert(this_.layerLoadedTitleText, this_.layerLoadedText);
 	        			this_.window.close();
 	        		},
 	        		function(form, action){
@@ -298,6 +303,7 @@ OpenLayers.Control.LoadWFS = OpenLayers.Class(OpenLayers.Control.LoadKML,{
 	        			var json = Ext.util.JSON.decode(action.response.responseText);
 	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
 	        			Sicecat.addLayer(layer);
+                                        Ext.Msg.alert(this_.layerLoadedTitleText, this_.layerLoadedText);
 	        			this_.window.close();
 	        });
 		}
