@@ -497,7 +497,7 @@ OpenLayers.Control.LoadKML = OpenLayers.Class(OpenLayers.Control, {
 			params.properties.isBaseLayer = this_.form.get("inputIsBaseLayer").getValue();
 		}
                 
-                var fileType = this.getLayerType();
+		var fileType = this.getLayerType();
         
 		if(!!Sicecat.SELECTED_GROUP){
 			this_.parser.saveLayerByGroup(Sicecat.SELECTED_GROUP, params,
@@ -508,7 +508,7 @@ OpenLayers.Control.LoadKML = OpenLayers.Class(OpenLayers.Control, {
 	        			var json = Ext.util.JSON.decode(action.response.responseText);
 	        			var layer = this_.parser.LOADERS_CLASSES[json.type].load(json);
 	        			Sicecat.addLayer(layer);
-                                         Ext.Msg.alert(this_.layerLoadedTitleText, String.format(this_.layerLoadedText, fileType));
+                        Ext.Msg.alert(this_.layerLoadedTitleText, String.format(this_.layerLoadedText, fileType));
 	        			this_.windowLocationLayer.close();
 	        			this_.window.close();
 	        		},
@@ -519,7 +519,7 @@ OpenLayers.Control.LoadKML = OpenLayers.Class(OpenLayers.Control, {
 	        			var json = Ext.util.JSON.decode(action.response.responseText);
 	        			var layer = this_.parser.LOADERS_CLASSES[json.type].load(json);
 	        			Sicecat.addLayer(layer);
-                                        Ext.Msg.alert(this_.layerLoadedTitleText, String.format(this_.layerLoadedText, fileType));
+                        Ext.Msg.alert(this_.layerLoadedTitleText, String.format(this_.layerLoadedText, fileType));
 	        			this_.windowLocationLayer.close();
 	        			this_.window.close();
 	        });
@@ -532,7 +532,7 @@ OpenLayers.Control.LoadKML = OpenLayers.Class(OpenLayers.Control, {
 	        			var json = Ext.util.JSON.decode(action.response.responseText);
 	        			var layer = this_.parser.LOADERS_CLASSES[json.type].load(json);
 	        			Sicecat.addLayer(layer);
-                                        Ext.Msg.alert(this_.layerLoadedTitleText, String.format(this_.layerLoadedText, fileType));
+                        Ext.Msg.alert(this_.layerLoadedTitleText, String.format(this_.layerLoadedText, fileType));
 	        			this_.windowLocationLayer.close();
 	        			this_.window.close();
 	        		},
@@ -543,7 +543,7 @@ OpenLayers.Control.LoadKML = OpenLayers.Class(OpenLayers.Control, {
 	        			var json = Ext.util.JSON.decode(action.response.responseText);
 	        			var layer = this_.parser.LOADERS_CLASSES[json.type].load(json);
 	        			Sicecat.addLayer(layer);
-                                        Ext.Msg.alert(this_.layerLoadedTitleText, String.format(this_.layerLoadedText, fileType));
+                        Ext.Msg.alert(this_.layerLoadedTitleText, String.format(this_.layerLoadedText, fileType));
 	        			this_.windowLocationLayer.close();
 	        			this_.window.close();
 	        });

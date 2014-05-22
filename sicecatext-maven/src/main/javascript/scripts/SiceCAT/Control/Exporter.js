@@ -94,7 +94,7 @@ SiceCAT.Control.Exporter = OpenLayers
 							console.log("Downloading '" + fileName + "'");
 
 						var self = this;
-                                                var downloadSuccessText = downloadSuccessText;
+                        var downloadSuccessText = downloadSuccessText;
 						Downloadify.create(idButton,{
 				    	    filename: function(){
 				    	      return fileName;
@@ -104,7 +104,6 @@ SiceCAT.Control.Exporter = OpenLayers
 				    	    },
 				    	    onComplete: function(){
 				    	    	self.onCompleteRequest(statusBar, helpText, downloadSuccessTitleText, downloadSuccessText);
-                                 
 				    	    },
 				    	    onCancel: function(){ 
 				    	    	Ext.Msg.alert(downloadCancelTitleText, downloadCancelText);
