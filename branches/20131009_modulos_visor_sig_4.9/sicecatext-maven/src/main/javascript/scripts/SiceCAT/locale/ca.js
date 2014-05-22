@@ -432,7 +432,9 @@ GeoExt.Lang
 						errorLoadingSomeResultsText: "{0} punts no s\u00F3n el format TEXT, si us plau, compru\u00E9belos.",
 						labelStringSeparator: "Car\u00E0cter separador",
 						selectStringSeparatorText: "Car\u00E0cter que separa els atributs del fitxer",
-						charNoValidated: "Car\u00E0cter no v\u00e0lid"
+						charNoValidated: "Car\u00E0cter no v\u00e0lid",
+                                                layerLoadedTitleText: 'Fet',
+                                                layerLoadedText: 'La cape s\'ha carregat',
 					},
 
 					"OpenLayers.Control.LoadGML.prototype" : {
@@ -500,7 +502,9 @@ GeoExt.Lang
 						buttonSaveFormLayer: "Desa",
 						buttonCancelFormLayer: "Cancel·lar",
 						labelGeometryType: "Tipus de geometria",
-						labelGeometryTypeEmpty: "Selecciona el tipus de geometria"
+						labelGeometryTypeEmpty: "Selecciona el tipus de geometria",
+                                                 layerLoadedTitleText: 'Fet',
+                                                layerLoadedText: 'WFS s\'ha carregat',
 					},
 
 					"OpenLayers.Control.MapMenu.prototype" : {
@@ -820,7 +824,7 @@ GeoExt.Lang
 						previewLayerText : "Vista pr\u00E8via de la capa '{0}'",
 						expanderTemplateText : "<p><b>Resum:</b> {abstract}</p>",
 						folderSaved: "Capa guardada",
-					    folderSavedText: "La capa %s% ha estat guardada correctament",
+					    folderSavedText: "La capa ha estat guardada correctament",
 					    folderCancel: "Av\u00eds",
 					    folderCancelText: "Error en desar la capa. Intenteu-ho de nou."
 					},

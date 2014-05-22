@@ -94,6 +94,7 @@ SiceCAT.Control.Exporter = OpenLayers
 							console.log("Downloading '" + fileName + "'");
 
 						var self = this;
+                                                var downloadSuccessText = downloadSuccessText;
 						Downloadify.create(idButton,{
 				    	    filename: function(){
 				    	      return fileName;
@@ -102,7 +103,8 @@ SiceCAT.Control.Exporter = OpenLayers
 				    	      return data;
 				    	    },
 				    	    onComplete: function(){
-				    	    	self.onCompleteRequest(statusBar, helpText, downloadSuccessTitleText, downloadSuccessTitleText);
+				    	    	self.onCompleteRequest(statusBar, helpText, downloadSuccessTitleText, downloadSuccessText);
+                                 
 				    	    },
 				    	    onCancel: function(){ 
 				    	    	Ext.Msg.alert(downloadCancelTitleText, downloadCancelText);
@@ -147,7 +149,7 @@ SiceCAT.Control.Exporter = OpenLayers
 						});
 					},
 					
-					onCompleteRequest: function(statusBar, helpText, downloadSuccessTitleText, downloadSuccessTitleText){
+					onCompleteRequest: function(statusBar, helpText, downloadSuccessTitleText, downloadSuccessText){
 						statusBar.setText(helpText);
 			    		Ext.Msg.alert(downloadSuccessTitleText, downloadSuccessText);
 					},

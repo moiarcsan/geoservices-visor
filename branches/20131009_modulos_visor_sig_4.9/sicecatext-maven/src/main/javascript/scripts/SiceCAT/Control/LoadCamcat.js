@@ -87,6 +87,8 @@ OpenLayers.Control.LoadCamcat = OpenLayers.Class(OpenLayers.Control.LoadKML, {
     labelStringSeparator: "Character separator",
     selectStringSeparatorText: "Character that split the attributes from the file",
     charNoValidated: "Character no validated",
+     layerLoadedTitleText: 'Done',
+     layerLoadedText: 'Layer has been loaded',
     
     
     getLayerType:function(){
@@ -228,6 +230,7 @@ OpenLayers.Control.LoadCamcat = OpenLayers.Class(OpenLayers.Control.LoadKML, {
 	        			var json = Ext.util.JSON.decode(action.response.responseText);
 	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
 	        			Sicecat.addLayer(layer);
+                                        Ext.Msg.alert(this_.layerLoadedTitleText, this_.layerLoadedText);
 	        			this_.windowLocationLayer.close();
 	        			this_.window.close();
 	        		},
@@ -238,6 +241,7 @@ OpenLayers.Control.LoadCamcat = OpenLayers.Class(OpenLayers.Control.LoadKML, {
 	        			var json = Ext.util.JSON.decode(action.response.responseText);
 	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
 	        			Sicecat.addLayer(layer);
+                                        Ext.Msg.alert(this_.layerLoadedTitleText, this_.layerLoadedText);
 	        			this_.windowLocationLayer.close();
 	        			this_.window.close();
 	        });
@@ -250,6 +254,7 @@ OpenLayers.Control.LoadCamcat = OpenLayers.Class(OpenLayers.Control.LoadKML, {
 	        			var json = Ext.util.JSON.decode(action.response.responseText);
 	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
 	        			Sicecat.addLayer(layer);
+                                        Ext.Msg.alert(this_.layerLoadedTitleText, this_.layerLoadedText);
 	        			this_.windowLocationLayer.close();
 	        			this_.window.close();
 	        		},
@@ -260,6 +265,7 @@ OpenLayers.Control.LoadCamcat = OpenLayers.Class(OpenLayers.Control.LoadKML, {
 	        			var json = Ext.util.JSON.decode(action.response.responseText);
 	        			var layer = PersistenceGeoParser.LOADERS_CLASSES[json.type].load(json);
 	        			Sicecat.addLayer(layer);
+                                        Ext.Msg.alert(this_.layerLoadedTitleText, this_.layerLoadedText);
 	        			this_.windowLocationLayer.close();
 	        			this_.window.close();
 	        });

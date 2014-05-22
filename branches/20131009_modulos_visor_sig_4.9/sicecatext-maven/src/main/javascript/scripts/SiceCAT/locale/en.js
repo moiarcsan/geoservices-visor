@@ -431,7 +431,9 @@ GeoExt.Lang
 					    errorLoadingSomeResultsText: "{0} points are not in TEXT format, please check it.",
 					    labelStringSeparator: "Character separator",
 					    selectStringSeparatorText: "Character that split the attributes from the file",
-					    charNoValidated: "Character no validated"
+					    charNoValidated: "Character no validated",
+                                            layerLoadedTitleText: 'Done',
+                                            layerLoadedText: 'Layer has been loaded'
 					},
 
 					"OpenLayers.Control.LoadGML.prototype" : {
@@ -472,6 +474,8 @@ GeoExt.Lang
 						selectSchema: "Introduce the schema url",
 						buttonSaveFormLayer: "Save",
 						buttonCancelFormLayer: "Cancel",
+                                                 layerLoadedTitleText: 'Done',
+                                                layerLoadedText: 'WFS has been loaded'
 					},
 
 					"OpenLayers.Control.MapMenu.prototype" : {
@@ -780,7 +784,7 @@ GeoExt.Lang
 						previewLayerText : "Preview of '{0}' layer",
 						expanderTemplateText : "<p><b>Abstract:</b> {abstract}</p>",
 						folderSaved: "Folder saved",
-					    folderSavedText: "The layer %s% have been saved correctly.",
+					    folderSavedText: "The layer have been saved correctly.",
 					    folderCancel: "Warning",
 					    folderCancelText: "Error to load layer. Try again."
 					},
