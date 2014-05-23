@@ -99,6 +99,8 @@ PersistenceGeo.loaders.WFSLoader
 					if(layerData['properties']['inUse'] && this.toBoolean(layerData['properties']['inUse'])){
 						// In use layer
 						layer.visibility = false;
+						layer.groupLayers = "in_edition";
+						layer.subgroupLayers = "in_edition";
 					}else if(layerData['properties']['available'] && this.toBoolean(layerData['properties']['available'])){
 						// Available layer
 						layer.groupLayers = "available";
@@ -165,8 +167,9 @@ PersistenceGeo.loaders.WFSLoader
 				mask_wfs.hide();
 			});
 			
-			layer.visibility = false;
-			
+			// To prevent loading
+			layer.visibility = false;			
+
 			return layer;
 		},
 
