@@ -532,7 +532,8 @@ GeoExt.Lang
 						add_wfs_layer: "<li>Add WFS layer</li>",
 						edit: "<li>Edition</li>",
 						admin_edit_layer: "<li>Administration editable layers</li></ul>",
-						msgLoadingMask: "Loading..."
+						msgLoadingMask: "Loading...",
+						alertMsg: "There have been a problem with the layer load",
 					},
 					
 					"SiceCAT.FeatureSelectedMonitor.prototype" : {

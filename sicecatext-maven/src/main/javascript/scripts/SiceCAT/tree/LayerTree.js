@@ -217,7 +217,7 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 							groupLayers : 'occupied'
 						}
 					}, 
-				}   
+				}
 			]
 		}];
 		

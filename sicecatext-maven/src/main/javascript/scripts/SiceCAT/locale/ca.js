@@ -562,7 +562,8 @@ GeoExt.Lang
 						add_wfs_layer: "<li>Afegir capa WFS</li>",
 						edit: "<li>Edici\u00f3</li>",
 						admin_edit_layer: "<li>Administraci\u00f3 de capes editables</li></ul>",
-						msgLoadingMask: "Carregant..."
+						msgLoadingMask: "Carregant...",
+						alertMsg: "Hi ha hagut un problema amb la c\u00e0rrega de la capa",
 					},
 					
 					"SiceCAT.FeatureSelectedMonitor.prototype" : {
