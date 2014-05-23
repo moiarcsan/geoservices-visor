@@ -296,16 +296,10 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 				layerExportToGMLMenuText, layerExporterControl,
 				"ExportToGML");
 		// Delete Layer
-		if ((Sicecat.GROUP_IDS.SUPERADMIN == layer.groupID 
-				&& (Sicecat.user.permisos.indexOf("admin1") > -1))
-			|| (Sicecat.GROUP_IDS.CECAT == layer.groupID 
-					&& (Sicecat.user.permisos.indexOf("admin2") > -1))
-			|| ((Sicecat.GROUP_IDS.GPCL == layer.groupID)
-					&& (Sicecat.user.permisos.indexOf("admin2") > -1))
-			|| (!layer.groupID 
-					//&& layer.userID == Sicecat.user.login
-					)
-			){
+		if ((Sicecat.GROUP_IDS.SUPERADMIN == layer.groupID && (Sicecat.user.permisos.indexOf("admin1") > -1) && layer.groupLayers != 'in_edition')
+			|| (Sicecat.GROUP_IDS.CECAT == layer.groupID && (Sicecat.user.permisos.indexOf("admin2") > -1))
+			|| ((Sicecat.GROUP_IDS.GPCL == layer.groupID) && (Sicecat.user.permisos.indexOf("admin2") > -1))
+			|| !layer.groupID){
 				items.push(layerDeleteContext);
 		}
 
@@ -371,18 +365,14 @@ SiceCAT.tree.LayerContextMenu = Ext.extend(Ext.menu.Menu, {
 
 		if (!!layer.saveStrategy 
 				&& !!layer.groupLayers){
-			if(layer.groupLayers =='editables'){
-				items.push(this.getMarkAsOcuppied(
-						this.markLayerAsOccuped, 'MarkLayerAsOccupied', 
-							layer));
+			if(layer.groupLayers =='editables' || layer.groupLayers == 'in_edition'){
+				items.push(this.getMarkAsOcuppied(this.markLayerAsOccuped, 'MarkLayerAsOccupied', layer));
 			}else if(layer.groupLayers =='occupied'){
-				items.push(this.getSaveLayerProperties(
-						this.markLayerAsAvailable, 'MarkLayerAsAvailable', 
-							layer, {
-								inUse:false,
-								occupied: false,
-								available:true
-							}, false, true));
+				items.push(this.getSaveLayerProperties(this.markLayerAsAvailable, 'MarkLayerAsAvailable', layer, {
+					inUse:false,
+					occupied: false,
+					available:true
+					}, false, true));
 			}
 		}
 		

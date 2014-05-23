@@ -75,6 +75,7 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 	createFolderText: "Folder",
 	avalaibleText: "Availables",
 	occupiedText: "Occupied",
+	inEditionText: "In Edition",
     
     /** private: method[initComponent]
      */
@@ -215,6 +216,19 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 							radioGroup : "foo",
 							uiProvider : "layernodeui",
 							groupLayers : 'occupied'
+						}
+					}, 
+				},
+				{
+					nodeType : "gx_sicecat_editablelayercontainer",
+					expanded : true,
+					text : this.inEditionText,
+					groupLayers : 'in_edition',
+					loader : {
+						baseAttrs : {
+							radioGroup : "foo",
+							uiProvider : "layernodeui",
+							groupLayers : 'in_edition'
 						}
 					}, 
 				}

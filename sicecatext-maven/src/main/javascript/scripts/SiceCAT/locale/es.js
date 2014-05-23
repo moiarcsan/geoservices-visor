@@ -614,7 +614,8 @@ GeoExt.Lang
 						configurationText: "Configuraci\u00F3n inicial del mapa",
 						createFolderText: "Crear una nueva carpeta",
 						avalaibleText: "Disponibles",
-						occupiedText: "Descartadas"
+						occupiedText: "Descartadas",
+						inEditionText: "En Edici\u00f3n"
 					},
 
 					"SiceCAT.tree.LayerContextMenu.prototype" : {

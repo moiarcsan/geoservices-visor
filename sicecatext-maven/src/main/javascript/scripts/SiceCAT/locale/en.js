@@ -601,7 +601,10 @@ GeoExt.Lang
 						errorTitleText: 'Error',
 						errorText: 'An error ocurred performing this operation.',
 						notPoolWFSTitleText: 'Error',
-						notPoolWFSText: 'You must\'n mark \'{0}\' layer as discarded. There aren\'t more available layers of geometry type \'{1}\''
+						notPoolWFSText: 'You must\'n mark \'{0}\' layer as discarded. There aren\'t more available layers of geometry type \'{1}\'',
+						avalaibleText: "Availables",
+						occupiedText: "Occupied",
+						inEditionText: "In Edition"
 					},
 
 					"SiceCAT.tree.LayerContextMenu.prototype" : {
