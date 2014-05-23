@@ -130,6 +130,7 @@ SiceCAT = Ext
 					add_wfs_layer: "<li>Añadir capa WFS</li>",
 					edit: "<li>Edición</li>",
 					admin_edit_layer: "<li>Administración de capas editables</li></ul>",
+					alertMsg: "There have been a problem with the layer load",
 
 					// overrided by localized this.userLayersText
 					DEFAULT_USER_LAYERS_FOLDER: "User's layers",
@@ -2203,6 +2204,20 @@ SiceCAT = Ext
 					 */
 					createLoadingMask: function(){
 						return new Ext.LoadMask(Ext.getBody(), {msg: this.msgLoadingMask});
+					},
+					
+					/**
+					 * Method: createTextMsg
+					 * 
+					 * Crea un objeto con el mensaje que se debe manadar
+					 * 
+					 * @returns {Object}
+					 */
+					createTextMsg: function(){
+						return {
+							title: this.status_text,
+							msg: this.alertMsg
+						}
 					},
 
 					CLASS_NAME : "SiceCAT"
