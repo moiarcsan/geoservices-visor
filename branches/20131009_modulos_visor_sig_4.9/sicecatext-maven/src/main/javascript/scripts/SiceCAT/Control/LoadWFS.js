@@ -131,7 +131,6 @@ OpenLayers.Control.LoadWFS = OpenLayers.Class(OpenLayers.Control.LoadKML,{
         	listeners:{
         		featureTypeAdded: function (record){
         			this_.window = this_.createWindowLocationLayer();
-        			this_.window.show();
         			if(!!record.data 
         					&& !!record.data.layer){
         				this_.layerData = record.data.layer;
