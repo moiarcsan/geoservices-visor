@@ -132,14 +132,14 @@ OpenLayers.Control.LoadCamcat = OpenLayers.Class(OpenLayers.Control.LoadKML, {
 		});
 		this.form = formLocationLayer;
 
-		var win = new Ext.Window({
+		this.win = new Ext.Window({
 			title : String.format(this.titleWindowLocationLayer),
 			closeAction : 'close',
 			width : 500,
 			items : [ formLocationLayer ]
 		});
 
-		return win;
+		return this.win;
 	},
 	
 	getFormItems: function(){

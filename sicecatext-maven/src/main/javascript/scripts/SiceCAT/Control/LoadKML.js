@@ -322,6 +322,7 @@ OpenLayers.Control.LoadKML = OpenLayers.Class(OpenLayers.Control, {
 					}
 
     				store.loadData(json);
+    				self.win.show();
         		}, 
         		function(form, action) {
     				if (Sicecat.isLogEnabled) console.log("Fail loading  folders data");
@@ -401,14 +402,14 @@ OpenLayers.Control.LoadKML = OpenLayers.Class(OpenLayers.Control, {
 		});
 		this.form = formLocationLayer;
 
-		var win = new Ext.Window({
+		this.win = new Ext.Window({
 			title : String.format(this.titleWindowLocationLayer),
 			closeAction : 'close',
 			width : 500,
 			items : [ formLocationLayer ]
 		});
 
-		return win;
+		return this.win;
 	},
 	
 	getFormItems: function(){
@@ -613,7 +614,6 @@ OpenLayers.Control.LoadKML = OpenLayers.Class(OpenLayers.Control, {
 								// folder
 								this_.windowLocationLayer = this_.createWindowLocationLayer();
 								this_.windowLocationLayer.fp = fp;
-								this_.windowLocationLayer.show();
 							},
 							failure : function(form, action) {
 								var json = Ext.decode(action.response.responseText);

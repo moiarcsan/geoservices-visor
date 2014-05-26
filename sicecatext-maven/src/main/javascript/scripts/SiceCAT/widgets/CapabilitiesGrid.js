@@ -395,7 +395,6 @@ SiceCAT.grid.CapabilitiesGrid = Ext.extend(gxp.grid.CapabilitiesGrid, {
     		this_.submitForm();
     	};
 		this.windowLocationLayer = this.control.createWindowLocationLayer();
-		this.windowLocationLayer.show();
     	// NEW WIN: a quitar cuando se recupere el codigo de la ventana
     	//this.submitForm();
     }

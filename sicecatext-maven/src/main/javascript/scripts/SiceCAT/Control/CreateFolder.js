@@ -86,7 +86,6 @@ OpenLayers.Control.CreateFolder = OpenLayers.Class(OpenLayers.Control.LoadKML, {
 	 */
 	trigger: function(){
 		this.window = this.createWindowLocationLayer();
-		this.window.show();
 	},
     
     /**
