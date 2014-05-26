@@ -249,7 +249,7 @@ Ext.extend(GeoExt.data.WFSCapabilitiesReader, Ext.data.DataReader, {
                 
                 var record = new this.recordType(values, values.layer.id);
                 
-                this.loadDescribeFeature(record);
+                //this.loadDescribeFeature(record);
 
                 records.push(record);
             }

@@ -69,10 +69,10 @@ Ext.namespace("Viewer.view.dialog");
     
     /** i18n **/
    	title: 'Asistente WFS',
-   	descriptionText:'La presente ventana le permite a√±adir una nueva capa de tipo WFS al visor. '
-        + 'Introduza a continuaci√≥n la URL del documento Capabilities del servicio que desee a√±adir. '
-        + 'En el paso siguiente podr√° seleccionar que tipo de elemento de los ofrecidos por el servicio '
-        + 'desea a√±adir al visor.',
+   	descriptionText:'La presente ventana le permite aÒadir una nueva capa de tipo WFS al visor. '
+        + 'Introduza a continuaciÛn la URL del documento Capabilities del servicio que desee aÒadir. '
+        + 'En el paso siguiente podr· seleccionar que tipo de elemento de los ofrecidos por el servicio '
+        + 'desea aÒadir al visor.',
     title: 'Datos del servicio',
     waitTitle: 'Por favor espere...',
     blankText: 'Introduzca la URL del servicio WFS',
@@ -81,7 +81,7 @@ Ext.namespace("Viewer.view.dialog");
     loadingServiceText: 'Obteniendo datos del servicio...',
     errorOneTitleText: "Error recuperando WFSCapabilities",
     errorOneText: "Se ha producido un error al recuperar "
-        + "la informaci√≥n de las capas disponibles en el servidor. Compruebe que la URL introducida es correcta.",
+        + "la informaciÛn de las capas disponibles en el servidor. Compruebe que la URL introducida es correcta.",
     gridTitleText:{
     	title: "Titulo",
     	name: "Nombre", 
@@ -98,7 +98,7 @@ Ext.namespace("Viewer.view.dialog");
     },
     errorTwoTitleText: "Error recuperando campos de la capa",
     errorTwoText: "Se ha producido un error al recuperar "
-        + "la informaci√≥n de los campos de la capa.",
+        + "la informaciÛn de los campos de la capa.",
     
    	activeItem: 0,
     
@@ -251,7 +251,7 @@ Ext.namespace("Viewer.view.dialog");
                     id: 'anadir',
                     align: 'center',
                     renderer: function(value, meta, record, rowIndex) {
-                        //return '<div class="vw-add-grid-button">A√±adir</div>';
+                        //return '<div class="vw-add-grid-button">AÒadir</div>';
                         meta.css = 'add-button';
                         return '';
                     },
@@ -300,6 +300,8 @@ Ext.namespace("Viewer.view.dialog");
     },
 
     loadDescribeFeature: function(record) {
+    	var loading_mask = Sicecat.createLoadingMask();
+    	loading_mask.show();
         var dw = this.describeWindows.get(record.data.namespace + record.data.name);
         if (!dw) {
         	var featureTypeName = record.data.layer.protocol.featureType;
@@ -323,11 +325,13 @@ Ext.namespace("Viewer.view.dialog");
                 scope: {
                     self_: this, 
                     name: record.data.name, 
-                    namespace: record.data.namespace
+                    namespace: record.data.namespace,
+                    loading_mask: loading_mask
                 }
             });
         } else {
             dw.show();
+            loading_mask.hide();
         }
     },
     
@@ -362,11 +366,14 @@ Ext.namespace("Viewer.view.dialog");
                     });
                     this.self_.describeWindows.add(this.namespace+this.name, dfWindow);
                     dfWindow.show();
+                    this.loading_mask.hide();
                 } catch (e) {
                     Ext.Msg.alert(this.self_.errorTwoTitleText, this.self_.errorTwoText);
+                    this.loading_mask.hide();
                 }
             } else {
                     Ext.Msg.alert(this.self_.errorTwoTitleText, this.self_.errorTwoText);
+                    this.loading_mask.hide();
             }
 
 
