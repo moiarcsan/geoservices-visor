@@ -754,6 +754,11 @@ SIGIntegrator = Ext
 									self.sicecatInstance.userInfo = obj.data;
 								}
 							});
+							// TODO Temporalmente
+							if(idSession == null){
+								idSession = "88";
+							}
+							this.sicecatInstance.idSession = idSession;
 							// Funcion de inicializacion de SiceCAT en
 							// init_sicecatII.js.
 							init_all();
