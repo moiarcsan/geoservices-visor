@@ -269,6 +269,8 @@ SIGIntegrator = Ext
 										styleMap: styleMap
 									});
 									AuxiliaryLayer.map.addLayer(aux_layer);
+								}else{
+									aux_layer.styleMap = styleMap;
 								}
 								var pre_feature = AuxiliaryLayer.searchFeature(element.getCapa(), feature);
 								if (!!pre_feature && !!pre_feature[0]) {
