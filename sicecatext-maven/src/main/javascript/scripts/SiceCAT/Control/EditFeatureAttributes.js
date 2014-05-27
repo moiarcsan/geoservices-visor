@@ -140,6 +140,7 @@ OpenLayers.Control.EditFeatureAttributes = OpenLayers.Class(OpenLayers.Control.S
 				scope : this.popup
 			});
 			this.populate(this.currentFeature);
+			this.loading_mask.hide();
 			this.popup.show();
 		}
 	},
@@ -211,6 +212,8 @@ OpenLayers.Control.EditFeatureAttributes = OpenLayers.Class(OpenLayers.Control.S
 	 * Parameters: feature - {<OpenLayers.Layer.Vector>} feature whose has been selected.
 	 */
 	onSelect: function(feature){
+		this.loading_mask = Sicecat.createLoadingMask();
+		this.loading_mask.show();
 		this.currentFeature = feature;
 		this.currentLayer = this.currentFeature.layer;
 		this.currentLayer.featureSchema = new OpenLayers.Protocol.HTTP({
