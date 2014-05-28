@@ -1457,7 +1457,7 @@ SiceCAT = Ext
 										projection : this.jsonMapConfiguration['projection'],
 										units : this.jsonMapConfiguration['units'],
 										initialExtent : initialExtent,
-										maxExtent : maxExtent,
+										maxExtent : initialExtent,
 										resolutions : this.jsonMapConfiguration['resolutions'],
 										center : center,
 										tileSize : new OpenLayers.Size(400, 400),

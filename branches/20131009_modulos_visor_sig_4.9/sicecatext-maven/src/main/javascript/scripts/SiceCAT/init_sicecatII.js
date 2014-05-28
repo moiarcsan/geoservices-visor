@@ -493,7 +493,13 @@ function initComposer() {
 		Sicecat.map.zoomToExtent(Sicecat.loadedBBox, true);
 	} else if (Sicecat.map.maxExtent) {
 		try{
-			Sicecat.map.zoomToExtent(Sicecat.map.maxExtent, true);	
+			var bbox = Sicecat.jsonMapConfiguration["bbox"];
+			var bboxArray = bbox.split(",");
+			var minX = parseFloat(bboxArray[0]);
+			var minY = parseFloat(bboxArray[1]);
+			var maxX = parseFloat(bboxArray[2]);
+			var maxY = parseFloat(bboxArray[3]);
+			Sicecat.map.zoomToExtent(new OpenLayers.Bounds(minX, minY, maxX, maxY), true);	
 		} catch(e) {
 			
 		}
