@@ -2141,8 +2141,9 @@ SiceCAT = Ext
 					 * 
 					 */
 					showWarningSigescat: function(){
-						var msg_text = this.warning_text + this.search_wfs + this.export_pdf + this.layer_information +
-						this.zoom + this.edit_style + this.export_csv + this.available + this.add_wfs_layer + this.edit + this.admin_edit_layer;
+						//var msg_text = this.warning_text + this.search_wfs + this.export_pdf + this.layer_information +
+						//this.zoom + this.edit_style + this.export_csv + this.available + this.add_wfs_layer + this.edit + this.admin_edit_layer;
+						var msg_text = this.warning_text;
 						Ext.MessageBox.alert(this.status_text, msg_text, Ext.Msg.OK);
 					},
 					

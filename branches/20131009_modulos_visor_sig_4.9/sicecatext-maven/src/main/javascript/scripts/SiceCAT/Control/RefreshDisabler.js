@@ -77,25 +77,25 @@ OpenLayers.Control.RefreshDisabler = OpenLayers.Class(OpenLayers.Control, {
         switch(evt.keyCode) {
             case OpenLayers.Event.KEY_F5:
             	// Remove the feature selected monitor and the selected features
-            	Sicecat.featureSelectedMonitor.destroy();
-            	Sicecat.tmpSelectedFeatures = [];
-            	Sicecat.featureSelectedMonitor = new SiceCAT.FeatureSelectedMonitor({
-					title: 'Selected features by layers',
-					closeAction : 'hide',
-					width : 200,
-					height : 300,
-					id : 'features_selected',
-					layout : 'fit'
-				});
-            	// Remove the wfs searcher window
-            	Sicecat.wfsSearcherWindow.close();
-            	//disable propagation if this.disableRefresh is activate
-            	this.onRefresh(evt);
-                if(this.disableRefresh){
-                	OpenLayers.Event.stop(evt);
-                }
-                break;
-
+//            	Sicecat.featureSelectedMonitor.destroy();
+//            	Sicecat.tmpSelectedFeatures = [];
+//            	Sicecat.featureSelectedMonitor = new SiceCAT.FeatureSelectedMonitor({
+//					title: 'Selected features by layers',
+//					closeAction : 'hide',
+//					width : 200,
+//					height : 300,
+//					id : 'features_selected',
+//					layout : 'fit'
+//				});
+//            	// Remove the wfs searcher window
+//            	Sicecat.wfsSearcherWindow.close();
+//            	//disable propagation if this.disableRefresh is activate
+//            	this.onRefresh(evt);
+//                if(this.disableRefresh){
+//                	OpenLayers.Event.stop(evt);
+//                }
+//                break;
+            	OpenLayers.Event.stop(evt);
             default:
                 handled = false;
         }

@@ -488,7 +488,7 @@ GeoExt.Lang
 						labelLayerGroupLayer: "Grup de capes",
 						selectGroupLayer: "Introdueix el nom del grup de capes",
 						labelLayerMaxFeatures: "M\u00e0ximas features",
-						selectMaxFeature: "Introdueix el nmero m\u00E0ximo de features a mostrar",
+						selectMaxFeature: "Introdueix el numero m\u00E0xim de features a mostrar",
 						labelLayerFeatureType: "Tipus de la feature",
 						selectFeatureType: "Introdueix el tipus de la feature",
 						labelLayerFeatureNS: "Feature NS",
@@ -551,7 +551,7 @@ GeoExt.Lang
 						errorLayerInfo: "Error en obtenir informaci\u00f3 de la capa",
 						userLayersText : "Capes de l'usuari",
 						status_text: "Notes",
-						warning_text: "Alguna cosa en SIGESCAT va malament, la funcionalitat que se veur\u00e0 afectada ser\u00e0: <br/>",
+						warning_text: "La funcionalitat de c\u00E0rrega de capes s'ha vist afectada per l'elevat temps de resposta que proporciona SIGESCAT <br/>",
 						search_wfs: "<ul><li>Cercador WFS</li>",
 						export_pdf: "<li>Exportar PDF/PNG</li>",
 						layer_information: "<li>Veure informaci\u00f3 de capa</li>",
@@ -756,9 +756,9 @@ GeoExt.Lang
 
 					"SiceCAT.QueryPanel.prototype" : {
 						maxFeaturesText : "L\u00EDmit de resultats",
-						queryByCrossedFeature: "Intersecció de features",
+						queryByCrossedFeature: "IntersecciÃ³ de features",
 					    emptyTextLayer: "Seleccioneu una capa",
-					    emptyNameLayerText: "Sense descripció ({0})"
+					    emptyNameLayerText: "Sense descripciÃ³ ({0})"
 					},
 
 					"SiceCAT.form.ColorField.prototype" : {
@@ -840,8 +840,8 @@ GeoExt.Lang
 						downloadErrorTitleText: "Error en exportar",
 						layerEmptyText: "No \u00E9s possible exportar una capa buida",
 						downloadErrorText: "Error en exportar la capa.",
-						downloadCancelTitleText: "Exportaci\u00F3 cancel Â· lada",
-						downloadCancelText: "Has cancel Â· lant l'exportaci\u00F3 de la capa seleccionada.",
+						downloadCancelTitleText: "Exportaci\u00F3 cancel ÃÂ· lada",
+						downloadCancelText: "Has cancel ÃÂ· lant l'exportaci\u00F3 de la capa seleccionada.",
 						downloadSuccessTitleText: "Fet",
 						downloadSuccessText: "S'ha exportat amb \u00E8xit la capa '{1}' al format '{0}'",
 					    downloadImage: "images/downloadify/export_ca.png"
