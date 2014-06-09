@@ -49,7 +49,7 @@
  * 
  * Author: 
  * 
- * MoisÃ©s Arcos Santiago (marcos@emergya.com)
+ * Moisés Arcos Santiago (marcos@emergya.com)
  */
 OpenLayers.Control.LoadWFS = OpenLayers.Class(OpenLayers.Control.LoadKML,{
 	/*
@@ -135,12 +135,56 @@ OpenLayers.Control.LoadWFS = OpenLayers.Class(OpenLayers.Control.LoadKML,{
         					&& !!record.data.layer){
         				this_.layerData = record.data.layer;
         			}
+        			if(this_.layerData.protocol && !this_.layerData.protocol.geometryName){
+        				this_.getGeometryName(record);
+        			}
         			this_.form.get("inputMaxFeatures").setValue(200);
         			this_.form.get("inputName").setValue(record.data.layer.name);
         		}
         	}
         });
         w.show();
+	},
+	
+	/**
+     * Known SIGESCAT namespaces prefixes
+     */
+    SIGESCAT_NS_MAP:{
+    	'http://www.sitep.com/visor': 'v:',
+    	'www.sigem.sitep.com': 's:',
+    	'www.rescat.cat': 'r:',
+    	'www.sigem.com': 'p:' 
+    },
+	
+	getGeometryName: function(record){
+		var featureTypeName = record.data.layer.protocol.featureType;
+		//SIGESCAT
+    	if(!!this.SIGESCAT_NS_MAP[record.data.layer.protocol.featureNS]){
+    		featureTypeName = this.SIGESCAT_NS_MAP[record.data.layer.protocol.featureNS] 
+    							+ featureTypeName;
+    	}
+        var this_ = this;
+    	/* GetURLProxy */
+		var layer_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, record.data.layer.protocol.url);
+        OpenLayers.Request.GET({
+            url: layer_url,
+            params: {
+                "SERVICE": "WFS",
+                "REQUEST": "DescribeFeatureType",
+                "NAMESPACE": record.data.layer.protocol.featureNS,
+                "VERSION": record.data.layer.protocol.version,
+                "TYPENAME": featureTypeName
+            },
+            callback: function(response){
+            	var attributeStore = new GeoExt.data.AttributeStore();
+            	attributeStore.loadData(response.responseXML);
+            	for(var i=0; i<attributeStore.data.items.length; i++){
+            		if(attributeStore.data.items[i].data.type == "gml:GeometryPropertyType"){
+            			this_.layerData.protocol.geometryName = attributeStore.data.items[i].data.name;
+            		}
+            	}
+            }
+        });
 	},
 	
 	getFormItems: function(){
