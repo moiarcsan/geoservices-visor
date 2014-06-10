@@ -258,11 +258,15 @@ SIGIntegrator = Ext
 									'temporary': OpenLayers.Feature.Vector.style["temporary"]
 								});
 								// Add style to the layer
-								var layer_array = map.getLayersByName(element.getCapa());
-								var aux_layer = null;
-								if(layer_array.length > 0){
-									aux_layer = layer_array[0];
+								var layer_array = null;
+								for(var i=0; i<map.layers.length; i++){
+									if(map.layers[i].name == element.getCapa()
+										&& map.layers[i] instanceof OpenLayers.Layer.Vector){
+										layer_array = map.layers[i];
+										break;
+									}
 								}
+								var aux_layer = layer_array;
 								if(aux_layer == null){
 									aux_layer = new OpenLayers.Layer.Vector(element.getCapa(), {
 										strategies : [ new OpenLayers.Strategy.Save() ],
