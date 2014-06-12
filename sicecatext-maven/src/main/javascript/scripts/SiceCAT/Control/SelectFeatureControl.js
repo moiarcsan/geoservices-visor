@@ -142,6 +142,18 @@ OpenLayers.Control.SelectFeatureControl = OpenLayers.Class(
 			onSelect : function(feature) {
 				// Mostramos la ventana
 				Sicecat.featureSelectedMonitor.show();
+				// Temporary case for Sirenes
+				if(feature.data.estilo){
+					var style = Sicecat.styles[feature.data.estilo + "_s"];
+					feature.style = integrator.cloneObject(style);
+					if(feature.data.type == integrator.ELEMENT_TYPE_INCIDENTE){
+						feature.style.label = feature.data.pk_id.toString();
+						feature.style.labelAlign = "rt";
+						feature.style.labelXOffset = 20;
+						feature.style.labelYOffset = 20;
+					}
+					feature.layer.redraw();
+				}
 				this.featuresSelected.push(feature);
 				this.classifyFeature(feature);
 				this.countFeaturesSelected();
@@ -156,6 +168,19 @@ OpenLayers.Control.SelectFeatureControl = OpenLayers.Class(
 			 */
 			unselect : function(feature) {
 				OpenLayers.Util.removeItem(Sicecat.featuresSelected, feature);
+				// Temporary case for Sirenes
+				if(feature.data.estilo){
+					var name_style = feature.data.estilo.replace("_s", "");
+					var style = Sicecat.styles[name_style];
+					feature.style = integrator.cloneObject(style);
+					if(feature.data.type == integrator.ELEMENT_TYPE_INCIDENTE){
+						feature.style.label = feature.data.pk_id.toString();
+						feature.style.labelAlign = "rt";
+						feature.style.labelXOffset = 20;
+						feature.style.labelYOffset = 20;
+					}
+					feature.layer.redraw();
+				}
 				this.unClassifyFeature(feature);
 				this.countFeaturesSelected();
 				OpenLayers.Control.SelectFeature.prototype.unselect.apply(this,

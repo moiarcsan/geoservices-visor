@@ -281,6 +281,7 @@ AuxiliaryLayer = {
 				feature.position[1]);
 
 		var feature2 = new OpenLayers.Feature.Vector(geom, data, null);
+		feature2.style = feature.style;
 		vectorLayer.addFeatures(feature2);
 		
 		data.sicecat_feature = new SiceCAT.Feature(feature2);
