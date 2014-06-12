@@ -238,25 +238,29 @@ SIGIntegrator = Ext
 								if(selectStyle == null){
 									selectStyle = this.cloneObject(OpenLayers.Feature.Vector.style["select"]);
 								}
-								// Show a label with the id
-								if(element.getType() == integrator.ELEMENT_TYPE_INCIDENTE){
-									// Default style
-									defaultStyle.label = '${pk_id}';
-									defaultStyle.labelAlign = "rt";
-									defaultStyle.labelXOffset = 20;
-									defaultStyle.labelYOffset = 20;
-									// Select style
-									selectStyle.label = '${pk_id}';
-									selectStyle.labelAlign = "rt";
-									selectStyle.labelXOffset = 20;
-									selectStyle.labelYOffset = 20;
-								}
 								var styleMap = new OpenLayers.StyleMap({
 									'default': defaultStyle, 
 									'select': selectStyle,
 									'delete': OpenLayers.Feature.Vector.style["delete"],
 									'temporary': OpenLayers.Feature.Vector.style["temporary"]
 								});
+								if(element.getStyle()){
+									// Añadimos el estilo a la propia feature
+									var defaultStyle = Sicecat.styles[element.getStyle()];
+									if(element.getType() == integrator.ELEMENT_TYPE_INCIDENTE){
+										// Default style
+										defaultStyle.label = feature.id.toString();
+										defaultStyle.labelAlign = "rt";
+										defaultStyle.labelXOffset = 20;
+										defaultStyle.labelYOffset = 20;
+										// Select style
+										selectStyle.label = feature.id.toString();
+										selectStyle.labelAlign = "rt";
+										selectStyle.labelXOffset = 20;
+										selectStyle.labelYOffset = 20;
+									}
+									feature.style = defaultStyle;
+								}
 								// Add style to the layer
 								var layer_array = null;
 								for(var i=0; i<map.layers.length; i++){
