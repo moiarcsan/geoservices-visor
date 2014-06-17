@@ -229,12 +229,12 @@ SIGIntegrator = Ext
 								// Save feature style
 								feature.estilo = element.getStyle();
 								// Get default style
-								var defaultStyle = Sicecat.styles[element.getStyle()];
+								var defaultStyle = this.cloneObject(Sicecat.styles[element.getStyle()]);
 								if(defaultStyle == null){
 									defaultStyle = this.cloneObject(OpenLayers.Feature.Vector.style["default"]);
 								}
 								// Get select style
-								var selectStyle = Sicecat.styles[element.getStyle()+"_s"];
+								var selectStyle = this.cloneObject(Sicecat.styles[element.getStyle()+"_s"]);
 								if(selectStyle == null){
 									selectStyle = this.cloneObject(OpenLayers.Feature.Vector.style["select"]);
 								}
@@ -246,7 +246,7 @@ SIGIntegrator = Ext
 								});
 								if(element.getStyle()){
 									// Añadimos el estilo a la propia feature
-									var defaultStyle = Sicecat.styles[element.getStyle()];
+									var defaultStyle = this.cloneObject(Sicecat.styles[element.getStyle()]);
 									if(element.getType() == integrator.ELEMENT_TYPE_INCIDENTE){
 										// Default style
 										defaultStyle.label = feature.id.toString();
@@ -1507,26 +1507,28 @@ SIGIntegrator = Ext
 					saveDefElement: function(element){
 						var self = this;
 						var sendDefElement = this.createDefElement(element);
-						Ext.Ajax.request({
-							url: 'rest/persistenceGeo/userContext/saveFeature/' + Sicecat.idSession,
-							method: 'POST',
-							params: {
-								feature: Ext.util.JSON.encode(sendDefElement),
-								featureID: element.getId().toString()
-							},
-							success: function(response){
-								if (self.isLogEnabled()){
-									console.info("El defElement se ha guardado correctamente: ");
-									console.dir(response);
+						if(element.getId() != null && element.getId().toString() != null && element.getId().toString() != "" && !isNaN(element.getId().toString())){
+							Ext.Ajax.request({
+								url: 'rest/persistenceGeo/userContext/saveFeature/' + Sicecat.idSession,
+								method: 'POST',
+								params: {
+									feature: Ext.util.JSON.encode(sendDefElement),
+									featureID: element.getId().toString()
+								},
+								success: function(response){
+									if (self.isLogEnabled()){
+										console.info("El defElement se ha guardado correctamente: ");
+										console.dir(response);
+									}
+								},
+								failure: function(response){
+									if (self.isLogEnabled()){
+										console.error("[Error] El defElement no se ha guardado correctamente: ");
+										console.dir(response);
+									}
 								}
-							},
-							failure: function(response){
-								if (self.isLogEnabled()){
-									console.error("[Error] El defElement no se ha guardado correctamente: ");
-									console.dir(response);
-								}
-							}
-						});
+							});
+						}
 					},
 					
 					createDefElement: function(element){
