@@ -1163,16 +1163,18 @@ SIGIntegrator = Ext
 					 */
 					msAplPointSelected : function(posX, posY, direccion,
 							municipio, comarca) {
-
 						this.posX_ = posX;
 						this.posY_ = posY;
 						this.direccion_ = direccion;
+						this.municipio_ = municipio;
 						this.propertiesToLoad = 1;
 						this.functionToCall = "msAplPointSelected";
-						var bounds = (new OpenLayers.Geometry.Point(posX, posY))
-								.getBounds();
-						this.listMunicipios_ = new SiceCAT.Feature(null,
-								bounds, true);
+						if(direccion == null && municipio == null){
+							var bounds = (new OpenLayers.Geometry.Point(posX, posY)).getBounds();
+							this.listMunicipios_ = new SiceCAT.Feature(null, bounds, true);
+						}else{
+							this.msAplLoadPost();
+						}
 					},
 
 					/**
@@ -1240,11 +1242,18 @@ SIGIntegrator = Ext
 										this.listMunicipios_);
 								this.functionToCall = null;
 							} else if (this.functionToCall == "msAplPointSelected") {
-								this.getSecondaryAPI().msAplPointSelected(
-										this.posX_, this.posY_,
-										this.listMunicipios_.direccion,
-										this.listMunicipios_.getIdMunicipio(),
-										this.listMunicipios_.getIdComarca());
+								if(this.direccion_ != null && this.municipio_ != null){
+									this.getSecondaryAPI().msAplPointSelected(
+											this.posX_, this.posY_,
+											this.direccion_,
+											this.municipio_);
+								}else{
+									this.getSecondaryAPI().msAplPointSelected(
+											this.posX_, this.posY_,
+											this.listMunicipios_.direccion,
+											this.listMunicipios_.getIdMunicipio(),
+											this.listMunicipios_.getIdComarca());
+								}
 								this.functionToCall = null;
 							} else if (this.functionToCall == "msAplResolvedAddress") {
 								// this.getSecondaryAPI().msAplResolvedAddress(this.posX_,
@@ -1507,28 +1516,26 @@ SIGIntegrator = Ext
 					saveDefElement: function(element){
 						var self = this;
 						var sendDefElement = this.createDefElement(element);
-						if(element.getId() != null && element.getId().toString() != null && element.getId().toString() != "" && !isNaN(element.getId().toString())){
-							Ext.Ajax.request({
-								url: 'rest/persistenceGeo/userContext/saveFeature/' + Sicecat.idSession,
-								method: 'POST',
-								params: {
-									feature: Ext.util.JSON.encode(sendDefElement),
-									featureID: element.getId().toString()
-								},
-								success: function(response){
-									if (self.isLogEnabled()){
-										console.info("El defElement se ha guardado correctamente: ");
-										console.dir(response);
-									}
-								},
-								failure: function(response){
-									if (self.isLogEnabled()){
-										console.error("[Error] El defElement no se ha guardado correctamente: ");
-										console.dir(response);
-									}
+						Ext.Ajax.request({
+							url: 'rest/persistenceGeo/userContext/saveFeature/' + Sicecat.idSession,
+							method: 'POST',
+							params: {
+								feature: Ext.util.JSON.encode(sendDefElement),
+								featureID: element.getId().toString()
+							},
+							success: function(response){
+								if (self.isLogEnabled()){
+									console.info("El defElement se ha guardado correctamente: ");
+									console.dir(response);
 								}
-							});
-						}
+							},
+							failure: function(response){
+								if (self.isLogEnabled()){
+									console.error("[Error] El defElement no se ha guardado correctamente: ");
+									console.dir(response);
+								}
+							}
+						});
 					},
 					
 					createDefElement: function(element){

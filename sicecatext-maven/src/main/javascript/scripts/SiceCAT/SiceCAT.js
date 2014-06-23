@@ -2220,6 +2220,54 @@ SiceCAT = Ext
 							msg: this.alertMsg
 						}
 					},
+					
+					doOpenLSRequest: function(posX, posY, funct){
+						var data = '<XLS xsi:schemaLocation="http://www.opengis.net/xls" version="1.2.0" xmlns="http://www.opengis.net/xls"'
+							+ ' xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
+							+ '<Request methodName="Geocode" requestID="123" '
+							+ 'version="1.2.0" maximumResponses="' + false + '">'
+							+ '<ReverseGeocodeRequest> <Position> <gml:Point srsName="EPSG:23031">' 
+							+ '<gml:pos>' + posX + ' ' + posY
+							+ '</gml:pos></gml:Point></Position></ReverseGeocodeRequest>'
+							+ '</Request></XLS>';
+			
+						var store_rg = new Ext.data.Store({
+							proxy : new Ext.data.HttpProxy({
+								url: Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, 'http://sigescat.pise.interior.intranet/openls'),
+								method: 'POST',
+								xmlData: data
+							}),
+							fields : [
+							   {name: "lon", type: "number"},
+							   {name: "lat", type: "number"},
+							   {name: "place", type: "text"},
+							   {name: "typePlace", type: "text"},
+							   "text"
+							],
+							listeners:{
+								load: funct,
+								scope: this
+							},
+							reader: new SiceCAT.data.OpenLS_XLSReverseGeocodeReader()
+						});
+						store_rg.load();
+					},
+					
+					/**
+					 * Method: getJsonFromRecords
+					 * 
+					 * Params:
+					 **/
+					getJsonFromRecords: function(records){
+						var json = [];
+						for(r in records){
+							var data = records[r].data;
+							for(d in data){
+								json.push([d, data[d]]);
+							}
+						}
+						return json;
+					},
 
 					CLASS_NAME : "SiceCAT"
 				});

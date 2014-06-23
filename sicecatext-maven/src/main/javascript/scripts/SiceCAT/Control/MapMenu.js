@@ -5,8 +5,8 @@
  * 
  * Author: 
  * 
- * Mariano LÃ³pez MuÃ±oz (mlopez@emergya.com)
- * MarÃ­a Arias de Reyna DomÃ­nguez (marias@emergya.com)
+ * Mariano López Muñoz (mlopez@emergya.com)
+ * María Arias de Reyna Domínguez (marias@emergya.com)
  * 
  * Inherits from: 
  * 
@@ -300,7 +300,17 @@ OpenLayers.Control.MapMenu = OpenLayers
 						return new Ext.menu.Item({
 							text : this.enviarPosicionText,
 							handler : function() {
-								integrator.msAplPointSelected(posX, posY);
+								Sicecat.doOpenLSRequest(posX, posY, function(store, records, options) {
+									var json = this.getJsonFromRecords(records);
+									var direccion = "";
+									if(json[2][1] != null && json[2][1] != ""){
+										direccion += json[2][1];
+										if(json[3][1] != null && json[3][1] != ""){
+											direccion += ", " + json[3][1];
+										}
+									}
+									integrator.msAplPointSelected(posX, posY, direccion, json[4][1]);
+								});
 							}
 						});
 					},
