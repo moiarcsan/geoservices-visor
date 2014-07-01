@@ -206,8 +206,7 @@ OpenLayers.Control.LoadWFS = OpenLayers.Class(OpenLayers.Control.LoadKML,{
 			allowBlank : false,
 			emptyText: this.selectMaxFeature
 		}); 
-		if(Sicecat.GROUP_IDS.CECAT == Sicecat.SELECTED_GROUP
-				|| Sicecat.GROUP_IDS.SUPERADMIN == Sicecat.SELECTED_GROUP){
+		if(Sicecat.GROUP_IDS.CECAT == Sicecat.SELECTED_GROUP){
 			items.push({
 				xtype: 'checkbox',
 				id: 'inputIsEditable',

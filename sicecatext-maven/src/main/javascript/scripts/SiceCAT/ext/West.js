@@ -24,9 +24,9 @@
  * This exception does not however invalidate any other reasons why the
  * executable file might be covered by the GNU General Public License.
  * 
- * Authors:: Alejandro Díaz Torres (mailto:adiaz@emergya.com)
- * Author: María Arias de Reyna Domínguez (mailto:marias@emergya.com)
- * Author: Moisés Arcos Santiago (mailto:marcos@emergya.com)
+ * Authors:: Alejandro DÃ­az Torres (mailto:adiaz@emergya.com)
+ * Author: MarÃ­a Arias de Reyna DomÃ­nguez (mailto:marias@emergya.com)
+ * Author: MoisÃ©s Arcos Santiago (mailto:marcos@emergya.com)
  * 
  */
 
@@ -185,22 +185,8 @@ SiceCAT.West = Ext
 						this.edition = [];
 
 						this.init_layers_tree_2();
-						// NEW WIN: Quitamos los botones del panel de
-						// importacion
-						// this.init_toolbarExport();
-						//this.init_toolbarLocalizacion();
-						this.init_toolbarEdition();
 						this.init_toolbarRouting();
-
-						// NEW WIN: Quitamos el panel de importacion
-						// var buttonsExporter = new Ext.Panel({
-						// itemID : "import_export",
-						// frame : false,
-						// title : this.importExportButtonText,
-						// autoHeight : true,
-						// border : false,
-						// tbar : this.exporter
-						// });
+						
 						var buttonsLocalizator = new Ext.Panel({
 							frame : false,
 							title : this.searchButtonText,
@@ -208,15 +194,20 @@ SiceCAT.West = Ext
 							border : false,
 							tbar : this.localizator
 						});
-
-						var buttonsEdition = new Ext.Panel({
-							id : 'edition',
-							frame : false,
-							autoscroll : true,
-							title : this.editionButtonText,
-							border : false,
-							tbar : this.edition
-						});
+						var buttonsEdition = null;
+						if(Global_TMP.permisos.indexOf("admin1") > -1){
+							// Not load toolbar edition
+						}else{
+							this.init_toolbarEdition();
+							buttonsEdition = new Ext.Panel({
+								id : 'edition',
+								frame : false,
+								autoscroll : true,
+								title : this.editionButtonText,
+								border : false,
+								tbar : this.edition
+							});
+						}
 
 						var buttonsRouting = new Ext.Panel({
 							id : 'routing',
@@ -234,37 +225,69 @@ SiceCAT.West = Ext
 							dynamic : true
 						});
 
-						this.leftSide = {
-							/*
-							 * Panel tipo accordion
-							 */
-							id : 'accordionWest',
-							region : 'west',
-							xtype : 'panel',
-							layout : 'accordion',
-							border : true,
-							split : true,
-							collapsible : true,
-							collapseMode : "mini",
-							// autoScroll : true,
-							width : 200,
-							layoutConfig : {
-								titleCollapse : false,
-								animate : false,
-								activeOnTop : false
-							},
-							items : [
-							// Árbol de capas (Capas)
-							this.tree,
-							// Leyenda (Leyenda)
-							legend,
-							// Edición de capas (Edición)
-							buttonsEdition,
-							// Creación de rutas (Ruta)
-							buttonsRouting]
-							// Buscador
-							//buttonsLocalizator]
-						};
+						if(buttonsEdition != null){
+							this.leftSide = {
+									/*
+									 * Panel tipo accordion
+									 */
+									id : 'accordionWest',
+									region : 'west',
+									xtype : 'panel',
+									layout : 'accordion',
+									border : true,
+									split : true,
+									collapsible : true,
+									collapseMode : "mini",
+									// autoScroll : true,
+									width : 200,
+									layoutConfig : {
+										titleCollapse : false,
+										animate : false,
+										activeOnTop : false
+									},
+									items : [
+									// ï¿½rbol de capas (Capas)
+									this.tree,
+									// Leyenda (Leyenda)
+									legend,
+									// Ediciï¿½n de capas (Ediciï¿½n)
+									buttonsEdition,
+									// Creaciï¿½n de rutas (Ruta)
+									buttonsRouting]
+									// Buscador
+									//buttonsLocalizator]
+								};
+						}else{
+							this.leftSide = {
+									/*
+									 * Panel tipo accordion
+									 */
+									id : 'accordionWest',
+									region : 'west',
+									xtype : 'panel',
+									layout : 'accordion',
+									border : true,
+									split : true,
+									collapsible : true,
+									collapseMode : "mini",
+									// autoScroll : true,
+									width : 200,
+									layoutConfig : {
+										titleCollapse : false,
+										animate : false,
+										activeOnTop : false
+									},
+									items : [
+									// ï¿½rbol de capas (Capas)
+									this.tree,
+									// Leyenda (Leyenda)
+									legend,
+									// Creaciï¿½n de rutas (Ruta)
+									buttonsRouting]
+									// Buscador
+									//buttonsLocalizator]
+								};
+						}
 					},
 
 					/**
@@ -337,7 +360,7 @@ SiceCAT.West = Ext
 												handler : function() {
 													// Comprobamos que los
 													// campos obligatorios no
-													// estén vacíos
+													// estÃ©n vacÃ­os
 													var srcValue = Ext.getCmp("fromRoute").getValue();
 													var targetValue = Ext.getCmp("toRoute").getValue();
 													var shortestValue = Ext.getCmp("shortestType").getValue();
@@ -352,8 +375,8 @@ SiceCAT.West = Ext
 															type = "TIME";
 														}
 														var formatSoap = new OpenLayers.Format.XMLSOAP();
-														// Parámetros que se
-														// envian en la petición
+														// ParÃ¡metros que se
+														// envian en la peticiÃ³n
 														var paramInput = {
 															srsName : map.projection,
 															startPoint : srcValue,
@@ -363,17 +386,17 @@ SiceCAT.West = Ext
 														};
 														var inputData = formatSoap.write(paramInput);
 														var url = Sicecat.defaultWMSServer.replace("ows/wms?", "mrk");
-														// Método que se lanza
+														// MÃ©todo que se lanza
 														// cuando la consulta al
 														// servicio no tiene
-														// éxito
+														// Ã©xito
 														var requestFailure = function(response) {
 															Ext.Msg.alert(control.titleError, control.msgError);
 														};
 
-														// Método que se lanza
-														// cuando la petición al
-														// servicio tiene éxito
+														// MÃ©todo que se lanza
+														// cuando la peticiÃ³n al
+														// servicio tiene Ã©xito
 														var requestSuccess = function(response) {
 															var format = new OpenLayers.Format.XMLSOAP();
 															var output = format.read(response.responseText);
@@ -391,7 +414,7 @@ SiceCAT.West = Ext
 															var edge = [];
 															var routingGeom = [];
 															if (output.path) {
-																// Añadir la
+																// AÃ±adir la
 																// lista de
 																// pasos al grid
 																grid = Ext.getCmp("routingGrid");
@@ -435,7 +458,7 @@ SiceCAT.West = Ext
 																}
 																store.loadData(routingData);
 																// Dibujar la
-																// geometría de
+																// geometrÃ­a de
 																// la respuesta
 																for ( var i = 0; i < arrayEdge.length; i++) {
 																	edge = arrayEdge[i];
@@ -443,7 +466,7 @@ SiceCAT.West = Ext
 																		routingGeom.push(edge[j]);
 																	}
 																}
-																// Añadir la
+																// AÃ±adir la
 																// informacion
 																// de tiempo y
 																// distancia
@@ -529,7 +552,7 @@ SiceCAT.West = Ext
 																				false);
 															}
 														};
-														// Petición de datos al
+														// PeticiÃ³n de datos al
 														// servicio
 														OpenLayers.Request
 																.POST({
@@ -547,7 +570,7 @@ SiceCAT.West = Ext
 												}
 											},
 											{
-												// Botón de borrar
+												// BotÃ³n de borrar
 												text : this.removePath,
 												hideLabel : true,
 												width : 60,
@@ -686,7 +709,7 @@ SiceCAT.West = Ext
 										}
 									}
 								});
-						// Panel con información de la ruta completa (Tiempo
+						// Panel con informaciÃ³n de la ruta completa (Tiempo
 						// total y distancia total)
 						var routingInfoPanel = new Ext.Panel({
 							id : "routingInfoPanel",
@@ -1375,21 +1398,21 @@ SiceCAT.West = Ext
 					/**
 					 * Method: init_layers_tree_2
 					 * 
-					 * Inicializa el árbol de capas
+					 * Inicializa el Ã¡rbol de capas
 					 * 
-					 * Cartografía base: Son capas que forman la base del mapa.
+					 * CartografÃ­a base: Son capas que forman la base del mapa.
 					 * Normalmente son opacas, por lo que no permiten visualizar
-					 * las capas que hay bajo ellas. Por este motivo sólo podrá
+					 * las capas que hay bajo ellas. Por este motivo sÃ³lo podrÃ¡
 					 * haber una capa base activa a la vez. Su
-					 * activación/desactivación se realizará mediante un control
+					 * activaciÃ³n/desactivaciÃ³n se realizarÃ¡ mediante un control
 					 * de tipo radio. Capas superpuestas u Overlays: Se trata
 					 * normalmente capas que contienen zonas transparentes, por
 					 * lo que pueden ser superpuestas a la capa base activa. Su
-					 * activación/desactivación se realizará mediante un control
+					 * activaciÃ³n/desactivaciÃ³n se realizarÃ¡ mediante un control
 					 * de tipo checkbox ya que puede haber varias activas al
-					 * mismo tiempo. Capas editables: En esta categoría se
+					 * mismo tiempo. Capas editables: En esta categorÃ­a se
 					 * agrupan las capas WFS-T editables por el usuario. Capas
-					 * del usuario: Se trata de las capas que el usuario añade
+					 * del usuario: Se trata de las capas que el usuario aÃ±ade
 					 * mediante el asistente WMS. Se activan y desactivan
 					 * mediante un checkbox.
 					 */

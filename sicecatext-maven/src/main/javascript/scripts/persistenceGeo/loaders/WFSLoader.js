@@ -92,7 +92,7 @@ PersistenceGeo.loaders.WFSLoader
 			this.postFunctionsWrapper(layerData, layer, layerTree);
 			
 			// Dinstict load depends on role user
-			if(Global_TMP.permisos.contains('admin')){
+			if(Global_TMP.permisos.contains('admin2')){
 				// He's an admin
 				if(layerData['properties']['editable'] && this.toBoolean(layerData['properties']['editable'])){
 					// It's an editable layer
@@ -120,6 +120,8 @@ PersistenceGeo.loaders.WFSLoader
 					// It's not an editable layer
 					layer.visibility = false;
 				}
+			}else if(Global_TMP.permisos.contains('admin1')){
+				// Do anything
 			}else{
 				// He's an user
 				if(layerData['properties']['editable'] && this.toBoolean(layerData['properties']['editable'])){

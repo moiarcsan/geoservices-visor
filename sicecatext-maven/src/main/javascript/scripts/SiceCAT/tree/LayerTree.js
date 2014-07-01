@@ -185,55 +185,64 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 			notGroupLayers.push(Sicecat.notGroupLayers[i]);
 		}
 
-		var treeConfigObject = [ {
-			nodeType : "gx_baselayercontainer",
-			text : baseLayersText
-		}, {
-			leaf: false,
-			expanded : true,
-			text : editableLayersText, 
-			children:[
-				{
-					nodeType : "gx_sicecat_editablelayercontainer",
-					expanded : true,
-					text : this.avalaibleText,
-					groupLayers : 'available',
-					loader : {
-						baseAttrs : {
-							radioGroup : "foo",
-							uiProvider : "layernodeui",
-							groupLayers : 'available'
-						}
-					}, 
-				},
-				{
-					nodeType : "gx_sicecat_editablelayercontainer",
-					expanded : true,
-					text : this.occupiedText,
-					groupLayers : 'occupied',
-					loader : {
-						baseAttrs : {
-							radioGroup : "foo",
-							uiProvider : "layernodeui",
-							groupLayers : 'occupied'
-						}
-					}, 
-				},
-				{
-					nodeType : "gx_sicecat_editablelayercontainer",
-					expanded : true,
-					text : this.inEditionText,
-					groupLayers : 'in_edition',
-					loader : {
-						baseAttrs : {
-							radioGroup : "foo",
-							uiProvider : "layernodeui",
-							groupLayers : 'in_edition'
-						}
-					}, 
-				}
-			]
-		}];
+		var treeConfigObject = null;
+		
+		if(Global_TMP.permisos.indexOf("admin1") > -1){
+			treeConfigObject = [ {
+				nodeType : "gx_baselayercontainer",
+				text : baseLayersText
+			}];
+		}else{
+			treeConfigObject = [ {
+				nodeType : "gx_baselayercontainer",
+				text : baseLayersText
+			}, {
+				leaf: false,
+				expanded : true,
+				text : editableLayersText, 
+				children:[
+					{
+						nodeType : "gx_sicecat_editablelayercontainer",
+						expanded : true,
+						text : this.avalaibleText,
+						groupLayers : 'available',
+						loader : {
+							baseAttrs : {
+								radioGroup : "foo",
+								uiProvider : "layernodeui",
+								groupLayers : 'available'
+							}
+						}, 
+					},
+					{
+						nodeType : "gx_sicecat_editablelayercontainer",
+						expanded : true,
+						text : this.occupiedText,
+						groupLayers : 'occupied',
+						loader : {
+							baseAttrs : {
+								radioGroup : "foo",
+								uiProvider : "layernodeui",
+								groupLayers : 'occupied'
+							}
+						}, 
+					},
+					{
+						nodeType : "gx_sicecat_editablelayercontainer",
+						expanded : true,
+						text : this.inEditionText,
+						groupLayers : 'in_edition',
+						loader : {
+							baseAttrs : {
+								radioGroup : "foo",
+								uiProvider : "layernodeui",
+								groupLayers : 'in_edition'
+							}
+						}, 
+					}
+				]
+			}];
+		}
 		
 		var treeConfig = (new SiceCATGeoParser()).parseLayerTreeConfig(treeConfigObject, Sicecat.auxGroupLayers, Sicecat.notGroupLayers);
 		
