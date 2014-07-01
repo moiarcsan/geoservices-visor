@@ -1516,26 +1516,28 @@ SIGIntegrator = Ext
 					saveDefElement: function(element){
 						var self = this;
 						var sendDefElement = this.createDefElement(element);
-						Ext.Ajax.request({
-							url: 'rest/persistenceGeo/userContext/saveFeature/' + Sicecat.idSession,
-							method: 'POST',
-							params: {
-								feature: Ext.util.JSON.encode(sendDefElement),
-								featureID: element.getId().toString()
-							},
-							success: function(response){
-								if (self.isLogEnabled()){
-									console.info("El defElement se ha guardado correctamente: ");
-									console.dir(response);
+						if(element.getId() != null && element.getId().toString() != null && element.getId().toString() != "" && !isNaN(element.getId().toString())){
+							Ext.Ajax.request({
+								url: 'rest/persistenceGeo/userContext/saveFeature/' + Sicecat.idSession,
+								method: 'POST',
+								params: {
+									feature: Ext.util.JSON.encode(sendDefElement),
+									featureID: element.getId().toString()
+								},
+								success: function(response){
+									if (self.isLogEnabled()){
+										console.info("El defElement se ha guardado correctamente: ");
+										console.dir(response);
+									}
+								},
+								failure: function(response){
+									if (self.isLogEnabled()){
+										console.error("[Error] El defElement no se ha guardado correctamente: ");
+										console.dir(response);
+									}
 								}
-							},
-							failure: function(response){
-								if (self.isLogEnabled()){
-									console.error("[Error] El defElement no se ha guardado correctamente: ");
-									console.dir(response);
-								}
-							}
-						});
+							});
+						}
 					},
 					
 					createDefElement: function(element){
