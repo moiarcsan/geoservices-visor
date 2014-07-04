@@ -1062,27 +1062,38 @@ SiceCAT.West = Ext
 								{
 									name : "OpenLayers.Control.DeleteFeature",
 									type : OpenLayers.Control.TYPE_TOGGLE,
-									hover : false,
-									toggle : true,
+									hover : true,
+									highlightOnly: true,
+									//toggle : true,
 									multiple : true,
 									box: true,
 									onSelect : function(feature) {
 										// if feature doesn't have a
 										// fid, destroy it
 										if (feature.fid == undefined) {
-											feature.layer
-													.destroyFeatures([ feature ]);
+											feature.layer.destroyFeatures([ feature ]);
 										} else {
 											feature.state = OpenLayers.State.DELETE;
-											feature.layer.events
-													.triggerEvent(
-															"afterfeaturemodified",
-															{
-																feature : feature
-															});
-											feature.layer
-													.drawFeature(feature);
+											feature.layer.events.triggerEvent("afterfeaturemodified", {
+												feature : feature
+											});
+											feature.layer.drawFeature(feature);
 										}
+									},
+									clickFeature: function(feature){
+										var selected = (OpenLayers.Util.indexOf(feature.layer.selectedFeatures, feature) > -1);
+							            if (selected) {
+							                if (this.toggleSelect()) {
+							                    this.unselect(feature);
+							                } else if (!this.multipleSelect()) {
+							                    this.unselectAll({except: feature});
+							                }
+							            } else {
+							                if (!this.multipleSelect()) {
+							                    this.unselectAll({except: feature});
+							                }
+							                this.select(feature);
+							            }
 									}
 								});
 						action = new GeoExt.Action({
