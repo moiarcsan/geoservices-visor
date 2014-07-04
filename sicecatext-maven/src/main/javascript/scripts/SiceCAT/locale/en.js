@@ -506,6 +506,7 @@ GeoExt.Lang
 
 					"SiceCAT.prototype" : {
 						nombreCapaAuxiliarText : "Auxiliar",
+						nombreCapaResultadoText : "Search results",
 						compatibiltyIEText: "This browser is not 100% compatible with this viewer, please use Mozilla Firefox or Google Chrome 7 + 15 +",
 						compatibiltyScreenText: "Your screen is not optimized for this viewer. The minimum recommended resolution is 1280x1024",
 						compatibiltywindiwTitleText: "Warning!",
@@ -958,6 +959,7 @@ GeoExt.Lang
 						featureTitleTextAPI: "{0} layer element: {1}",
 						titlePopup: "Information",
 						titleSeeMore: "See more",
+						titleReverseGeocoding: "Reverse Geocoding",
 						nameProperty: "Property",
 						valueProperty: "Value",
 					},

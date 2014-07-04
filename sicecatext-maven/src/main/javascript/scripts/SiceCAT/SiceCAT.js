@@ -86,7 +86,7 @@ SiceCAT = Ext
 					 * 
 					 * {String} Default text to be show
 					 */
-					nombreCapaResultadoText : "Resultado de consulta",
+					nombreCapaResultadoText : "Resultados de la consulta",
 
 					/**
 					 * Property: searchButtonWFSButtonText
