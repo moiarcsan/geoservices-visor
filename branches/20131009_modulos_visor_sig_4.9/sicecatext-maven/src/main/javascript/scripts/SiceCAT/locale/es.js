@@ -515,6 +515,7 @@ GeoExt.Lang
 
 					"SiceCAT.prototype" : {
 						nombreCapaAuxiliarText : "Auxiliar",
+						nombreCapaResultadoText : "Resultados de la consulta",
 						compatibiltyIEText: "Este navegador no es compatible al 100% con este visor, por favor, use Mozilla Firefox 7+ o Google Chrome 15+",
 						compatibiltyScreenText: "La pantalla no est\u00E1 optimizada para este visor. La resoluci\u00F3n m\u00EDnima recomendada es 1280x1024",
 						compatibiltywindiwTitleText: "\u00a1Cuidado!",
@@ -992,6 +993,7 @@ GeoExt.Lang
 						featureTitleTextAPI: "Elemento de la capa {0}: {1}",
 						titlePopup: "Informaci\u00F3n",
 						titleSeeMore: "Ver m\u00E1s",
+						titleReverseGeocoding: "Geocodificaci\u00f3n Inversa",
 						nameProperty: "Propiedad",
 						valueProperty: "Valor"
 					},
