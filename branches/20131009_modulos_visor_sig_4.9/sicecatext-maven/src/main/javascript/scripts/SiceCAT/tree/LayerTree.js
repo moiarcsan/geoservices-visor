@@ -95,6 +95,9 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 		
 		SiceCAT.tree.LayerTree.superclass.initComponent.apply(this, arguments);
 		
+		// Set the title panel
+    	this.title = this.initialConfig.title;
+		
 		new Ext.tree.TreeSorter(this, {
 		    folderSort: true,
 		    dir: "desc",

@@ -1432,7 +1432,8 @@ SiceCAT.West = Ext
 						var sicecatInstance = this.sicecatInstance;
 						
 						this.tree = new SiceCAT.tree.LayerTree({
-							sicecatInstance: sicecatInstance
+							sicecatInstance: sicecatInstance,
+							title: this.layersText
 						});
 					}
 });
