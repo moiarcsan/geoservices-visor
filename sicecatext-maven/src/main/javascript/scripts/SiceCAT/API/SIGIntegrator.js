@@ -253,11 +253,15 @@ SIGIntegrator = Ext
 										defaultStyle.labelAlign = "rt";
 										defaultStyle.labelXOffset = 20;
 										defaultStyle.labelYOffset = 20;
+										defaultStyle.fontSize = "20px";
+										defaultStyle.fontWeight = "20px";
 										// Select style
 										selectStyle.label = feature.id.toString();
 										selectStyle.labelAlign = "rt";
 										selectStyle.labelXOffset = 20;
 										selectStyle.labelYOffset = 20;
+										selectStyle.fontSize = "20px";
+										selectStyle.fontWeight = "20px";
 									}
 									feature.style = defaultStyle;
 								}
