@@ -76,7 +76,11 @@ SiceCAT.Control.ModifyFeatureControl = OpenLayers.Class(OpenLayers.Control.Modif
      *     feature on server-side.
      */
     onModificationStart: function(feature) {
-    	this.dragControl.removeFeature(feature);
+    	if(this.mode == OpenLayers.Control.ModifyFeature.DRAG && this.feature.geometry instanceof OpenLayers.Geometry.Point){
+    		// Do anything
+    	}else{
+    		this.dragControl.removeFeature(feature);
+    	}
     },
     
     /**
@@ -153,7 +157,7 @@ SiceCAT.Control.ModifyFeatureControl = OpenLayers.Class(OpenLayers.Control.Modif
         var selectOptions = {
         		clickout : true,
 				toggle : true,
-				multiple : true,
+				multiple : false,
 				hover : false,
 				highlightOnly : true,
 				selectStyle : Sicecat.styles["select"],
