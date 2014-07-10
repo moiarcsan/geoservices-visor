@@ -70,8 +70,6 @@ PersistenceGeo.loaders.GMLLoader
 			formatType = new OpenLayers.Format.GML.v3({
 				internalProjection : internalProjection,
 				externalProjection : externalProjection,
-				featureType : "feature",
-				featureNS : "http://example.com/feature",
 				extractStyles : true,
 				extractAttributes : true,
 				maxDepth : 2

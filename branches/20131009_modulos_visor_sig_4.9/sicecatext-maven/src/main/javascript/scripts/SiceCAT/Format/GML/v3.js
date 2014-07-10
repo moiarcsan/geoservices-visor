@@ -98,6 +98,9 @@ OpenLayers.Format.GML.v3 = OpenLayers.Class(OpenLayers.Format.GML.Base, {
                     obj.srsDimension = dim;
                 }
             },
+            "FeatureCollection": function(node, obj){
+            	this.readChildNodes(node, obj);
+            },
             "featureMembers": function(node, obj) {
                 //console.log("Parsing GML_V3");
                 this.readChildNodes(node, obj);
@@ -296,6 +299,9 @@ OpenLayers.Format.GML.v3 = OpenLayers.Class(OpenLayers.Format.GML.Base, {
             this.setNamespace("feature", node.namespaceURI);
             this.featureNS = node.namespaceURI;
             this.autoConfig = true;
+        }
+        if(first){
+        	this.setNamespace(node.prefix, node.namespaceURI);
         }
         return OpenLayers.Format.XML.prototype.readNode.apply(this, [node, obj]);
     },
