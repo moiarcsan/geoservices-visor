@@ -91,43 +91,39 @@ OpenLayers.Control.LoadGML = OpenLayers.Class(OpenLayers.Control.LoadKML, {
     
 	createPopup: function(){
 		var windowImporter = OpenLayers.Control.LoadKML.prototype.createPopup.apply(this, arguments);
+		var storeType = new Ext.data.ArrayStore({
+	        id: 0,
+	        fields: [
+	            'myId',
+	            'displayText'
+	        ],
+	        data: [[2, this.TYPE_GML_V2]
+	        , [3, this.TYPE_GML_V3] //#55164: Comento GML V3 que no consigo que funciones(no encuentra las geometrias)
+	        ]
+	    });
+		//storeType.load();
+	    var comboType = new Ext.form.ComboBox({
+	        typeAhead: true,
+	        triggerAction: 'all',
+	        lazyRender:true,
+	        mode: 'local',
+	        store: storeType,
+	        valueField: 'myId',
+	        displayField: 'displayText',
+		    fieldLabel: this.labelComboText,
+	        width: 245,
+		    emptyText: this.selectTypeText,
+		    listeners: {
+		    	select: function(combo, record, index){
+		        	var idTypeSelected = comboType.value;
+		        	var nameTypeSelected = record.get(comboType.displayField);
+		        	this.importType(idTypeSelected, nameTypeSelected);
+		        },
+		        scope: this}
+	    });
 		
-		//TODO: Add cuando funcione GML.v3
-		if(!this.comboType){
-			var storeType = new Ext.data.ArrayStore({
-		        id: 0,
-		        fields: [
-		            'myId',
-		            'displayText'
-		        ],
-		        data: [[2, this.TYPE_GML_V2]
-		        , [3, this.TYPE_GML_V3] //#55164: Comento GML V3 que no consigo que funciones(no encuentra las geometrias)
-		        ]
-		    });
-			//storeType.load();
-		    var comboType = new Ext.form.ComboBox({
-		        typeAhead: true,
-		        triggerAction: 'all',
-		        lazyRender:true,
-		        mode: 'local',
-		        store: storeType,
-		        valueField: 'myId',
-		        displayField: 'displayText',
-			    fieldLabel: this.labelComboText,
-		        width: 245,
-			    emptyText: this.selectTypeText,
-			    listeners: {
-			    	select: function(combo, record, index){
-			        	var idTypeSelected = comboType.value;
-			        	var nameTypeSelected = record.get(comboType.displayField);
-			        	this.importType(idTypeSelected, nameTypeSelected);
-			        },
-			        scope: this}
-		    });
-			
-			this.fp.add(comboType);
-			this.comboType = comboType;
-		}
+		this.fp.add(comboType);
+		this.comboType = comboType;
 		
 		return windowImporter;
 	},
