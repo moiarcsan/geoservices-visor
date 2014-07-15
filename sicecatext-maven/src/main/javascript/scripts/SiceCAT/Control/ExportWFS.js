@@ -372,10 +372,17 @@ OpenLayers.Control.ExportWFS = OpenLayers
 						} else {
 							layerURL = layer.protocol.url;
 						}
+						
+						SIGESCAT_NS_MAP={
+					    	'http://www.sitep.com/visor': 'v:',
+					    	'www.sigem.sitep.com': 's:',
+					    	'www.rescat.cat': 'r:',
+					    	'www.sigem.com': 'p:' 
+					    };
 
 						var urlVectorWFS = layerURL
 								+ "&request=DescribeFeatureType&typeName="
-								+ layer.protocol.featurePrefix + ":"
+								+ SIGESCAT_NS_MAP[layer.protocol.featureNS]
 								+ layer.protocol.featureType;
 						
 						/* GetURLProxy */
