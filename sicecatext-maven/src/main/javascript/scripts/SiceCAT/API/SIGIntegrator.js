@@ -250,18 +250,20 @@ SIGIntegrator = Ext
 									if(element.getType() == integrator.ELEMENT_TYPE_INCIDENTE){
 										// Default style
 										defaultStyle.label = feature.id.toString();
-										defaultStyle.labelAlign = "rt";
-										defaultStyle.labelXOffset = 20;
-										defaultStyle.labelYOffset = 20;
+										defaultStyle.labelAlign = "lt";
+										defaultStyle.labelXOffset = 5;
+										defaultStyle.labelYOffset = 30;
 										defaultStyle.fontSize = "20px";
 										defaultStyle.fontWeight = "20px";
+										defaultStyle.fontFamily = "arial, tahoma, helvetica, sans-serif";
 										// Select style
 										selectStyle.label = feature.id.toString();
-										selectStyle.labelAlign = "rt";
-										selectStyle.labelXOffset = 20;
-										selectStyle.labelYOffset = 20;
+										selectStyle.labelAlign = "lt";
+										selectStyle.labelXOffset = 5;
+										selectStyle.labelYOffset = 30;
 										selectStyle.fontSize = "20px";
 										selectStyle.fontWeight = "20px";
+										selectStyle.fontFamily = "arial, tahoma, helvetica, sans-serif";
 									}
 									feature.style = defaultStyle;
 								}
