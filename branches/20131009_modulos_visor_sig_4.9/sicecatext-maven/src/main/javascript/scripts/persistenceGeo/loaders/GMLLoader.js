@@ -95,8 +95,8 @@ PersistenceGeo.loaders.GMLLoader
 			styleMap: styleMap,
 			protocol : new OpenLayers.Protocol.HTTP({
 				url : layerData.server_resource,
-				format : this
-						.formatType(layerData.properties ? layerData.properties.externalProjection : null),
+				format : this.formatType(layerData.properties ? layerData.properties.externalProjection : null, 
+						layerData.properties ? layerData.properties.typeDesc : null),
 				srsName : this.map.projection
 			})
 		});
