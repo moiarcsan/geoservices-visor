@@ -155,18 +155,23 @@ PersistenceGeo.loaders.WFSLoader
 			}
 			
 			var mask_wfs = Sicecat.createLoadingMask();
+			var mask_visible = false;
 			
 			layer.events.register("loadstart", layer, function(object, element){
 				mask_wfs.show();
+				mask_visible = true;
 				// Show a message when It's not loaded in 5 seconds
 				setTimeout(function(){
-					mask_wfs.hide();
-					var msg = Sicecat.createTextMsg();
-					Ext.Msg.alert(msg.title, msg.msg);
-				}, 5000);
+					if(mask_visible){
+						mask_wfs.hide();
+						var msg = Sicecat.createTextMsg();
+						Ext.Msg.alert(msg.title, msg.msg);
+					}
+				}, 10000);
 			});
 			layer.events.register("loadend", layer, function(object, element){
 				mask_wfs.hide();
+				mask_visible = false;
 			});
 			
 			// To prevent loading
