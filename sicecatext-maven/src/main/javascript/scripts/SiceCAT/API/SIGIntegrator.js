@@ -191,7 +191,7 @@ SIGIntegrator = Ext
 									+ element.getPosY() + ")";
 							}
 							// Guardamos el elemento que hemos recibido
-							this.saveDefElement(element);
+							//this.saveDefElement(element);
 							if (!feature) {
 								var feature = {};
 								feature.position = new Array();
