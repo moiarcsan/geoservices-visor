@@ -355,10 +355,10 @@ SiceCAT.CombinedSearchField = Ext.extend(Ext.form.TextField, {
                     map.addLayer(layer);
                     var position = new OpenLayers.LonLat(lon, lat);
                     if (lon != null && lat != null && lon != "" && lat != "") {
-                        position.transform(
-                                new OpenLayers.Projection("EPSG:23031"),
-                                map.getProjectionObject()
-                                );
+                        Proj4js.defs["EPSG:23030"] = "+proj=utm +zone=30 +ellps=intl +towgs84=-131,-100.3,-163.4,-1.244,-0.020,-1.144,9.39 +units=m +no_defs";
+                        var src = new OpenLayers.Projection('EPSG:23030');
+                        var dest = new OpenLayers.Projection('EPSG:4326');
+                        position.transform(src, dest);
                         var feature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(position.lon, position.lat));
                         if (data != null) {
                             feature.data = data;
@@ -509,7 +509,7 @@ SiceCAT.CombinedSearchField = Ext.extend(Ext.form.TextField, {
             this.num_results[2] = {panel: 'generalPanel', records: this.solrResponseSize};
         }
         // Set the content panel with the grid result
-        var featureGeneral = records.slice(this.roadResponseSize, this.solrResponseSize);
+        var featureGeneral = records.slice(this.roadResponseSize, records.length);
         var gridGeneralPanel = this.getGridPanel(featureGeneral, 2);
         generalPanel.removeAll();
         generalPanel.add(gridGeneralPanel);

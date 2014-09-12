@@ -1,1 +1,1 @@
-alter table gis_authority add column workspace_name VARCHAR2(255 CHAR);
+alter table gis_authority add workspace_name VARCHAR2(255 CHAR);
