@@ -151,7 +151,13 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReader, Ext.data.XmlReader, {
 				xy = format.getChildValue(pos[0]);
 			}
 
-			var xyArr = xy.split(',');
+			var xyArr = null;
+
+			if(xy.indexOf(",") > -1){
+				xyArr = xy.split(',');
+			}else if(xy.indexOf(" ") > -1){
+				xyArr = xy.split(' ');
+			}
 
 			var text = '';
 			var place = '';

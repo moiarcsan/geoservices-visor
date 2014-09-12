@@ -5,12 +5,12 @@
 </head>
 	<%
 		// Invisible para pre
-		if("IS_NOT_DISPLAY".equals("IS_DISPLAY_NONE")){
+		if("IS_DEVEL".equals("IS_DISPLAY_NONE")){
 			out.print("<body><div style=\"display: none;\">");
 			out.print("<iframe name=\"gislibrary\" src=\"visorGISLibrary.jsp\" id=\"gislibrary\" ></iframe>");
 			out.print("<iframe name=\"sicecat\" src=\"sicecat.jsp\" id=\"sicecat\" ></iframe>");
 			out.print("<iframe name=\"sicecatlibrary\" src=\"visorGIS.jsp\" id=\"sicecatlibrary\" ></iframe></div></body>");
-		}else if("IS_NOT_DISPLAY".equals("IS_DEVEL")){
+		}else if("IS_DEVEL".equals("IS_DEVEL")){
 	%>
 		<frameset frameborder="0" rows="0%,70%,*">
 			<frame name="gislibrary" src="visorGISLibrary.jsp" id="gislibrary" />

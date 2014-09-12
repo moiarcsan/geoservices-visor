@@ -1457,8 +1457,8 @@ SiceCAT = Ext
 										projection : this.jsonMapConfiguration['projection'],
 										units : this.jsonMapConfiguration['units'],
 										initialExtent : initialExtent,
-										maxExtent : initialExtent,
-										resolutions : this.jsonMapConfiguration['resolutions'],
+										//maxExtent : initialExtent,
+										//resolutions : this.jsonMapConfiguration['resolutions'],
 										center : center,
 										tileSize : new OpenLayers.Size(400, 400),
 										numZoomLevels : this.jsonMapConfiguration['numZoomLevels'],
@@ -2225,8 +2225,8 @@ SiceCAT = Ext
 						var data = '<XLS xsi:schemaLocation="http://www.opengis.net/xls" version="1.2.0" xmlns="http://www.opengis.net/xls"'
 							+ ' xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
 							+ '<Request methodName="Geocode" requestID="123" '
-							+ 'version="1.2.0" maximumResponses="' + false + '">'
-							+ '<ReverseGeocodeRequest> <Position> <gml:Point srsName="EPSG:23031">' 
+							+ 'version="1.2.0" maximumResponses="1">'
+							+ '<ReverseGeocodeRequest> <Position> <gml:Point srsName="EPSG:4326">' 
 							+ '<gml:pos>' + posX + ' ' + posY
 							+ '</gml:pos></gml:Point></Position></ReverseGeocodeRequest>'
 							+ '</Request></XLS>';

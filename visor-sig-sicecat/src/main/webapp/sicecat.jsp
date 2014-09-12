@@ -10,7 +10,7 @@
 
 	<%
 		// Invisible para pre
-		if("IS_NOT_DISPLAY".equals("IS_NOT_DISPLAY")){
+		if("IS_DEVEL".equals("IS_NOT_DISPLAY")){
 		//NADA
 		}else { //IS_DISPLAY_NONE | IS_DEVEL
 	%>
