@@ -55,6 +55,9 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, SiceCAT.data.OpenLS_XLSR
 		var records = [];
 		var format = new OpenLayers.Format.XML(opts);
 		var addresses = format.getElementsByTagNameNS(root, "xls", 'ReverseGeocodedLocation');
+		if(addresses.length == 0){
+			addresses = root.getElementsByTagName("ReverseGeocodedLocation");
+		}
 
 		// Create record for each address
 		var recordType = Ext.data.Record.create([
@@ -75,7 +78,13 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, SiceCAT.data.OpenLS_XLSR
 				xy = format.getChildValue(pos[0]);
 			}
 
-			var xyArr = xy.split(',');
+			var xyArr = null;
+
+			if(xy.indexOf(",") > -1){
+				xyArr = xy.split(',');
+			}else if(xy.indexOf(" ") > -1){
+				xyArr = xy.split(' ');
+			}
 
 			var text = '';
 			var place = '';
