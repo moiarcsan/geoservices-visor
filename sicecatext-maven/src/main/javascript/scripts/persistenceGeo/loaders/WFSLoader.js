@@ -74,6 +74,9 @@ PersistenceGeo.loaders.WFSLoader
 			this.copyAllPosibleProperties(layerData['properties'], options);
 
 			options['version'] = '1.0.0';
+			//Añadido por: ver ticket #109111
+			options['srsName'] = map.getProjection();
+	        options['srsNameInQuery'] = true;
 
 			// Get layer style
 			var styleMap = this.preFunctionStyle(layerData);
