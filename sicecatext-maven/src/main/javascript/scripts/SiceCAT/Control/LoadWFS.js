@@ -135,9 +135,10 @@ OpenLayers.Control.LoadWFS = OpenLayers.Class(OpenLayers.Control.LoadKML,{
         					&& !!record.data.layer){
         				this_.layerData = record.data.layer;
         			}
-        			if(this_.layerData.protocol && !this_.layerData.protocol.geometryName){
+        			//Comentado por: ver ticket #109110
+        			//if(this_.layerData.protocol && !this_.layerData.protocol.geometryName){
         				this_.getGeometryName(record);
-        			}
+        			//}
         			this_.form.get("inputMaxFeatures").setValue(200);
         			this_.form.get("inputName").setValue(record.data.layer.name);
         		}
