@@ -759,36 +759,11 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 							version : "1.1.1",
 							ptype : "gxp_wmssource"
 						},
-						"taure.icc.cat" : {
-							url : taure_url,
-							baseParams : {
-								map : "/opt/idec/dades/pcivil/risc_municipal.map",
-								LAYERS : "PAM_CAMCAT_obl",
-								FORMAT : "image%2Fpng",
-								SRS : "EPSG%3A23031",
-								EXCEPTIONS : "application%2Fvnd.ogc.se_xml",
-								TRANSPARENT : true,
-								SERVICE : "WMS",
-								REQUEST : "getCapabilities"
-							},
-							version : "1.1.1",
-							ptype : "gxp_wmssource"
-						},
-						"galileo.icc.cat" : {
-							url : galileo_url,
-							version : "1.1.1",
-							ptype : "gxp_wmssource"
-						},
-						"proteccion civil" : {
-							url : wms_sec,
-							version : "1.1.0",
-							ptype : "gxp_wmssource",
-							baseParams: {
-								SERVICE : "WMS",
-								REQUEST : "getCapabilities",
-								SECURITY: true
-							}
-						}
+                        "mapproxy" :{
+                            url: Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA,"http://geoemerg-win2008.emergya.es:8081/service?REQUEST=GetCapabilities"),
+                            ptype : "gxp_wmssource"
+                        }
+						
 					// ,
 					// sagitari.icc.cat: {
 					// url : OpenLayers.ProxyHost

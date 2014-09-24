@@ -165,7 +165,8 @@ SiceCAT.Control.GetFeatureInfo = OpenLayers
 								}else if (layer instanceof OpenLayers.Layer.Vector && !!layer.protocol){
 									type = "WFS";
 								}
-								if (type != null && layer.name.indexOf("OpenLayers") < 0 && !layers_map[layer.name]){
+								if (type != null && layer.name.indexOf("OpenLayers") < 0 && !layers_map[layer.name]
+                                        && layer.options && !layer.options.isBaseLayer){
 									if(layer.protocol && 
 											(layer.protocol.format instanceof OpenLayers.Format.KML || 
 													layer.protocol.format instanceof OpenLayers.Format.GML)){
