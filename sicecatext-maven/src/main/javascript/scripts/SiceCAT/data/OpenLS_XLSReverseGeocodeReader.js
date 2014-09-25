@@ -54,8 +54,8 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, SiceCAT.data.OpenLS_XLSR
 
 		var records = [];
 		var format = new OpenLayers.Format.XML(opts);
-		var addresses = format.getElementsByTagNameNS(root, "xls", 'ReverseGeocodedLocation');
-		if(addresses.length == 0){
+		var addresses = format.getElementsByTagNameNS(root, "", 'ReverseGeocodedLocation');
+		if(addresses.length === 0){
 			addresses = root.getElementsByTagName("ReverseGeocodedLocation");
 		}
 
