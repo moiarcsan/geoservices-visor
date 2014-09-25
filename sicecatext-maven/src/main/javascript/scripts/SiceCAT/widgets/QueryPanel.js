@@ -257,6 +257,8 @@ SiceCAT.QueryPanel = Ext.extend(gxp.QueryPanel, {
             urlWFS = urlWFS.replace("?", "");
         }
         var url_layer = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, urlWFS);
+        
+        var self =this;
         Ext.Ajax.request({
             url: url_layer,
             method: 'GET',
@@ -297,6 +299,9 @@ SiceCAT.QueryPanel = Ext.extend(gxp.QueryPanel, {
                     layers: featuresToLoad
                 };
                 this.layerStore.loadData(data, false);
+                
+                // We select the first layer.
+                self.items.items[0].setValue(this.layerStore.getAt(0).data.title);
             },
             scope: this
         });
