@@ -42,6 +42,9 @@
      
 <![endif]-->
 <!-- Extjs -->
+
+<script type="text/javascript" src="scripts/visorConfig.js"></script>
+
 <script type="text/javascript" src="scripts/ext/ext-base-3.4.js"></script>
 <script type="text/javascript" src="scripts/ext/ext-all-3.4.js"></script>
 
