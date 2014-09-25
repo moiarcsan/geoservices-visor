@@ -445,7 +445,7 @@ SiceCAT.CombinedSearchField = Ext.extend(Ext.form.TextField, {
         var openls_data = String.format(this.data, query);
         var store_rg = new Ext.data.Store({
             proxy: new Ext.data.HttpProxy({
-                url: OpenLayers.ProxyHost + 'http://sigescat.pise.interior.intranet/openls',
+                url: OpenLayers.ProxyHost +  Sicecat.defaultWMSServer.replace("ows/wms?", "openls"),
                 method: 'POST',
                 xmlData: openls_data
             }),
