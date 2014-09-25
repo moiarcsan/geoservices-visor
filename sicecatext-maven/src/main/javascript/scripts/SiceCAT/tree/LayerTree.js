@@ -740,12 +740,27 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 	getAddLayersPanel : function() {
 		// var map = this.map;
 		Ext.QuickTips.init();
-		/* GetURLProxy */
-		var wms_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, this.sicecatInstance.defaultWMSServer);
-		var taure_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, "http://taure.icc.cat/cgi-bin/mapserv?");
-		var galileo_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, "http://galileo.icc.cat/arcgis/services/icc_limadmin_v_r/MapServer/WMSServer");
-		var wms_sec_url = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, "http://sigescat.pise.interior.intranet/ows2/wms");
-		var wms_sec = Sicecat.getUrlSecurized(wms_sec_url);
+
+        var sources = {};
+        
+        // We have got to process the sources config.
+        for(var sourceId in VisorConfig.WMS_SOURCES) {
+            var sourceOrig = VisorConfig.WMS_SOURCES[sourceId];
+            var source = sources[sourceId] = {};
+            for(var key in sourceOrig) {
+                if(key=="url") {
+                    // We need to proxy these urls.
+                    source["url"] = Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA, sourceOrig["url"]);
+                    if(sourceOrig.securized) {
+                        source["url"] = Sicecat.getUrlSecurized(source["url"]);
+                    }
+                } else {
+                   source[key] = sourceOrig["key"];
+                }
+            }
+            
+            source["ptype"] = "gxp_wmssource";
+        }
 		var panel = new SiceCAT.widgets.AddLayers(
 				{
 					width : 365,
@@ -753,26 +768,7 @@ SiceCAT.tree.LayerTree = Ext.extend(Ext.tree.TreePanel, {
 					map : map,
 					maxFeatures : 200,
 					mapPanel : mapPanel,
-					sources : {
-						"sigescat" : {
-							url : wms_url,
-							version : "1.1.1",
-							ptype : "gxp_wmssource"
-						},
-                        "mapproxy" :{
-                            url: Sicecat.getURLProxy(Sicecat.confType, Sicecat.typeCall.ALFANUMERICA,"http://geoemerg-win2008.emergya.es:8081/service?REQUEST=GetCapabilities"),
-                            ptype : "gxp_wmssource"
-                        }
-						
-					// ,
-					// sagitari.icc.cat: {
-					// url : OpenLayers.ProxyHost
-					// +
-					// "http://sagitari.icc.cat/tilecache/tilecache.py?SERVICE=WMS&VERSION=1.1.1&request=GetCapabilities",
-					// version : "1.1.1",
-					// ptype : "gxp_wmssource"
-					// }
-					}
+					sources : sources					
 				});
 
 		action = new GeoExt.Action({
