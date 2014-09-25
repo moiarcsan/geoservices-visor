@@ -1,0 +1,13 @@
+**/target
+*.orig
+*~
+*.bak
+.project
+.settings
+.classpath
+/javascript-maven-tools/javascript-maven-archive/target/
+/javascript-maven-tools/javascript-compressor/javascript-compressor-api/target/
+/javascript-maven-tools/javascript-compressor/yahooui-compressor/target/
+/visor-sig-sicecat/src/main/webapp/META-INF/context.xml
+/visor-sig-sicecat/nb-configuration.xml
+/visor-sig-sicecat/src/main/javascript/.dummy

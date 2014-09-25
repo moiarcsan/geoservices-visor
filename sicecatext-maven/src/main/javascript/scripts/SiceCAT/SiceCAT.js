@@ -1367,14 +1367,16 @@ SiceCAT = Ext
 
 						if (!!this.jsonMapConfiguration) {
 							// Resolutions
-							var arrayResolutions = this.jsonMapConfiguration['resolutions'].split(",");
-							var arrayResNumber = new Array();
-							if(arrayResolutions != null){
-								for(var i=0; i<arrayResolutions.length; i++){
-									arrayResNumber.push(parseFloat(arrayResolutions[i]));
-								}
-							}
-							this.jsonMapConfiguration['resolutions'] = arrayResNumber;
+                            if(this.jsonMapConfiguration['resolutions']) {
+                                var arrayResolutions = this.jsonMapConfiguration['resolutions'].split(",");
+                                var arrayResNumber = new Array();
+                                if(arrayResolutions != null){
+                                    for(var i=0; i<arrayResolutions.length; i++){
+                                        arrayResNumber.push(parseFloat(arrayResolutions[i]));
+                                    }
+                                }
+                                this.jsonMapConfiguration['resolutions'] = arrayResNumber;
+                            }
 							// DisplayProjection
 							var displayProj =  this.jsonMapConfiguration['displayProjection'];
 							if(displayProj == "true"){
@@ -1457,8 +1459,8 @@ SiceCAT = Ext
 										projection : this.jsonMapConfiguration['projection'],
 										units : this.jsonMapConfiguration['units'],
 										initialExtent : initialExtent,
-										//maxExtent : initialExtent,
-										//resolutions : this.jsonMapConfiguration['resolutions'],
+										maxExtent : initialExtent,
+										resolutions : this.jsonMapConfiguration['resolutions'],
 										center : center,
 										tileSize : new OpenLayers.Size(400, 400),
 										numZoomLevels : this.jsonMapConfiguration['numZoomLevels'],
