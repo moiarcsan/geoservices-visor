@@ -22,7 +22,7 @@
  * This variable has configurations that can be overriden in different environments
  */
 var VisorConfig = {
-    LAYER_TITLES: {
+    "LAYER_TITLES": {
 		"pap" : "Centres de l'administraci\u00f3 p\u00fablica",
 		"pas" : "Centres d'assist\u00e8ncia social",
 		"pb" : "Centres de negoci",
@@ -85,7 +85,7 @@ var VisorConfig = {
 		"z3" : "Zones inundables T500.",
 		"zt" : "Inuncat: Zones inundables T100"
 	},
-    WMS_SOURCES: {
+    "WMS_SOURCES": {
         "geoserver": {
             url: "http://geoemerg-win2008.emergya.es/geoserver/wms?REQUEST=GetCapabilities",
             version: "1.1.1"
@@ -93,6 +93,8 @@ var VisorConfig = {
         "mapproxy": {
             url: "http://geoemerg-win2008.emergya.es:8081/service?REQUEST=GetCapabilities"
         }
-    }
+    },
+    
+    "OPENLS_SRS": "EPSG:23030"
 
 };

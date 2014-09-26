@@ -293,9 +293,8 @@ SiceCAT.CombinedSearchField = Ext.extend(Ext.form.TextField, {
                     map.addLayer(layer);
                     var position = new OpenLayers.LonLat(lon, lat);
                     if (lon != null && lat != null && lon != "" && lat != "") {
-                        Proj4js.defs["EPSG:23030"] = "+proj=utm +zone=30 +ellps=intl +towgs84=-131,-100.3,-163.4,-1.244,-0.020,-1.144,9.39 +units=m +no_defs";
-                        var src = new OpenLayers.Projection('EPSG:23030');
-                        var dest = new OpenLayers.Projection('EPSG:4326');
+                        var src = new OpenLayers.Projection(VisorConfig.OPENLS_SRS);
+                        var dest = map.getProjectionObject();
                         position.transform(src, dest);
                         var feature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(position.lon, position.lat));
                         if (data != null) {
