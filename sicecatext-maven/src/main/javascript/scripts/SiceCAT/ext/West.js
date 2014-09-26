@@ -658,13 +658,18 @@ SiceCAT.West = Ext
 									height : 175,
 									// autoHeight: true,
 									autoscroll : true,
-									store : store,
+									store : store,   
 									hidden : true,
+                                    forceLayout: true,
+                                    anchor: "100%",
+                                    viewConfig: {
+                                        forceFit: true
+                                    },
 									plugins : [ expander ],
 									columns : [ expander, {
 										header : this.nameStreet,
 										dataIndex : "name",
-										width : 155
+                                        flex: 1
 									} ],
 									listeners : {
 										cellclick : function(grid, rowIndex,
@@ -717,7 +722,7 @@ SiceCAT.West = Ext
 							hidden : true,
 							// height : 40,
 							// width: 195,
-							items : [ {
+                            items : [ {
 								xtype : "label",
 								id : "timeLabel"
 							}, {
@@ -730,8 +735,9 @@ SiceCAT.West = Ext
 						var routingPanel = new Ext.Panel({
 							// height: 400,
 							// autoscroll: true,
-							id : "routingPanel",
+							id : "routingPanel",                            
 							autoHeight : true,
+                            layout: "anchor",
 							items : [ routingForm, routingInfoPanel,
 									routingGrid ]
 						});
