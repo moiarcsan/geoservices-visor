@@ -11,3 +11,8 @@
 /visor-sig-sicecat/src/main/webapp/META-INF/context.xml
 /visor-sig-sicecat/nb-configuration.xml
 /visor-sig-sicecat/src/main/javascript/.dummy
+/visor-sig-sicecat/src/main/webapp/WEB-INF/lib/*
+/visor-sig-sicecat/src/main/webapp/WEB-INF/weblogic.xml
+/visor-sig-sicecat/src/main/webapp/WEB-INF/web-jdk6.xml
+/visor-sig-sicecat/src/main/webapp/WEB-INF/web.xml
+/visor-sig-sicecat/src/main/webapp/WEB-INF/config.yaml
