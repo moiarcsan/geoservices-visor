@@ -1,0 +1,90 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.emergya.geoservices</groupId>
+    <artifactId>geoservices-viewer-webapp</artifactId>
+    <version>0.1</version>
+    
+    <packaging>war</packaging>
+
+    <name>Geoservices: Map Viewer</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>        
+    </properties>
+    
+   
+   
+    <dependencies>       
+        <dependency>
+            <groupId>interior.cat.visor</groupId>
+            <artifactId>visor-sig-sicecat</artifactId>
+            <version>4.9</version>
+            <type>war</type>
+            <scope>runtime</scope>
+        </dependency>        
+    </dependencies>
+
+    <build>
+        <finalName>geoservices-viewer-webapp</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/webresources/${profile.webresources}</directory>
+                <filtering>false</filtering>                         
+                <targetPath>../../src/main/webapp</targetPath>
+            </resource>
+        </resources>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.3.2</version>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>                    
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.1.1</version>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                        <configuration>
+                            <overlays>
+                                <overlay>
+                                    <groupId>interior.cat.visor</groupId>
+                                    <artifactId>visor-sig-sicecat</artifactId>
+                                </overlay>
+                                <overlay>
+                                    <!-- empty groupId/artifactId represents the current build this allows 
+                                    us to override configs from the overlaid wars -->
+                                </overlay>
+                            </overlays>
+                        </configuration>
+                    </configuration>
+                </plugin>     
+               
+            </plugins>
+        </pluginManagement>
+       
+    </build>
+    
+    <profiles>
+        <profile>
+            <id>devel</id>
+            <properties>
+                <profile.webresources>devel</profile.webresources>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profile.webresources>prod</profile.webresources>
+            </properties>
+        </profile>
+    </profiles>
+</project>
