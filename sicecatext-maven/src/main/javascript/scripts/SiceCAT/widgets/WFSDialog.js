@@ -136,7 +136,7 @@ Ext.namespace("Viewer.view.dialog");
                            vtype: 'url',
                            vtypeText: this.vtypeText,
                            msgTarget: 'under',
-                           value: Sicecat.defaultWMSServer.replace("ows/wms?", "ows/wfs?request=GetCapabilities")
+                           value: Sicecat.defaultWMSServer.replace("ows/wms?", VISOR_CONFIG.WFS_GET_CAPABILITES)
                        }
                     ],
                     buttons: [
