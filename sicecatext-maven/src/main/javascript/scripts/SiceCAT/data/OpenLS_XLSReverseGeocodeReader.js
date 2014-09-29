@@ -115,6 +115,9 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, SiceCAT.data.OpenLS_XLSR
 			place = reader.addOptXlsText(format, address, 'Place', opts.namespaces.xls);
 			/* Get center distance */
 			searchCentreDistance = reader.addOptXlsPropertyText(format, address, 'SearchCentreDistance', "", 'value');
+			if(searchCentreDistance == ""){
+				searchCentreDistance = reader.addOptXlsPropertyText(format, address, 'SearchCentreDistance', opts.namespaces.xls, 'value');
+			}
 			/* Get type place */
 			typePlace = reader.addOptXlsPropertyText(format, address, 'Place', opts.namespaces.xls, 'type');
 			/* Make object with values to show */
