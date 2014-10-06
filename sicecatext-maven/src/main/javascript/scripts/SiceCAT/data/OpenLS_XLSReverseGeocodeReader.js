@@ -54,10 +54,20 @@ Ext.extend(SiceCAT.data.OpenLS_XLSReverseGeocodeReader, SiceCAT.data.OpenLS_XLSR
 
 		var records = [];
 		var format = new OpenLayers.Format.XML(opts);
+        
+        // Strategy for the original sigescat openls server.
 		var addresses = format.getElementsByTagNameNS(root, "", 'ReverseGeocodedLocation');
 		if(addresses.length === 0){
+            // Some services put the namespace for the result so we better search just by the tag name.
 			addresses = root.getElementsByTagName("ReverseGeocodedLocation");
+            
+            if(addresses.length === 0){
+                // Needed for Firefox
+                addresses = root.getElementsByTagName("xls:ReverseGeocodedLocation");
+            }
 		}
+        
+        
 
 		// Create record for each address
 		var recordType = Ext.data.Record.create([
