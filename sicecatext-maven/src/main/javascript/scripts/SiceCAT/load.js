@@ -19,6 +19,8 @@ if (typeof console === "undefined" || typeof console.log === "undefined") {
 
 var jsfiles = new Array();
 
+// VisorConfig file
+jsfiles.push("visorConfig.js");
 // Feature Handler
 jsfiles.push("SiceCAT/Handler/Feature.js");
 //PersistenceGeo
