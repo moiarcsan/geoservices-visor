@@ -23,7 +23,7 @@
  */
 var VisorConfig = {
     "LAYER_TITLES": {
-		"pap" : "Centros de administración pública",
+		"pap" : "Centros de administraci&oacute;n p&uacute;blica",
 		"pas" : "Centros de asistencia social",
 		"pb" : "Centros de negocio",
 		"pe" : "Centros educativos",
@@ -36,11 +36,11 @@ var VisorConfig = {
 		"rl" : "Anotaciones lineales",
 		"rp" : "Anotaciones puntuales",
 		"a" : "AVAS (bases de aviones de vigilancia y ataque)",
-		"ab" : "Áreas básicas policiales",
+		"ab" : "&Aacute;reas b&aacute;sicas policiales",
 		"ae" : "Actividades extractivas",
-		"ap" : "Inuncat: Puntos de actuación prioritaria",
-		"aps" : "Puntos de actuación prioritaria",
-		"b" : "Vigías",
+		"ap" : "Inuncat: Puntos de actuaci&oacute;n prioritaria",
+		"aps" : "Puntos de actuaci&oacute;n prioritaria",
+		"b" : "Vig&iacute;­as",
 		"c" : "Helipuertos",
 		"c112" : "Centros del servicio 112",
 		"ca" : "Red de caminos",
@@ -50,34 +50,34 @@ var VisorConfig = {
 		"e" : "Puntos de agua",
 		"ef" : "Estaciones de ferrocarril",
 		"ei" : "Establecimientos industriales (SIPAE)",
-		"en" : "Espacios naturales con protección especial",
+		"en" : "Espacios naturales con protecci&oacute;n especial",
 		"f" : "Parques de bomberos",
-		"fo" : "Áreas forestales públicas",
-		"g" : "Torres de comunicación",
+		"fo" : "&Aacute;reas forestales p&uacute;blicas",
+		"g" : "Torres de comunicaci&oacute;n",
 		"h" : "Capitales de municipio",
-		"i" : "Límites municipales",
-		"k" : "Límites comarcales",
-		"lf" : "Líneas de ferrocarril",
-		"np" : "Núcleos de población",
+		"i" : "L&iacute;­mites municipales",
+		"k" : "L&iacute;­mites comarcales",
+		"lf" : "L&iacute;­neas de ferrocarril",
+		"np" : "N&uacute;cleos de poblaci&oacute;n",
 		"nv" : "Nodos del grafo",
-		"p" : "Límites provinciales",
+		"p" : "L&iacute;­mites provinciales",
 		"pi" : "Zonas potencialmente inundables",
-		"plo" : "Municipios con policía local",
+		"plo" : "Municipios con polic&iacute;­a local",
 		"pn" : "Riesgo de incendio forestal (peligro) ",
-		"po" : "Última posición de efectivos RESCAT",
+		"po" : "&iacute;šltima posici&oacute;n de efectivos RESCAT",
 		"rpo" : "Mapa de las regiones policiales",
 		"s1" : "Malla SOC 1km",
 		"s5" : "Malla SOC de 5 km",
 		"sc" : "Inuncat: Sirenas presas cobertura",
 		"soc" : "Malla SOC 1 km",
-		"sp" : "Situación de la sirena de les presas",
+		"sp" : "Situaci&oacute;n de la sirena de les presas",
 		"sv" : "Segmentos del grafo",
 		"svm" : "Segmentos del grafo",
-		"tf" : "Túneles de ferrocarril",
+		"tf" : "T&uacute;neles de ferrocarril",
 		"tt" : "Inuncat: Temps de tr\u00e0nsit",
-		"vu" : "Mapa de vulnerabilidad de incéndios",
+		"vu" : "Mapa de vulnerabilidad de inc&eacute;ndios",
 		"x" : "Ejes de carretera",
-		"y" : "Puntos kilométricos",
+		"y" : "Puntos kilom&eacute;tricos",
 		"z" : "Cortafuegos",
 		"z1" : "Zonas inundables T50",
 		"z3" : "Zonas inundables T500",
@@ -85,11 +85,8 @@ var VisorConfig = {
 	},
     "WMS_SOURCES": {
         "geoserver": {
-            url: "http://192.168.5.192:8080/geoserver/wms?REQUEST=GetCapabilities",
+            url: "http://10.239.200.70/geoserver/wms?REQUEST=GetCapabilities",
             version: "1.1.1"
-        },
-        "mapproxy": {
-            url: "http://192.168.5.192:8081/service?REQUEST=GetCapabilities"
         }
     },
     
@@ -98,3 +95,4 @@ var VisorConfig = {
     "OPENLS_SRS": "EPSG:23030"
 
 };
+
