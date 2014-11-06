@@ -32,7 +32,6 @@ import interior.cat.visor.openls.utils.HTTPRequestPoster;
 import java.io.BufferedInputStream;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -242,27 +241,19 @@ public class Proxy extends HttpServlet {
                     log.trace("redirected get, code = " + proxyResponseCode);
                 }
                 
-                log.trace("trying to copy response in array");
+                log.trace("trying to copy response");
                  // Send the content to the client
                 InputStream inputStreamProxyResponse = getMethod.getResponseBodyAsStream();
-                
-                ByteArrayOutputStream aux = new ByteArrayOutputStream();
-                IOUtils.copy(inputStreamProxyResponse, aux);
-               
-                log.trace("finished copying response in array");
+                IOUtils.copy(inputStreamProxyResponse, os);
+                log.trace("finished copying response");
 
                 // Pass response headers back to the client
                 Header[] headerArrayResponse = getMethod.getResponseHeaders();
                 for (Header header : headerArrayResponse) {
-                    log.trace("header: "+header.toString());
-                    if(header.getName().equals("Content-Type")) {
-                        response.setHeader(header.getName(), header.getValue());
-                    }
+                    response.setHeader(header.getName(), header.getValue());
                 }
-                
-                log.trace("trying to copy response in output");
-                os.write(aux.toByteArray());
-                log.trace("finshed to copy response in output");
+
+               
 
             } else if (request.getMethod().toLowerCase().equals("post")) {
                 String endPoint = getURLRequest(request);
@@ -293,7 +284,7 @@ public class Proxy extends HttpServlet {
                         + request.getRemoteHost());
             }
         } catch (Exception e) {
-            //log.error("getInputStream() failed", e);
+            log.error("getInputStream() failed", e);
             // fall through
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Page not found.");
         } finally {
