@@ -219,6 +219,9 @@ SiceCAT.CombinedSearchField = Ext.extend(Ext.form.TextField, {
                 municipi = json_data.municipi;
                 entitat = json_data.entitat;
                 var layer = this.titlesForLayer[entitat];
+                if(layer == null){
+                    layer = entitat;
+                }
                 var cadena = "";
                 if (nom != null) {
                     cadena += nom;
