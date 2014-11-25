@@ -440,14 +440,14 @@ SiceCAT.MapLayout = Ext
 						actions["scale"] = action;
 
 						this.footBar.push("->");
-						var proj2show = new Array();
-						var projName2show = new Array();
-						projName2show[0] = "WGS84";
-						projName2show[1] = "UTM ETRS89 31N";
-						projName2show[2] = "UTM ED50 31N";
-						proj2show[0] = "EPSG:4326";
-						proj2show[1] = "EPSG:25831";
-						proj2show[2] = "EPSG:23031";
+						var proj2show =  [];
+						var projName2show = [];
+                        
+                        for(var projKey in VisorConfig.MOUSE_CONTROL_PROJECTIONS) {
+                            proj2show.push(VisorConfig.MOUSE_CONTROL_PROJECTIONS[projKey]);
+                            projName2show.push(projKey)
+                        }
+                        
 						var control = new OpenLayers.Control.MousePositionSiceCAT(
 								{
 									projectionsToShow : proj2show,

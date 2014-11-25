@@ -159,11 +159,7 @@ OpenLayers.Control.GeoCalculator = OpenLayers
 					getProjectionArrayStore : function(idField, displayField,
 							defaultProjectionID) {
 
-						var projections = [
-								[ 'EPSG:23031', 'EPSG:23031 (UTM 31N / ED50)' ],
-								[ 'EPSG:25831', 'EPSG:25831 (UTM 31N / ETRS89)' ],
-								[ 'EPSG:4326', 'EPSG:4326 (Lat/Lon WGS84)' ],
-								[ 'EPSG:4258', 'EPSG:4258 (Lat/Lon ETRS89)' ] ];
+						var projections = VisorConfig.COORDINATES_CALCULATOR_PROJECTIONS;
 
 						var fields = [ idField, displayField ];
 

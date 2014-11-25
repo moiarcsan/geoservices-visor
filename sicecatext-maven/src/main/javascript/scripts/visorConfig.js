@@ -121,8 +121,17 @@ var VisorConfig = {
         }
 
     },
-    
     "WFS_GET_CAPABILITIES": "ows/wfs?request=GetCapabilities",
-    "OPENLS_SRS": "EPSG:23031"
+    "OPENLS_SRS": "EPSG:23031",
+    "MOUSE_CONTROL_PROJECTIONS": {
+        "WGS84": "EPSG:4326",
+        "UTM ETRS89 31N": "EPSG:25831",
+        "UTM ED50 31N": "EPSG:25831"
+    },
+    "COORDINATES_CALCULATOR_PROJECTIONS": [
+        ['EPSG:23031', 'EPSG:23031 (UTM 31N / ED50)'],
+        ['EPSG:25831', 'EPSG:25831 (UTM 31N / ETRS89)'],
+        ['EPSG:4326', 'EPSG:4326 (Lat/Lon WGS84)'],
+        ['EPSG:4258', 'EPSG:4258 (Lat/Lon ETRS89)']]
 
 };

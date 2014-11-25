@@ -95,6 +95,14 @@ var VisorConfig = {
     
     "WFS_GET_CAPABILITIES": "ows/wfs?request=GetCapabilities&version=1.1.0",
     
-    "OPENLS_SRS": "EPSG:23030"
+    "OPENLS_SRS": "EPSG:23030",
+    
+    "MOUSE_CONTROL_PROJECTIONS": {
+        "WGS84":"EPSG:4326",
+        "UTM ED50 30N":"EPSG:23030"
+    },
+    "COORDINATES_CALCULATOR_PROJECTIONS": [
+        ['EPSG:23030', 'EPSG:23030 (UTM 30N / ED50)'],
+        ['EPSG:4326', 'EPSG:4326 (Lat/Lon WGS84)']]
 
 };
